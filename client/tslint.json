@@ -1,0 +1,23 @@
+{
+    "extends": ["tslint-react"],
+    "rules": {
+        "semicolon": [ true, "never" ],
+        "space-before-function-paren": true,
+        "space-after-keywords": true,
+        "object-curly-spacing": true,
+        "no-empty": true,
+        "eofline": false,
+        "curly": true,
+        "class-name": true,
+        "indent": [ true, "spaces" ],
+        "no-any": true,
+        "no-construct": true,
+        "no-duplicate-variable": true,
+        "no-eval": true,
+        "no-string-literal": true,
+        "no-trailing-whitespace": false,
+        "no-unused-expression": true,
+        "quotemark": [true, "single", "jsx-double"],
+        "jsx-wrap-multiline": false
+    }
+}
