@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core'
 import React from 'react'
 
 export default class Home extends React.Component {
@@ -6,6 +7,9 @@ export default class Home extends React.Component {
     return (
       <div>
         Home Page
+        <Button variant="contained" color="primary">
+          Hello World
+        </Button>
       </div>
     )
   }
