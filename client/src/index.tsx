@@ -2,4 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import App from './App'
 
-render(React.createElement(App), document.getElementById('root'))
+const Root = () => <App />
+
+const root = document.getElementById('root')
+render(<Root />, root)
