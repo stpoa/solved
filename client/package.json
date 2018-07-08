@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "pages": "0.0.16",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.4.1",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
+    "@types/react-router": "^4.0.28",
+    "@types/react-router-dom": "^4.2.7",
     "parcel-bundler": "^1.9.3",
     "tslint": "^5.10.0",
     "tslint-config-standard": "^7.1.0",

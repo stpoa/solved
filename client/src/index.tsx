@@ -1,16 +1,5 @@
-import * as React from 'react'
+import React from 'react'
 import { render } from 'react-dom'
+import App from './App'
 
-import Home from './pages/Home'
-
-const Root = () => (
-  <div>
-    <div>Header</div>
-      <Home />
-    <div>Footer</div>
-  </div>
-)
-
-// main
-const root = document.getElementById('root')
-render(<Root />, root)
+render(React.createElement(App), document.getElementById('root'))
