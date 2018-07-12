@@ -1,5 +1,6 @@
 **/node_modules
 client/dist
 client/.cache
+client/lib
 .idea
 .DS_Store
