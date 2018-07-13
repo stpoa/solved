@@ -2,6 +2,7 @@
   "extends": ["tslint:latest", "tslint-react", "tslint-config-standard"],
   "rules": {
     "no-submodule-imports": false,
+    "no-implicit-dependencies": false, // because of ~ path alias
     "quotemark": [true, "single", "jsx-double"]
   }
 }
