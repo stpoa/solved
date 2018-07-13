@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "module": "commonjs",
     "moduleResolution": "node",
     "newLine": "LF",
@@ -12,6 +13,11 @@
       "es2017",
       "dom"
     ],
+    "paths": {
+      "~*": [
+        "./*"
+      ]
+    },
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
