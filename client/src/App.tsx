@@ -3,11 +3,10 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 // Generic
-import Header from '~generic/Header'
+import Header from '~generic'
 
 // Pages
-import Home from '~pages/Home'
-import Profile from '~pages/Profile'
+import { Home, Profile } from '~pages'
 
 const styles = createStyles({
   containerStyles: {
