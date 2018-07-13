@@ -1,11 +1,20 @@
 import { Button } from '@material-ui/core'
+import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles'
 import React from 'react'
 
-export default class Home extends React.Component {
+const styles = createStyles({
+  containerStyles: {
+    height: '100%'
+  }
+})
 
+interface IHomeProps extends WithStyles<typeof styles> {}
+
+class Home extends React.Component <IHomeProps> {
   public render () {
+    const { containerStyles } = this.props.classes
     return (
-      <div>
+      <div className={containerStyles}>
         Home Page
         <Button variant="contained" color="primary">
           Hello World
@@ -13,5 +22,6 @@ export default class Home extends React.Component {
       </div>
     )
   }
-
 }
+
+export default withStyles(styles)(Home)
