@@ -1,2 +1,7 @@
-export * from './Home/Home'
-export * from './Profile/Profile'
+import Home from './Home/Home'
+import Profile from './Profile/Profile'
+
+export {
+  Home,
+  Profile
+}

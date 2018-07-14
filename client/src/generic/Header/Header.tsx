@@ -10,7 +10,7 @@ const styles = createStyles({
   }
 })
 
-interface IHeaderProps extends WithStyles<typeof styles> {}
+interface IHeaderProps extends WithStyles <typeof styles> {}
 
 const Header = ({ classes: { toolbarStyles } }: IHeaderProps) => (
   <AppBar position="sticky">
