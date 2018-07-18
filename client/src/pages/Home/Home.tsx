@@ -8,7 +8,7 @@ const styles = createStyles({
   }
 })
 
-interface IHomeProps extends WithStyles<typeof styles> {}
+interface IHomeProps extends WithStyles <typeof styles> {}
 
 class Home extends React.Component <IHomeProps> {
   public render () {
