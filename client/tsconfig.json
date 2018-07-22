@@ -26,7 +26,8 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": false
   },
   "include": [
     "src/**/*"

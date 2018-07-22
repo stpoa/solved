@@ -1,4 +1,5 @@
-import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles'
+import { blue } from '@material-ui/core/colors'
+import { createMuiTheme, createStyles, MuiThemeProvider, WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -18,18 +19,24 @@ const styles = createStyles({
 })
 interface AppProps extends WithStyles <typeof styles> {}
 
+const theme = createMuiTheme({
+  palette: { primary: blue }
+})
+
 class App extends Component <AppProps> {
   public render () {
     const { containerStyles } = this.props.classes
     return (
-      <Router>
-        <div className={containerStyles}>
-          <Header />
-          <Route exact path="/" component={Home} />
-          <Route path="/profile" component={Profile} />
+      <MuiThemeProvider theme={theme}>
+        <Router>
+          <div className={containerStyles}>
+            <Header />
+            <Route exact path="/" component={Home} />
+            <Route path="/profile" component={Profile} />
           <Route path="/add-task" component={AddTask} />
-        </div>
-      </Router>
+          </div>
+        </Router>
+      </MuiThemeProvider>
     )
   }
 }
