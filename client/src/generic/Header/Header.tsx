@@ -10,9 +10,9 @@ const styles = createStyles({
   }
 })
 
-interface IHeaderProps extends WithStyles <typeof styles> {}
+interface HeaderProps extends WithStyles <typeof styles> {}
 
-const Header = ({ classes: { toolbarStyles } }: IHeaderProps) => (
+const Header = ({ classes: { toolbarStyles } }: HeaderProps) => (
   <AppBar position="sticky">
     <Toolbar className={toolbarStyles}>
       <IconButton color="inherit" aria-label="Menu">

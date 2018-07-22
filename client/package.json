@@ -25,7 +25,8 @@
   "scripts": {
     "test": "npm run lint",
     "lint": "tslint --project ./ --fix",
-    "start": "parcel serve src/index.html"
+    "start": "rm -rf .cache dist && npm run start:raw",
+    "start:raw": "parcel serve src/index.html"
   },
   "repository": {
     "type": "git",
