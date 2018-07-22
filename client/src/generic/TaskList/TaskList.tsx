@@ -1,15 +1,14 @@
 import { List, ListItem, WithStyles, withStyles } from '@material-ui/core'
 
 import React from 'react'
-import { ITaskListElement } from '~interfaces'
+import { TaskListElement } from '~interfaces'
 import TaskListElement from './TaskListElement'
 
-const styles = {};
+const styles = {}
 
 interface TaskListProps extends WithStyles<typeof styles> {
-  tasks: ITaskListElement[]
+  tasks: TaskListElement[]
 }
-
 
 const TaskList = ({ tasks }: TaskListProps) => (
   <List>

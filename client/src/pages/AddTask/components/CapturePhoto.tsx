@@ -81,12 +81,12 @@ class CapturePhoto extends Component<CapturePhotoProps> {
         ref={this.canvas}
       />
 
-    { !photoAdded &&
-    <div className={classes.iconContainer}>
-      <PhotoCamera className={classes.icon} onClick={this.onClick} />
-    </div>
-    }
-  </Grid>
+      { !photoAdded &&
+        <div className={classes.iconContainer}>
+          <PhotoCamera className={classes.icon} onClick={this.onClick} />
+        </div>
+      }
+      </Grid>
     )
   }
 
@@ -98,6 +98,8 @@ class CapturePhoto extends Component<CapturePhotoProps> {
       const context = canvasElement.getContext('2d')
 
       if (context) {
+        canvasElement.width = videoElement.videoWidth
+        canvasElement.height = videoElement.videoHeight
         context.drawImage(videoElement, 0, 0)
 
         const imgSrc = canvasElement.toDataURL('image/png')
@@ -106,7 +108,6 @@ class CapturePhoto extends Component<CapturePhotoProps> {
       }
     }
   }
-
 }
 
 export default withStyles(styles)(CapturePhoto)

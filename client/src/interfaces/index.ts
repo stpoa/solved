@@ -1,11 +1,11 @@
-interface ICategory {
+interface Category {
   id: string,
   name: string
 }
 
-type ICategoryList = ICategory[]
+type CategoryList = Category[]
 
-interface ITaskListElement {
+interface TaskListElement {
   category: string
   tags: string[]
   shortDescription: string
@@ -14,7 +14,7 @@ interface ITaskListElement {
 }
 
 export {
-  ICategory,
-  ICategoryList,
-  ITaskListElement
+  Category,
+  CategoryList,
+  TaskListElement
 }

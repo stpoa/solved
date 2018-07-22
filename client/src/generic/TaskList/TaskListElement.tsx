@@ -2,7 +2,6 @@ import { Avatar, Card, CardContent, Chip, StyleRulesCallback, Theme, Typography,
 } from '@material-ui/core'
 import React from 'react'
 import { ITaskListElement } from '~interfaces'
-
 import { getTimeLeft } from '~lib/date'
 
 const styles: StyleRulesCallback = (theme: Theme) => ({
