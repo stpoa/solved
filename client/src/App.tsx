@@ -17,6 +17,7 @@ const styles = createStyles({
     overflow: 'hidden'
   }
 })
+
 interface AppProps extends WithStyles <typeof styles> {}
 
 const theme = createMuiTheme({
@@ -38,6 +39,14 @@ class App extends Component <AppProps> {
         </Router>
       </MuiThemeProvider>
     )
+  }
+
+  private signIn = () => {
+    this.setState({ signedIn: true })
+  }
+
+  private signOut = () => {
+    this.setState({ signedIn: false })
   }
 }
 
