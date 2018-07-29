@@ -35,6 +35,10 @@
     "start": "rm -rf .cache dist && npm run start:raw",
     "start:raw": "parcel serve src/index.html"
   },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stpoa/notowork.git"
