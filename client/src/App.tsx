@@ -1,13 +1,14 @@
 import { blue } from '@material-ui/core/colors'
 import { createMuiTheme, createStyles, MuiThemeProvider, WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import AuthProvider from './AuthProvider'
 
 // Generic
 import { Header } from '~generic'
 
 // Pages
-import { AddTask, Home, Profile } from '~pages'
+import { AddTask, Home, Profile, SignIn } from '~pages'
 
 const styles = createStyles({
   containerStyles: {
@@ -27,6 +28,7 @@ const theme = createMuiTheme({
 class App extends Component <AppProps> {
   public render () {
     const { containerStyles } = this.props.classes
+
     return (
       <MuiThemeProvider theme={theme}>
         <Router>
@@ -35,18 +37,11 @@ class App extends Component <AppProps> {
             <Route exact path="/" component={Home} />
             <Route path="/profile" component={Profile} />
             <Route path="/add-task" component={AddTask} />
+            <Route path="/sign-in" component={SignIn} />
           </div>
         </Router>
       </MuiThemeProvider>
     )
-  }
-
-  private signIn = () => {
-    this.setState({ signedIn: true })
-  }
-
-  private signOut = () => {
-    this.setState({ signedIn: false })
   }
 }
 

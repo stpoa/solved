@@ -1,7 +1,11 @@
-import { AppBar, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Button as Btn, IconButton, Menu, MenuItem, Toolbar, Typography } from '@material-ui/core'
 import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles'
 import { AccountCircle, Menu as MenuIcon } from '@material-ui/icons'
 import React, { Component, MouseEventHandler } from 'react'
+import { Link } from 'react-router-dom'
+import { AuthContext } from '~AuthProvider'
+
+const Button = Btn as any
 
 const styles = createStyles({
   hidden: {
@@ -27,47 +31,52 @@ class Header extends Component<IHeaderProps, IHeaderState> {
   public readonly state: IHeaderState = {}
 
   public render () {
-    const {
-      classes: { hidden, toolbarStyles },
-      onClickSignIn,
-      signedIn
-    } = this.props
-
     return (
       <AppBar position="sticky">
-        <Toolbar className={toolbarStyles}>
-          <div>
-            <IconButton color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
-            <Button
-              color="inherit"
-              className={`${signedIn ? hidden : ''}`}
-              onClick={onClickSignIn}
-            >
-              Sign In
-            </Button>
-          </div>
-          <div>
-            <Typography variant="title" color="inherit">
-              Notowork
-            </Typography>
-          </div>
-          <AccountCircle
-            className={`${!signedIn ? hidden : ''}`}
-            onClick={this.onClickAccount}
-          />
-          <Menu
-            open={Boolean(this.state.anchorElement)}
-            anchorEl={this.state.anchorElement}
-            onClose={this.closeMenu}
-          >
-            <MenuItem onClick={this.onSignOut}>
-              Sign out
-            </MenuItem>
-          </Menu>
-        </Toolbar>
+        <AuthContext.Consumer>
+          {this.renderToolbar}
+        </AuthContext.Consumer>
       </AppBar>
+    )
+  }
+
+  private renderToolbar = ({ signedIn }) => {
+    const { classes: { hidden, toolbarStyles } } = this.props
+
+    return (
+      <Toolbar className={toolbarStyles}>
+        <div>
+          <IconButton color="inherit" aria-label="Menu">
+            <MenuIcon />
+          </IconButton>
+          <Button
+            color="inherit"
+            className={`${signedIn ? hidden : ''}`}
+            component={Link as any}
+            to={'/sign-in'}
+          >
+            Sign In
+          </Button>
+        </div>
+        <div>
+          <Typography variant="title" color="inherit">
+            Notowork
+          </Typography>
+        </div>
+        <AccountCircle
+          className={`${!signedIn ? hidden : ''}`}
+          onClick={this.onClickAccount}
+        />
+        <Menu
+          open={Boolean(this.state.anchorElement)}
+          anchorEl={this.state.anchorElement}
+          onClose={this.closeMenu}
+        >
+          <MenuItem onClick={this.onSignOut}>
+            Sign out
+          </MenuItem>
+        </Menu>
+      </Toolbar>
     )
   }
 
