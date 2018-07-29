@@ -1,8 +1,11 @@
 {
   "extends": ["tslint:latest", "tslint-react", "tslint-config-standard"],
   "rules": {
-    "no-submodule-imports": false,
-    "no-implicit-dependencies": false, // because of ~ path alias
+    "interface-name": [true, "never-prefix"],
+    "jsx-boolean-value": [true, "never"],
+    "jsx-no-multiline-js": false,
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": [true, "@material-ui/core"],
     "quotemark": [true, "single", "jsx-double"]
   }
 }

@@ -1,7 +1,9 @@
 import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core'
 import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles'
-import { AccountCircle, Menu } from '@material-ui/icons'
+import { AccountCircle, Menu, Search } from '@material-ui/icons'
 import React from 'react'
+
+import { Search } from '~generic'
 
 const styles = createStyles({
   toolbarStyles: {
@@ -10,10 +12,13 @@ const styles = createStyles({
   }
 })
 
-interface IHeaderProps extends WithStyles <typeof styles> {}
+interface HeaderProps extends WithStyles <typeof styles> {
+  handleSearchButton: () => void
+}
 
-const Header = ({ classes: { toolbarStyles } }: IHeaderProps) => (
+const Header = ({ classes: { toolbarStyles }, children, handleSearchButton }: HeaderProps) => (
   <AppBar position="sticky">
+    {children}
     <Toolbar className={toolbarStyles}>
       <IconButton color="inherit" aria-label="Menu">
         <Menu />
@@ -21,7 +26,14 @@ const Header = ({ classes: { toolbarStyles } }: IHeaderProps) => (
       <Typography variant="title" color="inherit">
         Notowork
       </Typography>
-      <AccountCircle />
+      <div>
+        <IconButton color="inherit">
+          <AccountCircle style={{ fontSize: 30 }} />
+        </IconButton>
+        <IconButton color="inherit" onClick={handleSearchButton}>
+          <Search style={{ fontSize: 30 }} />
+        </IconButton>
+      </div>
     </Toolbar>
   </AppBar>
 )
