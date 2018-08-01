@@ -1,11 +1,20 @@
-interface Category {
+interface ICategory {
   id: string,
   name: string
 }
 
-interface CategoryList extends Array<Category> {}
+type ICategoryList = ICategory[]
+
+interface ITaskListElement {
+  category: string
+  tags: string[]
+  shortDescription: string
+  price: number
+  expiredAt: number
+}
 
 export {
-  Category,
-  CategoryList
+  ICategory,
+  ICategoryList,
+  ITaskListElement
 }
