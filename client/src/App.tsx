@@ -6,25 +6,28 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Header } from '~generic'
 
 // Pages
-import { Home, Profile } from '~pages'
+import { AddTask, Home, Profile } from '~pages'
 
 const styles = createStyles({
   containerStyles: {
+    display: 'grid',
+    gridTemplateRows: 'max-content auto',
     height: '100vh',
     overflow: 'hidden'
   }
 })
-interface IAppProps extends WithStyles <typeof styles> {}
+interface AppProps extends WithStyles <typeof styles> {}
 
-class App extends Component <IAppProps> {
+class App extends Component <AppProps> {
   public render () {
     const { containerStyles } = this.props.classes
     return (
       <Router>
         <div className={containerStyles}>
           <Header />
-          <Route exact={true} path="/" component={Home} />
+          <Route exact path="/" component={Home} />
           <Route path="/profile" component={Profile} />
+          <Route path="/add-task" component={AddTask} />
         </div>
       </Router>
     )
