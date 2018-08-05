@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Header } from '~generic'
 
 // Pages
-import { AddTask, Home, Profile } from '~pages'
+import { AddTask, Home, Profile, SignIn } from '~pages'
 
 const styles = createStyles({
   containerStyles: {
@@ -17,6 +17,7 @@ const styles = createStyles({
     overflow: 'hidden'
   }
 })
+
 interface AppProps extends WithStyles <typeof styles> {}
 
 const theme = createMuiTheme({
@@ -26,6 +27,7 @@ const theme = createMuiTheme({
 class App extends Component <AppProps> {
   public render () {
     const { containerStyles } = this.props.classes
+
     return (
       <MuiThemeProvider theme={theme}>
         <Router>
@@ -33,7 +35,8 @@ class App extends Component <AppProps> {
             <Header />
             <Route exact path="/" component={Home} />
             <Route path="/profile" component={Profile} />
-          <Route path="/add-task" component={AddTask} />
+            <Route path="/add-task" component={AddTask} />
+            <Route path="/sign-in" component={SignIn} />
           </div>
         </Router>
       </MuiThemeProvider>

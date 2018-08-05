@@ -1,13 +1,15 @@
-import { Avatar, Card, CardContent, Chip, StyleRulesCallback, Theme, Typography, withStyles, WithStyles
+import { Card, CardContent, Chip, StyleRulesCallback, Theme, Typography, withStyles, WithStyles
 } from '@material-ui/core'
 import React from 'react'
-import { ITaskListElement } from '~interfaces'
-
+import { TaskListElement } from '~interfaces'
 import { getTimeLeft } from '~lib/date'
 
 const styles: StyleRulesCallback = (theme: Theme) => ({
   card: {
     display: 'flex'
+  },
+  chip: {
+    margin: theme.spacing.unit
   },
   content: {
     flex: '1 0 auto'
@@ -29,9 +31,6 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   playIcon: {
     height: 38,
     width: 38
-  },
-  chip: {
-    margin: theme.spacing.unit,
   }
 })
 
@@ -64,7 +63,7 @@ const TagListRaw = ({ tags, classes }: TagListProps) => (
 
 const TagList = withStyles(styles)(TagListRaw)
 
-interface TaskListElementProps extends WithStyles<typeof styles>, ITaskListElement {}
+interface TaskListElementProps extends WithStyles<typeof styles>, TaskListElement {}
 
 const TaskListElementRaw = ({ category, tags, shortDescription, price, expiredAt, classes }: TaskListElementProps) => {
   const timeLeft = getTimeLeft(expiredAt)
@@ -85,4 +84,3 @@ const TaskListElementRaw = ({ category, tags, shortDescription, price, expiredAt
 }
 
 export default withStyles(styles)(TaskListElementRaw)
-
