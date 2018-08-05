@@ -10,7 +10,7 @@ const tasks = [{
   expiredAt: now + 1000 * 60 * 100,
   price: 100,
   shortDescription: 'Rownanie różniczkowe analiza matematyczna',
-  tags: ['rownania', 'analiza'],
+  tags: ['rownania', 'analiza']
 }, {
   category: 'Fizyka',
   expiredAt: now + 1000 * 60 * 10,

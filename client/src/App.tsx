@@ -1,8 +1,7 @@
 import { blue } from '@material-ui/core/colors'
 import { createMuiTheme, createStyles, MuiThemeProvider, WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import AuthProvider from './AuthProvider'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 // Generic
 import { Header } from '~generic'

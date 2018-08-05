@@ -9,7 +9,6 @@ import React, { ChangeEventHandler, Component, MouseEventHandler } from 'react'
 import isEmail from 'validator/lib/isEmail'
 import isLength from 'validator/lib/isLength'
 import { Body } from '~generic'
-import { Consumer } from './../../AuthProvider'
 
 const styles: StyleRules = createStyles({
   button: {
@@ -54,17 +53,17 @@ class SignIn extends Component<ISignInProps, ISignInState> {
     return (
       <Body className={classes.container}>
         <TextField
-          autoFocus={true}
+          autoFocus
           className={classes.item}
           error={Boolean(emailError)}
           margin="dense"
           label="Email Address"
           helperText={emailError}
-          required={true}
+          required
           name="email"
           type="email"
           value={email}
-          fullWidth={true}
+          fullWidth
           onChange={this.onChangeText}
         />
         <TextField
@@ -73,17 +72,17 @@ class SignIn extends Component<ISignInProps, ISignInState> {
           error={Boolean(passwordError)}
           label="Password"
           helperText={passwordError}
-          required={true}
+          required
           name="password"
           type="password"
           value={password}
-          fullWidth={true}
+          fullWidth
           onChange={this.onChangeText}
         />
         <Button
           className={`${classes.item} ${classes.button}`}
           onClick={this.onSubmit}
-          fullWidth={true}
+          fullWidth
         >
           Sign in
         </Button>
