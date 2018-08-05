@@ -1,22 +1,47 @@
-import { List, ListItem, WithStyles, withStyles } from '@material-ui/core'
+import { createStyles, Grid, StyleRulesCallback, WithStyles, withStyles } from '@material-ui/core'
 
 import React from 'react'
 import { ITaskListElement } from '~interfaces'
 import TaskListElement from './TaskListElement'
 
-const styles = {};
+const styles: StyleRulesCallback = () => createStyles({
+  container: {
+    height: '100%',
+    margin: 0,
+    overflow: 'auto'
+  },
+  grid: {
+    height: 0,
+    margin: 0,
+    width: '100%'
+  },
+  gridItem: {
+    // height: '250px'
+  }
+})
 
 interface TaskListProps extends WithStyles<typeof styles> {
   tasks: ITaskListElement[]
 }
 
-
-const TaskList = ({ tasks }: TaskListProps) => (
-  <List>
+const TaskList = ({ classes, tasks }: TaskListProps) => (
+  <div className={classes.container}>
+    <Grid classes={{ container: classes.grid }} spacing={8} container>
     {tasks.map((task, i) => (
-      <ListItem button key={i} onClick={console.log.bind(console, task)}><TaskListElement {...task} /></ListItem>
+      <Grid
+        className={classes.gridItem}
+        item
+        xs={12}
+        sm={6}
+        md={3}
+        key={i}
+        onClick={console.log.bind(console, task)}
+      >
+        <TaskListElement {...task} />
+      </Grid>
     ))}
-  </List>
+    </Grid>
+  </div>
 )
 
 export default withStyles(styles)(TaskList)

@@ -33,7 +33,7 @@ class App extends Component <AppProps> {
             <Header />
             <Route exact path="/" component={Home} />
             <Route path="/profile" component={Profile} />
-          <Route path="/add-task" component={AddTask} />
+            <Route path="/add-task" component={AddTask} />
           </div>
         </Router>
       </MuiThemeProvider>
