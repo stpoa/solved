@@ -3,6 +3,7 @@ import { SearchBar, SearchFilter } from './Search'
 import SelectCategory, { SelectCategoryProps } from './SelectCategory'
 import SelectTags, { SelectTagsProps } from './SelectTags'
 import TaskList from './TaskList/TaskList'
+import WrappedLink from './WrappedLink'
 
 export {
   Header,
@@ -12,5 +13,6 @@ export {
   SelectCategoryProps,
   SelectTags,
   SelectTagsProps,
-  TaskList
+  TaskList,
+  WrappedLink
 }

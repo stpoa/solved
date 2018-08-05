@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 // Generic
-import { Header, SearchBar, SearchFilter } from '~generic'
+import { Header, SearchFilter } from '~generic'
 
 // Pages
 import { AddTask, Home, Profile } from '~pages'
@@ -30,9 +30,7 @@ class App extends Component <AppProps, {}> {
       <MuiThemeProvider theme={theme}>
         <Router>
           <div className={containerStyles}>
-            <Header>
-              <SearchBar />
-            </Header>
+            <Header />
             <Route exact path="/" component={Home} />
             <Route path="/profile" component={Profile} />
             <Route path="/add-task" component={AddTask} />
