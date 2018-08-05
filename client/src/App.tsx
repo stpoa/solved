@@ -1,7 +1,8 @@
 import { blue } from '@material-ui/core/colors'
 import { createMuiTheme, createStyles, MuiThemeProvider, WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Provider as AuthProvider } from '~auth'
 
 // Generic
 import { Header } from '~generic'
@@ -28,14 +29,18 @@ class App extends Component <AppProps> {
     const { containerStyles } = this.props.classes
     return (
       <MuiThemeProvider theme={theme}>
-        <Router>
-          <div className={containerStyles}>
-            <Header />
-            <Route exact path="/" component={Home} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/add-task" component={AddTask} />
-          </div>
-        </Router>
+        <AuthProvider>
+          <Router>
+            <div className={containerStyles}>
+              <Header />
+              <Switch>
+                <Route path="/profile" component={Profile} />
+                <Route path="/add-task" component={AddTask} />
+                <Route path="*" component={Home} />
+              </Switch>
+            </div>
+          </Router>
+        </AuthProvider>
       </MuiThemeProvider>
     )
   }
