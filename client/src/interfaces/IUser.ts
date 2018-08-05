@@ -1,5 +1,5 @@
-interface IUser {
+interface User {
   email: string
 }
 
-export default IUser
+export default User

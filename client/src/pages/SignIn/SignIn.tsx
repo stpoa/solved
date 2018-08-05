@@ -1,14 +1,10 @@
 import { Button, TextField } from '@material-ui/core'
-import {
-  createStyles,
-  StyleRules,
-  withStyles,
-  WithStyles
-} from '@material-ui/core/styles'
+import { createStyles, StyleRules, withStyles, WithStyles } from '@material-ui/core/styles'
 import React, { ChangeEventHandler, Component, MouseEventHandler } from 'react'
 import isEmail from 'validator/lib/isEmail'
 import isLength from 'validator/lib/isLength'
 import { Body } from '~generic'
+import { Status, withAuth } from './../../AuthProvider'
 
 const styles: StyleRules = createStyles({
   button: {
@@ -47,14 +43,21 @@ class SignIn extends Component<ISignInProps, ISignInState> {
   }
 
   public render () {
-    const { classes } = this.props
+    const { classes: { button, container, item } } = this.props
     const { email, emailError, password, passwordError } = this.state
+    const isPending = status === Status.Pending
 
     return (
-      <Body className={classes.container}>
+      <Body className={container}>
         <TextField
+<<<<<<< Updated upstream
           autoFocus
           className={classes.item}
+=======
+          autoFocus={true}
+          className={item}
+          disabled={isPending}
+>>>>>>> Stashed changes
           error={Boolean(emailError)}
           margin="dense"
           label="Email Address"
@@ -68,7 +71,8 @@ class SignIn extends Component<ISignInProps, ISignInState> {
         />
         <TextField
           margin="dense"
-          className={classes.item}
+          className={item}
+          disabled={isPending}
           error={Boolean(passwordError)}
           label="Password"
           helperText={passwordError}
@@ -80,7 +84,8 @@ class SignIn extends Component<ISignInProps, ISignInState> {
           onChange={this.onChangeText}
         />
         <Button
-          className={`${classes.item} ${classes.button}`}
+          className={`${item} ${button}`}
+          disabled={isPending}
           onClick={this.onSubmit}
           fullWidth
         >
@@ -96,8 +101,8 @@ class SignIn extends Component<ISignInProps, ISignInState> {
       [e.target.name]: e.target.value,
       emailError: '',
       passwordError: ''
-     } as Pick<ISignInState, keyof ISignInState>
-    /* tslint:enable */
+    } as Pick<ISignInState, keyof ISignInState>
+      /* tslint:enable */
 
     this.setState(state)
   }
@@ -106,15 +111,15 @@ class SignIn extends Component<ISignInProps, ISignInState> {
     const { email, password } = this.state
     const errors: IErrors = {
       emailError: !email
-        ? 'Field required'
-        : !isEmail(email)
-        ? 'Incorrect email address'
-        : '',
+      ? 'Field required'
+      : !isEmail(email)
+      ? 'Incorrect email address'
+      : '',
       passwordError: !password
-        ? 'Field required'
-        : !isLength(password, { min: 6 })
-        ? 'Password should have at least 6 characters'
-        : ''
+      ? 'Field required'
+      : !isLength(password, { min: 6 })
+      ? 'Password should have at least 6 characters'
+      : ''
     }
 
     const hasErrors = Object.values(errors).some((error) => error.length)
@@ -128,7 +133,9 @@ class SignIn extends Component<ISignInProps, ISignInState> {
     if (errors) {
       return this.setState(errors)
     }
+
+    this.props.signIn(this.state.email, this.state.password)
   }
 }
 
-export default withStyles(styles)(SignIn)
+export default withAuth(withStyles(styles)(SignIn))

@@ -13,8 +13,13 @@ interface TaskListElement {
   expiredAt: number
 }
 
+interface User {
+  email: string
+}
+
 export {
   Category,
   CategoryList,
+  User,
   TaskListElement
 }

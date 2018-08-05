@@ -1,23 +1,23 @@
-import React, { Component, Context, createContext } from 'react'
-import { users } from '~data'
-import { IUser } from '~interfaces'
+import React, { Context, createContext } from 'react'
+import { accounts } from '~data'
+import { User } from '~interfaces'
 
 export const AuthContext: Context<{}> = createContext({})
 
-enum Status {
+export enum Status {
   Success = 'success',
   Failure = 'failure',
   Pending = 'pending'
 }
 
-interface IAuthState {
+interface AuthState {
   signedIn: boolean,
-  status?: Status
-  user: IUser | null
+  status?: Status,
+  user: User | null
 }
 
-export default class AuthProvider extends Component<{}, IAuthState> {
-  public readonly state = {
+export default class AuthProvider extends React.Component<{}, AuthState> {
+  public readonly state: AuthState = {
     signedIn: false,
     user: null
   }
@@ -42,17 +42,24 @@ export default class AuthProvider extends Component<{}, IAuthState> {
       status: Status.Pending
     })
 
-    const user = users.find((user) => (
-      user.email === email && user.password === password
+    const matchedAccount = accounts.find((account) => (
+      account.email === email && account.password === password
     ))
-
-    if (user) {
-    }
 
     this.setState({ signedIn: true })
   }
 
   private signOut: () => void = () => {
     this.setState({ signedIn: false })
+  }
+}
+
+export function withAuth (Component: any) {
+  return function AuthedComponent (props: any) {
+    return (
+      <AuthContext.Consumer>
+        {(authProps) => <Component {...props} {...authProps} />}
+      </AuthContext.Consumer>
+    )
   }
 }
