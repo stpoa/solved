@@ -1,4 +1,4 @@
-import { Avatar, Card, CardContent, Chip, StyleRulesCallback, Theme, Typography, withStyles, WithStyles
+import { Card, CardContent, Chip, StyleRulesCallback, Theme, Typography, withStyles, WithStyles
 } from '@material-ui/core'
 import React from 'react'
 import { ITaskListElement } from '~interfaces'
@@ -9,8 +9,12 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   card: {
     display: 'flex'
   },
+  chip: {
+    margin: theme.spacing.unit
+  },
   content: {
-    flex: '1 0 auto'
+    flex: '1 0 auto',
+    height: '15em'
   },
   controls: {
     alignItems: 'center',
@@ -26,12 +30,15 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column'
   },
+  footer: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  header: {
+  },
   playIcon: {
     height: 38,
     width: 38
-  },
-  chip: {
-    margin: theme.spacing.unit,
   }
 })
 
@@ -72,12 +79,14 @@ const TaskListElementRaw = ({ category, tags, shortDescription, price, expiredAt
   return (
     <Card>
       <CardContent className={classes.content}>
-        <Typography variant="headline">{category}</Typography>
+        <Typography className={classes.header} variant="headline">{category}</Typography>
         <Typography variant="subheading" color="textSecondary">
           <TagList tags={tags}/>
           <p>{shortDescription}</p>
-          <span>{price} PLN</span>
-          <TimeLeft {...timeLeft}/>
+          <div className={classes.footer}>
+            <TimeLeft {...timeLeft}/>
+            <span>{price} PLN</span>
+          </div>
         </Typography>
       </CardContent>
     </Card>
@@ -85,4 +94,3 @@ const TaskListElementRaw = ({ category, tags, shortDescription, price, expiredAt
 }
 
 export default withStyles(styles)(TaskListElementRaw)
-

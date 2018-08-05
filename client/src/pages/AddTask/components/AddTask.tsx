@@ -1,4 +1,4 @@
-import { Button, Grid, Tab, Tabs } from '@material-ui/core'
+import { Button, Tab, Tabs } from '@material-ui/core'
 import { createStyles, StyleRulesCallback, WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { ChangeEvent, Fragment, MouseEventHandler, SFC } from 'react'
 import CapturePhoto, { CapturePhotoProps } from './CapturePhoto'
