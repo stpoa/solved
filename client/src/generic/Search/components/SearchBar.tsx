@@ -1,7 +1,6 @@
-import { IconButton, Input } from '@material-ui/core'
+import { Input } from '@material-ui/core'
 import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles'
-import { Close } from '@material-ui/icons'
-import React, { Fragment } from 'react'
+import React from 'react'
 
 const styles = createStyles({
   containerStyles: {

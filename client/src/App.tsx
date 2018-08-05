@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 // Generic
-import { Header, SearchBar } from '~generic'
+import { Header, SearchBar, SearchFilter } from '~generic'
 
 // Pages
 import { AddTask, Home, Profile } from '~pages'
@@ -35,7 +35,8 @@ class App extends Component <AppProps, {}> {
             </Header>
             <Route exact path="/" component={Home} />
             <Route path="/profile" component={Profile} />
-          <Route path="/add-task" component={AddTask} />
+            <Route path="/add-task" component={AddTask} />
+            <Route path="/search" component={SearchFilter} />
           </div>
         </Router>
       </MuiThemeProvider>

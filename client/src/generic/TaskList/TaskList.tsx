@@ -33,7 +33,7 @@ const TaskList = ({ classes: { container, grid, gridItem }, tasks }: TaskListPro
         item
         xs={12}
         sm={6}
-        md={3}
+        md={4}
         key={i}
         onClick={console.log.bind(console, task)}
       >
