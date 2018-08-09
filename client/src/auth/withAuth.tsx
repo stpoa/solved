@@ -1,8 +1,9 @@
-import React from 'react'
-import context from './context'
+import React, { ComponentType } from 'react'
+import { Subtract } from 'utility-types'
+import context, { Value } from './context'
 
-export default function withAuth (Component: any) {
-  return class AuthedComponent extends React.Component {
+export default function withAuth<P extends WithAuth> (Component: ComponentType<P>) {
+  return class AuthedComponent extends React.Component<Subtract<P, WithAuth>> {
     public render () {
       return (
         <context.Consumer>
@@ -11,10 +12,14 @@ export default function withAuth (Component: any) {
       )
     }
 
-    public renderComponent = (authProps: {}) => {
+    public renderComponent = (authProps: Value) => {
       return (
         <Component auth={authProps} {...this.props} />
       )
     }
   }
+}
+
+export interface WithAuth {
+  auth: Value
 }

@@ -1,23 +1,15 @@
-import React from 'react'
-import { accounts, users } from '~data'
-import { User } from '~interfaces'
-import context from './context'
+import React, { Component } from 'react'
+import context, { defaultValue, SignIn, SignOut, Status, Value } from './context'
+import { signIn } from './service'
 
-export enum Status {
-  Success = 'success',
-  Failure = 'failure',
-  Pending = 'pending'
-}
-
-export default class AuthProvider extends React.Component<{}, AuthState> {
+export default class Provider extends Component<{}, ProviderState> {
   public constructor (props: {}) {
     super(props)
 
     this.state = {
+      ...defaultValue,
       signIn: this.signIn,
-      signOut: this.signOut,
-      signedIn: false,
-      user: null
+      signOut: this.signOut
     }
   }
 
@@ -29,39 +21,27 @@ export default class AuthProvider extends React.Component<{}, AuthState> {
     )
   }
 
-  private signIn: SignIn = (email, password) => {
+  private signIn: SignIn = async (email, password) => {
     this.setState({
       status: Status.Pending
     })
 
-    window.setTimeout(() => {
-      const matchedAccount = accounts.find((account) => (
-          account.email === email && account.password === password
-        ))
+    const maybeUser = await signIn(email, password)
 
-      const matchedUser = (matchedAccount && users.find((user) => user.email === email)) || null
-
-      this.setState({
-        signedIn: Boolean(matchedUser),
-        status: matchedUser ? Status.Success : Status.Failure,
-        user: matchedUser
-      })
-    }, 2000)
+    this.setState({
+      signedIn: Boolean(maybeUser),
+      status: maybeUser ? Status.Success : Status.Failure,
+      user: maybeUser
+    })
   }
 
   private signOut: SignOut = () => {
-    this.setState({ signedIn: false })
+    this.setState({
+      signedIn: false,
+      status: undefined,
+      user: null
+    })
   }
 }
 
-type SignIn = (email: string, password: string) => void
-type SignOut = () => void
-type MaybeUser = User | null
-
-interface AuthState {
-  signedIn: boolean,
-  status?: Status,
-  user: MaybeUser,
-  signIn: SignIn,
-  signOut: SignOut
-}
+export type ProviderState = Value
