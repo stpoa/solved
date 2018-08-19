@@ -1,10 +1,9 @@
 import { Button, Tab, Tabs } from '@material-ui/core'
 import { createStyles, StyleRulesCallback, WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { ChangeEvent, Fragment, MouseEventHandler, SFC } from 'react'
+import { SelectCategory, SelectCategoryProps, SelectTags, SelectTagsProps } from '~generic'
 import CapturePhoto, { CapturePhotoProps } from './CapturePhoto'
 import Description, { DescriptionProps } from './Description'
-import SelectCategory, { SelectCategoryProps } from './SelectCategory'
-import SelectTags, { SelectTagsProps } from './SelectTags'
 
 const styles: StyleRulesCallback = () => createStyles({
   addTaskContainer: {

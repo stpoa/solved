@@ -8,23 +8,13 @@ import { Provider as AuthProvider } from '~auth'
 import { Header } from '~generic'
 
 // Pages
-import { AddTask, Home, Profile } from '~pages'
-
-const styles = createStyles({
-  containerStyles: {
-    display: 'grid',
-    gridTemplateRows: 'max-content auto',
-    height: '100vh',
-    overflow: 'hidden'
-  }
-})
-interface AppProps extends WithStyles <typeof styles> {}
+import { AddTask, Home, Profile, Search } from '~pages'
 
 const theme = createMuiTheme({
   palette: { primary: blue }
 })
 
-class App extends Component <AppProps> {
+class App extends Component <AppProps, {}> {
   public render () {
     const { containerStyles } = this.props.classes
     return (
@@ -36,6 +26,7 @@ class App extends Component <AppProps> {
               <Switch>
                 <Route path="/profile" component={Profile} />
                 <Route path="/add-task" component={AddTask} />
+                <Route path="/search" component={Search} />
                 <Route path="*" component={Home} />
               </Switch>
             </div>
@@ -46,4 +37,15 @@ class App extends Component <AppProps> {
   }
 }
 
+const styles = createStyles({
+  containerStyles: {
+    display: 'grid',
+    gridTemplateRows: 'max-content auto',
+    height: '100vh',
+    overflow: 'hidden'
+  }
+})
+
 export default withStyles(styles)(App)
+
+interface AppProps extends WithStyles<typeof styles> {}

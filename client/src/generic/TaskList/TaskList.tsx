@@ -35,7 +35,6 @@ const TaskList = ({ classes, tasks }: TaskListProps) => (
         sm={6}
         md={3}
         key={i}
-        onClick={console.log.bind(console, task)}
       >
         <TaskListElement {...task} />
       </Grid>
