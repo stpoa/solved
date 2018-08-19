@@ -1,9 +1,9 @@
-interface ICategory {
+interface Category {
   id: string,
   name: string
 }
 
-type ICategoryList = ICategory[]
+type CategoryList = Category[]
 
 interface ITaskListElement {
   category: string
@@ -13,8 +13,13 @@ interface ITaskListElement {
   expiredAt: number
 }
 
+interface User {
+  email: string
+}
+
 export {
-  ICategory,
-  ICategoryList,
-  ITaskListElement
+  Category,
+  CategoryList,
+  ITaskListElement,
+  User
 }

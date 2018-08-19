@@ -24,18 +24,17 @@ interface TaskListProps extends WithStyles<typeof styles> {
   tasks: ITaskListElement[]
 }
 
-const TaskList = ({ classes: { container, grid, gridItem }, tasks }: TaskListProps) => (
-  <div className={container}>
-    <Grid classes={{ container: grid }} spacing={8} container>
+const TaskList = ({ classes, tasks }: TaskListProps) => (
+  <div className={classes.container}>
+    <Grid classes={{ container: classes.grid }} spacing={8} container>
     {tasks.map((task, i) => (
       <Grid
-        className={gridItem}
+        className={classes.gridItem}
         item
         xs={12}
         sm={6}
-        md={4}
+        md={3}
         key={i}
-        onClick={console.log.bind(console, task)}
       >
         <TaskListElement {...task} />
       </Grid>

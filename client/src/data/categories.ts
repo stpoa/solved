@@ -1,6 +1,6 @@
-import { ICategoryList } from '~interfaces'
+import { CategoryList } from '~interfaces'
 
-const categories: ICategoryList = [{
+const categories: CategoryList = [{
   id: '1',
   name: 'Język Polski'
 }, {

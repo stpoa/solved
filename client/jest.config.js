@@ -15,4 +15,8 @@ module.exports = {
     "json",
     "node"
   ],
+  "moduleNameMapper": {
+    "^~(.*)$": "<rootDir>/src/$1"
+  },
+  "setupTestFrameworkScriptFile": "<rootDir>/setupTests.ts"
 }
