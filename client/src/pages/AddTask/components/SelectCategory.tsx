@@ -1,7 +1,7 @@
 import { List, MenuItem } from '@material-ui/core'
 import { createStyles, StyleRules, withStyles, WithStyles } from '@material-ui/core/styles'
 import React, { SFC } from 'react'
-import { ICategory, ICategoryList } from '~interfaces'
+import { Category, CategoryList } from '~interfaces'
 
 const styles: StyleRules = createStyles({
   container: {
@@ -18,9 +18,9 @@ const styles: StyleRules = createStyles({
 })
 
 export interface SelectCategoryProps extends WithStyles<typeof styles> {
-  categories: ICategoryList,
-  onClick: (id: ICategory['id']) => void,
-  value: ICategory['id'] | null
+  categories: CategoryList,
+  onClick: (id: Category['id']) => void,
+  value: Category['id'] | null
 }
 
 const SelectCategory: SFC<SelectCategoryProps> = ({
