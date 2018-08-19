@@ -3,28 +3,6 @@ import { createStyles, StyleRulesCallback, WithStyles, withStyles } from '@mater
 import React, { ChangeEvent, Fragment, MouseEventHandler, SFC } from 'react'
 import { SelectCategory, SelectCategoryProps, SelectTags, SelectTagsProps } from '~generic'
 
-const styles: StyleRulesCallback = () => createStyles({
-  container: {
-    display: 'grid',
-    gridTemplateRows: 'max-content auto'
-  },
-  item: {
-    justifyContent: 'center',
-    maxWidth: '100%'
-  }
-})
-
-export interface SearchFilterProps extends WithStyles<typeof styles> {
-  categories: SelectCategoryProps['categories'],
-  onClickCategory: SelectCategoryProps['onClick'],
-  onClickTag: SelectTagsProps['onClick'],
-  onSubmit: MouseEventHandler,
-  onChangeTab: (e: ChangeEvent<{}>, value: number) => void,
-  categoryValue: SelectCategoryProps['value'],
-  tags: SelectTagsProps['tags'],
-  tabValue: boolean | number
-}
-
 const SearchFilter: SFC<SearchFilterProps> = ({
   classes: { container, item },
   categories,
@@ -55,4 +33,26 @@ const SearchFilter: SFC<SearchFilterProps> = ({
     </div>
 )
 
+const styles: StyleRulesCallback = () => createStyles({
+  container: {
+    display: 'grid',
+    gridTemplateRows: 'max-content auto'
+  },
+  item: {
+    justifyContent: 'center',
+    maxWidth: '100%'
+  }
+})
+
 export default withStyles(styles)(SearchFilter)
+
+export interface SearchFilterProps extends WithStyles<typeof styles> {
+  categories: SelectCategoryProps['categories'],
+  onClickCategory: SelectCategoryProps['onClick'],
+  onClickTag: SelectTagsProps['onClick'],
+  onSubmit: MouseEventHandler,
+  onChangeTab: (e: ChangeEvent<{}>, value: number) => void,
+  categoryValue: SelectCategoryProps['value'],
+  tags: SelectTagsProps['tags'],
+  tabValue: boolean | number
+}

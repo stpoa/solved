@@ -2,13 +2,6 @@ import React, { Component } from 'react'
 import { categories, tags } from '~data'
 import SearchFilter, { SearchFilterProps } from '../components/SearchFilter'
 
-interface SearchFilterContainerState {
-  categoryValue: SearchFilterProps['categoryValue']
-  categories: SearchFilterProps['categories'],
-  tags: SearchFilterProps['tags'],
-  tabValue: SearchFilterProps['tabValue']
-}
-
 export default class SearchFilterContainer extends Component<{}, SearchFilterContainerState> {
   public readonly state: SearchFilterContainerState = {
     categories,
@@ -56,4 +49,11 @@ export default class SearchFilterContainer extends Component<{}, SearchFilterCon
   }
 
   private search: SearchFilterProps['onSubmit'] = () => { return }
+}
+
+interface SearchFilterContainerState {
+  categoryValue: SearchFilterProps['categoryValue']
+  categories: SearchFilterProps['categories'],
+  tags: SearchFilterProps['tags'],
+  tabValue: SearchFilterProps['tabValue']
 }

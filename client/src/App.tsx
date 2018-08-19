@@ -5,20 +5,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider as AuthProvider } from '~auth'
 
 // Generic
-import { Header, SearchFilter } from '~generic'
+import { Header } from '~generic'
 
 // Pages
-import { AddTask, Home, Profile } from '~pages'
-
-const styles = createStyles({
-  containerStyles: {
-    display: 'grid',
-    gridTemplateRows: 'max-content auto',
-    height: '100vh',
-    overflow: 'hidden'
-  }
-})
-interface AppProps extends WithStyles<typeof styles> {}
+import { AddTask, Home, Profile, Search } from '~pages'
 
 const theme = createMuiTheme({
   palette: { primary: blue }
@@ -36,7 +26,7 @@ class App extends Component <AppProps, {}> {
               <Switch>
                 <Route path="/profile" component={Profile} />
                 <Route path="/add-task" component={AddTask} />
-                <Route path="/search" component={SearchFilter} />
+                <Route path="/search" component={Search} />
                 <Route path="*" component={Home} />
               </Switch>
             </div>
@@ -47,4 +37,15 @@ class App extends Component <AppProps, {}> {
   }
 }
 
+const styles = createStyles({
+  containerStyles: {
+    display: 'grid',
+    gridTemplateRows: 'max-content auto',
+    height: '100vh',
+    overflow: 'hidden'
+  }
+})
+
 export default withStyles(styles)(App)
+
+interface AppProps extends WithStyles<typeof styles> {}

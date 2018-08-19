@@ -3,51 +3,58 @@ import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles'
 import { AccountCircle, Close, Menu, Search } from '@material-ui/icons'
 import React, { Component } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { SearchBar, WrappedLink } from '~generic'
+import { WrappedLink } from '~generic'
+import SearchBar from './SearchBar'
 
 class Header extends Component<HeaderProps> {
   public render () {
     const { classes, location } = this.props
-    const isSearching = location.pathname === '/search'
+    const pathname = location.pathname
 
     return (
       <AppBar position="sticky">
-        {!isSearching && (
-          <Toolbar className={classes.toolbar}>
-            <IconButton color="inherit" aria-label="Menu">
-              <Menu />
-            </IconButton>
-            <WrappedLink
-              wrapper={Typography}
-              className={classes.title}
-              variant="title"
-              color="inherit"
-              to="/"
-            >
-              Notowork
-            </WrappedLink>
-            <div>
-              <WrappedLink color="inherit" wrapper={IconButton} to="/profile">
-                <AccountCircle className={classes.icon} />
+        {pathname !== '/search'
+          ? (
+            <Toolbar className={classes.toolbar}>
+              <IconButton color="inherit" aria-label="Menu">
+                <Menu />
+              </IconButton>
+              <WrappedLink
+                wrapper={Typography}
+                className={classes.title}
+                variant="title"
+                color="inherit"
+                to="/"
+              >
+                Notowork
               </WrappedLink>
-              <WrappedLink color="inherit" wrapper={IconButton} to="/search">
-                <Search className={classes.icon} />
+              <div>
+                {pathname === '/' && (
+                  <WrappedLink color="inherit" wrapper={IconButton} to="/search">
+                    <Search className={classes.icon} />
+                  </WrappedLink>
+                )}
+                <WrappedLink color="inherit" wrapper={IconButton} to="/profile">
+                  <AccountCircle className={classes.icon} />
+                </WrappedLink>
+              </div>
+            </Toolbar>
+          )
+          : (
+            <Toolbar className={classes.searchToolbar}>
+              <SearchBar />
+              <WrappedLink wrapper={IconButton} to="/">
+                <Close />
               </WrappedLink>
-            </div>
-          </Toolbar>
-        )}
-        {isSearching && (
-          <Toolbar className={classes.searchToolbar}>
-            <SearchBar />
-            <WrappedLink wrapper={IconButton} to="/">
-              <Close />
-            </WrappedLink>
-          </Toolbar>
-        )}
+            </Toolbar>
+          )
+        }
       </AppBar>
     )
   }
 }
+
+const wrappedComponent = withRouter(Header)
 
 const styles = createStyles({
   icon: {
@@ -65,8 +72,6 @@ const styles = createStyles({
   }
 })
 
-interface HeaderProps extends RouteComponentProps<{}>, WithStyles <typeof styles> {}
-
-const wrappedComponent = withRouter(Header)
-
 export default withStyles(styles)(wrappedComponent)
+
+interface HeaderProps extends RouteComponentProps<{}>, WithStyles <typeof styles> {}
