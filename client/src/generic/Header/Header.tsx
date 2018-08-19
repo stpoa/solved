@@ -3,7 +3,7 @@ import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles'
 import { AccountCircle, Close, Menu, Search } from '@material-ui/icons'
 import React, { Component } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { WrappedLink } from '~generic'
+import WrappedLink from './../WrappedLink'
 import SearchBar from './SearchBar'
 
 class Header extends Component<HeaderProps> {
