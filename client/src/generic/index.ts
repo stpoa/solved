@@ -1,4 +1,5 @@
 import Header from './Header/Header'
+import PrivateRoute from './PrivateRoute'
 import SelectCategory, { SelectCategoryProps } from './SelectCategory'
 import SelectTags, { SelectTagsProps } from './SelectTags'
 import TaskList from './TaskList/TaskList'
@@ -11,5 +12,6 @@ export {
   SelectTags,
   SelectTagsProps,
   TaskList,
-  WrappedLink
+  WrappedLink,
+  PrivateRoute
 }
