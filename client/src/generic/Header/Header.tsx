@@ -7,6 +7,14 @@ import { withAuth, WithAuth } from '~auth'
 import WrappedLink from './../WrappedLink'
 import SearchBar from './SearchBar'
 
+const menuLinks = [{
+  name: 'Add task',
+  to: '/add-task'
+}, {
+  name: 'Profile',
+  to: '/profile'
+}]
+
 class Header extends Component<HeaderProps, HeaderState> {
   public readonly state: HeaderState = {}
 
@@ -63,9 +71,11 @@ class Header extends Component<HeaderProps, HeaderState> {
                 anchorEl={this.state.anchorElement}
                 onClose={this.closeMenu}
               >
-                <WrappedLink className={classes.link} wrapper={MenuItem} to="/profile">
-                  Profile
-                </WrappedLink>
+                {menuLinks.map((link, i) => (
+                  <WrappedLink className={classes.link} key={i} wrapper={MenuItem} to={link.to}>
+                    {link.name}
+                  </WrappedLink>
+                ))}
                 <MenuItem onClick={this.onSignOut}>
                   Sign out
                 </MenuItem>
