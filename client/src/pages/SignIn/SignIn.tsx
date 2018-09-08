@@ -1,28 +1,43 @@
-import { Button, TextField } from '@material-ui/core'
+import { Button, Snackbar, TextField } from '@material-ui/core'
 import { createStyles, StyleRules, withStyles, WithStyles } from '@material-ui/core/styles'
 import React, { ChangeEventHandler, Component, MouseEventHandler } from 'react'
 import { Redirect } from 'react-router-dom'
 import isEmail from 'validator/lib/isEmail'
 import isLength from 'validator/lib/isLength'
 import { Status, withAuth, WithAuth } from '~auth'
+import SignInError from './components/SignInError'
 
-class SignIn extends Component<ISignInProps, ISignInState> {
-  public readonly state: ISignInState = {
+class SignIn extends Component<SignInProps, SignInState> {
+  public readonly state: SignInState = {
     email: '',
     emailError: '',
     password: '',
-    passwordError: ''
+    passwordError: '',
+    showSignInError: false
+  }
+
+  public componentDidUpdate (prevProps: SignInProps) {
+    if (prevProps.auth.status === Status.Pending && this.props.auth.status === Status.Failure) {
+      this.setState({ showSignInError: true })
+    }
   }
 
   public render () {
     if (this.props.auth.signedIn) return <Redirect to="/profile" />
 
     const { auth: { status }, classes: { button, container, item } } = this.props
-    const { email, emailError, password, passwordError } = this.state
+    const { email, emailError, password, passwordError, showSignInError } = this.state
     const isPending = status === Status.Pending
 
     return (
       <div className={container}>
+        <Snackbar
+          autoHideDuration={4000}
+          open={showSignInError}
+          onClose={this.hideSignInError}
+        >
+          <SignInError />
+        </Snackbar>
         <TextField
           autoFocus
           className={item}
@@ -70,15 +85,15 @@ class SignIn extends Component<ISignInProps, ISignInState> {
       [e.target.name]: e.target.value,
       emailError: '',
       passwordError: ''
-    } as Pick<ISignInState, keyof ISignInState>
+    } as Pick<SignInState, Exclude<keyof SignInState, 'showSignInError'>>
       /* tslint:enable */
 
     this.setState(state)
   }
 
-  private validate (): IErrors | false {
+  private validate (): Errors | false {
     const { email, password } = this.state
-    const errors: IErrors = {
+    const errors: Errors = {
       emailError: !email
       ? 'Field required'
       : !isEmail(email)
@@ -105,6 +120,10 @@ class SignIn extends Component<ISignInProps, ISignInState> {
 
     await this.props.auth.signIn(this.state.email, this.state.password)
   }
+
+  private hideSignInError: () => void = () => {
+    this.setState({ showSignInError: false })
+  }
 }
 
 const styles: StyleRules = createStyles({
@@ -123,16 +142,17 @@ const styles: StyleRules = createStyles({
   }
 })
 
-interface ISignInProps extends WithAuth, WithStyles<typeof styles> {}
+interface SignInProps extends WithAuth, WithStyles<typeof styles> {}
 
-interface IErrors {
+interface Errors {
   emailError: string,
   passwordError: string
 }
 
-interface ISignInState extends IErrors {
+interface SignInState extends Errors {
   email: string,
-  password: string
+  password: string,
+  showSignInError: boolean
 }
 
 export default withAuth(withStyles(styles)(SignIn))
