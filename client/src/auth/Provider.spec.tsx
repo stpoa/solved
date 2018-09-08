@@ -74,7 +74,7 @@ describe('<Provider />', () => {
     }
 
     it('when signIn() succeeds', (done) => {
-      testSignIn('user@notowork.com', '1234', (wrapper) => {
+      testSignIn('user@notowork.com', '123456', (wrapper) => {
         const value = getValue(wrapper)
 
         expect(value.signedIn).toBe(true)

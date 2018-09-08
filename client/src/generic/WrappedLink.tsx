@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 const WrappedLink: SFC<any> = ({ children, wrapper: Wrapper, ...rest }) => {
   return (
-  <Wrapper component={Link} {...rest}>
-    {children}
-  </Wrapper>
+    <Wrapper component={Link} {...rest}>
+      {children}
+    </Wrapper>
   )
 }
 
