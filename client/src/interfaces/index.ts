@@ -5,9 +5,12 @@ interface Category {
 
 type CategoryList = Category[]
 
-interface ITaskListElement {
+interface TagList extends Array<string> {}
+
+interface Task {
+  id: string,
   category: string
-  tags: string[]
+  tags: TagList,
   shortDescription: string
   price: number
   expiredAt: number
@@ -20,6 +23,7 @@ interface User {
 export {
   Category,
   CategoryList,
-  ITaskListElement,
+  Task,
+  TagList,
   User
 }

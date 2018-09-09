@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { categories, tags } from '~data'
+import { categories, tags as tagsData } from '~data'
 import AddTask, { AddTaskProps } from './../components/AddTask'
+import addTask from './../service'
 
 interface AddTaskContainerState {
   categoryValue: AddTaskProps['categoryValue']
@@ -18,7 +19,7 @@ export default class AddTaskContainer extends Component<{}, AddTaskContainerStat
     descriptionValue: '',
     image: '',
     tabValue: false,
-    tags: tags.map((tag) => ({ name: tag, selected: false }))
+    tags: tagsData.map((tag) => ({ name: tag, selected: false }))
   }
 
   public render () {
@@ -73,5 +74,29 @@ export default class AddTaskContainer extends Component<{}, AddTaskContainerStat
     this.setState({ image })
   }
 
-  private addTask: AddTaskProps['onSubmit'] = () => { return }
+  private validate (): boolean {
+    const { categoryValue, descriptionValue, tags } = this.state
+
+    return Boolean(
+      categoryValue &&
+      descriptionValue.length > 10 &&
+      tags.filter((tag) => tag.selected).length
+    )
+  }
+
+  private addTask: AddTaskProps['onSubmit'] = async () => {
+    if (!this.validate()) return false
+
+    const { categoryValue, descriptionValue } = this.state
+
+    const task = {
+      category: categoryValue,
+      shortDescription: descriptionValue,
+      tags: this.state.tags.filter((tag) => tag.selected).map((tag) => tag.name)
+    }
+
+    await addTask(task)
+
+    return
+  }
 }
