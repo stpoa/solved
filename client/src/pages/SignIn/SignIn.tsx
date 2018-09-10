@@ -80,15 +80,14 @@ class SignIn extends Component<SignInProps, SignInState> {
   }
 
   private onChangeText: ChangeEventHandler<HTMLInputElement> = (e) => {
-    /* tslint:disable */
     const state = {
       [e.target.name]: e.target.value,
       emailError: '',
       passwordError: ''
-    } as Pick<SignInState, Exclude<keyof SignInState, 'showSignInError'>>
-      /* tslint:enable */
+    }
 
-    this.setState(state)
+    // https://github.com/Microsoft/TypeScript/issues/13948
+    this.setState(state as Pick<SignInState, Exclude<keyof SignInState, 'showSignInError'>>)
   }
 
   private validate (): Errors | false {
