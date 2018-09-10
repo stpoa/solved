@@ -92,6 +92,7 @@ class SignIn extends Component<SignInProps, SignInState> {
 
   private validate (): Errors | false {
     const { email, password } = this.state
+
     const errors: Errors = {
       emailError: !email
       ? 'Field required'
@@ -113,11 +114,9 @@ class SignIn extends Component<SignInProps, SignInState> {
   private onSubmit: MouseEventHandler<HTMLElement> = async () => {
     const errors = this.validate()
 
-    if (errors) {
-      return this.setState(errors)
-    }
-
-    await this.props.auth.signIn(this.state.email, this.state.password)
+    return errors
+      ? this.setState(errors)
+      : this.props.auth.signIn(this.state.email, this.state.password)
   }
 
   private hideSignInError: () => void = () => {
