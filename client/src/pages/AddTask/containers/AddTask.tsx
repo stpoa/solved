@@ -95,8 +95,6 @@ export default class AddTaskContainer extends Component<{}, AddTaskContainerStat
       tags: this.state.tags.filter((tag) => tag.selected).map((tag) => tag.name)
     }
 
-    await addTask(task)
-
-    return
+    return addTask(task)
   }
 }
