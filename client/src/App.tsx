@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider as AuthProvider } from '~auth'
 
 // Generic
-import { Header } from '~generic'
+import { Header, PrivateRoute } from '~generic'
 
 // Pages
 import { AddTask, Home, Profile, Search } from '~pages'
@@ -24,8 +24,8 @@ class App extends Component <AppProps, {}> {
             <div className={containerStyles}>
               <Header />
               <Switch>
-                <Route path="/profile" component={Profile} />
-                <Route path="/add-task" component={AddTask} />
+                <PrivateRoute path="/profile" component={Profile} />
+                <PrivateRoute path="/add-task" component={AddTask} />
                 <Route path="/search" component={Search} />
                 <Route path="*" component={Home} />
               </Switch>
