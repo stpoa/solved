@@ -10,7 +10,8 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
-    "utility-types": "^2.0.0"
+    "utility-types": "^2.0.0",
+    "validator": "^10.7.1"
   },
   "devDependencies": {
     "@types/date-fns": "^2.6.0",
@@ -20,6 +21,7 @@
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
     "@types/react-router-dom": "^4.2.7",
+    "@types/validator": "^9.4.1",
     "enzyme": "^3.4.0",
     "enzyme-adapter-react-16": "^1.2.0",
     "husky": "^0.14.3",
