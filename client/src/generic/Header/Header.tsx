@@ -12,7 +12,7 @@ class Header extends Component<HeaderProps> {
     const pathname = location.pathname
 
     return (
-      <AppBar position="sticky">
+      <AppBar position="sticky" classes={{ root: classes.root }}>
         {pathname !== '/search'
           ? (
             <Toolbar className={classes.toolbar}>
@@ -60,6 +60,11 @@ const styles = createStyles({
   icon: {
     fontSize: 30
   },
+  root: {
+    bottom: 0,
+    position: 'absolute',
+    top: 'auto'
+  },
   searchToolbar: {
     backgroundColor: 'white'
   },
@@ -67,8 +72,10 @@ const styles = createStyles({
     textDecoration: 'none'
   },
   toolbar: {
+    bottom: '0',
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    top: 'auto'
   }
 })
 

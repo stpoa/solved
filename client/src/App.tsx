@@ -22,7 +22,6 @@ class App extends Component <AppProps, {}> {
         <AuthProvider>
           <Router>
             <div className={containerStyles}>
-              <Header />
               <Switch>
                 <PrivateRoute path="/profile" component={Profile} />
                 <PrivateRoute path="/add-task" component={AddTask} />
@@ -30,6 +29,7 @@ class App extends Component <AppProps, {}> {
                 <Route path="/register" component={Register} />
                 <Route path="*" component={Home} />
               </Switch>
+              <Header />
             </div>
           </Router>
         </AuthProvider>
@@ -40,7 +40,6 @@ class App extends Component <AppProps, {}> {
 
 const styles = createStyles({
   containerStyles: {
-    display: 'grid',
     gridTemplateRows: 'max-content auto',
     height: '100vh',
     overflow: 'hidden'
