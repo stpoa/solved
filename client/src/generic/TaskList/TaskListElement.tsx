@@ -1,7 +1,7 @@
 import { Card, CardContent, Chip, StyleRulesCallback, Theme, Typography, withStyles, WithStyles
 } from '@material-ui/core'
 import React from 'react'
-import { ITaskListElement } from '~interfaces'
+import { Task } from '~interfaces'
 
 import { getTimeLeft } from '~lib/date'
 
@@ -71,7 +71,7 @@ const TagListRaw = ({ tags, classes }: TagListProps) => (
 
 const TagList = withStyles(styles)(TagListRaw)
 
-interface TaskListElementProps extends WithStyles<typeof styles>, ITaskListElement {}
+interface TaskListElementProps extends WithStyles<typeof styles>, Task {}
 
 const TaskListElementRaw = ({ category, tags, shortDescription, price, expiredAt, classes }: TaskListElementProps) => {
   const timeLeft = getTimeLeft(expiredAt)

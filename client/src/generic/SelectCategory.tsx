@@ -20,7 +20,7 @@ const styles: StyleRules = createStyles({
 export interface SelectCategoryProps extends WithStyles<typeof styles> {
   categories: CategoryList,
   onClick: (id: Category['id']) => void,
-  value: Category['id'] | null
+  value: Category['id']
 }
 
 const SelectCategory: SFC<SelectCategoryProps> = ({

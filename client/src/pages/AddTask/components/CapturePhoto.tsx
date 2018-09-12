@@ -12,12 +12,14 @@ const styles: StyleRules = createStyles({
   },
   icon: {
     fontSize: 50,
-    position: 'absolute'
+    position: 'absolute',
+    width: '100%'
   },
   iconContainer: {
     bottom: 70,
     cursor: 'pointer',
-    position: 'absolute'
+    position: 'absolute',
+    width: '100%'
   },
   photo: {
     backgroundColor: 'gray',
@@ -47,9 +49,7 @@ class CapturePhoto extends Component<CapturePhotoProps> {
     if (navigator.getUserMedia && this.video.current) {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: {
-            facingMode: 'user'
-          }
+          video: { facingMode: 'user' }
         })
 
         this.video.current.srcObject = stream
@@ -57,9 +57,13 @@ class CapturePhoto extends Component<CapturePhotoProps> {
     }
   }
 
+  public componentWillUnmount () {
+    this.stopCapturing()
+  }
+
   public render () {
-    const { classes } = this.props
-    const photoAdded = !!this.props.imgSrc
+    const { classes, imgSrc } = this.props
+    const photoAdded = !!imgSrc
 
     return (
       <Grid className={classes.container}>
@@ -69,24 +73,24 @@ class CapturePhoto extends Component<CapturePhotoProps> {
           ref={this.video}
         />
 
-      <Fade in={photoAdded}>
-        <img
-          src={this.props.imgSrc}
-          className={`${classes.photo} ${photoAdded ? '' : classes.hidden}`}
+        <Fade in={photoAdded}>
+          <img
+            src={this.props.imgSrc}
+            className={`${classes.photo} ${photoAdded ? '' : classes.hidden}`}
+          />
+        </Fade>
+
+        <canvas
+          className={classes.hidden}
+          ref={this.canvas}
         />
-      </Fade>
 
-      <canvas
-        className={classes.hidden}
-        ref={this.canvas}
-      />
-
-    { !photoAdded &&
-    <div className={classes.iconContainer}>
-      <PhotoCamera className={classes.icon} onClick={this.onClick} />
-    </div>
-    }
-  </Grid>
+        {!photoAdded && (
+          <div className={classes.iconContainer}>
+            <PhotoCamera className={classes.icon} onClick={this.onClick} />
+          </div>
+        )}
+      </Grid>
     )
   }
 
@@ -98,15 +102,22 @@ class CapturePhoto extends Component<CapturePhotoProps> {
       const context = canvasElement.getContext('2d')
 
       if (context) {
-        context.drawImage(videoElement, 0, 0)
+        context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height)
 
         const imgSrc = canvasElement.toDataURL('image/png')
 
         this.props.onCapture(imgSrc)
+
+        this.stopCapturing()
       }
     }
   }
 
+  private stopCapturing () {
+    if (this.video && this.video.current && this.video.current.srcObject) {
+      (this.video.current.srcObject as any).getTracks().forEach((stream: any) => stream.stop())
+    }
+  }
 }
 
 export default withStyles(styles)(CapturePhoto)

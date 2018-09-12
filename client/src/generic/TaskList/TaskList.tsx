@@ -1,7 +1,6 @@
 import { createStyles, Grid, StyleRulesCallback, WithStyles, withStyles } from '@material-ui/core'
-
 import React from 'react'
-import { ITaskListElement } from '~interfaces'
+import { Task } from '~interfaces'
 import TaskListElement from './TaskListElement'
 
 const styles: StyleRulesCallback = () => createStyles({
@@ -21,7 +20,7 @@ const styles: StyleRulesCallback = () => createStyles({
 })
 
 interface TaskListProps extends WithStyles<typeof styles> {
-  tasks: ITaskListElement[]
+  tasks: Task[]
 }
 
 const TaskList = ({ classes, tasks }: TaskListProps) => (

@@ -1,4 +1,4 @@
-interface TagList extends Array<string> {}
+import { TagList } from '~interfaces'
 
 const tags: TagList = [
   'ancient',
