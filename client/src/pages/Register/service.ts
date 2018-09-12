@@ -4,7 +4,7 @@ import { User } from '~interfaces'
 export const register: Register = (email, password) => {
   return new Promise((resolve, reject) => {
     window.setTimeout(() => {
-      const doesEmailExist = accounts.find((account) => account.email === email)
+      const doesEmailExist = accounts.find(account => account.email === email)
 
       if (doesEmailExist) return reject(new Error('Email already taken'))
 

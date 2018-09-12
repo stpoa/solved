@@ -79,7 +79,7 @@ class SignIn extends Component<SignInProps, SignInState> {
     )
   }
 
-  private onChangeText: ChangeEventHandler<HTMLInputElement> = (e) => {
+  private onChangeText: ChangeEventHandler<HTMLInputElement> = e => {
     const state = {
       [e.target.name]: e.target.value,
       emailError: '',
@@ -106,7 +106,7 @@ class SignIn extends Component<SignInProps, SignInState> {
       : ''
     }
 
-    const hasErrors = Object.values(errors).some((error) => error.length)
+    const hasErrors = Object.values(errors).some(error => error.length)
 
     return hasErrors && errors
   }
