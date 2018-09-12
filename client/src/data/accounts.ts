@@ -1,6 +1,6 @@
 const accounts = [{
   email: 'user@notowork.com',
-  password: '1234'
+  password: '123456'
 }]
 
 export default accounts

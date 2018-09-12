@@ -1,43 +1,85 @@
-import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, IconButton, Menu, MenuItem, Toolbar, Typography } from '@material-ui/core'
 import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles'
-import { AccountCircle, Close, Menu, Search } from '@material-ui/icons'
-import React, { Component } from 'react'
+import { AccountCircle, Close, Input, Search } from '@material-ui/icons'
+import React, { Component, MouseEventHandler } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
+import { withAuth, WithAuth } from '~auth'
 import WrappedLink from './../WrappedLink'
 import SearchBar from './SearchBar'
 
-class Header extends Component<HeaderProps> {
+const menuLinks = [{
+  name: 'Add task',
+  to: '/add-task'
+}, {
+  name: 'Profile',
+  to: '/profile'
+}]
+
+class Header extends Component<HeaderProps, HeaderState> {
+  public readonly state: HeaderState = {}
+
+  public componentDidUpdate (prevProps: HeaderProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.closeMenu()
+    }
+  }
+
   public render () {
-    const { classes, location } = this.props
-    const pathname = location.pathname
+    const { auth: { signedIn }, classes, location: { pathname } } = this.props
 
     return (
       <AppBar position="sticky">
         {pathname !== '/search'
           ? (
             <Toolbar className={classes.toolbar}>
-              <IconButton color="inherit" aria-label="Menu">
-                <Menu />
-              </IconButton>
               <WrappedLink
                 wrapper={Typography}
-                className={classes.title}
+                className={classes.link}
                 variant="title"
                 color="inherit"
                 to="/"
               >
                 Notowork
               </WrappedLink>
-              <div>
+              <div className={classes.icons}>
                 {pathname === '/' && (
                   <WrappedLink color="inherit" wrapper={IconButton} to="/search">
-                    <Search className={classes.icon} />
+                    <Search />
                   </WrappedLink>
                 )}
-                <WrappedLink color="inherit" wrapper={IconButton} to="/profile">
-                  <AccountCircle className={classes.icon} />
-                </WrappedLink>
+                {signedIn
+                  ? (
+                    <IconButton
+                      className={`${!signedIn ? classes.hidden : ''}`}
+                      color="inherit"
+                      onClick={this.onClickAccount}
+                    >
+                      <AccountCircle />
+                    </IconButton>
+                  ) : (
+                    <WrappedLink
+                      color="inherit"
+                      wrapper={IconButton}
+                      to="/sign-in"
+                    >
+                      <Input />
+                    </WrappedLink>
+                  )}
               </div>
+              <Menu
+                open={Boolean(this.state.anchorElement)}
+                anchorEl={this.state.anchorElement}
+                onClose={this.closeMenu}
+              >
+                {menuLinks.map((link, i) => (
+                  <WrappedLink className={classes.link} key={i} wrapper={MenuItem} to={link.to}>
+                    {link.name}
+                  </WrappedLink>
+                ))}
+                <MenuItem onClick={this.onSignOut}>
+                  Sign out
+                </MenuItem>
+              </Menu>
             </Toolbar>
           )
           : (
@@ -52,26 +94,49 @@ class Header extends Component<HeaderProps> {
       </AppBar>
     )
   }
+
+  private onClickAccount: MouseEventHandler<HTMLElement> = (e) => {
+    this.setState({ anchorElement: e.currentTarget })
+  }
+
+  private closeMenu: () => void = () => {
+    this.setState({
+      anchorElement: undefined
+    })
+  }
+
+  private onSignOut: () => void = () => {
+    this.closeMenu()
+
+    this.props.auth.signOut()
+  }
 }
 
-const wrappedComponent = withRouter(Header)
-
 const styles = createStyles({
-  icon: {
-    fontSize: 30
+  hidden: {
+    visibility: 'hidden'
+  },
+  icons: {
+    fontSize: 30,
+    position: 'absolute',
+    right: '2vh'
+  },
+  link: {
+    textDecoration: 'none'
   },
   searchToolbar: {
     backgroundColor: 'white'
   },
-  title: {
-    textDecoration: 'none'
-  },
   toolbar: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'center'
   }
 })
 
-export default withStyles(styles)(wrappedComponent)
+interface HeaderProps extends RouteComponentProps<{}>, WithStyles<typeof styles>, WithAuth {}
 
-interface HeaderProps extends RouteComponentProps<{}>, WithStyles <typeof styles> {}
+interface HeaderState {
+  anchorElement?: HTMLElement
+}
+
+export default (withStyles(styles)(withAuth(withRouter(Header))))
