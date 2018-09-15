@@ -1,5 +1,5 @@
 import { Context, createContext } from 'react'
-import { User } from '~interfaces'
+import { Status, User } from '~interfaces'
 
 export const defaultValue: Value = {
   signIn: () => new Promise<void>((resolve) => resolve()),
@@ -16,12 +16,6 @@ export default context
 export type SignIn = (email: string, password: string) => Promise<void>
 export type SignOut = () => void
 export type MaybeUser = User | null
-
-export enum Status {
-  Success = 'success',
-  Failure = 'failure',
-  Pending = 'pending'
-}
 
 export interface Value {
   signedIn: boolean,

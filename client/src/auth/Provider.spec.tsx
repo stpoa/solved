@@ -1,6 +1,7 @@
 import { mount } from 'enzyme'
 import React, { SFC } from 'react'
-import context, { Status } from './context'
+import { Status } from '~interfaces'
+import context from './context'
 import Provider from './Provider'
 
 describe('<Provider />', () => {
@@ -61,16 +62,13 @@ describe('<Provider />', () => {
 
       expectInitialValue(value)
 
-      value
-        .signIn(email, password)
-        .then(() => callback(wrapper))
+      value.signIn(email, password).then(() => callback(wrapper))
 
       value = getValue(wrapper)
 
       expect(value.signedIn).toBe(false)
       expect(value.user).toBeNull()
       expect(value.status).toBe(Status.Pending)
-
     }
 
     it('when signIn() succeeds', (done) => {

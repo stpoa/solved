@@ -68,15 +68,27 @@ class Rate extends Component<RateProps, RateState> {
     )
   }
 
-  private handleClickThumbUp = () => !this.state.isPositiveRating && this.setState(({ reviewText }) => ({
-    isPositiveRating: true,
-    reviewText: isEdited(reviewText) ? reviewText : defaultPositiveReviewText
-  }))
+  private handleClickThumbUp = () => {
+    this.setState(({ isPositiveRating, reviewText }) => {
+      if (isPositiveRating) return null
 
-  private handleClickThumbDown = () => this.state.isPositiveRating && this.setState(({ reviewText }) => ({
-    isPositiveRating: false,
-    reviewText: isEdited(reviewText) ? reviewText : defaultNegativeReviewText
-  }))
+      return {
+        isPositiveRating: true,
+        reviewText: isEdited(reviewText) ? reviewText : defaultPositiveReviewText
+      }
+    })
+  }
+
+  private handleClickThumbDown = () => {
+    this.setState(({ isPositiveRating, reviewText }) => {
+      if (!isPositiveRating) return null
+
+      return {
+        isPositiveRating: false,
+        reviewText: isEdited(reviewText) ? reviewText : defaultNegativeReviewText
+      }
+    })
+  }
 
   private handleTextInput = (e: React.ChangeEvent<HTMLInputElement>) => this.setState({ reviewText: e.target.value })
 }

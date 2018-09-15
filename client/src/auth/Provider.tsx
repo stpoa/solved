@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import context, { defaultValue, SignIn, SignOut, Status, Value } from './context'
+import { Status } from '~interfaces'
+import context, { defaultValue, SignIn, SignOut, Value } from './context'
 import { signIn } from './service'
 
 export default class Provider extends Component<{}, ProviderState> {
@@ -21,17 +22,19 @@ export default class Provider extends Component<{}, ProviderState> {
     )
   }
 
-  private signIn: SignIn = async (email, password) => {
-    this.setState({
-      status: Status.Pending
-    })
+  private signIn: SignIn = (email, password) => {
+    return new Promise((resolve) => {
+      this.setState({
+        status: Status.Pending
+      }, async () => {
+        const maybeUser = await signIn(email, password)
 
-    const maybeUser = await signIn(email, password)
-
-    this.setState({
-      signedIn: Boolean(maybeUser),
-      status: maybeUser ? Status.Success : Status.Failure,
-      user: maybeUser
+        this.setState({
+          signedIn: Boolean(maybeUser),
+          status: maybeUser ? Status.Success : Status.Failure,
+          user: maybeUser
+        }, () => resolve())
+      })
     })
   }
 

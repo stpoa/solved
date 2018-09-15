@@ -100,9 +100,7 @@ class Header extends Component<HeaderProps, HeaderState> {
   }
 
   private closeMenu: () => void = () => {
-    this.setState({
-      anchorElement: undefined
-    })
+    this.setState({ anchorElement: undefined })
   }
 
   private onSignOut: () => void = () => {
