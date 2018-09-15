@@ -41,18 +41,8 @@ export interface AddTaskProps extends WithStyles<typeof styles> {
 
 const AddTask: SFC<AddTaskProps> = ({
   classes: { addTaskContainer, container, content, item },
-  categories,
-  onClickCategory,
-  onChangeDescription,
-  onChangeTab,
-  onCapturePhoto,
-  onClickTag,
-  onSubmit,
-  categoryValue,
-  descriptionValue,
-  image,
-  tags,
-  tabValue
+  categories, onClickCategory, onChangeDescription, onChangeTab, onCapturePhoto,
+  onClickTag, onSubmit, categoryValue, descriptionValue, image, tags, tabValue
 }) => (
     <div className={container}>
       <Tabs
