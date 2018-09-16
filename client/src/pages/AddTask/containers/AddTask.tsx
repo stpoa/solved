@@ -19,7 +19,7 @@ export default class AddTaskContainer extends Component<{}, AddTaskContainerStat
     descriptionValue: '',
     image: '',
     tabValue: false,
-    tags: tagsData.map((tag) => ({ name: tag, selected: false }))
+    tags: tagsData.map(tag => ({ name: tag, selected: false }))
   }
 
   public render () {
@@ -41,25 +41,25 @@ export default class AddTaskContainer extends Component<{}, AddTaskContainerStat
     )
   }
 
-  private changeDescription: AddTaskProps['onChangeDescription'] = (e) => {
+  private changeDescription: AddTaskProps['onChangeDescription'] = e => {
     this.setState({
       descriptionValue: e.target.value
     })
   }
 
   private selectTab: AddTaskProps['onChangeTab'] = (_, value) => {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       tabValue: prevState.tabValue === value ? false : value
     }))
   }
 
-  private selectCategory: AddTaskProps['onClickCategory'] = (id) => {
+  private selectCategory: AddTaskProps['onClickCategory'] = id => {
     this.setState({ categoryValue: id })
   }
 
-  private selectTag: AddTaskProps['onClickTag'] = (tagName) => {
-    this.setState((prevState) => ({
-      tags: prevState.tags.map((tag) => (
+  private selectTag: AddTaskProps['onClickTag'] = tagName => {
+    this.setState(prevState => ({
+      tags: prevState.tags.map(tag => (
         tag.name !== tagName
           ? tag
           : {
@@ -70,7 +70,7 @@ export default class AddTaskContainer extends Component<{}, AddTaskContainerStat
     }))
   }
 
-  private capturePhoto: AddTaskProps['onCapturePhoto'] = (image) => {
+  private capturePhoto: AddTaskProps['onCapturePhoto'] = image => {
     this.setState({ image })
   }
 
@@ -80,7 +80,7 @@ export default class AddTaskContainer extends Component<{}, AddTaskContainerStat
     return Boolean(
       categoryValue &&
       descriptionValue.length > 10 &&
-      tags.filter((tag) => tag.selected).length
+      tags.filter(tag => tag.selected).length
     )
   }
 
@@ -92,7 +92,7 @@ export default class AddTaskContainer extends Component<{}, AddTaskContainerStat
     const task = {
       category: categoryValue,
       shortDescription: descriptionValue,
-      tags: this.state.tags.filter((tag) => tag.selected).map((tag) => tag.name)
+      tags: this.state.tags.filter(tag => tag.selected).map(tag => tag.name)
     }
 
     return addTask(task)

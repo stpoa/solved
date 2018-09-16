@@ -7,7 +7,7 @@ export default class SearchFilterContainer extends Component<{}, SearchFilterCon
     categories,
     categoryValue: '',
     tabValue: 0,
-    tags: tags.map((tag) => ({ name: tag, selected: false }))
+    tags: tags.map(tag => ({ name: tag, selected: false }))
   }
 
   public render () {
@@ -26,18 +26,18 @@ export default class SearchFilterContainer extends Component<{}, SearchFilterCon
   }
 
   private selectTab: SearchFilterProps['onChangeTab'] = (_, value) => {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       tabValue: prevState.tabValue === value ? false : value
     }))
   }
 
-  private selectCategory: SearchFilterProps['onClickCategory'] = (id) => {
+  private selectCategory: SearchFilterProps['onClickCategory'] = id => {
     this.setState({ categoryValue: id })
   }
 
-  private selectTag: SearchFilterProps['onClickTag'] = (tagName) => {
-    this.setState((prevState) => ({
-      tags: prevState.tags.map((tag) => (
+  private selectTag: SearchFilterProps['onClickTag'] = tagName => {
+    this.setState(prevState => ({
+      tags: prevState.tags.map(tag => (
         tag.name !== tagName
           ? tag
           : {

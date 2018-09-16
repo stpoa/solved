@@ -15,7 +15,7 @@ const SignInError: SFC<SignInErrorProps> = ({ classes }) => (
   />
 )
 
-const styles: StyleRulesCallback = (theme) => ({
+const styles: StyleRulesCallback = theme => ({
   error: {
     backgroundColor: theme.palette.error.dark
   },
