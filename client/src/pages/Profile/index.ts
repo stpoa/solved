@@ -1,3 +1,3 @@
-import Search from './containers/ProfileContainer'
+import Search from './containers/ProfilePrivateContainer'
 
 export default Search
