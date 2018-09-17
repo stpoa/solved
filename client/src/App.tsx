@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import { Provider as AuthProvider } from '~auth'
 
 // Generic
-import { NavigationBar, PrivateRoute } from '~generic'
+import { Header, NavigationBar, PrivateRoute } from '~generic'
 
 // Pages
 import { AddTask, Home, Profile, Rate, Register, Search, SignIn } from '~pages'
