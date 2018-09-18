@@ -114,9 +114,9 @@ class Register extends Component<RegisterProps, RegisterState> {
   }
 
   private onSubmit: MouseEventHandler<HTMLElement> = () => {
-    this.setState((state) => {
+    this.setState(state => {
       const errors = this.validate(state.fields)
-      const hasErrors = Object.values(errors).some((error) => error.length)
+      const hasErrors = Object.values(errors).some(error => error.length)
 
       if (hasErrors) return { errors }
 
@@ -124,7 +124,7 @@ class Register extends Component<RegisterProps, RegisterState> {
     })
   }
 
-  private onTextChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+  private onTextChange: ChangeEventHandler<HTMLInputElement> = e => {
     const { name, value } = e.target
 
     this.setState(({ errors, fields }) => ({

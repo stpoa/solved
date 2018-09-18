@@ -23,7 +23,7 @@ export default class Provider extends Component<{}, ProviderState> {
   }
 
   private signIn: SignIn = (email, password) => {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.setState({
         status: Status.Pending
       }, async () => {

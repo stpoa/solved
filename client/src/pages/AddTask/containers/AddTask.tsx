@@ -12,7 +12,7 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
     image: '',
     status: undefined,
     tabValue: false,
-    tags: tagsData.map((tag) => ({ name: tag, selected: false }))
+    tags: tagsData.map(tag => ({ name: tag, selected: false }))
   }
 
   public async componentDidUpdate (_: {}, prevState: AddTaskContainerState) {
@@ -22,7 +22,7 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
       await addTask({
         category: categoryValue,
         shortDescription: descriptionValue,
-        tags: this.state.tags.filter((tag) => tag.selected).map((tag) => tag.name)
+        tags: this.state.tags.filter(tag => tag.selected).map(tag => tag.name)
       })
     }
   }
@@ -46,23 +46,23 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
     )
   }
 
-  private changeDescription: AddTaskProps['onChangeDescription'] = (e) => {
+  private changeDescription: AddTaskProps['onChangeDescription'] = e => {
     this.setState({ descriptionValue: e.target.value })
   }
 
   private selectTab: AddTaskProps['onChangeTab'] = (_, value) => {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       tabValue: prevState.tabValue === value ? false : value
     }))
   }
 
-  private selectCategory: AddTaskProps['onClickCategory'] = (id) => {
+  private selectCategory: AddTaskProps['onClickCategory'] = id => {
     this.setState({ categoryValue: id })
   }
 
-  private selectTag: AddTaskProps['onClickTag'] = (tagName) => {
-    this.setState((prevState) => ({
-      tags: prevState.tags.map((tag) => (
+  private selectTag: AddTaskProps['onClickTag'] = tagName => {
+    this.setState(prevState => ({
+      tags: prevState.tags.map(tag => (
         tag.name !== tagName
           ? tag
           : {
@@ -73,7 +73,7 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
     }))
   }
 
-  private capturePhoto: AddTaskProps['onCapturePhoto'] = (image) => {
+  private capturePhoto: AddTaskProps['onCapturePhoto'] = image => {
     this.setState({ image })
   }
 
@@ -84,12 +84,12 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
     return Boolean(
       categoryValue &&
       descriptionValue.length > 10 &&
-      tags.filter((tag) => tag.selected).length
+      tags.filter(tag => tag.selected).length
     )
   }
 
   private addTask: AddTaskProps['onSubmit'] = () => {
-    this.setState((state) => {
+    this.setState(state => {
       return this.validate(state) ? { status: Status.Pending } : null
     })
   }

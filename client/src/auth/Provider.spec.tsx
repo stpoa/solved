@@ -71,8 +71,8 @@ describe('<Provider />', () => {
       expect(value.status).toBe(Status.Pending)
     }
 
-    it('when signIn() succeeds', (done) => {
-      testSignIn('user@notowork.com', '123456', (wrapper) => {
+    it('when signIn() succeeds', done => {
+      testSignIn('user@notowork.com', '123456', wrapper => {
         const value = getValue(wrapper)
 
         expect(value.signedIn).toBe(true)
@@ -83,8 +83,8 @@ describe('<Provider />', () => {
       })
     })
 
-    it('when signIn() fails', (done) => {
-      testSignIn('badUser@notowork.com', '1234', (wrapper) => {
+    it('when signIn() fails', done => {
+      testSignIn('badUser@notowork.com', '1234', wrapper => {
         const value = getValue(wrapper)
 
         expect(value.signedIn).toBe(false)

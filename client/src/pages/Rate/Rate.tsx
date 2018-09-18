@@ -93,7 +93,7 @@ class Rate extends Component<RateProps, RateState> {
   private handleTextInput = (e: React.ChangeEvent<HTMLInputElement>) => this.setState({ reviewText: e.target.value })
 }
 
-const styles: StyleRulesCallback = (theme) => ({
+const styles: StyleRulesCallback = theme => ({
   container: {
     backgroundColor: theme.palette.background.paper,
     padding: '1em'

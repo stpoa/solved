@@ -2,7 +2,7 @@ import { Context, createContext } from 'react'
 import { Status, User } from '~interfaces'
 
 export const defaultValue: Value = {
-  signIn: () => new Promise<void>((resolve) => resolve()),
+  signIn: () => new Promise<void>(resolve => resolve()),
   signOut: () => undefined,
   signedIn: false,
   status: undefined,

@@ -95,7 +95,7 @@ class Header extends Component<HeaderProps, HeaderState> {
     )
   }
 
-  private onClickAccount: MouseEventHandler<HTMLElement> = (e) => {
+  private onClickAccount: MouseEventHandler<HTMLElement> = e => {
     this.setState({ anchorElement: e.currentTarget })
   }
 
