@@ -107,7 +107,7 @@ class Register extends Component<RegisterProps, RegisterState> {
           : ''
     }
 
-    const hasErrors = Object.values(errors).some((error) => error.length)
+    const hasErrors = Object.values(errors).some(error => error.length)
 
     if (hasErrors) {
       this.setState(({ fields }) => ({ fields: { ...fields, errors } }))
@@ -122,7 +122,7 @@ class Register extends Component<RegisterProps, RegisterState> {
     // Register User
   }
 
-  private onTextChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+  private onTextChange: ChangeEventHandler<HTMLInputElement> = e => {
     const { name, value } = e.target
 
     this.setState(({ fields }) => ({

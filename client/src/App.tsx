@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider as AuthProvider } from '~auth'
 
 // Generic
-import { Header, PrivateRoute } from '~generic'
+import { NavigationBar, PrivateRoute } from '~generic'
 
 // Pages
 import { AddTask, Home, Profile, Rate, Register, Search, SignIn } from '~pages'
@@ -22,10 +22,10 @@ class App extends Component <AppProps, {}> {
         <AuthProvider>
           <Router>
             <div className={containerStyles}>
-              <Header />
               <Switch>
                 <PrivateRoute path="/profile" component={Profile} />
-                <PrivateRoute path="/add-task" component={AddTask} />
+                <PrivateRoute path="/tasks" component={Profile} />
+                <Route path="/add-task" component={AddTask} />
                 <Route path="/search" component={Search} />
                 <Route path="/sign-in" component={SignIn} />
                 <Route path="/rate" component={Rate} />
@@ -33,6 +33,7 @@ class App extends Component <AppProps, {}> {
                 <Route path="/search" component={Search} />
                 <Route path="*" component={Home} />
               </Switch>
+              <NavigationBar />
             </div>
           </Router>
         </AuthProvider>
@@ -44,7 +45,7 @@ class App extends Component <AppProps, {}> {
 const styles = createStyles({
   containerStyles: {
     display: 'grid',
-    gridTemplateRows: 'max-content auto',
+    gridTemplateRows: 'auto max-content',
     height: '100vh',
     overflow: 'hidden'
   }
