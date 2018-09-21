@@ -31,7 +31,7 @@ class App extends Component <AppProps, {}> {
                 <Route path="/rate" component={Rate} />
                 <Route path="/register" component={Register} />
                 <Route path="/search" component={Search} />
-                <Route path="*" component={Home} />
+                <Route exact path="/" component={Home} />
               </Switch>
               <NavigationBar />
             </div>

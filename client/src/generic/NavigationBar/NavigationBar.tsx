@@ -3,7 +3,6 @@ import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core/s
 import { AddCircle, Help, Home, Person } from '@material-ui/icons'
 import React, { SFC } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { withAuth, WithAuth } from '~auth'
 import { Tasks } from '~icons'
 import WrappedLink from '../WrappedLink'
 import HighlightIcon from './HighlightIcon'
@@ -23,7 +22,7 @@ const menuLinks = {
   },
   something: {
     displayName: 'Something',
-    path: '/something'
+    path: '/rate'
   },
   tasks: {
     displayName: 'Tasks',
@@ -31,12 +30,9 @@ const menuLinks = {
   }
 }
 
-const isSelected = (expectedPath: string, actualPath: string) =>
-  expectedPath === actualPath
-
 const NavigationBar: SFC<NavigationBarProps> = ({ classes }) => {
   const { addTask, tasks, profile, something, home } = menuLinks
-  const actualPath = window.location.pathname
+
   return (
     <AppBar position="sticky" color="default">
       <Toolbar className={classes.toolbar}>
@@ -47,7 +43,6 @@ const NavigationBar: SFC<NavigationBarProps> = ({ classes }) => {
             variant={home.displayName}
             color="inherit"
             to={home.path}
-            selected={isSelected(home.path, actualPath)}
           >
             <Home className={classes.buttons} />
           </WrappedLink>
@@ -57,7 +52,6 @@ const NavigationBar: SFC<NavigationBarProps> = ({ classes }) => {
             variant={something.displayName}
             color="inherit"
             to={something.path}
-            selected={isSelected(something.path, actualPath)}
           >
             <Help className={classes.buttons} />
           </WrappedLink>
@@ -67,7 +61,6 @@ const NavigationBar: SFC<NavigationBarProps> = ({ classes }) => {
             variant={addTask.displayName}
             color="inherit"
             to={addTask.path}
-            selected={isSelected(addTask.path, actualPath)}
           >
             <AddCircle className={classes.generalButton} />
           </WrappedLink>
@@ -77,7 +70,6 @@ const NavigationBar: SFC<NavigationBarProps> = ({ classes }) => {
             variant={tasks.displayName}
             color="inherit"
             to={tasks.path}
-            selected={isSelected(tasks.path, actualPath)}
           >
             <Tasks className={classes.buttons} />
           </WrappedLink>
@@ -87,7 +79,6 @@ const NavigationBar: SFC<NavigationBarProps> = ({ classes }) => {
             variant={profile.displayName}
             color="inherit"
             to={profile.path}
-            selected={isSelected(profile.path, actualPath)}
           >
             <Person className={classes.buttons} />
           </WrappedLink>
@@ -105,14 +96,8 @@ const styles = ({ spacing }: Theme) => createStyles({
     color: '#4481EB',
     fontSize: 50
   },
-  hidden: {
-    visibility: 'hidden'
-  },
   link: {
     textDecoration: 'none'
-  },
-  searchToolbar: {
-    backgroundColor: 'white'
   },
   toolbar: {
     color: '#818181',
@@ -123,6 +108,6 @@ const styles = ({ spacing }: Theme) => createStyles({
   }
 })
 
-interface NavigationBarProps extends RouteComponentProps<{}>, WithStyles<typeof styles>, WithAuth { }
+interface NavigationBarProps extends RouteComponentProps<{}>, WithStyles<typeof styles> { }
 
-export default (withStyles(styles)(withAuth(withRouter(NavigationBar))))
+export default (withStyles(styles)(withRouter(NavigationBar)))
