@@ -4,6 +4,4 @@ before_install:
   - cd client
   - npm install -g npm@latest
 install: npm install
-script:
-  - npm run lint:raw
-  - npm test
+test: npm run lint:raw && npm test
