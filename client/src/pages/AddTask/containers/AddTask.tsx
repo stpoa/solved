@@ -1,25 +1,30 @@
 import React, { Component } from 'react'
 import { categories, tags as tagsData } from '~data'
+import { Status } from '~interfaces'
 import AddTask, { AddTaskProps } from './../components/AddTask'
 import addTask from './../service'
 
-interface AddTaskContainerState {
-  categoryValue: AddTaskProps['categoryValue']
-  categories: AddTaskProps['categories'],
-  descriptionValue: AddTaskProps['descriptionValue'],
-  image: AddTaskProps['image'],
-  tags: AddTaskProps['tags'],
-  tabValue: AddTaskProps['tabValue']
-}
-
-export default class AddTaskContainer extends Component<{}, AddTaskContainerState> {
+class AddTaskContainer extends Component<{}, AddTaskContainerState> {
   public readonly state: AddTaskContainerState = {
     categories,
     categoryValue: '',
     descriptionValue: '',
     image: '',
+    status: undefined,
     tabValue: false,
     tags: tagsData.map(tag => ({ name: tag, selected: false }))
+  }
+
+  public async componentDidUpdate (_: {}, prevState: AddTaskContainerState) {
+    const { categoryValue, descriptionValue, status } = this.state
+
+    if (prevState.status !== Status.Pending && status === Status.Pending) {
+      await addTask({
+        category: categoryValue,
+        shortDescription: descriptionValue,
+        tags: this.state.tags.filter(tag => tag.selected).map(tag => tag.name)
+      })
+    }
   }
 
   public render () {
@@ -42,9 +47,7 @@ export default class AddTaskContainer extends Component<{}, AddTaskContainerStat
   }
 
   private changeDescription: AddTaskProps['onChangeDescription'] = e => {
-    this.setState({
-      descriptionValue: e.target.value
-    })
+    this.setState({ descriptionValue: e.target.value })
   }
 
   private selectTab: AddTaskProps['onChangeTab'] = (_, value) => {
@@ -74,8 +77,9 @@ export default class AddTaskContainer extends Component<{}, AddTaskContainerStat
     this.setState({ image })
   }
 
-  private validate (): boolean {
-    const { categoryValue, descriptionValue, tags } = this.state
+  private validate (state: AddTaskContainerState): boolean {
+
+    const { categoryValue, descriptionValue, tags } = state
 
     return Boolean(
       categoryValue &&
@@ -84,17 +88,21 @@ export default class AddTaskContainer extends Component<{}, AddTaskContainerStat
     )
   }
 
-  private addTask: AddTaskProps['onSubmit'] = async () => {
-    if (!this.validate()) return false
-
-    const { categoryValue, descriptionValue } = this.state
-
-    const task = {
-      category: categoryValue,
-      shortDescription: descriptionValue,
-      tags: this.state.tags.filter(tag => tag.selected).map(tag => tag.name)
-    }
-
-    return addTask(task)
+  private addTask: AddTaskProps['onSubmit'] = () => {
+    this.setState(state => {
+      return this.validate(state) ? { status: Status.Pending } : null
+    })
   }
 }
+
+interface AddTaskContainerState {
+  categoryValue: AddTaskProps['categoryValue']
+  categories: AddTaskProps['categories'],
+  descriptionValue: AddTaskProps['descriptionValue'],
+  image: AddTaskProps['image'],
+  status: Status | undefined,
+  tags: AddTaskProps['tags'],
+  tabValue: AddTaskProps['tabValue']
+}
+
+export default AddTaskContainer

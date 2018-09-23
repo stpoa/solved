@@ -3,26 +3,6 @@ import { createStyles, StyleRules, withStyles, WithStyles } from '@material-ui/c
 import React, { SFC } from 'react'
 import { Category, CategoryList } from '~interfaces'
 
-const styles: StyleRules = createStyles({
-  container: {
-    height: '100%',
-    overflow: 'auto'
-  },
-  item: {
-    display: 'block',
-    textAlign: 'center'
-  },
-  list: {
-    height: 0
-  }
-})
-
-export interface SelectCategoryProps extends WithStyles<typeof styles> {
-  categories: CategoryList,
-  onClick: (id: Category['id']) => void,
-  value: Category['id']
-}
-
 const SelectCategory: SFC<SelectCategoryProps> = ({
   categories,
   classes: { container, item, list },
@@ -48,5 +28,25 @@ const SelectCategory: SFC<SelectCategoryProps> = ({
     </List>
   </div>
 )
+
+const styles: StyleRules = createStyles({
+  container: {
+    height: '100%',
+    overflow: 'auto'
+  },
+  item: {
+    display: 'block',
+    textAlign: 'center'
+  },
+  list: {
+    height: 0
+  }
+})
+
+export interface SelectCategoryProps extends WithStyles<typeof styles> {
+  categories: CategoryList,
+  onClick: (id: Category['id']) => void,
+  value: Category['id']
+}
 
 export default withStyles(styles)(SelectCategory)
