@@ -5,84 +5,51 @@ import React, { SFC } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { Tasks } from '~icons'
 import WrappedLink from '../WrappedLink'
-import HighlightIcon from './HighlightIcon'
 
-const menuLinks = {
-  addTask: {
-    displayName: 'Add task',
-    path: '/add-task'
-  },
-  home: {
-    displayName: 'Home',
-    path: '/'
-  },
-  profile: {
-    displayName: 'Profile',
-    path: '/profile'
-  },
-  something: {
-    displayName: 'Something',
-    path: '/rate'
-  },
-  tasks: {
-    displayName: 'Tasks',
-    path: '/tasks'
-  }
-}
+const menuLinks = [{
+  childIcon: Home,
+  displayName: 'Home',
+  path: '/'
+}, {
+  childIcon: Help,
+  displayName: 'Something',
+  path: '/search'
+}, {
+  childIcon: AddCircle,
+  displayName: 'Add task',
+  generalButton: true,
+  path: '/add-task'
+}, {
+  childIcon: Person,
+  displayName: 'Profile',
+  path: '/profile'
+}, {
+  childIcon: Tasks,
+  displayName: 'Tasks',
+  path: '/tasks'
+}]
 
 const NavigationBar: SFC<NavigationBarProps> = ({ classes }) => {
-  const { addTask, tasks, profile, something, home } = menuLinks
 
   return (
     <AppBar position="sticky" color="default">
       <Toolbar className={classes.toolbar}>
-        <HighlightIcon>
-          <WrappedLink
-            wrapper={IconButton}
-            className={classes.link}
-            variant={home.displayName}
-            color="inherit"
-            to={home.path}
-          >
-            <Home className={classes.buttons} />
-          </WrappedLink>
-          <WrappedLink
-            wrapper={IconButton}
-            className={classes.link}
-            variant={something.displayName}
-            color="inherit"
-            to={something.path}
-          >
-            <Help className={classes.buttons} />
-          </WrappedLink>
-          <WrappedLink
-            wrapper={IconButton}
-            className={classes.link}
-            variant={addTask.displayName}
-            color="inherit"
-            to={addTask.path}
-          >
-            <AddCircle className={classes.generalButton} />
-          </WrappedLink>
-          <WrappedLink
-            wrapper={IconButton}
-            className={classes.link}
-            variant={tasks.displayName}
-            color="inherit"
-            to={tasks.path}
-          >
-            <Tasks className={classes.buttons} />
-          </WrappedLink>
-          <WrappedLink
-            wrapper={IconButton}
-            className={classes.link}
-            variant={profile.displayName}
-            color="inherit"
-            to={profile.path}
-          >
-            <Person className={classes.buttons} />
-          </WrappedLink>
-        </HighlightIcon>
+        {
+          menuLinks.map(({ childIcon: Children, displayName, path, generalButton }) =>
+            <WrappedLink
+              wrapper={IconButton}
+              className={classes.link}
+              variant={displayName}
+              color="inherit"
+              key={displayName}
+              to={path}
+              exact
+              activeClassName={classes.highlight}
+            >
+              <Children
+                className={generalButton ? classes.generalButton : classes.buttons}
+              />
+            </WrappedLink>)}
       </Toolbar>
     </AppBar>
   )
@@ -95,6 +62,9 @@ const styles = ({ spacing }: Theme) => createStyles({
   generalButton: {
     color: '#4481EB',
     fontSize: 50
+  },
+  highlight: {
+    color: '#4481EB'
   },
   link: {
     textDecoration: 'none'

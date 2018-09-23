@@ -26,7 +26,6 @@ class App extends Component <AppProps, {}> {
                 <PrivateRoute path="/profile" component={Profile} />
                 <PrivateRoute path="/tasks" component={Profile} />
                 <Route path="/add-task" component={AddTask} />
-                <Route path="/search" component={Search} />
                 <Route path="/sign-in" component={SignIn} />
                 <Route path="/rate" component={Rate} />
                 <Route path="/register" component={Register} />
