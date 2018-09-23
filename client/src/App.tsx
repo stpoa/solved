@@ -14,6 +14,9 @@ const theme = createMuiTheme({
   palette: { primary: blue }
 })
 
+const redirectToHome = () =>
+    <Redirect to="/" />
+
 class App extends Component <AppProps, {}> {
 
   public render () {
@@ -32,7 +35,7 @@ class App extends Component <AppProps, {}> {
                 <Route path="/register" component={Register} />
                 <Route path="/search" component={Search} />
                 <Route exact path="/" component={Home} />
-                <Route path="*" render={this.matchRestPaths} />
+                <Route path="*" render={redirectToHome} />
               </Switch>
               <NavigationBar />
             </div>
@@ -41,9 +44,6 @@ class App extends Component <AppProps, {}> {
       </MuiThemeProvider>
     )
   }
-
-  private matchRestPaths = () =>
-    <Redirect to="/" />
 }
 
 const styles = createStyles({
