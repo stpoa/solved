@@ -37,7 +37,7 @@
   },
   "scripts": {
     "precommit": "lint-staged && npm run test:types && npm run test:logic",
-    "test": "run-p test:logic test:types",
+    "test": "run-p lint:raw test:logic test:types",
     "test:types": "tsc -p . --noEmit",
     "test:logic": "jest",
     "lint": "npm run lint:raw -- --fix",
