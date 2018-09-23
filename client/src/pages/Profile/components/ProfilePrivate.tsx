@@ -1,5 +1,11 @@
-import { createStyles, List, ListItem, ListSubheader, WithStyles, withStyles } from '@material-ui/core'
-import { StyleRules } from '@material-ui/core/styles'
+import {
+  List,
+  ListItem,
+  ListSubheader,
+  StyleRulesCallback,
+  WithStyles,
+  withStyles
+} from '@material-ui/core'
 import InboxIcon from '@material-ui/icons/Inbox'
 import SettingsIcon from '@material-ui/icons/Settings'
 import ReviewsIcon from '@material-ui/icons/Spellcheck'
@@ -66,12 +72,14 @@ interface ClassNameProps {
   className: string
 }
 
-const styles: StyleRules = createStyles({
+const styles: StyleRulesCallback = (theme) => ({
   balance: {
     fontSize: '10em'
   },
   finishedTasksButton: {},
-  root: {},
+  root: {
+    margin: theme.spacing.unit
+  },
   settingsButton: {},
   tasksInProgressButton: {}
 })
