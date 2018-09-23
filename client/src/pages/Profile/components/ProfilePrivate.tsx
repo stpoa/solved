@@ -72,7 +72,7 @@ interface ClassNameProps {
   className: string
 }
 
-const styles: StyleRulesCallback = (theme) => ({
+const styles: StyleRulesCallback = theme => ({
   balance: {
     fontSize: '10em'
   },
