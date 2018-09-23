@@ -20,9 +20,16 @@ interface User {
   email: string
 }
 
+enum Status {
+  Success = 'success',
+  Failure = 'failure',
+  Pending = 'pending'
+}
+
 export {
   Category,
   CategoryList,
+  Status,
   Task,
   TagList,
   User

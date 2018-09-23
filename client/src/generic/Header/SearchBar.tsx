@@ -14,6 +14,6 @@ const styles = createStyles({
   }
 })
 
-export default withStyles(styles)(SearchBar)
+interface SearchBarProps extends WithStyles<typeof styles> {}
 
-interface SearchBarProps extends WithStyles <typeof styles> {}
+export default withStyles(styles)(SearchBar)

@@ -6,14 +6,14 @@ import isLength from 'validator/lib/isLength'
 
 class Register extends Component<RegisterProps, RegisterState> {
   public readonly state: RegisterState = {
+    errors: {
+      emailError: '',
+      passwordError: '',
+      regulationsCheckBoxError: '',
+      retypedPasswordError: ''
+    },
     fields: {
       email: '',
-      errors: {
-        emailError: '',
-        passwordError: '',
-        regulationsCheckBoxError: '',
-        retypedPasswordError: ''
-      },
       password: '',
       regulationsCheckBox: false,
       retypedPassword: ''
@@ -22,7 +22,9 @@ class Register extends Component<RegisterProps, RegisterState> {
 
   public render () {
     const { classes } = this.props
-    const { emailError, passwordError, retypedPasswordError, regulationsCheckBoxError } = this.state.fields.errors
+    const { emailError, passwordError, retypedPasswordError, regulationsCheckBoxError } = this.state.errors
+    const { email, password, regulationsCheckBox, retypedPassword } = this.state.fields
+
     return (
       <div className={classes.registerContainer}>
         <div className={classes.content}>
@@ -38,6 +40,7 @@ class Register extends Component<RegisterProps, RegisterState> {
                 error={Boolean(emailError)}
                 helperText={emailError}
                 onChange={this.onTextChange}
+                value={email}
               />
               <TextField
                 margin="dense"
@@ -49,6 +52,7 @@ class Register extends Component<RegisterProps, RegisterState> {
                 error={Boolean(passwordError)}
                 helperText={passwordError}
                 onChange={this.onTextChange}
+                value={password}
               />
               <TextField
                 margin="dense"
@@ -60,12 +64,13 @@ class Register extends Component<RegisterProps, RegisterState> {
                 error={Boolean(retypedPasswordError)}
                 helperText={retypedPasswordError}
                 onChange={this.onTextChange}
+                value={retypedPassword}
               />
             </div>
           </div>
           <div className={classes.regulationsHolder}>
             <div>
-              <Checkbox onChange={this.onCheckboxChange} />
+              <Checkbox checked={regulationsCheckBox} onChange={this.onCheckboxChange} />
               Regulations
             </div>
             <div className={classes.errorMessage}>
@@ -78,13 +83,13 @@ class Register extends Component<RegisterProps, RegisterState> {
     )
   }
 
-  private validate = () => {
-    const { email, password, retypedPassword, regulationsCheckBox } = this.state.fields
+  private validate = (fields: RegisterState['fields']): Errors => {
+    const { email, password, retypedPassword, regulationsCheckBox } = fields
 
     const preparedPassword = password.trim()
     const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s])/
 
-    const errors: Errors = {
+    return {
       emailError: !email
         ? 'Field required'
         : !isEmail(email)
@@ -106,51 +111,45 @@ class Register extends Component<RegisterProps, RegisterState> {
           ? 'Password does not match the confirm password'
           : ''
     }
-
-    const hasErrors = Object.values(errors).some(error => error.length)
-
-    if (hasErrors) {
-      this.setState(({ fields }) => ({ fields: { ...fields, errors } }))
-    }
-
-    return Boolean(!hasErrors)
   }
 
   private onSubmit: MouseEventHandler<HTMLElement> = () => {
-    this.validate()
+    this.setState(state => {
+      const errors = this.validate(state.fields)
+      const hasErrors = Object.values(errors).some(error => error.length)
 
-    // Register User
+      if (hasErrors) return { errors }
+
+      return null
+    })
   }
 
   private onTextChange: ChangeEventHandler<HTMLInputElement> = e => {
     const { name, value } = e.target
 
-    this.setState(({ fields }) => ({
+    this.setState(({ errors, fields }) => ({
+      errors: {
+        ...errors,
+        [`${name}Error`]: ''
+      },
       fields: {
         ...fields,
-        [name]: value,
-        errors: {
-          ...fields.errors,
-          [`${name}Error`]: ''
-        }
+        [name]: value
       }
     }))
-
   }
 
   private onCheckboxChange: ChangeEventHandler<HTMLInputElement> = () => {
-
-    this.setState(({ fields }) => ({
+    this.setState(({ errors, fields }) => ({
+      errors: {
+        ...errors,
+        regulationsCheckBoxError: ''
+      },
       fields: {
         ...fields,
-        errors: {
-          ...fields.errors,
-          regulationsCheckBoxError: ''
-        },
         regulationsCheckBox: !fields.regulationsCheckBox
       }
     }))
-
   }
 }
 
@@ -195,12 +194,12 @@ interface Errors {
 }
 
 interface RegisterState {
+  errors: Errors,
   fields: {
     email: string,
     password: string,
     regulationsCheckBox: boolean,
-    retypedPassword: string,
-    errors: Errors
+    retypedPassword: string
   }
 }
 

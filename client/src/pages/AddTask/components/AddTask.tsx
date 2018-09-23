@@ -5,40 +5,6 @@ import { SelectCategory, SelectCategoryProps, SelectTags, SelectTagsProps } from
 import CapturePhoto, { CapturePhotoProps } from './CapturePhoto'
 import Description, { DescriptionProps } from './Description'
 
-const styles: StyleRulesCallback = () => createStyles({
-  addTaskContainer: {
-    display: 'grid',
-    gridTemplateRows: 'auto max-content'
-  },
-  container: {
-    display: 'grid',
-    gridTemplateRows: 'max-content auto'
-  },
-  content: {
-    display: 'grid',
-    gridTemplateRows: '50% 50%'
-  },
-  item: {
-    justifyContent: 'center',
-    maxWidth: '100%'
-  }
-})
-
-export interface AddTaskProps extends WithStyles<typeof styles> {
-  categories: SelectCategoryProps['categories'],
-  onClickCategory: SelectCategoryProps['onClick'],
-  onClickTag: SelectTagsProps['onClick'],
-  onSubmit: MouseEventHandler,
-  onCapturePhoto: CapturePhotoProps['onCapture'],
-  onChangeDescription: DescriptionProps['onChange'],
-  onChangeTab: (e: ChangeEvent<{}>, value: number) => void,
-  categoryValue: SelectCategoryProps['value'],
-  descriptionValue: DescriptionProps['value'],
-  image: CapturePhotoProps['imgSrc'],
-  tags: SelectTagsProps['tags'],
-  tabValue: boolean | number
-}
-
 const AddTask: SFC<AddTaskProps> = ({
   classes: { addTaskContainer, container, content, item },
   categories, onClickCategory, onChangeDescription, onChangeTab, onCapturePhoto,
@@ -73,5 +39,39 @@ const AddTask: SFC<AddTaskProps> = ({
       </Fragment>
     </div>
 )
+
+const styles: StyleRulesCallback = () => createStyles({
+  addTaskContainer: {
+    display: 'grid',
+    gridTemplateRows: 'auto max-content'
+  },
+  container: {
+    display: 'grid',
+    gridTemplateRows: 'max-content auto'
+  },
+  content: {
+    display: 'grid',
+    gridTemplateRows: '50% 50%'
+  },
+  item: {
+    justifyContent: 'center',
+    maxWidth: '100%'
+  }
+})
+
+export interface AddTaskProps extends WithStyles<typeof styles> {
+  categories: SelectCategoryProps['categories'],
+  onClickCategory: SelectCategoryProps['onClick'],
+  onClickTag: SelectTagsProps['onClick'],
+  onSubmit: MouseEventHandler,
+  onCapturePhoto: CapturePhotoProps['onCapture'],
+  onChangeDescription: DescriptionProps['onChange'],
+  onChangeTab: (e: ChangeEvent<{}>, value: number) => void,
+  categoryValue: SelectCategoryProps['value'],
+  descriptionValue: DescriptionProps['value'],
+  image: CapturePhotoProps['imgSrc'],
+  tags: SelectTagsProps['tags'],
+  tabValue: boolean | number
+}
 
 export default withStyles(styles)(AddTask)

@@ -4,7 +4,8 @@ import React, { ChangeEventHandler, Component, MouseEventHandler } from 'react'
 import { Redirect } from 'react-router-dom'
 import isEmail from 'validator/lib/isEmail'
 import isLength from 'validator/lib/isLength'
-import { Status, withAuth, WithAuth } from '~auth'
+import { withAuth, WithAuth } from '~auth'
+import { Status } from '~interfaces'
 import SignInError from './components/SignInError'
 
 class SignIn extends Component<SignInProps, SignInState> {
@@ -90,33 +91,32 @@ class SignIn extends Component<SignInProps, SignInState> {
     this.setState(state as Pick<SignInState, Exclude<keyof SignInState, 'showSignInError'>>)
   }
 
-  private validate (): Errors | false {
-    const { email, password } = this.state
-
-    const errors: Errors = {
+  private validate ({ email, password }: SignInState): Errors {
+    return {
       emailError: !email
-      ? 'Field required'
-      : !isEmail(email)
-      ? 'Incorrect email address'
-      : '',
+        ? 'Field required'
+        : !isEmail(email)
+          ? 'Incorrect email address'
+          : '',
       passwordError: !password
-      ? 'Field required'
-      : !isLength(password, { min: 6 })
-      ? 'Password should have at least 6 characters'
-      : ''
+        ? 'Field required'
+        : !isLength(password, { min: 6 })
+          ? 'Password should have at least 6 characters'
+          : ''
     }
-
-    const hasErrors = Object.values(errors).some(error => error.length)
-
-    return hasErrors && errors
   }
 
-  private onSubmit: MouseEventHandler<HTMLElement> = async () => {
-    const errors = this.validate()
+  private onSubmit: MouseEventHandler<HTMLElement> = () => {
+    this.setState((state, props) => {
+      const errors = this.validate(state)
+      const hasErrors = Object.values(errors).some(error => error.length)
 
-    return errors
-      ? this.setState(errors)
-      : this.props.auth.signIn(this.state.email, this.state.password)
+      if (hasErrors) return { ...errors }
+
+      props.auth.signIn(state.email, state.password).catch(() => { return })
+
+      return null
+    })
   }
 
   private hideSignInError: () => void = () => {
