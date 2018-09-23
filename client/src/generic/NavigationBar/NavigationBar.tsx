@@ -20,13 +20,13 @@ const menuLinks = [{
   generalButton: true,
   path: '/add-task'
 }, {
-  childIcon: Person,
-  displayName: 'Profile',
-  path: '/profile'
-}, {
   childIcon: Tasks,
   displayName: 'Tasks',
   path: '/tasks'
+}, {
+  childIcon: Person,
+  displayName: 'Profile',
+  path: '/profile'
 }]
 
 const NavigationBar: SFC<NavigationBarProps> = ({ classes }) => {

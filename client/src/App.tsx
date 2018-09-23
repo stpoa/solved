@@ -32,7 +32,7 @@ class App extends Component <AppProps, {}> {
                 <Route path="/register" component={Register} />
                 <Route path="/search" component={Search} />
                 <Route exact path="/" component={Home} />
-                <Route path="*" render={this.matchAllPaths} />
+                <Route path="*" render={this.matchRestPaths} />
               </Switch>
               <NavigationBar />
             </div>
@@ -42,7 +42,7 @@ class App extends Component <AppProps, {}> {
     )
   }
 
-  private matchAllPaths = () =>
+  private matchRestPaths = () =>
     <Redirect to="/" />
 }
 
