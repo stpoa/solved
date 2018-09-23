@@ -18,7 +18,7 @@ class PrivateRoute extends React.Component<PrivateRouteProps> {
       /* tslint:enable */
     } = this.props
 
-    return auth.signedIn ? <Component /> : <Redirect to="/" />
+    return auth.signedIn ? <Component /> : <Redirect to="/sign-in" />
   }
 }
 
