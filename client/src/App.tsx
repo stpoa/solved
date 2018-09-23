@@ -1,7 +1,7 @@
 import { blue } from '@material-ui/core/colors'
 import { createMuiTheme, createStyles, MuiThemeProvider, WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import { Provider as AuthProvider } from '~auth'
 
 // Generic
@@ -15,6 +15,7 @@ const theme = createMuiTheme({
 })
 
 class App extends Component <AppProps, {}> {
+
   public render () {
     const { containerStyles } = this.props.classes
     return (
@@ -31,6 +32,7 @@ class App extends Component <AppProps, {}> {
                 <Route path="/register" component={Register} />
                 <Route path="/search" component={Search} />
                 <Route exact path="/" component={Home} />
+                <Route path="*" render={this.matchAllPaths} />
               </Switch>
               <NavigationBar />
             </div>
@@ -39,6 +41,9 @@ class App extends Component <AppProps, {}> {
       </MuiThemeProvider>
     )
   }
+
+  private matchAllPaths = () =>
+    <Redirect to="/" />
 }
 
 const styles = createStyles({
