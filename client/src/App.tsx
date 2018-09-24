@@ -11,7 +11,7 @@ import { NavigationBar, PrivateRoute } from '~generic'
 import { AddTask, Home, Profile, Rate, Register, Search, SignIn } from '~pages'
 
 const theme = createMuiTheme({
-  palette: { primary: blue }
+  palette: { primary: blue },
 })
 
 const redirectToHome = () =>
@@ -51,8 +51,8 @@ const styles = createStyles({
     display: 'grid',
     gridTemplateRows: 'auto max-content',
     height: '100vh',
-    overflow: 'hidden'
-  }
+    overflow: 'hidden',
+  },
 })
 
 export default withStyles(styles)(App)

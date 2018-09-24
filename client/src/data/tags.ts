@@ -13,7 +13,7 @@ const tags: TagList = [
   'boring',
   'direful',
   'questionable',
-  'ill - fated'
+  'ill - fated',
 ]
 
 export default tags

@@ -9,24 +9,24 @@ import WrappedLink from '../WrappedLink'
 const menuLinks = [{
   childIcon: Home,
   displayName: 'Home',
-  path: '/'
+  path: '/',
 }, {
   childIcon: Help,
   displayName: 'Something',
-  path: '/search'
+  path: '/search',
 }, {
   childIcon: AddCircle,
   displayName: 'Add task',
   generalButton: true,
-  path: '/add-task'
+  path: '/add-task',
 }, {
   childIcon: Tasks,
   displayName: 'Tasks',
-  path: '/tasks'
+  path: '/tasks',
 }, {
   childIcon: Person,
   displayName: 'Profile',
-  path: '/profile'
+  path: '/profile',
 }]
 
 const NavigationBar: SFC<NavigationBarProps> = ({ classes }) => {
@@ -57,25 +57,25 @@ const NavigationBar: SFC<NavigationBarProps> = ({ classes }) => {
 
 const styles = ({ spacing }: Theme) => createStyles({
   buttons: {
-    fontSize: 32
+    fontSize: 32,
   },
   generalButton: {
     color: '#4481EB',
-    fontSize: 50
+    fontSize: 50,
   },
   highlight: {
-    color: '#4481EB'
+    color: '#4481EB',
   },
   link: {
-    textDecoration: 'none'
+    textDecoration: 'none',
   },
   toolbar: {
     color: '#818181',
     display: 'flex',
     justifyContent: 'space-between',
     marginLeft: spacing.unit,
-    marginRight: spacing.unit
-  }
+    marginRight: spacing.unit,
+  },
 })
 
 interface NavigationBarProps extends RouteComponentProps<{}>, WithStyles<typeof styles> { }

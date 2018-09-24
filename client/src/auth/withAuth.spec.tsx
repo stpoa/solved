@@ -9,7 +9,7 @@ const requireWithAuth = (value: any) => {
     return {
       Consumer (props: any) {
         return props.children(value)
-      }
+      },
     }
   })
 
@@ -19,7 +19,7 @@ const requireWithAuth = (value: any) => {
 describe('withAuth()', () => {
   const value = {
     signIn: jest.fn(),
-    signOut: jest.fn()
+    signOut: jest.fn(),
   }
 
   const withAuth = requireWithAuth(value)

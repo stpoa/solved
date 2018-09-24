@@ -14,7 +14,7 @@ class SignIn extends Component<SignInProps, SignInState> {
     emailError: '',
     password: '',
     passwordError: '',
-    showSignInError: false
+    showSignInError: false,
   }
 
   public componentDidUpdate (prevProps: SignInProps) {
@@ -84,7 +84,7 @@ class SignIn extends Component<SignInProps, SignInState> {
     const state = {
       [e.target.name]: e.target.value,
       emailError: '',
-      passwordError: ''
+      passwordError: '',
     }
 
     // https://github.com/Microsoft/TypeScript/issues/13948
@@ -102,7 +102,7 @@ class SignIn extends Component<SignInProps, SignInState> {
         ? 'Field required'
         : !isLength(password, { min: 6 })
           ? 'Password should have at least 6 characters'
-          : ''
+          : '',
     }
   }
 
@@ -127,17 +127,17 @@ class SignIn extends Component<SignInProps, SignInState> {
 const styles: StyleRules = createStyles({
   button: {
     marginBottom: 4,
-    marginTop: 12
+    marginTop: 12,
   },
   container: {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   item: {
-    width: 400
-  }
+    width: 400,
+  },
 })
 
 interface SignInProps extends WithAuth, WithStyles<typeof styles> {}
