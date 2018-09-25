@@ -5,7 +5,7 @@ import React, { SFC } from 'react'
 const SelectTags: SFC<SelectTagsProps> = ({
   tags,
   classes: { container, item, selected, clickable },
-  onClick
+  onClick,
 }) => (
   <div className={container}>
     {tags.map((tag, i) => (
@@ -22,26 +22,26 @@ const SelectTags: SFC<SelectTagsProps> = ({
 
 const styles: StyleRulesCallback = ({
   spacing,
-  palette: { primary: { light } }
+  palette: { primary: { light } },
 }) => createStyles({
   container: {
     alignSelf: 'flex-start',
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   item: {
-    margin: spacing.unit
+    margin: spacing.unit,
   },
   selected: {
     '&:focus': {
-      backgroundColor: light
+      backgroundColor: light,
     },
     '&:hover': {
-      backgroundColor: light
+      backgroundColor: light,
     },
-    'backgroundColor': light
-  }
+    'backgroundColor': light,
+  },
 })
 
 interface Tag {

@@ -18,8 +18,8 @@ const Description: SFC<DescriptionProps> = ({ classes, onChange, value }) => (
 
 const styles: StyleRules = createStyles({
   description: {
-    margin: 0
-  }
+    margin: 0,
+  },
 })
 
 export interface DescriptionProps extends WithStyles<typeof styles> {

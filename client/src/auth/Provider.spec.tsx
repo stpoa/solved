@@ -17,7 +17,7 @@ describe('<Provider />', () => {
       const wrapper = mount(
         <Provider>
           <div>rendered</div>
-        </Provider>
+        </Provider>,
       )
 
       expect(wrapper.html()).toBe('<div>rendered</div>')
@@ -32,7 +32,7 @@ describe('<Provider />', () => {
         <context.Consumer>
           {(value: any) => <Component value={value} />}
         </context.Consumer>
-      </Provider>
+      </Provider>,
     )
 
     const getValue = (wrapper: any, update: boolean = true) => {
@@ -101,7 +101,7 @@ describe('<Provider />', () => {
       wrapper.setState({
         signedIn: true,
         status: Status.Success,
-        user: {}
+        user: {},
       })
 
       getValue(wrapper, false).signOut()

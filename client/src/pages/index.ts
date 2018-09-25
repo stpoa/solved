@@ -13,5 +13,5 @@ export {
   Rate,
   Register,
   Search,
-  SignIn
+  SignIn,
 }

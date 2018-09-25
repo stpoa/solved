@@ -74,7 +74,7 @@ class Rate extends Component<RateProps, RateState> {
 
       return {
         isPositiveRating: true,
-        reviewText: isEdited(reviewText) ? reviewText : defaultPositiveReviewText
+        reviewText: isEdited(reviewText) ? reviewText : defaultPositiveReviewText,
       }
     })
   }
@@ -85,7 +85,7 @@ class Rate extends Component<RateProps, RateState> {
 
       return {
         isPositiveRating: false,
-        reviewText: isEdited(reviewText) ? reviewText : defaultNegativeReviewText
+        reviewText: isEdited(reviewText) ? reviewText : defaultNegativeReviewText,
       }
     })
   }
@@ -96,28 +96,28 @@ class Rate extends Component<RateProps, RateState> {
 const styles: StyleRulesCallback = theme => ({
   container: {
     backgroundColor: theme.palette.background.paper,
-    padding: '1em'
+    padding: '1em',
   },
   form: {
     margin: '0 auto',
     marginTop: '4em',
     textAlign: 'center',
-    width: '50%'
+    width: '50%',
   },
   submitButton: {
     display: 'inline',
-    marginTop: '2em'
+    marginTop: '2em',
   },
   thumbIcon: {
     height: '50%',
-    width: '50%'
+    width: '50%',
   },
   title: {
     fontSize: '20px',
     margin: '0 auto',
     padding: '1em',
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 })
 
 type RateState = Readonly<typeof initialState>

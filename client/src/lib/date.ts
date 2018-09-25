@@ -19,6 +19,6 @@ export const getTimeLeft = (expiredAt: number): TimeLeftSpec => {
   return {
     days: daysLeft,
     hours: hoursLeft,
-    minutes: minutesLeft
+    minutes: minutesLeft,
   }
 }

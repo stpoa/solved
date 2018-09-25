@@ -18,7 +18,7 @@ class CapturePhoto extends Component<CapturePhotoProps> {
     if (navigator.getUserMedia && this.video.current) {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: 'user' }
+          video: { facingMode: 'user' },
         })
 
         this.video.current.srcObject = stream
@@ -91,28 +91,28 @@ class CapturePhoto extends Component<CapturePhotoProps> {
 
 const styles: StyleRules = createStyles({
   container: {
-    position: 'relative'
+    position: 'relative',
   },
   hidden: {
-    display: 'none'
+    display: 'none',
   },
   icon: {
     fontSize: 50,
     position: 'absolute',
-    width: '100%'
+    width: '100%',
   },
   iconContainer: {
     bottom: 70,
     cursor: 'pointer',
     position: 'absolute',
-    width: '100%'
+    width: '100%',
   },
   photo: {
     backgroundColor: 'gray',
     height: '100%',
     position: 'absolute',
-    width: '100%'
-  }
+    width: '100%',
+  },
 })
 
 export interface CapturePhotoProps extends WithStyles<typeof styles> {

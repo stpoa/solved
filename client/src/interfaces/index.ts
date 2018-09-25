@@ -23,7 +23,7 @@ interface User {
 enum Status {
   Success = 'success',
   Failure = 'failure',
-  Pending = 'pending'
+  Pending = 'pending',
 }
 
 export {
@@ -32,5 +32,5 @@ export {
   Status,
   Task,
   TagList,
-  User
+  User,
 }

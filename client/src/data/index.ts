@@ -9,5 +9,5 @@ export {
   categories,
   tags,
   tasks,
-  users
+  users,
 }

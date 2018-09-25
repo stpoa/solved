@@ -6,7 +6,7 @@ export const defaultValue: Value = {
   signOut: () => undefined,
   signedIn: false,
   status: undefined,
-  user: null
+  user: null,
 }
 
 const context: Context<Value> = createContext(defaultValue)

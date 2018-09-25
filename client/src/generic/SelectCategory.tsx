@@ -7,7 +7,7 @@ const SelectCategory: SFC<SelectCategoryProps> = ({
   categories,
   classes: { container, item, list },
   onClick,
-  value
+  value,
 }) => (
   <div className={container}>
     <List
@@ -32,15 +32,15 @@ const SelectCategory: SFC<SelectCategoryProps> = ({
 const styles: StyleRules = createStyles({
   container: {
     height: '100%',
-    overflow: 'auto'
+    overflow: 'auto',
   },
   item: {
     display: 'block',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   list: {
-    height: 0
-  }
+    height: 0,
+  },
 })
 
 export interface SelectCategoryProps extends WithStyles<typeof styles> {

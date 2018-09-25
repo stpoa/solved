@@ -13,5 +13,5 @@ export {
   SelectTagsProps,
   TaskList,
   WrappedLink,
-  PrivateRoute
+  PrivateRoute,
 }
