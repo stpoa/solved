@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { wait } from '~lib/time'
-import Profile from '~pages/Profile/components/Profile'
-import { ProfileProps } from '../components/Profile'
+import Profile from '~pages/Profile/components/ProfilePrivate'
+import { ProfilePrivateProps } from '../components/ProfilePrivate'
 
 const fetchBalance = () => wait(2).then(() => 121)
 
@@ -18,4 +18,4 @@ export default class ProfileContainer extends Component<{}, ProfileContainerStat
   }
 }
 
-type ProfileContainerState = ProfileProps & { loading: boolean }
+interface ProfileContainerState extends ProfilePrivateProps { loading: boolean }

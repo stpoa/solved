@@ -7,14 +7,21 @@ import {
   withStyles
 } from '@material-ui/core'
 import { SvgIconProps } from '@material-ui/core/SvgIcon'
-import { AccountBalanceWallet } from '@material-ui/icons'
-import InboxIcon from '@material-ui/icons/Inbox'
-import SettingsIcon from '@material-ui/icons/Settings'
-import ReviewsIcon from '@material-ui/icons/Spellcheck'
-import UpdateIcon from '@material-ui/icons/Update'
-import React, { SFC } from 'react'
+import { AccountBalanceWallet, Inbox, Settings, Spellcheck, Update } from '@material-ui/icons'
+import React, { MouseEventHandler, SFC } from 'react'
 import { identity } from '~lib/fp'
 
+type ListItemData = [MouseEventHandler, React.ComponentType<SvgIconProps> | null, string | null, boolean]
+
+const handler = identity as MouseEventHandler
+const listData: ListItemData[] = [
+  [handler, null, null, false],
+  [handler, Update, 'Tasks in progress', true],
+  [handler, Inbox, 'Finished tasks', true],
+  [handler, Spellcheck, 'Reviews', true],
+  [handler, null, null, false],
+  [handler, Settings, 'Settings', true]
+]
 const ProfilePrivate: SFC<ProfilePrivatePropsStyled> = ({ balance, classes }) => (
   <div className={classes.root}>
     <List subheader={<ListSubheader>Profile</ListSubheader>}>
@@ -22,15 +29,7 @@ const ProfilePrivate: SFC<ProfilePrivatePropsStyled> = ({ balance, classes }) =>
         <ListItemIcon><AccountBalanceWallet /></ListItemIcon>
         <ListItemText>Balance: {balance}</ListItemText>
       </ListItem>
-      {([
-        [identity, false, '', false],
-        [identity, UpdateIcon, 'Tasks in progress', true],
-        [identity, InboxIcon, 'Finished tasks', true],
-        [identity, ReviewsIcon, 'Reviews', true],
-        [identity, false, '', false],
-        [identity, SettingsIcon, 'Settings', true]
-      ] as Array<[ () => void, React.ComponentType<SvgIconProps> | false, string, boolean ]>)
-      .map(([ handleClick, Icon, name, isButton ], i) => (
+      {listData.map(([ handleClick, Icon, name, isButton ], i) => (
         <ListItem key={i} button={isButton} onClick={handleClick}>
           {Icon ? <ListItemIcon><Icon/></ListItemIcon> : ''}
           {name ? <ListItemText primary={name} /> : ''}
