@@ -10,14 +10,14 @@ class Register extends Component<RegisterProps, RegisterState> {
       emailError: '',
       passwordError: '',
       regulationsCheckBoxError: '',
-      retypedPasswordError: ''
+      retypedPasswordError: '',
     },
     fields: {
       email: '',
       password: '',
       regulationsCheckBox: false,
-      retypedPassword: ''
-    }
+      retypedPassword: '',
+    },
   }
 
   public render () {
@@ -109,7 +109,7 @@ class Register extends Component<RegisterProps, RegisterState> {
         ? 'Field required'
         : preparedPassword !== retypedPassword
           ? 'Password does not match the confirm password'
-          : ''
+          : '',
     }
   }
 
@@ -130,12 +130,12 @@ class Register extends Component<RegisterProps, RegisterState> {
     this.setState(({ errors, fields }) => ({
       errors: {
         ...errors,
-        [`${name}Error`]: ''
+        [`${name}Error`]: '',
       },
       fields: {
         ...fields,
-        [name]: value
-      }
+        [name]: value,
+      },
     }))
   }
 
@@ -143,12 +143,12 @@ class Register extends Component<RegisterProps, RegisterState> {
     this.setState(({ errors, fields }) => ({
       errors: {
         ...errors,
-        regulationsCheckBoxError: ''
+        regulationsCheckBoxError: '',
       },
       fields: {
         ...fields,
-        regulationsCheckBox: !fields.regulationsCheckBox
-      }
+        regulationsCheckBox: !fields.regulationsCheckBox,
+      },
     }))
   }
 }
@@ -156,50 +156,50 @@ class Register extends Component<RegisterProps, RegisterState> {
 const styles: StyleRules = createStyles({
   content: {
     display: 'grid',
-    gridTemplateRows: 'auto max-content'
+    gridTemplateRows: 'auto max-content',
   },
   errorMessage: {
     color: '#f44336',
-    margin: '5px'
+    margin: '5px',
   },
   form: {
     display: 'grid',
-    width: '90%'
+    width: '90%',
   },
   formWrapper: {
     alignItems: 'center',
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   registerContainer: {
     display: 'grid',
-    gridTemplateRows: 'auto max-content'
+    gridTemplateRows: 'auto max-content',
   },
   regulationsHolder: {
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 })
 
 interface RegisterProps extends WithStyles<typeof styles> { }
 
 interface Errors {
-  emailError: string,
-  regulationsCheckBoxError: string,
-  retypedPasswordError: string,
-  passwordError: string,
+  emailError: string
+  regulationsCheckBoxError: string
+  retypedPasswordError: string
+  passwordError: string
 }
 
 interface RegisterState {
-  errors: Errors,
+  errors: Errors
   fields: {
     email: string,
     password: string,
     regulationsCheckBox: boolean,
-    retypedPassword: string
+    retypedPassword: string,
   }
 }
 

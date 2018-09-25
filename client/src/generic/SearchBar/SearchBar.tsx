@@ -10,8 +10,8 @@ const SearchBar: SFC<SearchBarProps> = ({ classes: { containerStyles } }) => (
 
 const styles = createStyles({
   containerStyles: {
-    width: '100%'
-  }
+    width: '100%',
+  },
 })
 
 interface SearchBarProps extends WithStyles<typeof styles> {}

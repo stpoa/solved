@@ -11,7 +11,7 @@ const SearchFilter: SFC<SearchFilterProps> = ({
   onClickTag,
   categoryValue,
   tags,
-  tabValue
+  tabValue,
 }) => (
     <div className={container}>
       <Tabs
@@ -36,12 +36,12 @@ const SearchFilter: SFC<SearchFilterProps> = ({
 const styles: StyleRulesCallback = () => createStyles({
   container: {
     display: 'grid',
-    gridTemplateRows: 'max-content auto'
+    gridTemplateRows: 'max-content auto',
   },
   item: {
     justifyContent: 'center',
-    maxWidth: '100%'
-  }
+    maxWidth: '100%',
+  },
 })
 
 export default withStyles(styles)(SearchFilter)

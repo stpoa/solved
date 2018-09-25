@@ -9,8 +9,8 @@ const Tasks: SFC<TasksProps> = ({ classes, className }) => (
 
 const styles = createStyles({
   imageWrapper: {
-    display: 'flex'
-  }
+    display: 'flex',
+  },
 })
 
 interface TasksProps extends WithStyles<typeof styles> {

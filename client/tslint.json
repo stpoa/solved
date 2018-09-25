@@ -8,6 +8,7 @@
     "no-submodule-imports": false,
     "quotemark": [true, "single", "jsx-double"],
     "interface-name": [false],
-    "no-empty-interface": false
+    "no-empty-interface": false,
+    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}]
   }
 }

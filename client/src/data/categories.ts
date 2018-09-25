@@ -2,43 +2,43 @@ import { CategoryList } from '~interfaces'
 
 const categories: CategoryList = [{
   id: '1',
-  name: 'Język Polski'
+  name: 'Język Polski',
 }, {
   id: '2',
-  name: 'Wiedza o kulturze'
+  name: 'Wiedza o kulturze',
 }, {
   id: '3',
-  name: 'Historia'
+  name: 'Historia',
 }, {
   id: '4',
-  name: 'Wiedza o społeczeństwie'
+  name: 'Wiedza o społeczeństwie',
 }, {
   id: '5',
-  name: 'Podstawy przedsiębiorczości'
+  name: 'Podstawy przedsiębiorczości',
 }, {
   id: '6',
-  name: 'Geografia'
+  name: 'Geografia',
 }, {
   id: '7',
-  name: 'Biologia'
+  name: 'Biologia',
 }, {
   id: '8',
-  name: 'Chemia'
+  name: 'Chemia',
 }, {
   id: '9',
-  name: 'Fizyka'
+  name: 'Fizyka',
 }, {
   id: '10',
-  name: 'Matematyka'
+  name: 'Matematyka',
 }, {
   id: '11',
-  name: 'Informatyka'
+  name: 'Informatyka',
 }, {
   id: '12',
-  name: 'Przysposobienie obronne'
+  name: 'Przysposobienie obronne',
 }, {
   id: '13',
-  name: 'Religia i etyka'
+  name: 'Religia i etyka',
 }]
 
 export default categories

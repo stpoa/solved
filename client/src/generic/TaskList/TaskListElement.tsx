@@ -1,4 +1,4 @@
-import { Card, CardContent, Chip, StyleRulesCallback, Theme, Typography, withStyles, WithStyles
+import { Card, CardContent, Chip, StyleRulesCallback, Theme, Typography, withStyles, WithStyles,
 } from '@material-ui/core'
 import React from 'react'
 import { Task } from '~interfaces'
@@ -7,39 +7,39 @@ import { getTimeLeft } from '~lib/date'
 
 const styles: StyleRulesCallback = (theme: Theme) => ({
   card: {
-    display: 'flex'
+    display: 'flex',
   },
   chip: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
   },
   content: {
     flex: '1 0 auto',
-    height: '15em'
+    height: '15em',
   },
   controls: {
     alignItems: 'center',
     display: 'flex',
     paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit
+    paddingLeft: theme.spacing.unit,
   },
   cover: {
     height: 151,
-    width: 151
+    width: 151,
   },
   details: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   footer: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   header: {
   },
   playIcon: {
     height: 38,
-    width: 38
-  }
+    width: 38,
+  },
 })
 
 interface TimeLeftSpec {

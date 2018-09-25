@@ -16,8 +16,8 @@ class Home extends React.Component <HomeProps> {
 
 const styles = createStyles({
   containerStyles: {
-    height: '100%'
-  }
+    height: '100%',
+  },
 })
 
 interface HomeProps extends WithStyles<typeof styles> {}

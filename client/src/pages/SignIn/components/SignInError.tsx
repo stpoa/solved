@@ -17,19 +17,19 @@ const SignInError: SFC<SignInErrorProps> = ({ classes }) => (
 
 const styles: StyleRulesCallback = theme => ({
   error: {
-    backgroundColor: theme.palette.error.dark
+    backgroundColor: theme.palette.error.dark,
   },
   icon: {
-    fontSize: 20
+    fontSize: 20,
   },
   iconVariant: {
     marginRight: theme.spacing.unit,
-    opacity: 0.9
+    opacity: 0.9,
   },
   message: {
     alignItems: 'center',
-    display: 'flex'
-  }
+    display: 'flex',
+  },
 })
 
 interface SignInErrorProps extends WithStyles<typeof styles> {}

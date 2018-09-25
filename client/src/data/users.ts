@@ -1,5 +1,5 @@
 const users = [{
-  email: 'user@notowork.com'
+  email: 'user@notowork.com',
 }]
 
 export default users

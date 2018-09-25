@@ -8,7 +8,7 @@ import Description, { DescriptionProps } from './Description'
 const AddTask: SFC<AddTaskProps> = ({
   classes: { addTaskContainer, container, content, item },
   categories, onClickCategory, onChangeDescription, onChangeTab, onCapturePhoto,
-  onClickTag, onSubmit, categoryValue, descriptionValue, image, tags, tabValue
+  onClickTag, onSubmit, categoryValue, descriptionValue, image, tags, tabValue,
 }) => (
     <div className={container}>
       <Tabs
@@ -43,34 +43,34 @@ const AddTask: SFC<AddTaskProps> = ({
 const styles: StyleRulesCallback = () => createStyles({
   addTaskContainer: {
     display: 'grid',
-    gridTemplateRows: 'auto max-content'
+    gridTemplateRows: 'auto max-content',
   },
   container: {
     display: 'grid',
-    gridTemplateRows: 'max-content auto'
+    gridTemplateRows: 'max-content auto',
   },
   content: {
     display: 'grid',
-    gridTemplateRows: '50% 50%'
+    gridTemplateRows: '50% 50%',
   },
   item: {
     justifyContent: 'center',
-    maxWidth: '100%'
-  }
+    maxWidth: '100%',
+  },
 })
 
 export interface AddTaskProps extends WithStyles<typeof styles> {
-  categories: SelectCategoryProps['categories'],
-  onClickCategory: SelectCategoryProps['onClick'],
-  onClickTag: SelectTagsProps['onClick'],
-  onSubmit: MouseEventHandler,
-  onCapturePhoto: CapturePhotoProps['onCapture'],
-  onChangeDescription: DescriptionProps['onChange'],
-  onChangeTab: (e: ChangeEvent<{}>, value: number) => void,
-  categoryValue: SelectCategoryProps['value'],
-  descriptionValue: DescriptionProps['value'],
-  image: CapturePhotoProps['imgSrc'],
-  tags: SelectTagsProps['tags'],
+  categories: SelectCategoryProps['categories']
+  onClickCategory: SelectCategoryProps['onClick']
+  onClickTag: SelectTagsProps['onClick']
+  onSubmit: MouseEventHandler
+  onCapturePhoto: CapturePhotoProps['onCapture']
+  onChangeDescription: DescriptionProps['onChange']
+  onChangeTab: (e: ChangeEvent<{}>, value: number) => void
+  categoryValue: SelectCategoryProps['value']
+  descriptionValue: DescriptionProps['value']
+  image: CapturePhotoProps['imgSrc']
+  tags: SelectTagsProps['tags']
   tabValue: boolean | number
 }
 

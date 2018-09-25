@@ -10,7 +10,7 @@ export default class Provider extends Component<{}, ProviderState> {
     this.state = {
       ...defaultValue,
       signIn: this.signIn,
-      signOut: this.signOut
+      signOut: this.signOut,
     }
   }
 
@@ -25,14 +25,14 @@ export default class Provider extends Component<{}, ProviderState> {
   private signIn: SignIn = (email, password) => {
     return new Promise(resolve => {
       this.setState({
-        status: Status.Pending
+        status: Status.Pending,
       }, async () => {
         const maybeUser = await signIn(email, password)
 
         this.setState({
           signedIn: Boolean(maybeUser),
           status: maybeUser ? Status.Success : Status.Failure,
-          user: maybeUser
+          user: maybeUser,
         }, () => resolve())
       })
     })
@@ -42,7 +42,7 @@ export default class Provider extends Component<{}, ProviderState> {
     this.setState({
       signedIn: false,
       status: undefined,
-      user: null
+      user: null,
     })
   }
 }

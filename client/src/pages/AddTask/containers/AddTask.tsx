@@ -12,7 +12,7 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
     image: '',
     status: undefined,
     tabValue: false,
-    tags: tagsData.map(tag => ({ name: tag, selected: false }))
+    tags: tagsData.map(tag => ({ name: tag, selected: false })),
   }
 
   public async componentDidUpdate (_: {}, prevState: AddTaskContainerState) {
@@ -22,7 +22,7 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
       await addTask({
         category: categoryValue,
         shortDescription: descriptionValue,
-        tags: this.state.tags.filter(tag => tag.selected).map(tag => tag.name)
+        tags: this.state.tags.filter(tag => tag.selected).map(tag => tag.name),
       })
     }
   }
@@ -52,7 +52,7 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
 
   private selectTab: AddTaskProps['onChangeTab'] = (_, value) => {
     this.setState(prevState => ({
-      tabValue: prevState.tabValue === value ? false : value
+      tabValue: prevState.tabValue === value ? false : value,
     }))
   }
 
@@ -67,9 +67,9 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
           ? tag
           : {
             name: tag.name,
-            selected: !tag.selected
+            selected: !tag.selected,
           }
-      ))
+      )),
     }))
   }
 
@@ -84,7 +84,7 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
     return Boolean(
       categoryValue &&
       descriptionValue.length > 10 &&
-      tags.filter(tag => tag.selected).length
+      tags.filter(tag => tag.selected).length,
     )
   }
 
