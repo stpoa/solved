@@ -1,1 +1,2 @@
-export const identity = <T>(a: T): T => a
+// https://ramdajs.com/docs/#always
+export const always = <T>(a: T) => () => a

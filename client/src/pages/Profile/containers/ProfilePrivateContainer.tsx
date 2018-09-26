@@ -17,4 +17,4 @@ export default class ProfilePrivateContainer extends Component<{}, ProfileContai
   }
 }
 
-type ProfileContainerState = ProfilePrivateProps & { loading: boolean }
+interface ProfileContainerState extends ProfilePrivateProps { loading: boolean }
