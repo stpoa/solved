@@ -9,16 +9,21 @@ import {
 } from '@material-ui/core'
 import { AccountBalanceWallet, Inbox, Settings, Spellcheck, Update } from '@material-ui/icons'
 import React, { SFC } from 'react'
+import { isNumber } from '~lib/math'
 
-const ProfilePrivate: SFC<ProfilePrivatePropsStyled> = ({ balance, classes }) => (
+const Profile: SFC<ProfilePropsStyled> = ({ isPrivate, balance, classes }) => (
   <div className={classes.root}>
     <div className={classes.title}><Typography className={classes.titleText} variant="title">Profile</Typography></div>
+    {isPrivate && (
     <List subheader={<ListSubheader>Info</ListSubheader>}>
+      {isNumber(balance) ? (
       <ListItem className={classes.balance}>
         <ListItemIcon><AccountBalanceWallet /></ListItemIcon>
         <ListItemText>Balance: {balance}</ListItemText>
       </ListItem>
+      ) : null}
     </List>
+    )}
     <List subheader={<ListSubheader>Activity</ListSubheader>}>
       <ListItem button>
         <ListItemIcon><Update/></ListItemIcon>
@@ -33,12 +38,14 @@ const ProfilePrivate: SFC<ProfilePrivatePropsStyled> = ({ balance, classes }) =>
         <ListItemText primary={'Reviews'} />
       </ListItem>
     </List>
+    {isPrivate && (
     <List subheader={<ListSubheader>Preferences</ListSubheader>}>
       <ListItem button>
         <ListItemIcon><Settings/></ListItemIcon>
         <ListItemText primary="Settings" />
       </ListItem>
     </List>
+    )}
   </div>
 )
 
@@ -57,7 +64,7 @@ const styles: StyleRulesCallback = theme => ({
   },
 })
 
-export interface ProfilePrivateProps { balance: number }
-interface ProfilePrivatePropsStyled extends ProfilePrivateProps, WithStyles<typeof styles> {}
+export interface ProfileProps { balance?: number, isPrivate: boolean }
+interface ProfilePropsStyled extends ProfileProps, WithStyles<typeof styles> {}
 
-export default withStyles(styles)(ProfilePrivate)
+export default withStyles(styles)(Profile)

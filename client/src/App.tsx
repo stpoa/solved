@@ -8,7 +8,7 @@ import { Provider as AuthProvider } from '~auth'
 import { NavigationBar, PrivateRoute } from '~generic'
 
 // Pages
-import { AddTask, Home, Profile, Rate, Register, Search, SignIn } from '~pages'
+import { AddTask, Home, ProfilePrivate, ProfilePublic, Rate, Register, Search, SignIn } from '~pages'
 
 const theme = createMuiTheme({
   palette: { primary: blue },
@@ -26,8 +26,9 @@ class App extends Component <AppProps, {}> {
           <Router>
             <div className={containerStyles}>
               <Switch>
-                <PrivateRoute path="/profile" component={Profile} />
-                <PrivateRoute path="/tasks" component={Profile} />
+                <PrivateRoute path="/profile" component={ProfilePrivate}/>
+                <PrivateRoute path="/tasks" component={ProfilePrivate} />
+                <Route path="/public/profile" component={ProfilePublic} />
                 <Route path="/add-task" component={AddTask} />
                 <Route path="/sign-in" component={SignIn} />
                 <Route path="/rate" component={Rate} />
