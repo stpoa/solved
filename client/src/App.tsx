@@ -18,7 +18,6 @@ const redirectToHome = () =>
     <Redirect to="/" />
 
 class App extends Component <AppProps, {}> {
-
   public render () {
     const { containerStyles } = this.props.classes
     return (
