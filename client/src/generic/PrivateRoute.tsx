@@ -2,24 +2,13 @@ import React, { ComponentType } from 'react'
 import { Redirect, Route, RouteProps } from 'react-router-dom'
 import { withAuth, WithAuth } from '~auth'
 
-class PrivateRoute extends React.Component<PrivateRouteProps> {
-  public render () {
-    const { auth, component, ...rest } = this.props
-
-    return <Route {...rest} render={this.renderComponent} />
-  }
-
-  private renderComponent: RouteProps['render'] = () => {
-    const {
-      auth,
-      /* tslint:disable */
-      // https://github.com/palantir/tslint/issues/2551
-      component: Component
-      /* tslint:enable */
-    } = this.props
-
-    return auth.signedIn ? <Component /> : <Redirect to="/sign-in" />
-  }
+const PrivateRoute = (
+  // https://github.com/palantir/tslint/issues/1400
+  // tslint:disable-next-line:no-use-before-declare
+  { auth: { signedIn }, component: Component, ...rest }: PrivateRouteProps,
+ ) => {
+  const componentIfSignedIn = () => signedIn ? <Component /> : <Redirect to="/sign-in" />
+  return <Route {...rest} render={componentIfSignedIn} />
 }
 
 interface PrivateRouteProps extends WithAuth, RouteProps {
