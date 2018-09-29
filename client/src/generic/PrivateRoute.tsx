@@ -7,8 +7,8 @@ const PrivateRoute = (
   // tslint:disable-next-line:no-use-before-declare
   { auth: { signedIn }, component: Component, ...rest }: PrivateRouteProps,
  ) => {
-  const componentIfSignedIn = () => signedIn ? <Component /> : <Redirect to="/sign-in" />
-  return <Route {...rest} render={componentIfSignedIn} />
+  const renderComponentOrRedirect = () => signedIn ? <Component /> : <Redirect to="/sign-in" />
+  return <Route {...rest} render={renderComponentOrRedirect} />
 }
 
 interface PrivateRouteProps extends WithAuth, RouteProps {

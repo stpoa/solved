@@ -17,4 +17,6 @@ export default class ProfilePrivate extends Component<{}, ProfilePrivateState> {
   }
 }
 
-type ProfilePrivateState = Omit<ProfileProps, 'isPrivate'> & { loading: boolean }
+interface ProfilePrivateState extends Omit<ProfileProps, 'isPrivate'> {
+  loading: boolean
+}

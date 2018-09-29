@@ -11,7 +11,7 @@ import { AccountBalanceWallet, Inbox, Settings, Spellcheck, Update } from '@mate
 import React, { SFC } from 'react'
 import { isNumber } from '~lib/math'
 
-const Profile: SFC<ProfilePropsStyled> = ({ isPrivate, balance, classes }) => (
+const Profile: SFC<ProfilePropsStyled> = ({ isPrivate = false, balance, classes }) => (
   <div className={classes.root}>
     <div className={classes.title}><Typography className={classes.titleText} variant="title">Profile</Typography></div>
     {isPrivate && (
@@ -64,7 +64,7 @@ const styles: StyleRulesCallback = theme => ({
   },
 })
 
-export interface ProfileProps { balance?: number, isPrivate: boolean }
+export interface ProfileProps { balance?: number, isPrivate?: boolean }
 interface ProfilePropsStyled extends ProfileProps, WithStyles<typeof styles> {}
 
 export default withStyles(styles)(Profile)

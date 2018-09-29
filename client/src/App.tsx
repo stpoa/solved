@@ -28,7 +28,7 @@ class App extends Component <AppProps, {}> {
               <Switch>
                 <PrivateRoute path="/profile" component={ProfilePrivate}/>
                 <PrivateRoute path="/tasks" component={ProfilePrivate} />
-                <Route path="/public/profile" component={ProfilePublic} />
+                <Route path="/profile-public" component={ProfilePublic} />
                 <Route path="/add-task" component={AddTask} />
                 <Route path="/sign-in" component={SignIn} />
                 <Route path="/rate" component={Rate} />
