@@ -1,12 +1,12 @@
 import { Card, CardContent, StyleRulesCallback, Theme, Typography, withStyles, WithStyles,
 } from '@material-ui/core'
+import { distanceInWordsToNow } from 'date-fns'
+import * as locale from 'date-fns/locale/en'
 import React from 'react'
 import { Task } from '~interfaces'
-import { getTimeLeft } from '~lib/date'
 import { TagList } from './TagList'
-import TimeLeft from './TimeLeft'
 
-const TaskListElementRaw = ({ category, tags, shortDescription, price, expiredAt, classes }: TaskListElementProps) => (
+const TaskListElement = ({ category, tags, shortDescription, price, expiredAt, classes }: TaskListElementProps) => (
   <Card>
     <CardContent className={classes.content}>
       <Typography className={classes.header} variant="headline">{category}</Typography>
@@ -14,8 +14,8 @@ const TaskListElementRaw = ({ category, tags, shortDescription, price, expiredAt
         <TagList tags={tags}/>
         <p>{shortDescription}</p>
         <div className={classes.footer}>
-          <TimeLeft {...getTimeLeft(expiredAt)}/>
           <span>{price} PLN</span>
+          <span>{distanceInWordsToNow(expiredAt, { locale })}</span>
         </div>
       </Typography>
     </CardContent>
@@ -58,4 +58,4 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
 
 interface TaskListElementProps extends WithStyles<typeof styles>, Task {}
 
-export default withStyles(styles)(TaskListElementRaw)
+export default withStyles(styles)(TaskListElement)
