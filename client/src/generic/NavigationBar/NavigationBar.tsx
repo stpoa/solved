@@ -32,7 +32,7 @@ const menuLinks = [{
 const NavigationBar: SFC<NavigationBarProps> = ({ classes }) => {
 
   return (
-    <AppBar position="sticky" color="default">
+    <AppBar position="sticky" color="primary">
       <Toolbar className={classes.toolbar}>
         {
           menuLinks.map(({ childIcon: Children, displayName, path, generalButton }) =>
@@ -55,22 +55,22 @@ const NavigationBar: SFC<NavigationBarProps> = ({ classes }) => {
   )
 }
 
-const styles = ({ spacing }: Theme) => createStyles({
+const styles = ({ spacing, palette: { secondary, grey } }: Theme) => createStyles({
   buttons: {
     fontSize: 32,
   },
   generalButton: {
-    color: '#4481EB',
+    color: secondary.main,
     fontSize: 50,
   },
   highlight: {
-    color: '#4481EB',
+    color: secondary.main,
   },
   link: {
     textDecoration: 'none',
   },
   toolbar: {
-    color: '#818181',
+    color: grey[500],
     display: 'flex',
     justifyContent: 'space-between',
     marginLeft: spacing.unit,
