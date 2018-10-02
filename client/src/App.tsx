@@ -10,7 +10,6 @@ import { NavigationBar, PrivateRoute } from '~generic'
 import { AddTask, Home, ProfilePrivate, ProfilePublic, Rate, Register, Search, SignIn } from '~pages'
 
 // Theme
-
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -31,6 +30,9 @@ const theme = createMuiTheme({
     //   dark: palette.error[700],
     //   contrastText: getContrastText(palette.error[500]),
     // },
+  },
+  typography: {
+    htmlFontSize: 10,
   },
 })
 

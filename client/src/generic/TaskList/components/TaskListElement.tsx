@@ -9,7 +9,7 @@ import { TagList } from './TagList'
 const TaskListElement = ({ category, tags, shortDescription, price, expiredAt, classes }: TaskListElementProps) => (
   <Card>
     <CardContent className={classes.content}>
-      <Typography className={classes.header} variant="headline">{category}</Typography>
+      <Typography color="secondary" className={classes.header} variant="headline">{category}</Typography>
       <Typography variant="subheading" color="textSecondary">
         <TagList tags={tags}/>
         <p>{shortDescription}</p>
@@ -49,6 +49,7 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     justifyContent: 'space-between',
   },
   header: {
+    fontSize: '20px',
   },
   playIcon: {
     height: 38,
