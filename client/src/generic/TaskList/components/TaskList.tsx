@@ -5,9 +5,9 @@ import TaskListElement from './TaskListElement'
 
 const TaskList = ({ classes, tasks }: TaskListProps) => (
   <div className={classes.container}>
-    <Grid classes={{ container: classes.grid }} spacing={8} container>
+    <Grid className={classes.grid} spacing={8} container>
     {tasks.map((task, i) => (
-      <Grid item xs={12} sm={6} md={3} key={i}>
+      <Grid item xs={12} sm={6} md={3} key={i} className={classes.gridItem}>
         <TaskListElement {...task} />
       </Grid>
     ))}
@@ -15,7 +15,7 @@ const TaskList = ({ classes, tasks }: TaskListProps) => (
   </div>
 )
 
-const styles: StyleRulesCallback = () => createStyles({
+const styles: StyleRulesCallback = ({ spacing: { unit } }) => createStyles({
   container: {
     height: '100%',
     margin: 0,
@@ -25,6 +25,9 @@ const styles: StyleRulesCallback = () => createStyles({
     height: 0,
     margin: 0,
     width: '100%',
+  },
+  gridItem: {
+    padding: `${unit}px ${unit}px ${0}px ${unit}px !important`,
   },
 })
 

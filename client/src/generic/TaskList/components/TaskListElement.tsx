@@ -1,40 +1,46 @@
 import { Card, CardContent, StyleRulesCallback, Theme, Typography, withStyles, WithStyles,
 } from '@material-ui/core'
+import { AccessTime, MonetizationOn } from '@material-ui/icons'
 import { distanceInWordsToNow } from 'date-fns'
 import * as locale from 'date-fns/locale/en'
 import React from 'react'
 import { Task } from '~interfaces'
-import { TagList } from './TagList'
+import TagList from './TagList'
 
 const TaskListElement = ({ category, tags, shortDescription, price, expiredAt, classes }: TaskListElementProps) => (
-  <Card>
+  <Card className={classes.root} elevation={1}>
     <CardContent className={classes.content}>
       <Typography color="secondary" className={classes.header} variant="headline">{category}</Typography>
       <Typography variant="subheading" color="textSecondary">
+        <p className={classes.shortDescription}>{shortDescription}</p>
         <TagList tags={tags}/>
-        <p>{shortDescription}</p>
         <div className={classes.footer}>
-          <span>{price} PLN</span>
-          <span>{distanceInWordsToNow(expiredAt, { locale })}</span>
+          <span className={classes.indicator}>
+            <AccessTime className={classes.indicatorIconLeft}/>
+            <span className={classes.indicatorText}>{distanceInWordsToNow(expiredAt, { locale })}</span>
+          </span>
+          <span className={classes.indicator}>
+            <span className={classes.indicatorText}>{price}</span>
+            <MonetizationOn className={classes.indicatorIconRight}/>
+          </span>
         </div>
       </Typography>
     </CardContent>
   </Card>
 )
 
-const styles: StyleRulesCallback = (theme: Theme) => ({
+const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
   card: {
     display: 'flex',
   },
   content: {
     flex: '1 0 auto',
-    height: '15em',
   },
   controls: {
     alignItems: 'center',
     display: 'flex',
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit,
+    paddingBottom: unit,
+    paddingLeft: unit,
   },
   cover: {
     height: 151,
@@ -46,14 +52,37 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   },
   footer: {
     display: 'flex',
+    fontSize: '1.2rem',
+    height: '2.4rem',
     justifyContent: 'space-between',
+    lineHeight: '2.4rem',
+    marginTop: unit,
   },
   header: {
-    fontSize: '20px',
+    fontSize: '1.6rem',
   },
+  indicator: {
+    verticalAlign: 'middle',
+  },
+  indicatorIconLeft: { verticalAlign: 'middle', marginRight: '0.4rem' },
+  indicatorIconRight: { verticalAlign: 'middle', marginLeft: '0.4rem' },
+  indicatorText: { verticalAlign: 'middle' },
   playIcon: {
     height: 38,
     width: 38,
+  },
+  root: {
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
+    marginTop: 0,
+  },
+  shortDescription: {
+    color: 'black',
+    fontSize: '1.4rem',
+    fontWeight: 300,
+    lineHeight: '1.4',
+    margin: '1rem 0',
   },
 })
 
