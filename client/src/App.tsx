@@ -1,4 +1,3 @@
-import { blue } from '@material-ui/core/colors'
 import { createMuiTheme, createStyles, MuiThemeProvider, WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
@@ -10,8 +9,29 @@ import { NavigationBar, PrivateRoute } from '~generic'
 // Pages
 import { AddTask, Home, ProfilePrivate, ProfilePublic, Rate, Register, Search, SignIn } from '~pages'
 
+// Theme
+
 const theme = createMuiTheme({
-  palette: { primary: blue },
+  palette: {
+    primary: {
+      dark: '#FFFFFF',
+      light: '#FFFFFF',
+      main: '#FFFFFF',
+      // contrastText: getContrastText(palette.secondary.A400),
+    },
+    secondary: {
+      dark: '#479AC8',
+      light: '#4481EB',
+      main: '#4481EB',
+      //   contrastText: getContrastText(palette.secondary.A400),
+    },
+    // error: {
+    //   light: palette.error[300],
+    //   main: palette.error[500],
+    //   dark: palette.error[700],
+    //   contrastText: getContrastText(palette.error[500]),
+    // },
+  },
 })
 
 const redirectToHome = () =>
