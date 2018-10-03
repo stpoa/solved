@@ -9,6 +9,7 @@
     "quotemark": [true, "single", "jsx-double"],
     "interface-name": [false],
     "no-empty-interface": false,
-    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}]
+    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
+    "object-literal-sort-keys": false
   }
 }
