@@ -22,12 +22,13 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }) => createStyles({
     overflow: 'auto',
   },
   grid: {
+    marginTop: unit,
     height: 0,
     margin: 0,
     width: '100%',
   },
   gridItem: {
-    padding: `${unit}px ${unit}px ${0}px ${unit}px !important`,
+    padding: `${0}px ${unit}px ${unit}px ${unit}px !important`,
   },
 })
 

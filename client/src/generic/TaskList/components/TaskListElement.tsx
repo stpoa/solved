@@ -20,7 +20,7 @@ const TaskListElement = ({ category, tags, shortDescription, price, expiredAt, c
             <span className={classes.indicatorText}>{distanceInWordsToNow(expiredAt, { locale })}</span>
           </span>
           <span className={classes.indicator}>
-            <span className={classes.indicatorText}>{price}</span>
+            <span className={classes.indicator}>{price}</span>
             <MonetizationOn className={classes.indicatorIconRight}/>
           </span>
         </div>
@@ -66,16 +66,12 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
   },
   indicatorIconLeft: { verticalAlign: 'middle', marginRight: '0.4rem' },
   indicatorIconRight: { verticalAlign: 'middle', marginLeft: '0.4rem' },
-  indicatorText: { verticalAlign: 'middle' },
   playIcon: {
     height: 38,
     width: 38,
   },
   root: {
-    marginBottom: 0,
-    marginLeft: 0,
-    marginRight: 0,
-    marginTop: 0,
+    margin: 0,
   },
   shortDescription: {
     color: 'black',

@@ -60,7 +60,10 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
     this.setState({ categoryValue: id })
   }
 
-  private selectTag: AddTaskProps['onClickTag'] = tagName => {
+  private selectTag: AddTaskProps['onClickTag'] = (
+    tagName: string,
+  ) => (
+  ) => {
     this.setState(prevState => ({
       tags: prevState.tags.map(tag => (
         tag.name !== tagName
