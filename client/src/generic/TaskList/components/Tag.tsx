@@ -1,12 +1,12 @@
 import { Chip, StyleRulesCallback, WithStyles, withStyles } from '@material-ui/core'
 import React, { MouseEventHandler } from 'react'
 
-const Tag = ({ classes, children, onClick, selected = false }: TagProps) => {
+const Tag = ({ classes, text, onClick, selected = false }: TagProps) => {
   const className = `${classes.chip} ${selected ? classes.selected : ''}`
 
   return (
     <Chip
-      label={children}
+      label={text}
       onClick={onClick}
       className={className}
     />
@@ -40,7 +40,7 @@ interface TagProps extends WithStyles<typeof styles> {
   onClick?: MouseEventHandler<HTMLElement>,
   selected?: boolean,
   clickable?: boolean,
-  children: string,
+  text: string,
 }
 
 export default withStyles(styles)(Tag)

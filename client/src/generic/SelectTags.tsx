@@ -5,7 +5,7 @@ import Tag from './TaskList/components/Tag'
 const SelectTags: SFC<SelectTagsProps> = ({ tags, classes: { container }, onClick }) => (
   <div className={container}>
     {tags.map(({ selected, name }, i) => (
-    <Tag selected={selected} clickable onClick={onClick(name)} key={i}>{name}</Tag>
+    <Tag selected={selected} clickable onClick={onClick(name)} key={i} text={name} />
     ))}
   </div>
 )

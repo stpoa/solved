@@ -10,6 +10,7 @@
     "interface-name": [false],
     "no-empty-interface": false,
     "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "no-unused-variable": false
   }
 }
