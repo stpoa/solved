@@ -136,7 +136,7 @@ const styles: StyleRules = createStyles({
     justifyContent: 'center',
   },
   item: {
-    width: 400,
+    width: '100%',
   },
 })
 

@@ -35,7 +35,10 @@ export default class SearchFilterContainer extends Component<{}, SearchFilterCon
     this.setState({ categoryValue: id })
   }
 
-  private selectTag: SearchFilterProps['onClickTag'] = tagName => {
+  private selectTag: SearchFilterProps['onClickTag'] = (
+    tagName: string,
+  ) => (
+  ) => {
     this.setState(prevState => ({
       tags: prevState.tags.map(tag => (
         tag.name !== tagName
