@@ -1,13 +1,13 @@
 import { ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Tab, Tabs, Typography } from '@material-ui/core'
-import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles'
+import { createStyles, StyleRulesCallback, WithStyles, withStyles } from '@material-ui/core/styles'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import React, { ChangeEvent, Component, Fragment, SFC } from 'react'
+import React, { ChangeEvent, Component, SFC } from 'react'
 import { taskCategories } from '~data'
 import { TaskList } from '~generic'
 import { Task } from '~interfaces'
 
 const ExpasionList: SFC<ExpansionListProps> = ({ classes, taskGroup }) => (
-  <Fragment>
+  <div className={classes.expansionList}>
     <ExpansionPanel defaultExpanded>
       <ExpansionPanelSummary classes={{ content: classes.expansionPanelSummary }} expandIcon={<ExpandMoreIcon />}>
         <Typography className={classes.expansionTitle} color="secondary">My tasks</Typography>
@@ -24,7 +24,7 @@ const ExpasionList: SFC<ExpansionListProps> = ({ classes, taskGroup }) => (
         <TaskList tasks={taskGroup.someoneTasks} />
       </ExpansionPanelDetails>
     </ExpansionPanel>
-  </Fragment>
+  </div>
 )
 
 class Tasks extends Component<TasksProps, TasksState> {
@@ -47,7 +47,6 @@ class Tasks extends Component<TasksProps, TasksState> {
           <Tab className={classes.tab} label="Ongoing" />
           <Tab className={classes.tab} label="Finished" />
         </Tabs>
-        <div className={classes.expansionList}>
         {selectedTabIndex === 0 && (
           <TaskList tasks={taskCategories.waitingTasks} />
         )}
@@ -57,7 +56,6 @@ class Tasks extends Component<TasksProps, TasksState> {
         {selectedTabIndex === 2 && (
           <ExpasionList classes={classes} taskGroup={taskCategories.finishedTasks} />
         )}
-        </div>
       </div>
     )
   }
@@ -66,19 +64,12 @@ class Tasks extends Component<TasksProps, TasksState> {
     this.setState({ selectedTabIndex: value })
 }
 
-const styles = createStyles({
+const styles: StyleRulesCallback = ({ spacing: { unit } }) => createStyles({
   container: {
     overflow: 'scroll',
   },
-  backIcon: {
-    fontSize: 32,
-  },
   tab: {
     textTransform: 'none',
-  },
-  typography: {
-    position: 'absolute',
-    width: '100%',
   },
   expansionPanelDetails: {
     padding: 0,
@@ -87,8 +78,8 @@ const styles = createStyles({
     justifyContent: 'center',
   },
   expansionList: {
-    marginTop: '16px',
-    marginBottom: '16px',
+    marginTop: unit,
+    marginBottom: unit,
   },
   expansionTitle: {
     fontSize: '2rem',
