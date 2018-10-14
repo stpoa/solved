@@ -37,10 +37,15 @@ class Tasks extends Component<TasksProps, TasksState> {
     const { selectedTabIndex } = this.state
     return (
       <div className={classes.container}>
-        <Tabs value={selectedTabIndex} onChange={this.onTabChange} fullWidth>
-          <Tab label="Waiting" />
-          <Tab label="Ongoing" />
-          <Tab label="Finished" />
+        <Tabs
+          value={selectedTabIndex}
+          onChange={this.onTabChange}
+          fullWidth
+          textColor="secondary"
+        >
+          <Tab className={classes.tab} label="Waiting" />
+          <Tab className={classes.tab} label="Ongoing" />
+          <Tab className={classes.tab} label="Finished" />
         </Tabs>
         <div className={classes.expansionList}>
         {selectedTabIndex === 0 && (
@@ -67,6 +72,9 @@ const styles = createStyles({
   },
   backIcon: {
     fontSize: 32,
+  },
+  tab: {
+    textTransform: 'none',
   },
   typography: {
     position: 'absolute',
