@@ -6,6 +6,7 @@ import Rate from './Rate/Rate'
 import Register from './Register/Register'
 import Search from './Search'
 import SignIn from './SignIn'
+import Tasks from './Tasks/Tasks'
 
 export {
   AddTask,
@@ -16,4 +17,5 @@ export {
   Register,
   Search,
   SignIn,
+  Tasks,
 }

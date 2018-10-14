@@ -68,6 +68,8 @@ const styles = ({ spacing, palette: { secondary, grey } }: Theme) => createStyle
   },
   link: {
     textDecoration: 'none',
+    paddingTop: 0,
+    paddingBottom: 0,
   },
   toolbar: {
     color: grey[500],
