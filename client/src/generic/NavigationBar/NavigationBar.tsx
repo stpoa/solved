@@ -1,6 +1,6 @@
 import { AppBar, IconButton, Toolbar } from '@material-ui/core'
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core/styles'
-import { AddCircle, Help, Home, Person } from '@material-ui/icons'
+import { AddCircle, Home, Person, Search } from '@material-ui/icons'
 import React, { SFC } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { Tasks } from '~icons'
@@ -11,8 +11,8 @@ const menuLinks = [{
   displayName: 'Home',
   path: '/',
 }, {
-  childIcon: Help,
-  displayName: 'Something',
+  childIcon: Search,
+  displayName: 'Search',
   path: '/search',
 }, {
   childIcon: AddCircle,
