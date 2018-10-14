@@ -17,13 +17,12 @@ const TaskList = ({ classes, tasks }: TaskListProps) => (
 
 const styles: StyleRulesCallback = ({ spacing: { unit } }) => createStyles({
   container: {
-    height: '100%',
     margin: 0,
     overflow: 'auto',
+    width: '100%',
   },
   grid: {
     marginTop: unit,
-    height: 0,
     margin: 0,
     width: '100%',
   },
@@ -33,7 +32,7 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }) => createStyles({
 })
 
 interface TaskListProps extends WithStyles<typeof styles> {
-  tasks: Task[]
+  tasks: Task[],
 }
 
 export default withStyles(styles)(TaskList)

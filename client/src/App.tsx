@@ -49,7 +49,7 @@ class App extends Component <AppProps, {}> {
             <div className={containerStyles}>
               <Switch>
                 <PrivateRoute path="/profile" component={Pages.ProfilePrivate}/>
-                <Route path="/tasks" component={Pages.Tasks} />
+                <PrivateRoute path="/tasks" component={Pages.Tasks} />
                 <Route path="/profile-public" component={Pages.ProfilePublic} />
                 <Route path="/add-task" component={Pages.AddTask} />
                 <Route path="/sign-in" component={Pages.SignIn} />
