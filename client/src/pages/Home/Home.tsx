@@ -1,9 +1,13 @@
-import React, { SFC } from 'react'
+import React from 'react'
 import { tasks } from '~data'
 import { TaskList } from '~generic'
 
-const Home: SFC<{}> = () => (
-  <TaskList tasks={tasks} />
-)
+class Home extends React.Component<{}> {
+  public render () {
+    return (
+      <TaskList tasks={tasks} />
+    )
+  }
+}
 
 export default Home

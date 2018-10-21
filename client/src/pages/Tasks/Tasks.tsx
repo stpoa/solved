@@ -6,7 +6,7 @@ import { taskCategories } from '~data'
 import { TaskList } from '~generic'
 import { Task } from '~interfaces'
 
-const ExpasionList: SFC<ExpansionListProps> = ({ classes, taskGroup }) => (
+const ExpansionList: SFC<ExpansionListProps> = ({ classes, taskGroup }) => (
   <div className={classes.expansionList}>
     <ExpansionPanel defaultExpanded>
       <ExpansionPanelSummary classes={{ content: classes.expansionPanelSummary }} expandIcon={<ExpandMoreIcon />}>
@@ -51,10 +51,10 @@ class Tasks extends Component<TasksProps, TasksState> {
           <TaskList tasks={taskCategories.waitingTasks} />
         )}
         {selectedTabIndex === 1 && (
-          <ExpasionList classes={classes} taskGroup={taskCategories.ongoingTasks} />
+          <ExpansionList classes={classes} taskGroup={taskCategories.ongoingTasks} />
         )}
         {selectedTabIndex === 2 && (
-          <ExpasionList classes={classes} taskGroup={taskCategories.finishedTasks} />
+          <ExpansionList classes={classes} taskGroup={taskCategories.finishedTasks} />
         )}
       </div>
     )
