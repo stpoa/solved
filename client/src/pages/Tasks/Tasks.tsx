@@ -21,7 +21,7 @@ const ExpansionList: SFC<ExpansionListProps> = ({ classes, taskGroup, isEditable
         <Typography className={classes.expansionTitle} color="secondary">Someone's tasks</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.expansionPanelDetails}>
-        <TaskList isEditable isDeletable={isDeletable} tasks={taskGroup.someoneTasks} />
+        <TaskList isDeletable={isDeletable} tasks={taskGroup.someoneTasks} />
       </ExpansionPanelDetails>
     </ExpansionPanel>
   </div>
