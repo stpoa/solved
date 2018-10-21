@@ -10,8 +10,8 @@ import TagList from './TagList'
 const TaskListElement = ({ category, tags, shortDescription, price, expiredAt, classes }: TaskListElementProps) => (
   <Card className={classes.root} elevation={1}>
     <CardContent className={classes.content}>
-      <Typography color="secondary" className={classes.header} variant="headline">{category}</Typography>
-      <Typography variant="subheading" color="textSecondary">
+      <Typography color="secondary" className={classes.header} variant="h5">{category}</Typography>
+      <Typography variant="h6" color="textSecondary">
         <p className={classes.shortDescription}>{shortDescription}</p>
         <TagList tags={tags}/>
         <div className={classes.footer}>

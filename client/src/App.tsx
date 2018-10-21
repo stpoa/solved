@@ -7,7 +7,7 @@ import { Provider as AuthProvider } from '~auth'
 import { NavigationBar, PrivateRoute } from '~generic'
 
 // Pages
-import { AddTask, Home, ProfilePrivate, ProfilePublic, Rate, Register, Search, SignIn } from '~pages'
+import * as Pages from '~pages'
 
 // Theme
 const theme = createMuiTheme({
@@ -48,15 +48,15 @@ class App extends Component <AppProps, {}> {
           <Router>
             <div className={containerStyles}>
               <Switch>
-                <PrivateRoute path="/profile" component={ProfilePrivate}/>
-                <PrivateRoute path="/tasks" component={ProfilePrivate} />
-                <Route path="/profile-public" component={ProfilePublic} />
-                <Route path="/add-task" component={AddTask} />
-                <Route path="/sign-in" component={SignIn} />
-                <Route path="/rate" component={Rate} />
-                <Route path="/register" component={Register} />
-                <Route path="/search" component={Search} />
-                <Route exact path="/" component={Home} />
+                <PrivateRoute path="/profile" component={Pages.ProfilePrivate}/>
+                <PrivateRoute path="/tasks" component={Pages.Tasks} />
+                <Route path="/profile-public" component={Pages.ProfilePublic} />
+                <Route path="/add-task" component={Pages.AddTask} />
+                <Route path="/sign-in" component={Pages.SignIn} />
+                <Route path="/rate" component={Pages.Rate} />
+                <Route path="/register" component={Pages.Register} />
+                <Route path="/search" component={Pages.Search} />
+                <Route exact path="/" component={Pages.Home} />
                 <Route path="*" render={redirectToHome} />
               </Switch>
               <NavigationBar />

@@ -1,7 +1,7 @@
 import accounts from './accounts'
 import categories from './categories'
 import tags from './tags'
-import tasks from './tasks'
+import tasks, { taskCategories } from './tasks'
 import users from './users'
 
 export {
@@ -9,5 +9,6 @@ export {
   categories,
   tags,
   tasks,
+  taskCategories,
   users,
 }

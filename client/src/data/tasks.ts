@@ -11,6 +11,67 @@ const addTime = (fromDate: DateLike, minutes: number, hours: number, days: numbe
   return withDays.getTime()
 }
 
+const waitingTasks = [{
+  category: 'Informatyka',
+  expiredAt: addTime(now, 2, 4, 5),
+  id: '1',
+  price: 100,
+  shortDescription: 'Napisz program, który poprosi użytkownika o podanie liczb godzin i minut. Funkcja main() ma',
+  tags: ['rownania', 'analiza'],
+}, {
+  category: 'Fizyka',
+  expiredAt: addTime(now, 2, 4, 5),
+  id: '2',
+  price: 100,
+  shortDescription: 'Masa marsa',
+  tags: ['astrologia'],
+}]
+
+const ongoingTasks = {
+  myTasks: [{
+    category: 'Fizyka',
+    expiredAt: addTime(now, 2, 4, 5),
+    id: '2',
+    price: 100,
+    shortDescription: 'Masa marsa',
+    tags: ['astrologia'],
+  }],
+  someoneTasks: [{
+    category: 'Angielski',
+    expiredAt: addTime(now, 2, 4, 5),
+    id: '2',
+    price: 100,
+    shortDescription: 'Odmień być',
+    tags: ['astrologia'],
+  }],
+}
+
+const finishedTasks = {
+  myTasks: [{
+    category: 'Muzyka',
+    expiredAt: addTime(now, 2, 4, 5),
+    id: '4',
+    price: 140,
+    shortDescription: 'Odczytaj nuty i zagraj',
+    tags: ['nuty'],
+  }, {
+    category: 'Muzyka',
+    expiredAt: addTime(now, 2, 4, 5),
+    id: '5',
+    price: 140,
+    shortDescription: 'Odczytaj nuty i zagraj',
+    tags: ['nuty'],
+  }],
+  someoneTasks: [{
+    category: 'Muzyka',
+    expiredAt: addTime(now, 2, 4, 5),
+    id: '5',
+    price: 140,
+    shortDescription: 'Odczytaj nuty i zagraj',
+    tags: ['nuty'],
+  }],
+}
+
 const tasks = [{
   category: 'Informatyka',
   expiredAt: addTime(now, 2, 4, 5),
@@ -82,5 +143,11 @@ const tasks = [{
   shortDescription: 'Odczytaj nuty i zagraj',
   tags: ['nuty'],
 }]
+
+export const taskCategories = {
+  waitingTasks,
+  ongoingTasks,
+  finishedTasks,
+}
 
 export default tasks
