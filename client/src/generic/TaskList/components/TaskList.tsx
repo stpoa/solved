@@ -40,8 +40,7 @@ class TaskList extends Component<TaskListProps, TaskListState> {
 
   private handleExpandedMenuLeave = () =>
     this.state.expandedDropdownId
-      ? this.setState({ expandedDropdownId: null, expandedDropdownAnchorEl: null })
-      : null
+      && this.setState({ expandedDropdownId: null, expandedDropdownAnchorEl: null })
 
   private handleMoreButtonClick = (id: number, e: Event) =>
     this.setState({ expandedDropdownId: id, expandedDropdownAnchorEl: e.currentTarget })
