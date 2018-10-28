@@ -30,6 +30,7 @@ class StepList extends Component<StepListProps, StepListState> {
   public render () {
     const children = this.props.children.map((child, index) => {
       const { currentStep, totalSteps } = this.state
+      console.log(index, currentStep === totalSteps)
 
       return React.cloneElement(child, {
         isActive: index === currentStep,

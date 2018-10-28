@@ -4,15 +4,15 @@ import { omit } from 'ramda'
 import React, { SFC } from 'react'
 
 interface StepProps {
-  isActive: boolean
-  displayPrevious: boolean,
-  displayNext: boolean
-  displaySubmit: boolean
-  component: React.ComponentClass
-  children: React.ReactNode
-  goToPreviousStep: () => void
-  goToNextStep: () => void
-  submit: () => void
+  isActive?: boolean
+  displayPrevious?: boolean,
+  displayNext?: boolean
+  displaySubmit?: boolean
+  component?: React.ComponentClass
+  children?: React.ReactNode
+  goToPreviousStep?: () => void
+  goToNextStep?: () => void
+  submit?: () => void
 }
 
 export const Step = (props: StepProps) => {
@@ -20,25 +20,32 @@ export const Step = (props: StepProps) => {
           children, goToPreviousStep, goToNextStep, submit } = props
 
   if (isActive === false) return null
+  console.log(displaySubmit)
 
   return (
     <React.Fragment>
       {component ? React.createElement(component) : children}
       <StepButton
+        key={0}
         isActive={displayPrevious}
         onClick={goToPreviousStep}
-      />
+      >
+        prev
+      </StepButton>
       <StepButton
+        key={1}
         isActive={displayNext}
         onClick={goToNextStep}
-      />
-      <StepButton isActive={displaySubmit} type="submit" onClick={submit} />
+      >
+       next
+      </StepButton>
+      <StepButton key={2} isActive={displaySubmit} type="submit" onClick={submit}>dfad</StepButton>
     </React.Fragment>
   )
 }
 
 interface StepButtonProps extends ButtonProps {
-  isActive: boolean,
+  isActive?: boolean,
 }
 
 const StepButton: SFC<StepButtonProps> = props => (

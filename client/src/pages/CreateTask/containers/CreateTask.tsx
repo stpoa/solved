@@ -27,10 +27,12 @@ class Rate extends Component<RateProps, RateState> {
       <div className={classes.container}>
 
         <PageHeader title="Nowe zadanie"/>
-        <Stepper />
+        {/* <Stepper /> */}
         <StepList>
-          <Step>dfadsf</Step>
-          <Step>dfsda<Step/>
+          <Step key={0} />
+          <Step key={1} />
+          <Step key={2} />
+          <Step key={3} />
         </StepList>
 
         <div style={{ marginTop: '8em' }}>
