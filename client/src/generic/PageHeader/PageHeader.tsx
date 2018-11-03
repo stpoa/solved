@@ -1,26 +1,27 @@
-import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core'
-import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles'
-import { ArrowBack } from '@material-ui/icons'
+import { AppBar, IconButton, StyleRulesCallback, Toolbar, Typography } from '@material-ui/core'
+import { WithStyles, withStyles } from '@material-ui/core/styles'
+import { ArrowBackIos } from '@material-ui/icons'
 import React, { SFC } from 'react'
 
 const PageHeader: SFC<PageHeaderProps> = ({ classes, title }) => (
   <AppBar position="sticky">
-    <Toolbar disableGutters>
+    <Toolbar disableGutters variant={'dense'} >
       <IconButton>
-        <ArrowBack className={classes.backIcon} />
+        <ArrowBackIos className={classes.backIcon} />
       </IconButton>
       <Typography className={classes.typography} align="center" variant="h6">{title}</Typography>
     </Toolbar>
   </AppBar>
 )
 
-const styles = createStyles({
+const styles: StyleRulesCallback = theme => ({
   container: {
     display: 'grid',
     gridTemplateRows: 'max-content',
   },
   backIcon: {
-    fontSize: 32,
+    color: theme.palette.text.primary,
+    fontSize: theme.typography.fontSize * 1.5,
   },
   typography: {
     position: 'absolute',
