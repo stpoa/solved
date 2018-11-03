@@ -12,6 +12,7 @@ const defaultPositiveReviewText = 'Wszystko ok. Polecam.'
 const defaultNegativeReviewText = 'Nic nie jest ok. Nie polecam :('
 const initialState = { isPositiveRating: true, reviewText: defaultPositiveReviewText }
 const isEdited = (review: string) => review !== defaultNegativeReviewText && review !== defaultPositiveReviewText
+const onSubmitClick = () => window.alert('Submit');
 
 class Rate extends Component<RateProps, RateState> {
 
@@ -28,11 +29,9 @@ class Rate extends Component<RateProps, RateState> {
 
         <PageHeader title="Nowe zadanie"/>
         {/* <Stepper /> */}
-        <StepList>
+        <StepList onSubmitClick={onSubmitClick}>
           <Step key={0} />
           <Step key={1} />
-          <Step key={2} />
-          <Step key={3} />
         </StepList>
 
         <div style={{ marginTop: '8em' }}>

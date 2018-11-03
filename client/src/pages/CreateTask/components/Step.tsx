@@ -16,6 +16,7 @@ interface StepProps {
 }
 
 export const Step = (props: StepProps) => {
+  console.log('step');
   const { isActive, displayPrevious, displayNext, displaySubmit, component,
           children, goToPreviousStep, goToNextStep, submit } = props
 
@@ -39,7 +40,14 @@ export const Step = (props: StepProps) => {
       >
        next
       </StepButton>
-      <StepButton key={2} isActive={displaySubmit} type="submit" onClick={submit}>dfad</StepButton>
+      <StepButton
+        key={2}
+        isActive={displaySubmit}
+        type="submit"
+        onClick={submit}
+      >
+        Submit
+      </StepButton>
     </React.Fragment>
   )
 }

@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, MouseEventHandler } from 'react'
 
 interface StepListProps {
-  children: Array<React.ReactElement<any>>,
+  children: Array<React.ReactElement<any>>
+  onSubmitClick: () => void
 }
 
 interface StepListState {
@@ -30,15 +31,15 @@ class StepList extends Component<StepListProps, StepListState> {
   public render () {
     const children = this.props.children.map((child, index) => {
       const { currentStep, totalSteps } = this.state
-      console.log(index, currentStep === totalSteps)
 
       return React.cloneElement(child, {
         isActive: index === currentStep,
         displayPrevious: currentStep > 0,
-        displayNext: currentStep < totalSteps,
-        displaySubmit: currentStep === totalSteps,
+        displayNext: currentStep < totalSteps - 1,
+        displaySubmit: currentStep === totalSteps - 1,
         goToPreviousStep: () => this.goToPreviousStep(),
         goToNextStep: () => this.goToNextStep(),
+        submit: () => this.props.onSubmitClick(),
       })
     })
 
