@@ -1,4 +1,5 @@
 import AddTask from './AddTask'
+import CreateTask from './CreateTask'
 import Home from './Home/Home'
 import ProfilePrivate from './ProfilePrivate/ProfilePrivate'
 import ProfilePublic from './ProfilePublic/ProfilePublic'
@@ -10,6 +11,7 @@ import Tasks from './Tasks/Tasks'
 
 export {
   AddTask,
+  CreateTask,
   Home,
   ProfilePrivate,
   ProfilePublic,
