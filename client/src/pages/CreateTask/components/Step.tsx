@@ -1,8 +1,8 @@
 import { StyleRulesCallback, WithStyles, withStyles } from '@material-ui/core'
-import React from 'react'
+import React, { SFC } from 'react'
 import StepButton from './StepButton'
 
-const Step = (props: StepProps) => {
+const Step: SFC<StepProps> = props => {
   const { isActive, displayPrevious, displayNext, displaySubmit, component,
           children, goToPreviousStep, goToNextStep, submit } = props
 
@@ -56,7 +56,6 @@ interface StepProps extends WithStyles<typeof styles> {
   displayNext?: boolean
   displaySubmit?: boolean
   component?: React.ComponentClass
-  children?: React.ReactNode
   goToPreviousStep?: () => void
   goToNextStep?: () => void
   submit?: () => void

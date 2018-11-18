@@ -1,44 +1,38 @@
 import { StyleRulesCallback, withStyles, WithStyles } from '@material-ui/core'
 import { Check } from '@material-ui/icons'
+import { range } from 'ramda'
 import React, { Component } from 'react'
 
-interface StepListState {
-  currentStep: number
-  totalSteps: number
-}
-
 class StepList extends Component<StepListProps, StepListState> {
-  constructor (props: StepListProps) {
-    super(props)
 
-    this.state = {
-      currentStep: 1,
-      totalSteps: this.props.children.length,
-    }
+  public state = {
+    currentStep: 1,
+    totalSteps: this.props.children.length,
   }
 
-  public goToPreviousStep = () => {
-    this.setState({ currentStep: this.state.currentStep - 1 })
-  }
+  public goToPreviousStep = () => this.setState(state => ({
+    currentStep: state.currentStep - 1,
+  }))
 
-  public goToNextStep = () => {
-    this.setState({ currentStep: this.state.currentStep + 1 })
-  }
+  public goToNextStep = () => this.setState(state => ({
+    currentStep: state.currentStep + 1,
+  }))
 
   public render () {
     const { currentStep, totalSteps } = this.state
     const { classes, children } = this.props
 
     const steps = children.map((child, index) => {
+      const step = index + 1
 
       return React.cloneElement(child, {
-        key: index + 1,
-        isActive: index + 1 === currentStep,
+        key: step,
+        isActive: step === currentStep,
         displayPrevious: currentStep > 1,
         displayNext: currentStep < totalSteps,
         displaySubmit: currentStep === totalSteps,
-        goToPreviousStep: () => this.goToPreviousStep(),
-        goToNextStep: () => this.goToNextStep(),
+        goToPreviousStep: this.goToPreviousStep,
+        goToNextStep: this.goToNextStep,
         submit: () => this.props.onSubmitClick(),
       })
     })
@@ -47,19 +41,18 @@ class StepList extends Component<StepListProps, StepListState> {
 
     const stepsIndicator = (
       <div className={classes.indicatorContainer}>
-      {Array.from({ length: totalSteps }).map((_, i) => {
-        const current = i + 1
-        const isActive = current === currentStep
-        const isDisabled = current > currentStep
+      {range(1, totalSteps + 1).map(step => {
+        const isActive = step === currentStep
+        const isDisabled = step > currentStep
         const disabledClass = isDisabled ? 'disabled' : ''
         const activeClass = isActive ? 'active' : ''
         const icon = isActive
-        ? current
+        ? step
         : isDisabled ? '' : <Check />
 
         return (
           <div
-            key={i}
+            key={step}
             className={className(
               classes.indicator, disabledClass, activeClass,
             )}
@@ -120,3 +113,8 @@ interface StepListProps extends WithStyles<typeof styles> {
 }
 
 export default withStyles(styles)(StepList)
+
+interface StepListState {
+  currentStep: number
+  totalSteps: number
+}

@@ -4,7 +4,7 @@ import React, { MouseEventHandler, ReactNode, SFC } from 'react'
 
 const Button: SFC<ButtonProps> = ({ onClick, children, classes, style }: ButtonProps) => (
   <MaterialButton
-    variant={'extendedFab'}
+    variant="extendedFab"
     onClick={onClick}
     className={classes.button}
     style={style}
