@@ -44,14 +44,14 @@ const TaskListElement = ({
               >
                 {isEditable && (
                   <MenuItem className={classes.expandedMenu}>
-                    <Typography className={classes.MenuItemElement} color="textSecondary">
+                    <Typography className={classes.menuItemElement} color="textSecondary">
                       <Edit className={classes.expandedMenuIcon} />Edit
                   </Typography>
                   </MenuItem>
                 )}
                 {isDeletable && (
                   <MenuItem className={classes.expandedMenu}>
-                    <Typography className={classes.MenuItemElement} color="textSecondary">
+                    <Typography className={classes.menuItemElement} color="textSecondary">
                       <Delete className={classes.expandedMenuIcon} />Delete
                   </Typography>
                   </MenuItem>
@@ -130,7 +130,7 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
     fontSize: '2rem',
     paddingRight: '2px',
   },
-  MenuItemElement: {
+  menuItemElement: {
     display: 'flex',
   },
   playIcon: {
