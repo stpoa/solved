@@ -6,14 +6,14 @@ import { taskCategories } from '~data'
 import { TaskList } from '~generic'
 import { Task } from '~interfaces'
 
-const ExpansionList: SFC<ExpansionListProps> = ({ classes, taskGroup }) => (
+const ExpansionList: SFC<ExpansionListProps> = ({ classes, taskGroup, isEditable, isDeletable }) => (
   <div className={classes.expansionList}>
     <ExpansionPanel defaultExpanded>
       <ExpansionPanelSummary classes={{ content: classes.expansionPanelSummary }} expandIcon={<ExpandMoreIcon />}>
         <Typography className={classes.expansionTitle} color="secondary">My tasks</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.expansionPanelDetails}>
-        <TaskList tasks={taskGroup.myTasks} />
+        <TaskList isEditable={isEditable} isDeletable={isDeletable} tasks={taskGroup.myTasks} />
       </ExpansionPanelDetails>
     </ExpansionPanel>
     <ExpansionPanel>
@@ -21,7 +21,7 @@ const ExpansionList: SFC<ExpansionListProps> = ({ classes, taskGroup }) => (
         <Typography className={classes.expansionTitle} color="secondary">Someone's tasks</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.expansionPanelDetails}>
-        <TaskList tasks={taskGroup.someoneTasks} />
+        <TaskList isDeletable={isDeletable} tasks={taskGroup.someoneTasks} />
       </ExpansionPanelDetails>
     </ExpansionPanel>
   </div>
@@ -48,13 +48,13 @@ class Tasks extends Component<TasksProps, TasksState> {
           <Tab className={classes.tab} label="Finished" />
         </Tabs>
         {selectedTabIndex === 0 && (
-          <TaskList tasks={taskCategories.waitingTasks} />
+          <TaskList isEditable isDeletable tasks={taskCategories.waitingTasks} />
         )}
         {selectedTabIndex === 1 && (
-          <ExpansionList classes={classes} taskGroup={taskCategories.ongoingTasks} />
+          <ExpansionList isEditable classes={classes} taskGroup={taskCategories.ongoingTasks} />
         )}
         {selectedTabIndex === 2 && (
-          <ExpansionList classes={classes} taskGroup={taskCategories.finishedTasks} />
+          <ExpansionList isDeletable classes={classes} taskGroup={taskCategories.finishedTasks} />
         )}
       </div>
     )
@@ -94,7 +94,9 @@ interface ExpansionListProps extends WithStyles<typeof styles> {
   taskGroup: {
     myTasks: Task[],
     someoneTasks: Task[],
-  }
+  },
+  isEditable?: boolean,
+  isDeletable?: boolean
 }
 
 export default withStyles(styles)(Tasks)
