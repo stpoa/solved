@@ -2,39 +2,58 @@ import { StyleRulesCallback } from '@material-ui/core'
 import { WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { Component } from 'react'
 import PageHeader from '~generic/PageHeader/PageHeader'
+import { OnChange } from '~typings/react'
 import Step from '../components/Step'
 import StepList from '../components/StepList'
 import { TaskCategoryEdit } from '../components/TaskCategoryEdit'
-import { TaskDescriptionEdit } from '../components/TaskDescriptionEdit'
+import TaskDescriptionEdit from '../components/TaskDescriptionEdit'
 import { TaskPhotoEdit } from '../components/TaskPhotoEdit'
 import { TaskPriceTermEdit } from '../components/TaskPriceTermEdit'
 import { TaskTagsEdit } from '../components/TaskTagsEdit'
 
-const initialState = {}
-const onSubmitClick = () => window.alert('Submit')
+const initialState = {
+  step: 1,
+  description: '',
+}
 
-class Rate extends Component<RateProps, RateState> {
+class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
 
-  public readonly state: RateState = initialState
+  public readonly state: CreateTaskState = initialState
 
   public render () {
-    const { classes } = this.props
+    const {
+      props: { classes },
+      state: { description, step },
+      onDescriptionUpdate,
+      updateStep,
+      onSubmitClick,
+    } = this
 
     return (
       <div className={classes.container}>
-
         <PageHeader title="Nowe zadanie"/>
-        <StepList onSubmitClick={onSubmitClick}>
-          <Step><TaskDescriptionEdit/></Step>
+        <StepList {...{ step, onSubmitClick, updateStep }}>
+          <Step>
+            <TaskDescriptionEdit {...{ description, onDescriptionUpdate }} />
+          </Step>
           <Step><TaskPhotoEdit/></Step>
           <Step><TaskCategoryEdit/></Step>
           <Step><TaskTagsEdit/></Step>
           <Step><TaskPriceTermEdit/></Step>
         </StepList>
-
       </div>
     )
   }
+
+  public onDescriptionUpdate: OnChange = e => {
+    this.setState({ description: e.target.value })
+  }
+
+  public updateStep = (step: number) => {
+    this.setState({ step })
+  }
+
+  public onSubmitClick = () => window.alert('Submit')
 }
 
 const styles: StyleRulesCallback = theme => ({
@@ -64,7 +83,7 @@ const styles: StyleRulesCallback = theme => ({
   },
 })
 
-type RateState = Readonly<typeof initialState>
+type CreateTaskState = Readonly<typeof initialState>
 
-export interface RateProps extends WithStyles<typeof styles> {}
-export default withStyles(styles)(Rate)
+export interface CreateTaskProps extends WithStyles<typeof styles> {}
+export default withStyles(styles)(CreateTask)
