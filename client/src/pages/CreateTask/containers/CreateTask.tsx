@@ -13,9 +13,9 @@ import { TaskTagsEdit } from '../components/TaskTagsEdit'
 const initialState = {}
 const onSubmitClick = () => window.alert('Submit')
 
-class Rate extends Component<RateProps, RateState> {
+class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
 
-  public readonly state: RateState = initialState
+  public readonly state: CreateTaskState = initialState
 
   public render () {
     const { classes } = this.props
@@ -40,6 +40,8 @@ class Rate extends Component<RateProps, RateState> {
 const styles: StyleRulesCallback = theme => ({
   container: {
     backgroundColor: theme.palette.background.paper,
+    display: 'grid',
+    gridTemplateRows: 'max-content auto',
     padding: '0',
   },
   form: {
@@ -64,7 +66,7 @@ const styles: StyleRulesCallback = theme => ({
   },
 })
 
-type RateState = Readonly<typeof initialState>
+type CreateTaskState = Readonly<typeof initialState>
 
-export interface RateProps extends WithStyles<typeof styles> {}
-export default withStyles(styles)(Rate)
+export interface CreateTaskProps extends WithStyles<typeof styles> {}
+export default withStyles(styles)(CreateTask)

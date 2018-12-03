@@ -10,7 +10,7 @@ const Step: SFC<StepProps> = props => {
 
   return (
     <div className={props.classes.container}>
-      <div className={props.classes.stepContainer}>
+      <div>
         {component ? React.createElement(component) : children}
       </div>
       <div className={props.classes.buttons}>
@@ -42,8 +42,9 @@ const Step: SFC<StepProps> = props => {
 }
 
 const styles: StyleRulesCallback = () => ({
-  stepContainer: {
-    minHeight: '66vh',
+  container: {
+    display: 'grid',
+    gridTemplateRows: 'auto max-content',
   },
   buttons: {
     textAlign: 'center',

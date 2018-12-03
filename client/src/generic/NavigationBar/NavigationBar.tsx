@@ -18,7 +18,7 @@ const menuLinks = [{
   childIcon: AddCircle,
   displayName: 'Add task',
   generalButton: true,
-  path: '/add-task',
+  path: '/create-task',
 }, {
   childIcon: Tasks,
   displayName: 'Tasks',
