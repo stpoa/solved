@@ -41,56 +41,60 @@ class StepList extends Component<StepListProps, StepListState> {
 
     const stepsIndicator = (
       <div className={classes.indicatorContainer}>
-      {range(1, totalSteps + 1).map(step => {
-        const isActive = step === currentStep
-        const isDisabled = step > currentStep
-        const disabledClass = isDisabled ? 'disabled' : ''
-        const activeClass = isActive ? 'active' : ''
-        const icon = isActive
-        ? step
-        : isDisabled ? '' : <Check />
+        {range(1, totalSteps + 1).map(step => {
+          const isActive = step === currentStep
+          const isDisabled = step > currentStep
+          const disabledClass = isDisabled ? 'disabled' : ''
+          const activeClass = isActive ? 'active' : ''
+          const icon = isActive
+            ? step
+            : isDisabled ? '' : <Check />
 
-        return (
-          <div
-            key={step}
-            className={className(
-              classes.indicator, disabledClass, activeClass,
-            )}
-          >
-            <svg className={classes.circle}>
-              <circle cx="12" cy="12" r="12"/>
-            </svg>
-            <span className={classes.current}>{icon}</span>
-          </div>
-        )
-      })}
+          return (
+            <div
+              key={step}
+              className={className(
+                classes.indicator, disabledClass, activeClass,
+              )}
+            >
+              <div className={classes.circle}>
+                <span className={classes.current}>{icon}</span>
+              </div>
+            </div>
+          )
+        })}
       </div>
     )
 
     return (
-      <React.Fragment>
+      <div className={classes.container}>
         {stepsIndicator}
         {steps}
-      </React.Fragment>
+      </div>
     )
   }
 }
 
 const styles: StyleRulesCallback = theme => ({
-  circle: {
-    position: 'absolute',
+  container: {
+    height: '100%',
+    display: 'grid',
+    gridTemplateRows: 'max-content auto',
   },
-  current: {
-    width: '2.4rem',
-    position: 'absolute',
+  circle: {
+    background: theme.palette.secondary.main,
+    width: '25px',
+    height: '25px',
+    borderRadius: '50%',
   },
   indicatorContainer: {
+    display: 'flex',
+    justifyContent: 'center',
     margin: '1.6rem',
     textAlign: 'center',
   },
   indicator: {
     color: theme.palette.primary.main,
-    fill: theme.palette.secondary.main,
     fontFamily: theme.typography.body1.fontFamily,
     textAlign: 'center',
     lineHeight: '2.4rem',
