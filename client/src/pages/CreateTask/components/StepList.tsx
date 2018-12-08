@@ -77,9 +77,9 @@ class StepList extends Component<StepListProps, StepListState> {
 
 const styles: StyleRulesCallback = theme => ({
   container: {
-    height: '100%',
     display: 'grid',
     gridTemplateRows: 'max-content auto',
+    backgroundColor: theme.palette.primary.dark,
   },
   circle: {
     background: theme.palette.secondary.main,

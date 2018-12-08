@@ -13,7 +13,7 @@ import * as Pages from '~pages'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      dark: '#FFFFFF',
+      dark: '#FAFAFA',
       light: '#FFFFFF',
       main: '#FFFFFF',
       // contrastText: getContrastText(palette.secondary.A400),

@@ -6,7 +6,7 @@ import Step from '../components/Step'
 import StepList from '../components/StepList'
 import { TaskCategoryEdit } from '../components/TaskCategoryEdit'
 import { TaskDescriptionEdit } from '../components/TaskDescriptionEdit'
-import { TaskPhotoEdit } from '../components/TaskPhotoEdit'
+import TaskPhotoEdit from '../components/TaskPhotoEdit'
 import { TaskPriceTermEdit } from '../components/TaskPriceTermEdit'
 import { TaskTagsEdit } from '../components/TaskTagsEdit'
 
