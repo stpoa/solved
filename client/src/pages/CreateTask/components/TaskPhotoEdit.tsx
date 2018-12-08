@@ -135,6 +135,7 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     display: 'flex',
+    cursor: 'pointer',
   },
   browsePhotoTitle: {
     display: 'flex',
