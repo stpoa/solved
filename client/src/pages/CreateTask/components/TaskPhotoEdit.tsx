@@ -151,10 +151,11 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'black',
+    borderRadius: '5px',
+    overflow: 'hidden',
   },
   image: {
-    height: 'fit-content',
-    borderRadius: '5px',
     maxWidth: '100%',
     maxHeight: '100%',
   },
