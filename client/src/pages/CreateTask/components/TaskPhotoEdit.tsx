@@ -1,6 +1,6 @@
 import { CardContent, Paper, StyleRulesCallback, Theme, Typography, withStyles, WithStyles } from '@material-ui/core'
 import { AddAPhoto, HighlightOff } from '@material-ui/icons'
-import React, { ChangeEvent, Component } from 'react'
+import React, { ChangeEvent, Component, SyntheticEvent } from 'react'
 
 const filesLength = 3
 
@@ -38,7 +38,7 @@ class TaskPhotoEdit extends Component<TaskPhotoEditProps, TaskPhotoEditState> {
         <div className={classes.filePicture}>
           <img onLoad={handlePhotoLoad} className={classes.image} src={url} />
         </div>
-        <HighlightOff className={classes.closeIcon} onClick={this.handleFileRemoval.bind(null, id)} />
+        <HighlightOff className={classes.closeIcon} onClick={this.handleFileRemoval(id)} />
       </Paper>
     )
 
@@ -58,7 +58,7 @@ class TaskPhotoEdit extends Component<TaskPhotoEditProps, TaskPhotoEditState> {
     )
   }
 
-  private handleFileRemoval = (id: string, _: Event) => {
+  private handleFileRemoval = (id?: string) => (_: SyntheticEvent<SVGSVGElement>) => {
     const filterFiles = (file: ExtendedFile) => file.id !== id
     this.setState(prevState => ({ files: prevState.files.filter(filterFiles) }))
   }
