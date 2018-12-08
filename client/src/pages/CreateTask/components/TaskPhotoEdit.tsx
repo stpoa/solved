@@ -33,7 +33,7 @@ class TaskPhotoEdit extends Component<TaskPhotoEditProps, TaskPhotoEditState> {
     const photoItem = ({ id, url, name }: ExtendedFile) => (
       <Paper key={id} className={classes.photoPaper}>
         <div className={classes.photoNameContainer}>
-          <Typography className={classes.photoName} color="secondary">{name}</Typography>
+          <Typography className={classes.photoName} color="textSecondary">{name}</Typography>
         </div>
         <div className={classes.filePicture}>
           <img onLoad={handlePhotoLoad} className={classes.image} src={url} />
