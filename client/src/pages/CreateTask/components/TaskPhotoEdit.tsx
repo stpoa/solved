@@ -53,7 +53,7 @@ class TaskPhotoEdit extends Component<TaskPhotoEditProps, TaskPhotoEditState> {
           id="upload-photo"
         />
         {files.length < filesLength && browsePhotoHolder}
-        {Array.from(files).map(file => photoItem(file))}
+        {Array.from(files).map(photoItem)}
       </CardContent>
     )
   }
@@ -65,20 +65,20 @@ class TaskPhotoEdit extends Component<TaskPhotoEditProps, TaskPhotoEditState> {
 
   private handleBrowsePhotoClick = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files && Array.from(e.target.files)
-    const mapFiles = (file: ExtendedFile) => {
+    const mapFile = (file: ExtendedFile) => {
       const fileUrl = URL.createObjectURL(file)
-
       file.id = createFileId(file)
       file.url = fileUrl
-
       return file
     }
+    const filterFile = (prevFiles: ExtendedFile[]) => (file: ExtendedFile) =>
+      !prevFiles.map(prevFile => prevFile.id).includes(file.id)
 
     this.setState(prevState => {
       const newFiles = files &&
         files
-          .map(file => mapFiles(file))
-          .filter(file => !prevState.files.map(prevFile => prevFile.id).includes(file.id))
+          .map(mapFile)
+          .filter(filterFile(prevState.files))
 
       return newFiles && newFiles.length
         ? ({ files: [...prevState.files, ...newFiles] })
