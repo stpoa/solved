@@ -5,22 +5,12 @@ import React, { Component } from 'react'
 
 class StepList extends Component<StepListProps, StepListState> {
 
-  public state = {
-    currentStep: 1,
-    totalSteps: this.props.children.length,
-  }
-
-  public goToPreviousStep = () => this.setState(state => ({
-    currentStep: state.currentStep - 1,
-  }))
-
-  public goToNextStep = () => this.setState(state => ({
-    currentStep: state.currentStep + 1,
-  }))
+  public goToPreviousStep = () => this.props.updateStep(this.props.step - 1)
+  public goToNextStep = () => this.props.updateStep(this.props.step + 1)
 
   public render () {
-    const { currentStep, totalSteps } = this.state
-    const { classes, children } = this.props
+    const { classes, children, step: currentStep } = this.props
+    const totalSteps = children.length
 
     const steps = children.map((child, index) => {
       const step = index + 1
@@ -114,6 +104,8 @@ const styles: StyleRulesCallback = theme => ({
 interface StepListProps extends WithStyles<typeof styles> {
   children: Array<React.ReactElement<any>>
   onSubmitClick: () => void
+  updateStep: (step: number) => void
+  step: number
 }
 
 export default withStyles(styles)(StepList)

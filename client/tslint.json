@@ -11,6 +11,7 @@
     "no-empty-interface": false,
     "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
     "object-literal-sort-keys": false,
-    "no-unused-variable": false
+    "no-unused-variable": false,
+    "no-this-assignment": false 
   }
 }
