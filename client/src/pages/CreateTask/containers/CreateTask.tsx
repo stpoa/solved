@@ -3,16 +3,22 @@ import { WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { Component } from 'react'
 import PageHeader from '~generic/PageHeader/PageHeader'
 import { Step, StepList } from '~generic/StepList'
-import { OnChange } from '~typings/react'
-import { TaskCategoryEdit } from '../components/TaskCategoryEdit'
+import { OnChange, OnChangeRadio } from '~typings/react'
+import TaskCategoryEdit from '../components/TaskCategoryEdit'
 import TaskDescriptionEdit from '../components/TaskDescriptionEdit'
 import { TaskPhotoEdit } from '../components/TaskPhotoEdit'
 import { TaskPriceTermEdit } from '../components/TaskPriceTermEdit'
 import { TaskTagsEdit } from '../components/TaskTagsEdit'
 
+const mockCategories = [
+  'Informatyka', 'Matematyka', 'Chemia', 'Biologia', 'Ekonomia', 'Filologia',
+].concat(Array(100).fill('Duupa'))
+
 const initialState = {
   step: 1,
   description: '',
+  category: '',
+  categories: mockCategories,
 }
 
 class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
@@ -22,8 +28,9 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
   public render () {
     const {
       props: { classes },
-      state: { description, step },
+      state: { description, category, categories, step },
       onDescriptionUpdate,
+      onCategoryUpdate,
       updateStep,
       onSubmitClick,
     } = this
@@ -36,7 +43,9 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
             <TaskDescriptionEdit {...{ description, onDescriptionUpdate }} />
           </Step>
           <Step><TaskPhotoEdit/></Step>
-          <Step><TaskCategoryEdit/></Step>
+          <Step>
+            <TaskCategoryEdit {...{ category, categories, onCategoryUpdate }}/>
+          </Step>
           <Step><TaskTagsEdit/></Step>
           <Step><TaskPriceTermEdit/></Step>
         </StepList>
@@ -46,6 +55,10 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
 
   public onDescriptionUpdate: OnChange = e => {
     this.setState({ description: e.target.value })
+  }
+
+  public onCategoryUpdate: OnChangeRadio = (_, value) => {
+    this.setState({ category: value })
   }
 
   public updateStep = (step: number) => {
