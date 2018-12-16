@@ -33,11 +33,11 @@ const TaskPhotoEdit: SFC<TaskPhotoEditProps> = ({
       file.url = fileUrl
       return file
     }
-    const filterNewFile = (prevFiles: ExtendedFile[]) => (file: ExtendedFile) =>
+    const isNewFile = (prevFiles: ExtendedFile[]) => (file: ExtendedFile) =>
       !prevFiles.map(prevFile => prevFile.id).includes(file.id)
 
     const newFiles =
-      eventFiles && eventFiles.map(extendFile).filter(filterNewFile(files))
+      eventFiles && eventFiles.map(extendFile).filter(isNewFile(files))
 
     newFiles && newFiles.length && onFilesUpdate([...files, ...newFiles])
   }
