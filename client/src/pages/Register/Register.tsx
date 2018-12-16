@@ -25,7 +25,7 @@ class Register extends Component<RegisterProps, RegisterState> {
     },
   }
 
-  public render () {
+  public render() {
     const { classes } = this.props
     const {
       emailError,

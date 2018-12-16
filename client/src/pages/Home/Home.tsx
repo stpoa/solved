@@ -3,7 +3,7 @@ import { tasks } from '~data'
 import { TaskList } from '~generic'
 
 class Home extends React.Component<{}> {
-  public render () {
+  public render() {
     return <TaskList tasks={tasks} />
   }
 }

@@ -22,7 +22,7 @@ class SignIn extends Component<SignInProps, SignInState> {
     showSignInError: false,
   }
 
-  public componentDidUpdate (prevProps: SignInProps) {
+  public componentDidUpdate(prevProps: SignInProps) {
     if (
       prevProps.auth.status === Status.Pending &&
       this.props.auth.status === Status.Failure
@@ -31,7 +31,7 @@ class SignIn extends Component<SignInProps, SignInState> {
     }
   }
 
-  public render () {
+  public render() {
     if (this.props.auth.signedIn) return <Redirect to="/profile" />
 
     const {
@@ -111,7 +111,7 @@ class SignIn extends Component<SignInProps, SignInState> {
     >)
   }
 
-  private validate ({ email, password }: SignInState): Errors {
+  private validate({ email, password }: SignInState): Errors {
     return {
       emailError: !email
         ? 'Field required'

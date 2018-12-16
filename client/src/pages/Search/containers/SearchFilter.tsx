@@ -13,7 +13,7 @@ export default class SearchFilterContainer extends Component<
     tags: tags.map(tag => ({ name: tag, selected: false })),
   }
 
-  public render () {
+  public render() {
     return (
       <SearchFilter
         categories={this.state.categories}

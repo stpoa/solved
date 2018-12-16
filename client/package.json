@@ -48,7 +48,7 @@
     "test": "run-p lint:raw test:logic test:types",
     "test:types": "tsc -p . --noEmit",
     "test:logic": "jest",
-    "lint": "prettier './**/*.ts*' --write && npm run lint:raw -- --fix",
+    "lint": "prettier './**/*.ts*' --write",
     "lint:raw": "tslint --project ./",
     "start": "rm -rf .cache dist && npm run start:raw",
     "start:raw": "parcel serve src/index.html"

@@ -63,7 +63,7 @@ class Tasks extends Component<TasksProps, TasksState> {
     selectedTabIndex: 0,
   }
 
-  public render () {
+  public render() {
     const { classes } = this.props
     const { selectedTabIndex } = this.state
     return (

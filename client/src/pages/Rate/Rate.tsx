@@ -21,7 +21,7 @@ const isEdited = (review: string) =>
 class Rate extends Component<RateProps, RateState> {
   public readonly state: RateState = initialState
 
-  public render () {
+  public render() {
     const { classes } = this.props
 
     const thumbUpColor = this.state.isPositiveRating ? 'default' : 'secondary'

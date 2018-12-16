@@ -20,7 +20,7 @@ class TaskList extends Component<TaskListProps, TaskListState> {
     expandedDropdownAnchorEl: null,
   }
 
-  public render () {
+  public render() {
     const { classes, tasks, isEditable, isDeletable } = this.props
     const { expandedDropdownId, expandedDropdownAnchorEl } = this.state
     return (

@@ -20,7 +20,7 @@ const initialState = {
 class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
   public readonly state: CreateTaskState = initialState
 
-  public render () {
+  public render() {
     const {
       props: { classes },
       state: { description, step, files },

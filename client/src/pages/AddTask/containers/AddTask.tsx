@@ -15,7 +15,7 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
     tags: tagsData.map(tag => ({ name: tag, selected: false })),
   }
 
-  public async componentDidUpdate (_: {}, prevState: AddTaskContainerState) {
+  public async componentDidUpdate(_: {}, prevState: AddTaskContainerState) {
     const { categoryValue, descriptionValue, status } = this.state
 
     if (prevState.status !== Status.Pending && status === Status.Pending) {
@@ -27,7 +27,7 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
     }
   }
 
-  public render () {
+  public render() {
     return (
       <AddTask
         categories={this.state.categories}
@@ -77,7 +77,7 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
     this.setState({ image })
   }
 
-  private validate (state: AddTaskContainerState): boolean {
+  private validate(state: AddTaskContainerState): boolean {
     const { categoryValue, descriptionValue, tags } = state
 
     return Boolean(
