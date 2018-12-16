@@ -1,5 +1,3 @@
 import React from 'react'
 
-export const TaskPriceTermEdit = () => (
-  <div>TaskPriceTermEdit</div>
-)
+export const TaskPriceTermEdit = () => <div>TaskPriceTermEdit</div>

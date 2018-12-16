@@ -1,5 +1,7 @@
-const users = [{
-  email: 'user@notowork.com',
-}]
+const users = [
+  {
+    email: 'user@notowork.com',
+  },
+]
 
 export default users

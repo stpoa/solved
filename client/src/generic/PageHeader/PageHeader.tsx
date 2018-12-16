@@ -9,7 +9,9 @@ const PageHeader: SFC<PageHeaderProps> = ({ classes, title }) => (
       <IconButton>
         <ArrowBack className={classes.backIcon} />
       </IconButton>
-      <Typography className={classes.typography} align="center" variant="h6">{title}</Typography>
+      <Typography className={classes.typography} align="center" variant="h6">
+        {title}
+      </Typography>
     </Toolbar>
   </AppBar>
 )

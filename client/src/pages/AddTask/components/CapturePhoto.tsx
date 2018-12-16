@@ -1,7 +1,17 @@
 import { Fade, Grid } from '@material-ui/core'
-import { createStyles, StyleRules, withStyles, WithStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  StyleRules,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import { PhotoCamera } from '@material-ui/icons'
-import React, { Component, createRef, MouseEventHandler, RefObject } from 'react'
+import React, {
+  Component,
+  createRef,
+  MouseEventHandler,
+  RefObject,
+} from 'react'
 
 class CapturePhoto extends Component<CapturePhotoProps> {
   private canvas: RefObject<HTMLCanvasElement>
@@ -22,7 +32,9 @@ class CapturePhoto extends Component<CapturePhotoProps> {
         })
 
         this.video.current.srcObject = stream
-      } catch (e) { return }
+      } catch (e) {
+        return
+      }
     }
   }
 
@@ -49,10 +61,7 @@ class CapturePhoto extends Component<CapturePhotoProps> {
           />
         </Fade>
 
-        <canvas
-          className={classes.hidden}
-          ref={this.canvas}
-        />
+        <canvas className={classes.hidden} ref={this.canvas} />
 
         {!photoAdded && (
           <div className={classes.iconContainer}>
@@ -71,7 +80,13 @@ class CapturePhoto extends Component<CapturePhotoProps> {
       const context = canvasElement.getContext('2d')
 
       if (context) {
-        context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height)
+        context.drawImage(
+          videoElement,
+          0,
+          0,
+          canvasElement.width,
+          canvasElement.height,
+        )
 
         const imgSrc = canvasElement.toDataURL('image/png')
 
@@ -84,7 +99,9 @@ class CapturePhoto extends Component<CapturePhotoProps> {
 
   private stopCapturing () {
     if (this.video && this.video.current && this.video.current.srcObject) {
-      (this.video.current.srcObject as any).getTracks().forEach((stream: any) => stream.stop())
+      ;(this.video.current.srcObject as any)
+        .getTracks()
+        .forEach((stream: any) => stream.stop())
     }
   }
 }
@@ -116,7 +133,7 @@ const styles: StyleRules = createStyles({
 })
 
 export interface CapturePhotoProps extends WithStyles<typeof styles> {
-  imgSrc: string,
+  imgSrc: string
   onCapture: (image: string) => void
 }
 

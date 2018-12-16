@@ -24,17 +24,23 @@ export default class Provider extends Component<{}, ProviderState> {
 
   private signIn: SignIn = (email, password) => {
     return new Promise(resolve => {
-      this.setState({
-        status: Status.Pending,
-      }, async () => {
-        const maybeUser = await signIn(email, password)
+      this.setState(
+        {
+          status: Status.Pending,
+        },
+        async () => {
+          const maybeUser = await signIn(email, password)
 
-        this.setState({
-          signedIn: Boolean(maybeUser),
-          status: maybeUser ? Status.Success : Status.Failure,
-          user: maybeUser,
-        }, () => resolve())
-      })
+          this.setState(
+            {
+              signedIn: Boolean(maybeUser),
+              status: maybeUser ? Status.Success : Status.Failure,
+              user: maybeUser,
+            },
+            () => resolve(),
+          )
+        },
+      )
     })
   }
 

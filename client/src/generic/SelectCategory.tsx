@@ -1,5 +1,10 @@
 import { List, MenuItem } from '@material-ui/core'
-import { createStyles, StyleRules, withStyles, WithStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  StyleRules,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import React, { SFC } from 'react'
 import { Category, CategoryList } from '~interfaces'
 
@@ -10,10 +15,7 @@ const SelectCategory: SFC<SelectCategoryProps> = ({
   value,
 }) => (
   <div className={container}>
-    <List
-      disablePadding
-      classes={{ root: list }}
-    >
+    <List disablePadding classes={{ root: list }}>
       {categories.map(({ id, name }) => (
         <MenuItem
           button
@@ -44,8 +46,8 @@ const styles: StyleRules = createStyles({
 })
 
 export interface SelectCategoryProps extends WithStyles<typeof styles> {
-  categories: CategoryList,
-  onClick: (id: Category['id']) => void,
+  categories: CategoryList
+  onClick: (id: Category['id']) => void
   value: Category['id']
 }
 

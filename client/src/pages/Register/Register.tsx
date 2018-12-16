@@ -1,5 +1,10 @@
 import { Button, Checkbox, TextField } from '@material-ui/core'
-import { createStyles, StyleRules, withStyles, WithStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  StyleRules,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import React, { ChangeEventHandler, Component, MouseEventHandler } from 'react'
 import isEmail from 'validator/lib/isEmail'
 import isLength from 'validator/lib/isLength'
@@ -22,8 +27,18 @@ class Register extends Component<RegisterProps, RegisterState> {
 
   public render () {
     const { classes } = this.props
-    const { emailError, passwordError, retypedPasswordError, regulationsCheckBoxError } = this.state.errors
-    const { email, password, regulationsCheckBox, retypedPassword } = this.state.fields
+    const {
+      emailError,
+      passwordError,
+      retypedPasswordError,
+      regulationsCheckBoxError,
+    } = this.state.errors
+    const {
+      email,
+      password,
+      regulationsCheckBox,
+      retypedPassword,
+    } = this.state.fields
 
     return (
       <div className={classes.registerContainer}>
@@ -70,7 +85,10 @@ class Register extends Component<RegisterProps, RegisterState> {
           </div>
           <div className={classes.regulationsHolder}>
             <div>
-              <Checkbox checked={regulationsCheckBox} onChange={this.onCheckboxChange} />
+              <Checkbox
+                checked={regulationsCheckBox}
+                onChange={this.onCheckboxChange}
+              />
               Regulations
             </div>
             <div className={classes.errorMessage}>
@@ -78,7 +96,9 @@ class Register extends Component<RegisterProps, RegisterState> {
             </div>
           </div>
         </div>
-        <Button onClick={this.onSubmit} fullWidth>Utwórz profil</Button>
+        <Button onClick={this.onSubmit} fullWidth>
+          Utwórz profil
+        </Button>
       </div>
     )
   }
@@ -93,23 +113,24 @@ class Register extends Component<RegisterProps, RegisterState> {
       emailError: !email
         ? 'Field required'
         : !isEmail(email)
-          ? 'Incorrect email address'
-          : '',
+        ? 'Incorrect email address'
+        : '',
       passwordError: !preparedPassword
         ? 'Field required'
         : !isLength(preparedPassword, { min: 6 })
-          ? 'Password should have at least 6 characters'
-          : !passwordRegex.test(preparedPassword)
-            ? 'Password should have at least one upper case, one lower case, one digit and one special character'
-            : '',
+        ? 'Password should have at least 6 characters'
+        : !passwordRegex.test(preparedPassword)
+        ? 'Password should have at least one upper case, ' +
+          'one lower case, one digit and one special character'
+        : '',
       regulationsCheckBoxError: !regulationsCheckBox
         ? 'Regulations are required'
         : '',
       retypedPasswordError: !retypedPassword
         ? 'Field required'
         : preparedPassword !== retypedPassword
-          ? 'Password does not match the confirm password'
-          : '',
+        ? 'Password does not match the confirm password'
+        : '',
     }
   }
 
@@ -184,7 +205,7 @@ const styles: StyleRules = createStyles({
   },
 })
 
-interface RegisterProps extends WithStyles<typeof styles> { }
+interface RegisterProps extends WithStyles<typeof styles> {}
 
 interface Errors {
   emailError: string
@@ -193,14 +214,15 @@ interface Errors {
   passwordError: string
 }
 
+interface RegisterStateFields {
+  email: string
+  password: string
+  regulationsCheckBox: boolean
+  retypedPassword: string
+}
 interface RegisterState {
   errors: Errors
-  fields: {
-    email: string,
-    password: string,
-    regulationsCheckBox: boolean,
-    retypedPassword: string,
-  }
+  fields: RegisterStateFields
 }
 
 export default withStyles(styles)(Register)

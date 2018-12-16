@@ -1,8 +1,17 @@
-import { Button as MaterialButton, StyleRulesCallback, withStyles,
-  WithStyles } from '@material-ui/core'
+import {
+  Button as MaterialButton,
+  StyleRulesCallback,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core'
 import React, { MouseEventHandler, ReactNode, SFC } from 'react'
 
-const Button: SFC<ButtonProps> = ({ onClick, children, classes, style }: ButtonProps) => (
+const Button: SFC<ButtonProps> = ({
+  onClick,
+  children,
+  classes,
+  style,
+}: ButtonProps) => (
   <MaterialButton
     variant="extendedFab"
     onClick={onClick}

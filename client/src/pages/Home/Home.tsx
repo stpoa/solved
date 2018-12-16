@@ -4,9 +4,7 @@ import { TaskList } from '~generic'
 
 class Home extends React.Component<{}> {
   public render () {
-    return (
-      <TaskList tasks={tasks} />
-    )
+    return <TaskList tasks={tasks} />
   }
 }
 

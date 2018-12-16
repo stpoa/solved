@@ -4,7 +4,6 @@ import { range } from 'ramda'
 import React, { Component } from 'react'
 
 class StepList extends Component<StepListProps, StepListState> {
-
   public goToPreviousStep = () => this.props.updateStep(this.props.step - 1)
   public goToNextStep = () => this.props.updateStep(this.props.step + 1)
 
@@ -36,15 +35,15 @@ class StepList extends Component<StepListProps, StepListState> {
           const isDisabled = step > currentStep
           const disabledClass = isDisabled ? 'disabled' : ''
           const activeClass = isActive ? 'active' : ''
-          const icon = isActive
-            ? step
-            : isDisabled ? '' : <Check />
+          const icon = isActive ? step : isDisabled ? '' : <Check />
 
           return (
             <div
               key={step}
               className={className(
-                classes.indicator, disabledClass, activeClass,
+                classes.indicator,
+                disabledClass,
+                activeClass,
               )}
             >
               <div className={classes.circle}>
