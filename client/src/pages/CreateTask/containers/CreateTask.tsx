@@ -7,13 +7,14 @@ import Step from '../components/Step'
 import StepList from '../components/StepList'
 import { TaskCategoryEdit } from '../components/TaskCategoryEdit'
 import TaskDescriptionEdit from '../components/TaskDescriptionEdit'
-import { TaskPhotoEdit } from '../components/TaskPhotoEdit'
+import TaskPhotoEdit, { ExtendedFile } from '../components/TaskPhotoEdit'
 import { TaskPriceTermEdit } from '../components/TaskPriceTermEdit'
 import { TaskTagsEdit } from '../components/TaskTagsEdit'
 
 const initialState = {
   step: 1,
   description: '',
+  files: [] as ExtendedFile[],
 }
 
 class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
@@ -22,8 +23,9 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
   public render () {
     const {
       props: { classes },
-      state: { description, step },
+      state: { description, step, files },
       onDescriptionUpdate,
+      onFilesUpdate,
       updateStep,
       onSubmitClick,
     } = this
@@ -36,7 +38,7 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
             <TaskDescriptionEdit {...{ description, onDescriptionUpdate }} />
           </Step>
           <Step>
-            <TaskPhotoEdit />
+            <TaskPhotoEdit files={files} onFilesUpdate={onFilesUpdate} />
           </Step>
           <Step>
             <TaskCategoryEdit />
@@ -55,6 +57,8 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
   public onDescriptionUpdate: OnChange = e => {
     this.setState({ description: e.target.value })
   }
+
+  public onFilesUpdate = (files: ExtendedFile[]) => this.setState({ files })
 
   public updateStep = (step: number) => {
     this.setState({ step })
@@ -92,7 +96,6 @@ const styles: StyleRulesCallback = theme => ({
   },
 })
 
-type CreateTaskState = Readonly<typeof initialState>
-
+interface CreateTaskState extends Readonly<typeof initialState> {}
 export interface CreateTaskProps extends WithStyles<typeof styles> {}
 export default withStyles(styles)(CreateTask)
