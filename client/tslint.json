@@ -15,8 +15,6 @@
     "no-empty-interface": false,
     "object-literal-sort-keys": false,
     "no-unused-variable": false,
-    "no-this-assignment": false,
-    "max-line-length": [true, 80],
-    "space-before-function-paren": [true, "always"]
+    "no-this-assignment": false
   }
 }

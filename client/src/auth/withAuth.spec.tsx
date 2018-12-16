@@ -7,7 +7,7 @@ beforeEach(() => jest.resetModules())
 const requireWithAuth = (value: any) => {
   jest.doMock('./context', () => {
     return {
-      Consumer (props: any) {
+      Consumer(props: any) {
         return props.children(value)
       },
     }

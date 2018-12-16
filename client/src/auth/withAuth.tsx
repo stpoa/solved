@@ -2,11 +2,11 @@ import React, { ComponentType } from 'react'
 import { Subtract } from 'utility-types'
 import context, { Value } from './context'
 
-export default function withAuth<P extends WithAuth> (
+export default function withAuth<P extends WithAuth>(
   Component: ComponentType<P>,
 ) {
   return class AuthedComponent extends React.Component<Subtract<P, WithAuth>> {
-    public render () {
+    public render() {
       return <context.Consumer>{this.renderComponent}</context.Consumer>
     }
 

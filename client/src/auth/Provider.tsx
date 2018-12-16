@@ -4,7 +4,7 @@ import context, { defaultValue, SignIn, SignOut, Value } from './context'
 import { signIn } from './service'
 
 export default class Provider extends Component<{}, ProviderState> {
-  public constructor (props: {}) {
+  public constructor(props: {}) {
     super(props)
 
     this.state = {
@@ -14,7 +14,7 @@ export default class Provider extends Component<{}, ProviderState> {
     }
   }
 
-  public render () {
+  public render() {
     return (
       <context.Provider value={this.state}>
         {this.props.children}

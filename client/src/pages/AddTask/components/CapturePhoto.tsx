@@ -17,14 +17,14 @@ class CapturePhoto extends Component<CapturePhotoProps> {
   private canvas: RefObject<HTMLCanvasElement>
   private video: RefObject<HTMLVideoElement>
 
-  constructor (props: CapturePhotoProps) {
+  constructor(props: CapturePhotoProps) {
     super(props)
 
     this.video = createRef()
     this.canvas = createRef()
   }
 
-  public async componentDidMount () {
+  public async componentDidMount() {
     if (navigator.getUserMedia && this.video.current) {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -38,11 +38,11 @@ class CapturePhoto extends Component<CapturePhotoProps> {
     }
   }
 
-  public componentWillUnmount () {
+  public componentWillUnmount() {
     this.stopCapturing()
   }
 
-  public render () {
+  public render() {
     const { classes, imgSrc } = this.props
     const photoAdded = !!imgSrc
 
@@ -97,7 +97,7 @@ class CapturePhoto extends Component<CapturePhotoProps> {
     }
   }
 
-  private stopCapturing () {
+  private stopCapturing() {
     if (this.video && this.video.current && this.video.current.srcObject) {
       ;(this.video.current.srcObject as any)
         .getTracks()

@@ -7,11 +7,11 @@ const fetchBalance = () => wait(2).then(() => 121)
 export default class ProfilePrivate extends Component<{}, ProfilePrivateState> {
   public readonly state: ProfilePrivateState = { balance: 0, loading: true }
 
-  public render () {
+  public render() {
     return <Profile isPrivate balance={this.state.balance} />
   }
 
-  public async componentDidMount () {
+  public async componentDidMount() {
     const balance = await fetchBalance()
     this.setState({ balance })
   }

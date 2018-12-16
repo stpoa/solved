@@ -51,7 +51,7 @@ const theme = createMuiTheme({
 const redirectToHome = () => <Redirect to="/" />
 
 class App extends Component<AppProps, {}> {
-  public render () {
+  public render() {
     const { containerStyles } = this.props.classes
     return (
       <MuiThemeProvider theme={theme}>

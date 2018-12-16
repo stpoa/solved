@@ -7,7 +7,7 @@ class StepList extends Component<StepListProps, StepListState> {
   public goToPreviousStep = () => this.props.updateStep(this.props.step - 1)
   public goToNextStep = () => this.props.updateStep(this.props.step + 1)
 
-  public render () {
+  public render() {
     const { classes, children, step: currentStep } = this.props
     const totalSteps = children.length
 
