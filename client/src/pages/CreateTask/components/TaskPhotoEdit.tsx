@@ -1,4 +1,12 @@
-import { CardContent, Paper, StyleRulesCallback, Theme, Typography, withStyles, WithStyles } from '@material-ui/core'
+import {
+  CardContent,
+  Paper,
+  StyleRulesCallback,
+  Theme,
+  Typography,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core'
 import { AddAPhoto, HighlightOff } from '@material-ui/icons'
 import React, { ChangeEvent, Component, SyntheticEvent } from 'react'
 
@@ -7,10 +15,10 @@ const filesLength = 3
 const handlePhotoLoad = (e: ChangeEvent<HTMLImageElement>) =>
   URL.revokeObjectURL(e.target.src)
 
-const createFileId = (file: File) => btoa(`${file.name}:${file.size}:${file.type}:${file.lastModified}`)
+const createFileId = (file: File) =>
+  btoa(`${file.name}:${file.size}:${file.type}:${file.lastModified}`)
 
 class TaskPhotoEdit extends Component<TaskPhotoEditProps, TaskPhotoEditState> {
-
   public state = {
     files: [],
   }
@@ -22,7 +30,11 @@ class TaskPhotoEdit extends Component<TaskPhotoEditProps, TaskPhotoEditState> {
     const browsePhotoHolder = (
       <Paper className={classes.paper}>
         <label className={classes.browsePhotoContainer} htmlFor="upload-photo">
-          <Typography className={classes.browsePhotoTitle} color="textSecondary" variant="title">
+          <Typography
+            className={classes.browsePhotoTitle}
+            color="textSecondary"
+            variant="title"
+          >
             <p className={classes.browsePhotoParagraph}>Browse photo</p>
             <AddAPhoto className={classes.photoIcon} />
           </Typography>
@@ -33,18 +45,25 @@ class TaskPhotoEdit extends Component<TaskPhotoEditProps, TaskPhotoEditState> {
     const photoItem = ({ id, url, name }: ExtendedFile) => (
       <Paper key={id} className={classes.photoPaper}>
         <div className={classes.photoNameContainer}>
-          <Typography className={classes.photoName} color="textSecondary">{name}</Typography>
+          <Typography className={classes.photoName} color="textSecondary">
+            {name}
+          </Typography>
         </div>
         <div className={classes.filePicture}>
           <img onLoad={handlePhotoLoad} className={classes.image} src={url} />
         </div>
-        <HighlightOff className={classes.closeIcon} onClick={this.handleFileRemoval(id)} />
+        <HighlightOff
+          className={classes.closeIcon}
+          onClick={this.handleFileRemoval(id)}
+        />
       </Paper>
     )
 
     return (
       <CardContent className={classes.cardContent}>
-        <Typography className={classes.header} color="secondary" variant="h5">Photos</Typography>
+        <Typography className={classes.header} color="secondary" variant="h5">
+          Photos
+        </Typography>
         <input
           className={classes.fileInput}
           onChange={this.handleBrowsePhotoClick}
@@ -58,7 +77,9 @@ class TaskPhotoEdit extends Component<TaskPhotoEditProps, TaskPhotoEditState> {
     )
   }
 
-  private handleFileRemoval = (id?: string) => (_: SyntheticEvent<SVGSVGElement>) => {
+  private handleFileRemoval = (id?: string) => (
+    _: SyntheticEvent<SVGSVGElement>,
+  ) => {
     const filterFiles = (file: ExtendedFile) => file.id !== id
     this.setState(prevState => ({ files: prevState.files.filter(filterFiles) }))
   }
@@ -75,17 +96,15 @@ class TaskPhotoEdit extends Component<TaskPhotoEditProps, TaskPhotoEditState> {
       !prevFiles.map(prevFile => prevFile.id).includes(file.id)
 
     this.setState(prevState => {
-      const newFiles = files &&
-        files
-          .map(mapFileToExtendedFile)
-          .filter(filterNewFile(prevState.files))
+      const newFiles =
+        files &&
+        files.map(mapFileToExtendedFile).filter(filterNewFile(prevState.files))
 
       return newFiles && newFiles.length
-        ? ({ files: [...prevState.files, ...newFiles] })
+        ? { files: [...prevState.files, ...newFiles] }
         : null
     })
   }
-
 }
 
 const styles: StyleRulesCallback = (theme: Theme) => ({
@@ -162,13 +181,13 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   },
 })
 
-interface TaskPhotoEditProps extends WithStyles<typeof styles> { }
+interface TaskPhotoEditProps extends WithStyles<typeof styles> {}
 interface TaskPhotoEditState {
   files: ExtendedFile[]
 }
 
 interface ExtendedFile extends File {
-  id?: string,
+  id?: string
   url?: string
 }
 
