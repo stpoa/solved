@@ -27,7 +27,7 @@ const TaskPhotoEdit: SFC<TaskPhotoEditProps> = ({
 
   const handleBrowsePhotoClick = (e: ChangeEvent<HTMLInputElement>) => {
     const eventFiles = e.target.files && Array.from(e.target.files)
-    const mapFileToExtendedFile = (file: ExtendedFile) => {
+    const extendFile = (file: ExtendedFile) => {
       const fileUrl = URL.createObjectURL(file)
       file.id = createFileId(file)
       file.url = fileUrl
@@ -37,8 +37,7 @@ const TaskPhotoEdit: SFC<TaskPhotoEditProps> = ({
       !prevFiles.map(prevFile => prevFile.id).includes(file.id)
 
     const newFiles =
-      eventFiles &&
-      eventFiles.map(mapFileToExtendedFile).filter(filterNewFile(files))
+      eventFiles && eventFiles.map(extendFile).filter(filterNewFile(files))
 
     newFiles && newFiles.length && onFilesUpdate([...files, ...newFiles])
   }
