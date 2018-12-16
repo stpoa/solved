@@ -69,4 +69,9 @@ interface StepProps extends WithStyles<typeof styles> {
   submit?: () => void
 }
 
+export interface StepItem {
+  stepperState: {[key: string]: any}
+  onUpdateStepperState: () => void
+}
+
 export default withStyles(styles)(Step)
