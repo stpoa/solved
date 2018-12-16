@@ -8,7 +8,7 @@ export default class ProfilePrivate extends Component<{}, ProfilePrivateState> {
   public readonly state: ProfilePrivateState = { balance: 0, loading: true }
 
   public render () {
-    return (<Profile isPrivate balance={this.state.balance}/>)
+    return <Profile isPrivate balance={this.state.balance} />
   }
 
   public async componentDidMount () {

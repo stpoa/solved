@@ -35,7 +35,7 @@ describe('withAuth()', () => {
     expect(componentProps).toHaveProperty('auth.signOut')
   })
 
-  it('calls injected functions when they are called from an enhanced component', () => {
+  it('calls injected functions from an enhanced component', () => {
     const component = wrapper.find(Component)
     const consumer = wrapper.children()
 

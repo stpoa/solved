@@ -4,11 +4,4 @@ import tags from './tags'
 import tasks, { taskCategories } from './tasks'
 import users from './users'
 
-export {
-  accounts,
-  categories,
-  tags,
-  tasks,
-  taskCategories,
-  users,
-}
+export { accounts, categories, tags, tasks, taskCategories, users }

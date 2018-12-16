@@ -18,9 +18,9 @@ export type SignOut = () => void
 export type MaybeUser = User | null
 
 export interface Value {
-  signedIn: boolean,
-  status: Status | undefined,
-  user: MaybeUser,
-  signIn: SignIn,
+  signedIn: boolean
+  status: Status | undefined
+  user: MaybeUser
+  signIn: SignIn
   signOut: SignOut
 }

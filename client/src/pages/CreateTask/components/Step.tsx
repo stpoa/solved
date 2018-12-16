@@ -1,19 +1,31 @@
-import { Card, StyleRulesCallback, WithStyles, withStyles } from '@material-ui/core'
+import {
+  Card,
+  StyleRulesCallback,
+  WithStyles,
+  withStyles,
+} from '@material-ui/core'
 import React, { SFC } from 'react'
 import StepButton from './StepButton'
 
 const Step: SFC<StepProps> = props => {
-  const { isActive, displayPrevious, displayNext, displaySubmit, component,
-          children, goToPreviousStep, goToNextStep, submit } = props
+  const {
+    isActive,
+    displayPrevious,
+    displayNext,
+    displaySubmit,
+    component,
+    children,
+    goToPreviousStep,
+    goToNextStep,
+    submit,
+  } = props
 
   if (isActive === false) return null
 
   return (
     <Card className={props.classes.cardContainer} elevation={1}>
       <div className={props.classes.container}>
-        <div>
-          {component ? React.createElement(component) : children}
-        </div>
+        <div>{component ? React.createElement(component) : children}</div>
         <div className={props.classes.buttons}>
           <StepButton
             key={0}
@@ -22,11 +34,7 @@ const Step: SFC<StepProps> = props => {
           >
             prev
           </StepButton>
-          <StepButton
-            key={1}
-            isActive={displayNext}
-            onClick={goToNextStep}
-          >
+          <StepButton key={1} isActive={displayNext} onClick={goToNextStep}>
             next
           </StepButton>
           <StepButton
@@ -60,7 +68,7 @@ const styles: StyleRulesCallback = () => ({
 
 interface StepProps extends WithStyles<typeof styles> {
   isActive?: boolean
-  displayPrevious?: boolean,
+  displayPrevious?: boolean
   displayNext?: boolean
   displaySubmit?: boolean
   component?: React.ComponentClass
@@ -70,7 +78,7 @@ interface StepProps extends WithStyles<typeof styles> {
 }
 
 export interface StepItem {
-  stepperState: {[key: string]: any}
+  stepperState: { [key: string]: any }
   onUpdateStepperState: () => void
 }
 

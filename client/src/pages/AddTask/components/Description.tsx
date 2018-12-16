@@ -1,5 +1,10 @@
 import { TextField } from '@material-ui/core'
-import { createStyles, StyleRules, withStyles, WithStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  StyleRules,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import React, { ChangeEventHandler, SFC } from 'react'
 
 const Description: SFC<DescriptionProps> = ({ classes, onChange, value }) => (
@@ -23,7 +28,7 @@ const styles: StyleRules = createStyles({
 })
 
 export interface DescriptionProps extends WithStyles<typeof styles> {
-  onChange: ChangeEventHandler<HTMLInputElement>,
+  onChange: ChangeEventHandler<HTMLInputElement>
   value: string
 }
 

@@ -60,19 +60,16 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
     this.setState({ categoryValue: id })
   }
 
-  private selectTag: AddTaskProps['onClickTag'] = (
-    tagName: string,
-  ) => (
-  ) => {
+  private selectTag: AddTaskProps['onClickTag'] = (tagName: string) => () => {
     this.setState(prevState => ({
-      tags: prevState.tags.map(tag => (
+      tags: prevState.tags.map(tag =>
         tag.name !== tagName
           ? tag
           : {
-            name: tag.name,
-            selected: !tag.selected,
-          }
-      )),
+              name: tag.name,
+              selected: !tag.selected,
+            },
+      ),
     }))
   }
 
@@ -81,13 +78,12 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
   }
 
   private validate (state: AddTaskContainerState): boolean {
-
     const { categoryValue, descriptionValue, tags } = state
 
     return Boolean(
       categoryValue &&
-      descriptionValue.length > 10 &&
-      tags.filter(tag => tag.selected).length,
+        descriptionValue.length > 10 &&
+        tags.filter(tag => tag.selected).length,
     )
   }
 
@@ -100,11 +96,11 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
 
 interface AddTaskContainerState {
   categoryValue: AddTaskProps['categoryValue']
-  categories: AddTaskProps['categories'],
-  descriptionValue: AddTaskProps['descriptionValue'],
-  image: AddTaskProps['image'],
-  status: Status | undefined,
-  tags: AddTaskProps['tags'],
+  categories: AddTaskProps['categories']
+  descriptionValue: AddTaskProps['descriptionValue']
+  image: AddTaskProps['image']
+  status: Status | undefined
+  tags: AddTaskProps['tags']
   tabValue: AddTaskProps['tabValue']
 }
 

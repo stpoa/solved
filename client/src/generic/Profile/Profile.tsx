@@ -9,44 +9,68 @@ import {
   WithStyles,
   withStyles,
 } from '@material-ui/core'
-import { AccountBalanceWallet, Inbox, Settings, Spellcheck, Update } from '@material-ui/icons'
+import {
+  AccountBalanceWallet,
+  Inbox,
+  Settings,
+  Spellcheck,
+  Update,
+} from '@material-ui/icons'
 import React, { SFC } from 'react'
 import { isNumber } from '~lib/math'
 
-const Profile: SFC<ProfilePropsStyled> = ({ isPrivate = false, balance, classes }) => (
+const Profile: SFC<ProfilePropsStyled> = ({
+  isPrivate = false,
+  balance,
+  classes,
+}) => (
   <div className={classes.root}>
-    <div className={classes.title}><Typography className={classes.titleText} variant="title">Profile</Typography></div>
+    <div className={classes.title}>
+      <Typography className={classes.titleText} variant="title">
+        Profile
+      </Typography>
+    </div>
     {isPrivate && (
-    <List subheader={<ListSubheader>Info</ListSubheader>}>
-      {isNumber(balance) ? (
-      <ListItem className={classes.balance}>
-        <ListItemIcon><AccountBalanceWallet /></ListItemIcon>
-        <ListItemText>Balance: {balance}</ListItemText>
-      </ListItem>
-      ) : null}
-    </List>
+      <List subheader={<ListSubheader>Info</ListSubheader>}>
+        {isNumber(balance) ? (
+          <ListItem className={classes.balance}>
+            <ListItemIcon>
+              <AccountBalanceWallet />
+            </ListItemIcon>
+            <ListItemText>Balance: {balance}</ListItemText>
+          </ListItem>
+        ) : null}
+      </List>
     )}
     <List subheader={<ListSubheader>Activity</ListSubheader>}>
       <ListItem button>
-        <ListItemIcon><Update/></ListItemIcon>
+        <ListItemIcon>
+          <Update />
+        </ListItemIcon>
         <ListItemText primary="Tasks in progress" />
       </ListItem>
       <ListItem button>
-        <ListItemIcon><Inbox/></ListItemIcon>
+        <ListItemIcon>
+          <Inbox />
+        </ListItemIcon>
         <ListItemText primary={'Finished tasks'} />
       </ListItem>
       <ListItem button>
-        <ListItemIcon><Spellcheck/></ListItemIcon>
+        <ListItemIcon>
+          <Spellcheck />
+        </ListItemIcon>
         <ListItemText primary={'Reviews'} />
       </ListItem>
     </List>
     {isPrivate && (
-    <List subheader={<ListSubheader>Preferences</ListSubheader>}>
-      <ListItem button>
-        <ListItemIcon><Settings/></ListItemIcon>
-        <ListItemText primary="Settings" />
-      </ListItem>
-    </List>
+      <List subheader={<ListSubheader>Preferences</ListSubheader>}>
+        <ListItem button>
+          <ListItemIcon>
+            <Settings />
+          </ListItemIcon>
+          <ListItemText primary="Settings" />
+        </ListItem>
+      </List>
     )}
   </div>
 )
@@ -66,7 +90,10 @@ const styles: StyleRulesCallback = theme => ({
   },
 })
 
-export interface ProfileProps { balance?: number, isPrivate?: boolean }
+export interface ProfileProps {
+  balance?: number
+  isPrivate?: boolean
+}
 interface ProfilePropsStyled extends ProfileProps, WithStyles<typeof styles> {}
 
 export default withStyles(styles)(Profile)

@@ -1,5 +1,5 @@
 interface Category {
-  id: string,
+  id: string
   name: string
 }
 
@@ -8,9 +8,9 @@ type CategoryList = Category[]
 interface TagList extends Array<string> {}
 
 interface Task {
-  id: string,
+  id: string
   category: string
-  tags: TagList,
+  tags: TagList
   shortDescription: string
   price: number
   expiredAt: number
@@ -26,11 +26,4 @@ enum Status {
   Pending = 'pending',
 }
 
-export {
-  Category,
-  CategoryList,
-  Status,
-  Task,
-  TagList,
-  User,
-}
+export { Category, CategoryList, Status, Task, TagList, User }

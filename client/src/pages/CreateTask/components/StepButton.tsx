@@ -10,13 +10,11 @@ interface StepButtonProps extends ButtonProps {
 const StepButton: SFC<StepButtonProps> = props => {
   const style = { display: 'inlineBlock', margin: '1rem' }
 
-  return props.isActive
-  ? (
+  return props.isActive ? (
     <Button style={style} {...omit(['isActive', 'children'], props)}>
       {props.children!}
     </Button>
-  )
-  : null
+  ) : null
 }
 
 export default StepButton

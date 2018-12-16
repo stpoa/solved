@@ -4,7 +4,11 @@ import SVGInline from 'react-svg-inline'
 import tasksSvgIcon from './tasks-solid.svg'
 
 const Tasks: SFC<TasksProps> = ({ classes, className }) => (
-    <SVGInline className={`${classes.imageWrapper} ${className}`} width="24" svg={tasksSvgIcon} />
+  <SVGInline
+    className={`${classes.imageWrapper} ${className}`}
+    width="24"
+    svg={tasksSvgIcon}
+  />
 )
 
 const styles = createStyles({
@@ -14,7 +18,7 @@ const styles = createStyles({
 })
 
 interface TasksProps extends WithStyles<typeof styles> {
-  className: string,
+  className: string
 }
 
 export default withStyles(styles)(Tasks)

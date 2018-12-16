@@ -1,5 +1,9 @@
 import SnackbarContent from '@material-ui/core/SnackbarContent'
-import { StyleRulesCallback, withStyles, WithStyles } from '@material-ui/core/styles'
+import {
+  StyleRulesCallback,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import ErrorIcon from '@material-ui/icons/Error'
 import React, { SFC } from 'react'
 
@@ -11,7 +15,8 @@ const SignInError: SFC<SignInErrorProps> = ({ classes }) => (
       <span className={classes.message}>
         <ErrorIcon className={`${classes.icon} ${classes.iconVariant}`} />
         Sign in failed!
-      </span>}
+      </span>
+    }
   />
 )
 

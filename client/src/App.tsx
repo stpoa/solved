@@ -1,6 +1,17 @@
-import { createMuiTheme, createStyles, MuiThemeProvider, WithStyles, withStyles } from '@material-ui/core/styles'
+import {
+  createMuiTheme,
+  createStyles,
+  MuiThemeProvider,
+  WithStyles,
+  withStyles,
+} from '@material-ui/core/styles'
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom'
 import { Provider as AuthProvider } from '~auth'
 
 // Generic
@@ -37,10 +48,9 @@ const theme = createMuiTheme({
   },
 })
 
-const redirectToHome = () =>
-    <Redirect to="/" />
+const redirectToHome = () => <Redirect to="/" />
 
-class App extends Component <AppProps, {}> {
+class App extends Component<AppProps, {}> {
   public render () {
     const { containerStyles } = this.props.classes
     return (
@@ -49,7 +59,10 @@ class App extends Component <AppProps, {}> {
           <Router>
             <div className={containerStyles}>
               <Switch>
-                <PrivateRoute path="/profile" component={Pages.ProfilePrivate}/>
+                <PrivateRoute
+                  path="/profile"
+                  component={Pages.ProfilePrivate}
+                />
                 <PrivateRoute path="/tasks" component={Pages.Tasks} />
                 <Route path="/profile-public" component={Pages.ProfilePublic} />
                 <Route path="/create-task" component={Pages.CreateTask} />

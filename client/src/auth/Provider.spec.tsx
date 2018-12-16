@@ -27,13 +27,14 @@ describe('<Provider />', () => {
   describe('provides correct value', () => {
     const Component: SFC<any> = () => null
 
-    const mountProvider = () => mount(
-      <Provider>
-        <context.Consumer>
-          {(value: any) => <Component value={value} />}
-        </context.Consumer>
-      </Provider>,
-    )
+    const mountProvider = () =>
+      mount(
+        <Provider>
+          <context.Consumer>
+            {(value: any) => <Component value={value} />}
+          </context.Consumer>
+        </Provider>,
+      )
 
     const getValue = (wrapper: any, update: boolean = true) => {
       if (update) wrapper.update()
@@ -56,7 +57,11 @@ describe('<Provider />', () => {
       expectInitialValue(value)
     })
 
-    const testSignIn = (email: string, password: string, callback: (wrapper: any) => void) => {
+    const testSignIn = (
+      email: string,
+      password: string,
+      callback: (wrapper: any) => void,
+    ) => {
       const wrapper = mountProvider()
       let value = getValue(wrapper, false)
 
