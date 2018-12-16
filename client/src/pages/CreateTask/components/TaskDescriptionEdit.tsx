@@ -1,13 +1,24 @@
-import { StyleRulesCallback, TextField, Typography, WithStyles, withStyles,
+import {
+  StyleRulesCallback,
+  TextField,
+  Typography,
+  WithStyles,
+  withStyles,
 } from '@material-ui/core'
 import React, { SFC } from 'react'
 
-const TaskDescriptionEdit: SFC<TaskDescriptionEditProps> = (
-  { classes, description, onDescriptionUpdate },
-) => (
+const TaskDescriptionEdit: SFC<TaskDescriptionEditProps> = ({
+  classes,
+  description,
+  onDescriptionUpdate,
+}) => (
   <div className={classes.container}>
-
-    <Typography className={classes.title} gutterBottom variant="h6" component="h2">
+    <Typography
+      className={classes.title}
+      gutterBottom
+      variant="h6"
+      component="h2"
+    >
       Opis
     </Typography>
 
@@ -24,7 +35,6 @@ const TaskDescriptionEdit: SFC<TaskDescriptionEditProps> = (
         onChange={onDescriptionUpdate}
       />
     </form>
-
   </div>
 )
 

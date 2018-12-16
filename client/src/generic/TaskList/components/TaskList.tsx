@@ -1,4 +1,10 @@
-import { createStyles, Grid, StyleRulesCallback, WithStyles, withStyles } from '@material-ui/core'
+import {
+  createStyles,
+  Grid,
+  StyleRulesCallback,
+  WithStyles,
+  withStyles,
+} from '@material-ui/core'
 import React, { Component } from 'react'
 import { Task } from '~interfaces'
 import TaskListElement from './TaskListElement'
@@ -21,7 +27,14 @@ class TaskList extends Component<TaskListProps, TaskListState> {
       <div className={classes.container}>
         <Grid className={classes.grid} container>
           {tasks.map((task, i) => (
-            <Grid item xs={12} sm={6} md={3} key={i} className={classes.gridItem}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+              key={i}
+              className={classes.gridItem}
+            >
               <TaskListElement
                 anchorEl={expandedDropdownAnchorEl}
                 onExpandedMenuLeave={this.handleExpandedMenuLeave}
@@ -39,38 +52,45 @@ class TaskList extends Component<TaskListProps, TaskListState> {
   }
 
   private handleExpandedMenuLeave = () =>
-    this.setState(prevState => prevState.expandedDropdownId
-      ? { expandedDropdownId: null, expandedDropdownAnchorEl: null } : null)
+    this.setState(prevState =>
+      prevState.expandedDropdownId
+        ? { expandedDropdownId: null, expandedDropdownAnchorEl: null }
+        : null,
+    )
 
   private handleMoreButtonClick = (id: number, e: Event) =>
-    this.setState({ expandedDropdownId: id, expandedDropdownAnchorEl: e.currentTarget })
+    this.setState({
+      expandedDropdownId: id,
+      expandedDropdownAnchorEl: e.currentTarget,
+    })
 }
 
-const styles: StyleRulesCallback = ({ spacing: { unit } }) => createStyles({
-  container: {
-    margin: 0,
-    overflow: 'auto',
-    width: '100%',
-  },
-  grid: {
-    marginTop: unit,
-    margin: 0,
-    width: '100%',
-  },
-  gridItem: {
-    padding: `${0}px ${unit}px ${unit}px ${unit}px`,
-  },
-})
+const styles: StyleRulesCallback = ({ spacing: { unit } }) =>
+  createStyles({
+    container: {
+      margin: 0,
+      overflow: 'auto',
+      width: '100%',
+    },
+    grid: {
+      marginTop: unit,
+      margin: 0,
+      width: '100%',
+    },
+    gridItem: {
+      padding: `${0}px ${unit}px ${unit}px ${unit}px`,
+    },
+  })
 
 interface TaskListProps extends WithStyles<typeof styles> {
-  isEditable: boolean,
-  isDeletable: boolean,
-  tasks: Task[],
+  isEditable: boolean
+  isDeletable: boolean
+  tasks: Task[]
 }
 
 interface TaskListState {
-  expandedDropdownId: number | null,
-  expandedDropdownAnchorEl: EventTarget | null,
+  expandedDropdownId: number | null
+  expandedDropdownAnchorEl: EventTarget | null
 }
 
 export default withStyles(styles)(TaskList)

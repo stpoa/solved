@@ -4,7 +4,9 @@ import Tag from './Tag'
 
 const TagList = ({ tags, classes }: TagListProps) => (
   <div className={classes.container}>
-    {tags.map((tag, i) => (<Tag text={tag} key={i} />))}
+    {tags.map((tag, i) => (
+      <Tag text={tag} key={i} />
+    ))}
   </div>
 )
 
@@ -15,7 +17,7 @@ const styles: StyleRulesCallback = theme => ({
 })
 
 interface TagListProps extends WithStyles<typeof styles> {
-  tags: string[],
+  tags: string[]
 }
 
 export default withStyles(styles)(TagList)

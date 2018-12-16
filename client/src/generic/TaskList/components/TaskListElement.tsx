@@ -1,7 +1,22 @@
 import {
-  Card, CardContent, IconButton, Menu, MenuItem, StyleRulesCallback, Theme, Typography, withStyles, WithStyles,
+  Card,
+  CardContent,
+  IconButton,
+  Menu,
+  MenuItem,
+  StyleRulesCallback,
+  Theme,
+  Typography,
+  withStyles,
+  WithStyles,
 } from '@material-ui/core'
-import { AccessTime, Delete, Edit, MonetizationOn, MoreVertRounded } from '@material-ui/icons'
+import {
+  AccessTime,
+  Delete,
+  Edit,
+  MonetizationOn,
+  MoreVertRounded,
+} from '@material-ui/icons'
 import { distanceInWordsToNow } from 'date-fns'
 import * as locale from 'date-fns/locale/en'
 import React, { Fragment } from 'react'
@@ -23,60 +38,72 @@ const TaskListElement = ({
   expiredAt,
   classes,
 }: TaskListElementProps) => (
-    <Card className={classes.root} elevation={1}>
-      <CardContent className={classes.content}>
-        <div className={classes.headerWrapper}>
-          <Typography color="secondary" className={classes.header} variant="h5">{category}</Typography>
-          {(isEditable || isDeletable) && (
-            <Fragment>
-              <IconButton
-                aria-label="More"
-                aria-haspopup="true"
-                onClick={onMoreButtonClick.bind(null, id)}
-                className={classes.moreButton}
-              >
-                <MoreVertRounded />
-              </IconButton>
-              <Menu
-                anchorEl={anchorEl}
-                open={isMoreExpanded}
-                onBlur={onExpandedMenuLeave}
-              >
-                {isEditable && (
-                  <MenuItem className={classes.expandedMenu}>
-                    <Typography className={classes.menuItemElement} color="textSecondary">
-                      <Edit className={classes.expandedMenuIcon} />Edit
-                  </Typography>
-                  </MenuItem>
-                )}
-                {isDeletable && (
-                  <MenuItem className={classes.expandedMenu}>
-                    <Typography className={classes.menuItemElement} color="textSecondary">
-                      <Delete className={classes.expandedMenuIcon} />Delete
-                  </Typography>
-                  </MenuItem>
-                )}
-              </Menu>
-            </Fragment>
-          )}
-        </div>
-        <Typography variant="h6" color="textSecondary">
-          <p className={classes.shortDescription}>{shortDescription}</p>
-          <TagList tags={tags} />
-          <div className={classes.footer}>
-            <span className={classes.indicator}>
-              <AccessTime className={classes.indicatorIconLeft} />
-              <span className={classes.indicatorText}>{distanceInWordsToNow(expiredAt, { locale })}</span>
-            </span>
-            <span className={classes.indicator}>
-              <span className={classes.indicator}>{price}</span>
-              <MonetizationOn className={classes.indicatorIconRight} />
-            </span>
-          </div>
+  <Card className={classes.root} elevation={1}>
+    <CardContent className={classes.content}>
+      <div className={classes.headerWrapper}>
+        <Typography color="secondary" className={classes.header} variant="h5">
+          {category}
         </Typography>
-      </CardContent>
-    </Card>
-  )
+        {(isEditable || isDeletable) && (
+          <Fragment>
+            <IconButton
+              aria-label="More"
+              aria-haspopup="true"
+              onClick={onMoreButtonClick.bind(null, id)}
+              className={classes.moreButton}
+            >
+              <MoreVertRounded />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={isMoreExpanded}
+              onBlur={onExpandedMenuLeave}
+            >
+              {isEditable && (
+                <MenuItem className={classes.expandedMenu}>
+                  <Typography
+                    className={classes.menuItemElement}
+                    color="textSecondary"
+                  >
+                    <Edit className={classes.expandedMenuIcon} />
+                    Edit
+                  </Typography>
+                </MenuItem>
+              )}
+              {isDeletable && (
+                <MenuItem className={classes.expandedMenu}>
+                  <Typography
+                    className={classes.menuItemElement}
+                    color="textSecondary"
+                  >
+                    <Delete className={classes.expandedMenuIcon} />
+                    Delete
+                  </Typography>
+                </MenuItem>
+              )}
+            </Menu>
+          </Fragment>
+        )}
+      </div>
+      <Typography variant="h6" color="textSecondary">
+        <p className={classes.shortDescription}>{shortDescription}</p>
+        <TagList tags={tags} />
+        <div className={classes.footer}>
+          <span className={classes.indicator}>
+            <AccessTime className={classes.indicatorIconLeft} />
+            <span className={classes.indicatorText}>
+              {distanceInWordsToNow(expiredAt, { locale })}
+            </span>
+          </span>
+          <span className={classes.indicator}>
+            <span className={classes.indicator}>{price}</span>
+            <MonetizationOn className={classes.indicatorIconRight} />
+          </span>
+        </div>
+      </Typography>
+    </CardContent>
+  </Card>
+)
 
 const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
   card: {
@@ -150,12 +177,12 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
 })
 
 interface TaskListElementProps extends WithStyles<typeof styles>, Task {
-  anchorEl: HTMLElement | null,
-  onMoreButtonClick: (id: number, event: Event) => void,
-  onExpandedMenuLeave: () => void,
-  isMoreExpanded: boolean,
-  isEditable: boolean,
-  isDeletable: boolean,
+  anchorEl: HTMLElement | null
+  onMoreButtonClick: (id: number, event: Event) => void
+  onExpandedMenuLeave: () => void
+  isMoreExpanded: boolean
+  isEditable: boolean
+  isDeletable: boolean
 }
 
 export default withStyles(styles)(TaskListElement)

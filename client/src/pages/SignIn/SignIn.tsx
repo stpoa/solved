@@ -1,5 +1,10 @@
 import { Button, Snackbar, TextField } from '@material-ui/core'
-import { createStyles, StyleRules, withStyles, WithStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  StyleRules,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import React, { ChangeEventHandler, Component, MouseEventHandler } from 'react'
 import { Redirect } from 'react-router-dom'
 import isEmail from 'validator/lib/isEmail'
@@ -18,7 +23,10 @@ class SignIn extends Component<SignInProps, SignInState> {
   }
 
   public componentDidUpdate (prevProps: SignInProps) {
-    if (prevProps.auth.status === Status.Pending && this.props.auth.status === Status.Failure) {
+    if (
+      prevProps.auth.status === Status.Pending &&
+      this.props.auth.status === Status.Failure
+    ) {
       this.setState({ showSignInError: true })
     }
   }
@@ -26,8 +34,17 @@ class SignIn extends Component<SignInProps, SignInState> {
   public render () {
     if (this.props.auth.signedIn) return <Redirect to="/profile" />
 
-    const { auth: { status }, classes: { button, container, item } } = this.props
-    const { email, emailError, password, passwordError, showSignInError } = this.state
+    const {
+      auth: { status },
+      classes: { button, container, item },
+    } = this.props
+    const {
+      email,
+      emailError,
+      password,
+      passwordError,
+      showSignInError,
+    } = this.state
     const isPending = status === Status.Pending
 
     return (
@@ -88,7 +105,10 @@ class SignIn extends Component<SignInProps, SignInState> {
     }
 
     // https://github.com/Microsoft/TypeScript/issues/13948
-    this.setState(state as Pick<SignInState, Exclude<keyof SignInState, 'showSignInError'>>)
+    this.setState(state as Pick<
+      SignInState,
+      Exclude<keyof SignInState, 'showSignInError'>
+    >)
   }
 
   private validate ({ email, password }: SignInState): Errors {
@@ -96,13 +116,13 @@ class SignIn extends Component<SignInProps, SignInState> {
       emailError: !email
         ? 'Field required'
         : !isEmail(email)
-          ? 'Incorrect email address'
-          : '',
+        ? 'Incorrect email address'
+        : '',
       passwordError: !password
         ? 'Field required'
         : !isLength(password, { min: 6 })
-          ? 'Password should have at least 6 characters'
-          : '',
+        ? 'Password should have at least 6 characters'
+        : '',
     }
   }
 
@@ -113,7 +133,9 @@ class SignIn extends Component<SignInProps, SignInState> {
 
       if (hasErrors) return { ...errors }
 
-      props.auth.signIn(state.email, state.password).catch(() => { return })
+      props.auth.signIn(state.email, state.password).catch(() => {
+        return
+      })
 
       return null
     })
@@ -143,13 +165,13 @@ const styles: StyleRules = createStyles({
 interface SignInProps extends WithAuth, WithStyles<typeof styles> {}
 
 interface Errors {
-  emailError: string,
+  emailError: string
   passwordError: string
 }
 
 interface SignInState extends Errors {
-  email: string,
-  password: string,
+  email: string
+  password: string
   showSignInError: boolean
 }
 

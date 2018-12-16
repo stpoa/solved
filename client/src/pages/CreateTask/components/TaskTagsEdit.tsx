@@ -1,5 +1,3 @@
 import React from 'react'
 
-export const TaskTagsEdit = () => (
-  <div>TaskTagsEdit</div>
-)
+export const TaskTagsEdit = () => <div>TaskTagsEdit</div>

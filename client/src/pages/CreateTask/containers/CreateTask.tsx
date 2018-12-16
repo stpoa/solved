@@ -17,7 +17,6 @@ const initialState = {
 }
 
 class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
-
   public readonly state: CreateTaskState = initialState
 
   public render () {
@@ -31,15 +30,23 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
 
     return (
       <div className={classes.container}>
-        <PageHeader title="Nowe zadanie"/>
+        <PageHeader title="Nowe zadanie" />
         <StepList {...{ step, onSubmitClick, updateStep }}>
           <Step>
             <TaskDescriptionEdit {...{ description, onDescriptionUpdate }} />
           </Step>
-          <Step><TaskPhotoEdit/></Step>
-          <Step><TaskCategoryEdit/></Step>
-          <Step><TaskTagsEdit/></Step>
-          <Step><TaskPriceTermEdit/></Step>
+          <Step>
+            <TaskPhotoEdit />
+          </Step>
+          <Step>
+            <TaskCategoryEdit />
+          </Step>
+          <Step>
+            <TaskTagsEdit />
+          </Step>
+          <Step>
+            <TaskPriceTermEdit />
+          </Step>
         </StepList>
       </div>
     )
