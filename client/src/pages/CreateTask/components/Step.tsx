@@ -4,10 +4,10 @@ import {
   WithStyles,
   withStyles,
 } from '@material-ui/core'
-import React, { SFC } from 'react'
+import React, { FunctionComponent } from 'react'
 import StepButton from './StepButton'
 
-const Step: SFC<StepProps> = props => {
+const Step: FunctionComponent<StepProps> = props => {
   const {
     isActive,
     displayPrevious,

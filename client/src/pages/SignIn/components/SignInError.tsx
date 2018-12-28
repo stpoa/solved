@@ -5,9 +5,9 @@ import {
   WithStyles,
 } from '@material-ui/core/styles'
 import ErrorIcon from '@material-ui/icons/Error'
-import React, { SFC } from 'react'
+import React, { FunctionComponent } from 'react'
 
-const SignInError: SFC<SignInErrorProps> = ({ classes }) => (
+const SignInError: FunctionComponent<SignInErrorProps> = ({ classes }) => (
   <SnackbarContent
     className={classes.error}
     aria-describedby="client-snackbar"

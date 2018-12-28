@@ -1,9 +1,9 @@
 import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core'
 import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles'
 import { ArrowBack } from '@material-ui/icons'
-import React, { SFC } from 'react'
+import React, { FunctionComponent } from 'react'
 
-const PageHeader: SFC<PageHeaderProps> = ({ classes, title }) => (
+const PageHeader: FunctionComponent<PageHeaderProps> = ({ classes, title }) => (
   <AppBar position="sticky">
     <Toolbar disableGutters>
       <IconButton>

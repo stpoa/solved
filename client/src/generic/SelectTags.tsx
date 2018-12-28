@@ -4,10 +4,10 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core/styles'
-import React, { MouseEventHandler, SFC } from 'react'
+import React, { FunctionComponent, MouseEventHandler } from 'react'
 import Tag from './TaskList/components/Tag'
 
-const SelectTags: SFC<SelectTagsProps> = ({
+const SelectTags: FunctionComponent<SelectTagsProps> = ({
   tags,
   classes: { container },
   onClick,

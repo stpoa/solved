@@ -5,10 +5,10 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core/styles'
-import React, { SFC } from 'react'
+import React, { FunctionComponent } from 'react'
 import { Category, CategoryList } from '~interfaces'
 
-const SelectCategory: SFC<SelectCategoryProps> = ({
+const SelectCategory: FunctionComponent<SelectCategoryProps> = ({
   categories,
   classes: { container, item, list },
   onClick,

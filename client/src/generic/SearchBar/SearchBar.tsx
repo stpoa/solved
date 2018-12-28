@@ -1,8 +1,10 @@
 import { Input } from '@material-ui/core'
 import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles'
-import React, { SFC } from 'react'
+import React, { FunctionComponent } from 'react'
 
-const SearchBar: SFC<SearchBarProps> = ({ classes: { containerStyles } }) => (
+const SearchBar: FunctionComponent<SearchBarProps> = ({
+  classes: { containerStyles },
+}) => (
   <div className={containerStyles}>
     <Input disableUnderline fullWidth />
   </div>

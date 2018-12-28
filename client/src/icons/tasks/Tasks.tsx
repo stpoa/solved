@@ -1,9 +1,9 @@
 import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles'
-import React, { SFC } from 'react'
+import React, { FunctionComponent } from 'react'
 import SVGInline from 'react-svg-inline'
 import tasksSvgIcon from './tasks-solid.svg'
 
-const Tasks: SFC<TasksProps> = ({ classes, className }) => (
+const Tasks: FunctionComponent<TasksProps> = ({ classes, className }) => (
   <SVGInline
     className={`${classes.imageWrapper} ${className}`}
     width="24"

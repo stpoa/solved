@@ -13,12 +13,12 @@ import {
   withStyles,
 } from '@material-ui/core/styles'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import React, { ChangeEvent, Component, SFC } from 'react'
+import React, { ChangeEvent, Component, FunctionComponent } from 'react'
 import { taskCategories } from '~data'
 import { TaskList } from '~generic'
 import { Task } from '~interfaces'
 
-const ExpansionList: SFC<ExpansionListProps> = ({
+const ExpansionList: FunctionComponent<ExpansionListProps> = ({
   classes,
   taskGroup,
   isEditable,

@@ -1,5 +1,5 @@
 import { mount } from 'enzyme'
-import React, { SFC } from 'react'
+import React, { FunctionComponent } from 'react'
 import { Status } from '~interfaces'
 import context from './context'
 import Provider from './Provider'
@@ -25,7 +25,7 @@ describe('<Provider />', () => {
   })
 
   describe('provides correct value', () => {
-    const Component: SFC<any> = () => null
+    const Component: FunctionComponent<any> = () => null
 
     const mountProvider = () =>
       mount(
