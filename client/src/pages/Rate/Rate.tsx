@@ -7,109 +7,104 @@ import {
 import { WithStyles, withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { ThumbDown, ThumbUp } from '@material-ui/icons'
-import React, { Component } from 'react'
+import React, { FunctionComponent, useState } from 'react'
+import { OnChange } from '~typings/react'
 
-const defaultPositiveReviewText = 'Wszystko ok. Polecam.'
-const defaultNegativeReviewText = 'Nic nie jest ok. Nie polecam :('
+const defaultReview = {
+  positive: 'Wszystko ok. Polecam.',
+  negative: 'Nic nie jest ok. Nie polecam :(',
+}
+
 const initialState = {
   isPositiveRating: true,
-  reviewText: defaultPositiveReviewText,
+  reviewText: defaultReview.positive,
 }
+
 const isEdited = (review: string) =>
-  review !== defaultNegativeReviewText && review !== defaultPositiveReviewText
+  review !== defaultReview.negative && review !== defaultReview.positive
 
-class Rate extends Component<RateProps, RateState> {
-  public readonly state: RateState = initialState
+const Rate: FunctionComponent<RateProps> = ({ classes }) => {
+  const [isPositive, updateIsPositive] = useState(initialState.isPositiveRating)
+  const [reviewText, updateReviewText] = useState(initialState.reviewText)
 
-  public render() {
-    const { classes } = this.props
-
-    const thumbUpColor = this.state.isPositiveRating ? 'default' : 'secondary'
-    const thumbDownColor = this.state.isPositiveRating ? 'secondary' : 'default'
-
-    return (
-      <div className={classes.container}>
-        <Typography
-          className={classes.title}
-          gutterBottom
-          variant="headline"
-          component="h2"
-        >
-          Oceń rozwiązującego
-        </Typography>
-
-        <div style={{ marginTop: '8em' }}>
-          <IconButton
-            onClick={this.handleClickThumbDown}
-            style={{ paddingTop: '6%' }}
-            color={thumbUpColor}
-            className={classes.thumbIcon}
-          >
-            <ThumbDown className={classes.thumbIcon} />
-          </IconButton>
-
-          <IconButton
-            onClick={this.handleClickThumbUp}
-            style={{ paddingBottom: '6%' }}
-            color={thumbDownColor}
-            className={classes.thumbIcon}
-          >
-            <ThumbUp className={classes.thumbIcon} />
-          </IconButton>
-        </div>
-
-        <form className={classes.form} noValidate autoComplete="off">
-          <TextField
-            id="multiline-static"
-            className={classes.textField}
-            margin="normal"
-            label="Napisz swoją opinie"
-            multiline
-            rows="4"
-            value={this.state.reviewText}
-            onChange={this.handleTextInput}
-          />
-
-          <Button
-            variant="contained"
-            color="secondary"
-            className={classes.submitButton}
-          >
-            Oceń
-          </Button>
-        </form>
-      </div>
+  const handleClickThumbUp = () => {
+    updateIsPositive(true)
+    updateReviewText(prevReviewText =>
+      isEdited(prevReviewText) ? prevReviewText : defaultReview.positive,
     )
   }
 
-  private handleClickThumbUp = () => {
-    this.setState(({ isPositiveRating, reviewText }) => {
-      if (isPositiveRating) return null
-
-      return {
-        isPositiveRating: true,
-        reviewText: isEdited(reviewText)
-          ? reviewText
-          : defaultPositiveReviewText,
-      }
-    })
+  const handleClickThumbDown = () => {
+    updateIsPositive(false)
+    updateReviewText(prevReviewText =>
+      isEdited(prevReviewText) ? prevReviewText : defaultReview.negative,
+    )
   }
 
-  private handleClickThumbDown = () => {
-    this.setState(({ isPositiveRating, reviewText }) => {
-      if (!isPositiveRating) return null
-
-      return {
-        isPositiveRating: false,
-        reviewText: isEdited(reviewText)
-          ? reviewText
-          : defaultNegativeReviewText,
-      }
-    })
+  const handleTextInput: OnChange = e => {
+    const { value } = e.target
+    updateReviewText(value)
   }
 
-  private handleTextInput = (e: React.ChangeEvent<HTMLInputElement>) =>
-    this.setState({ reviewText: e.target.value })
+  const handleSubmit = () => window.alert(reviewText)
+
+  const thumbUpColor = isPositive ? 'default' : 'secondary'
+  const thumbDownColor = isPositive ? 'secondary' : 'default'
+
+  return (
+    <div className={classes.container}>
+      <Typography
+        className={classes.title}
+        gutterBottom
+        variant="h5"
+        component="h2"
+      >
+        Oceń rozwiązującego
+      </Typography>
+
+      <div style={{ marginTop: '8em' }}>
+        <IconButton
+          onClick={handleClickThumbDown}
+          style={{ paddingTop: '6%' }}
+          color={thumbUpColor}
+          className={classes.thumbIcon}
+        >
+          <ThumbDown className={classes.thumbIcon} />
+        </IconButton>
+
+        <IconButton
+          onClick={handleClickThumbUp}
+          style={{ paddingBottom: '6%' }}
+          color={thumbDownColor}
+          className={classes.thumbIcon}
+        >
+          <ThumbUp className={classes.thumbIcon} />
+        </IconButton>
+      </div>
+
+      <form className={classes.form} noValidate autoComplete="off">
+        <TextField
+          id="multiline-static"
+          className={classes.textField}
+          margin="normal"
+          label="Napisz swoją opinie"
+          multiline
+          rows="4"
+          value={reviewText}
+          onChange={handleTextInput}
+        />
+
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.submitButton}
+          onClick={handleSubmit}
+        >
+          Oceń
+        </Button>
+      </form>
+    </div>
+  )
 }
 
 const styles: StyleRulesCallback = theme => ({
@@ -138,8 +133,6 @@ const styles: StyleRulesCallback = theme => ({
     textAlign: 'center',
   },
 })
-
-type RateState = Readonly<typeof initialState>
 
 export interface RateProps extends WithStyles<typeof styles> {}
 export default withStyles(styles)(Rate)
