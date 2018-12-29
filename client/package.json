@@ -45,17 +45,21 @@
   "scripts": {
     "prepush": "npm run test:logic",
     "precommit": "lint-staged && npm run test:types",
-    "test": "run-p lint:raw test:logic test:types",
+    "test": "run-p lint:tslint test:types test:logic",
     "test:types": "tsc -p . --noEmit",
     "test:logic": "jest",
-    "lint": "prettier './**/*.ts*' --write",
-    "lint:raw": "tslint --project ./",
+    "format": "run-s format:tslint format:prettier",
+    "format:tslint": "tslint --project ./ --fix",
+    "format:prettier": "prettier './**/*.ts*' --write",
+    "lint": "npm run lint:tslint",
+    "lint:tslint": "tslint --project ./",
     "start": "rm -rf .cache dist && npm run start:raw",
     "start:raw": "parcel serve src/index.html"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "npm run lint",
+      "npm run format:tslint",
+      "npm run format:prettier",
       "git add"
     ]
   },
