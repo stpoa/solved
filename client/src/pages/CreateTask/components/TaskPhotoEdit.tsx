@@ -8,14 +8,14 @@ import {
   WithStyles,
 } from '@material-ui/core'
 import { AddAPhoto, HighlightOff } from '@material-ui/icons'
-import React, { ChangeEvent, SFC } from 'react'
+import React, { ChangeEvent, FunctionComponent } from 'react'
 
 const filesLength = 3
 
 const createFileId = (file: File) =>
   btoa(`${file.name}:${file.size}:${file.type}:${file.lastModified}`)
 
-const TaskPhotoEdit: SFC<TaskPhotoEditProps> = ({
+const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({
   files,
   classes,
   onFilesUpdate,

@@ -6,7 +6,7 @@ import {
   withStyles,
 } from '@material-ui/core/styles'
 import { AddCircle, Home, Person, Search } from '@material-ui/icons'
-import React, { SFC } from 'react'
+import React, { FunctionComponent } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { Tasks } from '~icons'
 import WrappedLink from '../WrappedLink'
@@ -40,7 +40,7 @@ const menuLinks = [
   },
 ]
 
-const NavigationBar: SFC<NavigationBarProps> = ({ classes }) => {
+const NavigationBar: FunctionComponent<NavigationBarProps> = ({ classes }) => {
   return (
     <AppBar position="sticky" color="primary">
       <Toolbar className={classes.toolbar}>

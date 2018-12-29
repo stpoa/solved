@@ -16,10 +16,10 @@ import {
   Spellcheck,
   Update,
 } from '@material-ui/icons'
-import React, { SFC } from 'react'
+import React, { FunctionComponent } from 'react'
 import { isNumber } from '~lib/math'
 
-const Profile: SFC<ProfilePropsStyled> = ({
+const Profile: FunctionComponent<ProfilePropsStyled> = ({
   isPrivate = false,
   balance,
   classes,

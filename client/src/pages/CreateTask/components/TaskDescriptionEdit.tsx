@@ -5,9 +5,9 @@ import {
   WithStyles,
   withStyles,
 } from '@material-ui/core'
-import React, { SFC } from 'react'
+import React, { FunctionComponent } from 'react'
 
-const TaskDescriptionEdit: SFC<TaskDescriptionEditProps> = ({
+const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
   classes,
   description,
   onDescriptionUpdate,

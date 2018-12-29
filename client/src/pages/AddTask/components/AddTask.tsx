@@ -5,7 +5,12 @@ import {
   WithStyles,
   withStyles,
 } from '@material-ui/core/styles'
-import React, { ChangeEvent, Fragment, MouseEventHandler, SFC } from 'react'
+import React, {
+  ChangeEvent,
+  Fragment,
+  FunctionComponent,
+  MouseEventHandler,
+} from 'react'
 import {
   SelectCategory,
   SelectCategoryProps,
@@ -15,7 +20,7 @@ import {
 import CapturePhoto, { CapturePhotoProps } from './CapturePhoto'
 import Description, { DescriptionProps } from './Description'
 
-const AddTask: SFC<AddTaskProps> = ({
+const AddTask: FunctionComponent<AddTaskProps> = ({
   classes: { addTaskContainer, container, content, item },
   categories,
   onClickCategory,

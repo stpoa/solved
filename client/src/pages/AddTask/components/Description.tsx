@@ -5,9 +5,13 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core/styles'
-import React, { ChangeEventHandler, SFC } from 'react'
+import React, { ChangeEventHandler, FunctionComponent } from 'react'
 
-const Description: SFC<DescriptionProps> = ({ classes, onChange, value }) => (
+const Description: FunctionComponent<DescriptionProps> = ({
+  classes,
+  onChange,
+  value,
+}) => (
   <TextField
     id="multiline-static"
     multiline

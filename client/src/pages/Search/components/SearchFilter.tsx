@@ -5,7 +5,12 @@ import {
   WithStyles,
   withStyles,
 } from '@material-ui/core/styles'
-import React, { ChangeEvent, Fragment, MouseEventHandler, SFC } from 'react'
+import React, {
+  ChangeEvent,
+  Fragment,
+  FunctionComponent,
+  MouseEventHandler,
+} from 'react'
 import {
   SelectCategory,
   SelectCategoryProps,
@@ -13,7 +18,7 @@ import {
   SelectTagsProps,
 } from '~generic'
 
-const SearchFilter: SFC<SearchFilterProps> = ({
+const SearchFilter: FunctionComponent<SearchFilterProps> = ({
   classes: { container, item },
   categories,
   onClickCategory,

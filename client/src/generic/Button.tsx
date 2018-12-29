@@ -4,9 +4,9 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core'
-import React, { MouseEventHandler, ReactNode, SFC } from 'react'
+import React, { FunctionComponent, MouseEventHandler, ReactNode } from 'react'
 
-const Button: SFC<ButtonProps> = ({
+const Button: FunctionComponent<ButtonProps> = ({
   onClick,
   children,
   classes,

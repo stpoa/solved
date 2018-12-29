@@ -1,7 +1,11 @@
-import React, { SFC } from 'react'
+import React, { FunctionComponent } from 'react'
 import { NavLink } from 'react-router-dom'
 
-const WrappedLink: SFC<any> = ({ children, wrapper: Wrapper, ...rest }) => {
+const WrappedLink: FunctionComponent<any> = ({
+  children,
+  wrapper: Wrapper,
+  ...rest
+}) => {
   return (
     <Wrapper component={NavLink} {...rest}>
       {children}
