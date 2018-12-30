@@ -15,7 +15,7 @@ import {
 import { Provider as AuthProvider } from '~auth'
 
 // Generic
-import { NavigationBar, PrivateRoute } from '~generic'
+import { PrivateRoute } from '~generic'
 
 // Pages
 import * as Pages from '~pages'
@@ -52,12 +52,11 @@ const redirectToHome = () => <Redirect to="/" />
 
 class App extends Component<AppProps, {}> {
   public render() {
-    const { containerStyles } = this.props.classes
     return (
       <MuiThemeProvider theme={theme}>
         <AuthProvider>
           <Router>
-            <div className={containerStyles}>
+            <div className={this.props.classes.container}>
               <Switch>
                 <PrivateRoute
                   path="/profile"
@@ -73,7 +72,6 @@ class App extends Component<AppProps, {}> {
                 <Route exact path="/" component={Pages.Home} />
                 <Route path="*" render={redirectToHome} />
               </Switch>
-              <NavigationBar />
             </div>
           </Router>
         </AuthProvider>
@@ -83,11 +81,10 @@ class App extends Component<AppProps, {}> {
 }
 
 const styles = createStyles({
-  containerStyles: {
+  container: {
     display: 'grid',
-    gridTemplateRows: 'auto max-content',
-    height: '100vh',
-    overflow: 'hidden',
+    gridAutoRows: '1fr',
+    height: '100%',
   },
 })
 

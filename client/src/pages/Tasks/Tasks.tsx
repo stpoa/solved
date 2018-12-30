@@ -15,7 +15,7 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import React, { ChangeEvent, Component, FunctionComponent } from 'react'
 import { taskCategories } from '~data'
-import { TaskList } from '~generic'
+import { NavigationLayout, TaskList } from '~generic'
 import { Task } from '~interfaces'
 
 const ExpansionList: FunctionComponent<ExpansionListProps> = ({
@@ -67,39 +67,41 @@ class Tasks extends Component<TasksProps, TasksState> {
     const { classes } = this.props
     const { selectedTabIndex } = this.state
     return (
-      <div className={classes.container}>
-        <Tabs
-          value={selectedTabIndex}
-          onChange={this.onTabChange}
-          fullWidth
-          textColor="secondary"
-        >
-          <Tab className={classes.tab} label="Waiting" />
-          <Tab className={classes.tab} label="Ongoing" />
-          <Tab className={classes.tab} label="Finished" />
-        </Tabs>
-        {selectedTabIndex === 0 && (
-          <TaskList
-            isEditable
-            isDeletable
-            tasks={taskCategories.waitingTasks}
-          />
-        )}
-        {selectedTabIndex === 1 && (
-          <ExpansionList
-            isEditable
-            classes={classes}
-            taskGroup={taskCategories.ongoingTasks}
-          />
-        )}
-        {selectedTabIndex === 2 && (
-          <ExpansionList
-            isDeletable
-            classes={classes}
-            taskGroup={taskCategories.finishedTasks}
-          />
-        )}
-      </div>
+      <NavigationLayout withBottomNavigation>
+        <div className={classes.container}>
+          <Tabs
+            value={selectedTabIndex}
+            onChange={this.onTabChange}
+            fullWidth
+            textColor="secondary"
+          >
+            <Tab className={classes.tab} label="Waiting" />
+            <Tab className={classes.tab} label="Ongoing" />
+            <Tab className={classes.tab} label="Finished" />
+          </Tabs>
+          {selectedTabIndex === 0 && (
+            <TaskList
+              isEditable
+              isDeletable
+              tasks={taskCategories.waitingTasks}
+            />
+          )}
+          {selectedTabIndex === 1 && (
+            <ExpansionList
+              isEditable
+              classes={classes}
+              taskGroup={taskCategories.ongoingTasks}
+            />
+          )}
+          {selectedTabIndex === 2 && (
+            <ExpansionList
+              isDeletable
+              classes={classes}
+              taskGroup={taskCategories.finishedTasks}
+            />
+          )}
+        </div>
+      </NavigationLayout>
     )
   }
 

@@ -1,7 +1,7 @@
 import { StyleRulesCallback } from '@material-ui/core'
 import { WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { Component } from 'react'
-import PageHeader from '~generic/PageHeader/PageHeader'
+import { NavigationLayout } from '~generic'
 import { OnChange } from '~typings/react'
 import Step from '../components/Step'
 import StepList from '../components/StepList'
@@ -31,26 +31,27 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
     } = this
 
     return (
-      <div className={classes.container}>
-        <PageHeader title="Nowe zadanie" />
-        <StepList {...{ step, onSubmitClick, updateStep }}>
-          <Step>
-            <TaskDescriptionEdit {...{ description, onDescriptionUpdate }} />
-          </Step>
-          <Step>
-            <TaskPhotoEdit files={files} onFilesUpdate={onFilesUpdate} />
-          </Step>
-          <Step>
-            <TaskCategoryEdit />
-          </Step>
-          <Step>
-            <TaskTagsEdit />
-          </Step>
-          <Step>
-            <TaskPriceTermEdit />
-          </Step>
-        </StepList>
-      </div>
+      <NavigationLayout withTopNavigation title="Nowe zadanie">
+        <div className={classes.container}>
+          <StepList {...{ step, onSubmitClick, updateStep }}>
+            <Step>
+              <TaskDescriptionEdit {...{ description, onDescriptionUpdate }} />
+            </Step>
+            <Step>
+              <TaskPhotoEdit files={files} onFilesUpdate={onFilesUpdate} />
+            </Step>
+            <Step>
+              <TaskCategoryEdit />
+            </Step>
+            <Step>
+              <TaskTagsEdit />
+            </Step>
+            <Step>
+              <TaskPriceTermEdit />
+            </Step>
+          </StepList>
+        </div>
+      </NavigationLayout>
     )
   }
 
@@ -71,8 +72,9 @@ const styles: StyleRulesCallback = theme => ({
   container: {
     backgroundColor: theme.palette.background.paper,
     display: 'grid',
-    gridTemplateRows: 'max-content auto',
+    gridTemplateRows: '1fr',
     padding: '0',
+    height: '100%',
   },
   form: {
     margin: '0 auto',

@@ -42,7 +42,7 @@ const menuLinks = [
 
 const NavigationBar: FunctionComponent<NavigationBarProps> = ({ classes }) => {
   return (
-    <AppBar position="sticky" color="primary">
+    <AppBar className={classes.appBar} position="fixed" color="primary">
       <Toolbar className={classes.toolbar}>
         {menuLinks.map(
           ({ childIcon: Children, displayName, path, generalButton }) => (
@@ -71,6 +71,10 @@ const NavigationBar: FunctionComponent<NavigationBarProps> = ({ classes }) => {
 
 const styles = ({ spacing, palette: { secondary, grey } }: Theme) =>
   createStyles({
+    appBar: {
+      top: 'auto',
+      bottom: 0,
+    },
     buttons: {
       fontSize: 32,
     },

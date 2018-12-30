@@ -10,6 +10,7 @@ import { Redirect } from 'react-router-dom'
 import isEmail from 'validator/lib/isEmail'
 import isLength from 'validator/lib/isLength'
 import { withAuth, WithAuth } from '~auth'
+import { NavigationLayout } from '~generic'
 import { Status } from '~interfaces'
 import SignInError from './components/SignInError'
 
@@ -48,52 +49,54 @@ class SignIn extends Component<SignInProps, SignInState> {
     const isPending = status === Status.Pending
 
     return (
-      <div className={container}>
-        <Snackbar
-          autoHideDuration={4000}
-          open={showSignInError}
-          onClose={this.hideSignInError}
-        >
-          <SignInError />
-        </Snackbar>
-        <TextField
-          autoFocus
-          className={item}
-          disabled={isPending}
-          error={Boolean(emailError)}
-          margin="dense"
-          label="Email Address"
-          helperText={emailError}
-          required
-          name="email"
-          type="email"
-          value={email}
-          fullWidth
-          onChange={this.onChangeText}
-        />
-        <TextField
-          margin="dense"
-          className={item}
-          disabled={isPending}
-          error={Boolean(passwordError)}
-          label="Password"
-          helperText={passwordError}
-          required
-          name="password"
-          type="password"
-          value={password}
-          fullWidth
-          onChange={this.onChangeText}
-        />
-        <Button
-          className={`${item} ${button}`}
-          disabled={isPending}
-          onClick={this.onSubmit}
-          fullWidth
-        >
-          Sign in
-        </Button>
-      </div>
+      <NavigationLayout withBottomNavigation>
+        <div className={container}>
+          <Snackbar
+            autoHideDuration={4000}
+            open={showSignInError}
+            onClose={this.hideSignInError}
+          >
+            <SignInError />
+          </Snackbar>
+          <TextField
+            autoFocus
+            className={item}
+            disabled={isPending}
+            error={Boolean(emailError)}
+            margin="dense"
+            label="Email Address"
+            helperText={emailError}
+            required
+            name="email"
+            type="email"
+            value={email}
+            fullWidth
+            onChange={this.onChangeText}
+          />
+          <TextField
+            margin="dense"
+            className={item}
+            disabled={isPending}
+            error={Boolean(passwordError)}
+            label="Password"
+            helperText={passwordError}
+            required
+            name="password"
+            type="password"
+            value={password}
+            fullWidth
+            onChange={this.onChangeText}
+          />
+          <Button
+            className={`${item} ${button}`}
+            disabled={isPending}
+            onClick={this.onSubmit}
+            fullWidth
+          >
+            Sign in
+          </Button>
+        </div>
+      </NavigationLayout>
     )
   }
 

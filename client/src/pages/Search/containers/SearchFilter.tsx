@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { categories, tags } from '~data'
+import { NavigationLayout } from '~generic'
 import SearchFilter, { SearchFilterProps } from '../components/SearchFilter'
 
 export default class SearchFilterContainer extends Component<
@@ -15,16 +16,18 @@ export default class SearchFilterContainer extends Component<
 
   public render() {
     return (
-      <SearchFilter
-        categories={this.state.categories}
-        categoryValue={this.state.categoryValue}
-        onClickCategory={this.selectCategory}
-        onClickTag={this.selectTag}
-        onSubmit={this.search}
-        onChangeTab={this.selectTab}
-        tabValue={this.state.tabValue}
-        tags={this.state.tags}
-      />
+      <NavigationLayout withBottomNavigation>
+        <SearchFilter
+          categories={this.state.categories}
+          categoryValue={this.state.categoryValue}
+          onClickCategory={this.selectCategory}
+          onClickTag={this.selectTag}
+          onSubmit={this.search}
+          onChangeTab={this.selectTab}
+          tabValue={this.state.tabValue}
+          tags={this.state.tags}
+        />
+      </NavigationLayout>
     )
   }
 
