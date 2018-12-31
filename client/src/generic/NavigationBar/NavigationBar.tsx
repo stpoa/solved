@@ -42,7 +42,7 @@ const menuLinks = [
 
 const NavigationBar: FunctionComponent<NavigationBarProps> = ({ classes }) => {
   return (
-    <AppBar className={classes.appBar} position="fixed" color="primary">
+    <AppBar className={classes.appBar} position="relative" color="primary">
       <Toolbar className={classes.toolbar}>
         {menuLinks.map(
           ({ childIcon: Children, displayName, path, generalButton }) => (

@@ -12,7 +12,7 @@ const PageHeader: FunctionComponent<PageHeaderProps> = ({
   title,
   history,
 }) => (
-  <AppBar position="fixed">
+  <AppBar position="relative">
     <Toolbar disableGutters>
       <IconButton className={classes.button} onClick={handleClick(history)}>
         <ArrowBack className={classes.backIcon} />
