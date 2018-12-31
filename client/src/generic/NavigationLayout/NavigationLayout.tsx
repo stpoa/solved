@@ -26,7 +26,7 @@ const NavigationLayout: FunctionComponent<NavigationLayoutProps> = ({
 
 const styles = createStyles({
   container: {
-    height: '100vh',
+    overflow: 'hidden',
     display: 'grid',
     gridTemplateRows: 'auto 1fr auto',
     gridTemplateAreas: '"topNavigation" "content" "bottomNavigation"',
@@ -35,7 +35,7 @@ const styles = createStyles({
     display: 'grid',
     gridTemplateRows: '1fr',
     gridArea: 'content',
-    overflow: 'scroll',
+    overflow: 'auto',
   },
   topNavigation: {
     gridArea: 'topNavigation',
