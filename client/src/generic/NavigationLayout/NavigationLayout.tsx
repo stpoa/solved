@@ -35,6 +35,7 @@ const styles = createStyles({
     display: 'grid',
     gridTemplateRows: '1fr',
     gridArea: 'content',
+    WebkitOverflowScrolling: 'touch',
     overflow: 'auto',
   },
   topNavigation: {
