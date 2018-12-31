@@ -2,7 +2,7 @@ import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core'
 import React, { FunctionComponent } from 'react'
 import { NavigationBar, PageHeader } from '~generic'
 
-const NavigationLayout: FunctionComponent<NavigationBarProps> = ({
+const NavigationLayout: FunctionComponent<NavigationLayoutProps> = ({
   classes,
   children,
   title,
@@ -48,7 +48,7 @@ const styles = ({ mixins }: Theme) =>
     navSpacing: mixins.toolbar,
   })
 
-interface NavigationBarProps extends WithStyles<typeof styles> {
+interface NavigationLayoutProps extends WithStyles<typeof styles> {
   title?: string
   withTopNavigation?: boolean
   withBottomNavigation?: boolean
