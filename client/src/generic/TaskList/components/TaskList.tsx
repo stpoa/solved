@@ -69,7 +69,6 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }) =>
   createStyles({
     container: {
       margin: 0,
-      overflow: 'auto',
       width: '100%',
     },
     grid: {
