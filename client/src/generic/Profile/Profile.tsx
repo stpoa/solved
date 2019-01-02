@@ -17,15 +17,16 @@ import {
   Update,
 } from '@material-ui/icons'
 import React, { FunctionComponent } from 'react'
-import { NavigationLayout } from '~generic'
+import { NavigationBar } from '~generic'
 import { isNumber } from '~lib/math'
+import { pageWithBottomNavStyles } from '~pages/styles'
 
 const Profile: FunctionComponent<ProfilePropsStyled> = ({
   isPrivate = false,
   balance,
   classes,
 }) => (
-  <NavigationLayout withBottomNavigation>
+  <div style={{ ...pageWithBottomNavStyles }}>
     <div className={classes.root}>
       <div className={classes.title}>
         <Typography className={classes.titleText} variant="title">
@@ -75,7 +76,8 @@ const Profile: FunctionComponent<ProfilePropsStyled> = ({
         </List>
       )}
     </div>
-  </NavigationLayout>
+    <NavigationBar />
+  </div>
 )
 
 const styles: StyleRulesCallback = theme => ({

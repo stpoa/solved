@@ -10,8 +10,11 @@ import { Redirect } from 'react-router-dom'
 import isEmail from 'validator/lib/isEmail'
 import isLength from 'validator/lib/isLength'
 import { withAuth, WithAuth } from '~auth'
-import { NavigationLayout } from '~generic'
 import { Status } from '~interfaces'
+import {
+  pageContentNotScrollableStyles,
+  pageWithBottomNavStyles,
+} from '~pages/styles'
 import SignInError from './components/SignInError'
 
 class SignIn extends Component<SignInProps, SignInState> {
@@ -49,7 +52,7 @@ class SignIn extends Component<SignInProps, SignInState> {
     const isPending = status === Status.Pending
 
     return (
-      <NavigationLayout withBottomNavigation>
+      <div style={{ ...pageWithBottomNavStyles }}>
         <div className={container}>
           <Snackbar
             autoHideDuration={4000}
@@ -96,7 +99,7 @@ class SignIn extends Component<SignInProps, SignInState> {
             Sign in
           </Button>
         </div>
-      </NavigationLayout>
+      </div>
     )
   }
 
@@ -155,6 +158,7 @@ const styles: StyleRules = createStyles({
     marginTop: 12,
   },
   container: {
+    ...pageContentNotScrollableStyles,
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',

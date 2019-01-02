@@ -44,7 +44,7 @@ const styles = createStyles({
 interface PageHeaderProps
   extends RouteComponentProps<{}>,
     WithStyles<typeof styles> {
-  title?: string
+  title: string
 }
 
 export default withStyles(styles)(withRouter(PageHeader))

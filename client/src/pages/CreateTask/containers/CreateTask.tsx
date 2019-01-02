@@ -1,7 +1,11 @@
 import { StyleRulesCallback } from '@material-ui/core'
 import { WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { Component } from 'react'
-import { NavigationLayout } from '~generic'
+import { PageHeader } from '~generic'
+import {
+  pageContentNotScrollableStyles,
+  pageWithTopAndBottomNavStyles,
+} from '~pages/styles'
 import { OnChange } from '~typings/react'
 import Step from '../components/Step'
 import StepList from '../components/StepList'
@@ -31,7 +35,8 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
     } = this
 
     return (
-      <NavigationLayout withTopNavigation title="Nowe zadanie">
+      <div style={{ ...pageWithTopAndBottomNavStyles }}>
+        <PageHeader title="Nowe zadanie" />
         <div className={classes.container}>
           <StepList {...{ step, onSubmitClick, updateStep }}>
             <Step>
@@ -51,7 +56,7 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
             </Step>
           </StepList>
         </div>
-      </NavigationLayout>
+      </div>
     )
   }
 
@@ -70,11 +75,9 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
 
 const styles: StyleRulesCallback = theme => ({
   container: {
+    ...pageContentNotScrollableStyles,
     backgroundColor: theme.palette.background.paper,
-    display: 'grid',
-    gridTemplateRows: '1fr',
     padding: '0',
-    height: '100%',
   },
   form: {
     margin: '0 auto',

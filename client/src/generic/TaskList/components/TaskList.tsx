@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core'
 import React, { Component } from 'react'
 import { Task } from '~interfaces'
+import { pageContentScrollableStyles } from '~pages/styles'
 import TaskListElement from './TaskListElement'
 
 class TaskList extends Component<TaskListProps, TaskListState> {
@@ -68,8 +69,8 @@ class TaskList extends Component<TaskListProps, TaskListState> {
 const styles: StyleRulesCallback = ({ spacing: { unit } }) =>
   createStyles({
     container: {
+      ...pageContentScrollableStyles,
       margin: 0,
-      width: '100%',
     },
     grid: {
       marginTop: unit,

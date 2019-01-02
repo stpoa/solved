@@ -17,6 +17,7 @@ import {
   SelectTags,
   SelectTagsProps,
 } from '~generic'
+import { pageContentNotScrollableStyles } from '~pages/styles'
 
 const SearchFilter: FunctionComponent<SearchFilterProps> = ({
   classes: { container, item },
@@ -49,7 +50,7 @@ const SearchFilter: FunctionComponent<SearchFilterProps> = ({
 const styles: StyleRulesCallback = () =>
   createStyles({
     container: {
-      display: 'grid',
+      ...pageContentNotScrollableStyles,
       gridTemplateRows: 'max-content auto',
     },
     item: {

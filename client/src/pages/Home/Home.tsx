@@ -1,13 +1,15 @@
 import React from 'react'
 import { tasks } from '~data'
-import { NavigationLayout, TaskList } from '~generic'
+import { NavigationBar, TaskList } from '~generic'
+import { pageWithBottomNavStyles } from '~pages/styles'
 
 class Home extends React.Component<{}> {
   public render() {
     return (
-      <NavigationLayout withBottomNavigation>
+      <div style={{ ...pageWithBottomNavStyles }}>
         <TaskList tasks={tasks} />
-      </NavigationLayout>
+        <NavigationBar />
+      </div>
     )
   }
 }

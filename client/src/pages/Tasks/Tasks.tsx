@@ -15,8 +15,9 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import React, { ChangeEvent, Component, FunctionComponent } from 'react'
 import { taskCategories } from '~data'
-import { NavigationLayout, TaskList } from '~generic'
+import { TaskList } from '~generic'
 import { Task } from '~interfaces'
+import { pageWithBottomNavStyles } from '~pages/styles'
 
 const ExpansionList: FunctionComponent<ExpansionListProps> = ({
   classes,
@@ -67,7 +68,7 @@ class Tasks extends Component<TasksProps, TasksState> {
     const { classes } = this.props
     const { selectedTabIndex } = this.state
     return (
-      <NavigationLayout withBottomNavigation>
+      <div style={{ ...pageWithBottomNavStyles }}>
         <div className={classes.container}>
           <Tabs
             value={selectedTabIndex}
@@ -101,7 +102,7 @@ class Tasks extends Component<TasksProps, TasksState> {
             />
           )}
         </div>
-      </NavigationLayout>
+      </div>
     )
   }
 
