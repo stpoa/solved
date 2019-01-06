@@ -22,12 +22,12 @@ const Prelogin: FunctionComponent<PreloginProps> = ({ classes }) => {
             wszelakich przedmiotów oraz chcą zostać anonimowi.
           </Typography>
         </div>
-        <div className={classes.dots}>
+        <div className={classes.center}>
           <span className={`${classes.dot} ${classes.activeDot}`} />
           <span className={classes.dot} />
           <span className={classes.dot} />
         </div>
-        <div className={classes.buttons}>
+        <div className={classes.center}>
           <WrappedLink
             wrapper={Button}
             className={`${classes.button} ${classes.reverseButton}`}
@@ -73,7 +73,7 @@ const styles: StyleRulesCallback = theme => ({
     margin: '0 15%',
     fontSize: '1.5rem',
   },
-  dots: {
+  center: {
     display: 'flex',
     justifyContent: 'center',
   },
@@ -87,10 +87,6 @@ const styles: StyleRulesCallback = theme => ({
   },
   activeDot: {
     backgroundColor: theme.palette.secondary.main,
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'center',
   },
   button: {
     margin: '20% 4% 0 4%',
