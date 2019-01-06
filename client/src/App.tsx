@@ -64,6 +64,7 @@ class App extends Component<AppProps, {}> {
                   component={Pages.ProfilePrivate}
                 />
                 <PrivateRoute path="/tasks" component={Pages.Tasks} />
+                <Route path="/prelogin" component={Pages.Prelogin} />
                 <Route path="/profile-public" component={Pages.ProfilePublic} />
                 <Route path="/create-task" component={Pages.CreateTask} />
                 <Route path="/sign-in" component={Pages.SignIn} />
