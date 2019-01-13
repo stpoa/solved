@@ -1,13 +1,15 @@
-import { Button, Checkbox, TextField } from '@material-ui/core'
 import {
-  createStyles,
-  StyleRules,
-  withStyles,
-  WithStyles,
-} from '@material-ui/core/styles'
+  Button,
+  Checkbox,
+  StyleRulesCallback,
+  TextField,
+} from '@material-ui/core'
+import { withStyles, WithStyles } from '@material-ui/core/styles'
 import React, { ChangeEventHandler, Component, MouseEventHandler } from 'react'
 import isEmail from 'validator/lib/isEmail'
 import isLength from 'validator/lib/isLength'
+import { NavigationBar } from '~generic'
+import { pageContentNotScrollableWithNavigationBar } from '~pages/styles'
 
 class Register extends Component<RegisterProps, RegisterState> {
   public readonly state: RegisterState = {
@@ -41,65 +43,68 @@ class Register extends Component<RegisterProps, RegisterState> {
     } = this.state.fields
 
     return (
-      <div className={classes.registerContainer}>
-        <div className={classes.content}>
-          <div className={classes.formWrapper}>
-            <div className={classes.form}>
-              <TextField
-                margin="dense"
-                label="Email"
-                required
-                name="email"
-                type="email"
-                fullWidth
-                error={Boolean(emailError)}
-                helperText={emailError}
-                onChange={this.onTextChange}
-                value={email}
-              />
-              <TextField
-                margin="dense"
-                label="Password"
-                required
-                name="password"
-                type="password"
-                fullWidth
-                error={Boolean(passwordError)}
-                helperText={passwordError}
-                onChange={this.onTextChange}
-                value={password}
-              />
-              <TextField
-                margin="dense"
-                label="Confirm password"
-                required
-                name="retypedPassword"
-                type="password"
-                fullWidth
-                error={Boolean(retypedPasswordError)}
-                helperText={retypedPasswordError}
-                onChange={this.onTextChange}
-                value={retypedPassword}
-              />
+      <>
+        <div className={classes.container}>
+          <div className={classes.content}>
+            <div className={classes.formWrapper}>
+              <div className={classes.form}>
+                <TextField
+                  margin="dense"
+                  label="Email"
+                  required
+                  name="email"
+                  type="email"
+                  fullWidth
+                  error={Boolean(emailError)}
+                  helperText={emailError}
+                  onChange={this.onTextChange}
+                  value={email}
+                />
+                <TextField
+                  margin="dense"
+                  label="Password"
+                  required
+                  name="password"
+                  type="password"
+                  fullWidth
+                  error={Boolean(passwordError)}
+                  helperText={passwordError}
+                  onChange={this.onTextChange}
+                  value={password}
+                />
+                <TextField
+                  margin="dense"
+                  label="Confirm password"
+                  required
+                  name="retypedPassword"
+                  type="password"
+                  fullWidth
+                  error={Boolean(retypedPasswordError)}
+                  helperText={retypedPasswordError}
+                  onChange={this.onTextChange}
+                  value={retypedPassword}
+                />
+              </div>
+            </div>
+            <div className={classes.regulationsHolder}>
+              <div>
+                <Checkbox
+                  checked={regulationsCheckBox}
+                  onChange={this.onCheckboxChange}
+                />
+                Regulations
+              </div>
+              <div className={classes.errorMessage}>
+                {regulationsCheckBoxError}
+              </div>
             </div>
           </div>
-          <div className={classes.regulationsHolder}>
-            <div>
-              <Checkbox
-                checked={regulationsCheckBox}
-                onChange={this.onCheckboxChange}
-              />
-              Regulations
-            </div>
-            <div className={classes.errorMessage}>
-              {regulationsCheckBoxError}
-            </div>
-          </div>
+          <Button onClick={this.onSubmit} fullWidth>
+            Utwórz profil
+          </Button>
         </div>
-        <Button onClick={this.onSubmit} fullWidth>
-          Utwórz profil
-        </Button>
-      </div>
+        <NavigationBar />
+      </>
     )
   }
 
@@ -174,7 +179,12 @@ class Register extends Component<RegisterProps, RegisterState> {
   }
 }
 
-const styles: StyleRules = createStyles({
+const styles: StyleRulesCallback = theme => ({
+  container: {
+    ...pageContentNotScrollableWithNavigationBar(theme),
+    display: 'grid',
+    gridTemplateRows: 'auto max-content',
+  },
   content: {
     display: 'grid',
     gridTemplateRows: 'auto max-content',
@@ -191,10 +201,6 @@ const styles: StyleRules = createStyles({
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'center',
-  },
-  registerContainer: {
-    display: 'grid',
-    gridTemplateRows: 'auto max-content',
   },
   regulationsHolder: {
     alignItems: 'center',

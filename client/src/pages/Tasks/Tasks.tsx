@@ -7,7 +7,6 @@ import {
   Typography,
 } from '@material-ui/core'
 import {
-  createStyles,
   StyleRulesCallback,
   WithStyles,
   withStyles,
@@ -15,9 +14,9 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import React, { ChangeEvent, Component, FunctionComponent } from 'react'
 import { taskCategories } from '~data'
-import { TaskList } from '~generic'
+import { NavigationBar, TaskList } from '~generic'
 import { Task } from '~interfaces'
-import { pageWithBottomNavStyles } from '~pages/styles'
+import { pageContentNotScrollableWithNavigationBar } from '~pages/styles'
 
 const ExpansionList: FunctionComponent<ExpansionListProps> = ({
   classes,
@@ -68,7 +67,7 @@ class Tasks extends Component<TasksProps, TasksState> {
     const { classes } = this.props
     const { selectedTabIndex } = this.state
     return (
-      <div style={{ ...pageWithBottomNavStyles }}>
+      <>
         <div className={classes.container}>
           <Tabs
             value={selectedTabIndex}
@@ -102,7 +101,8 @@ class Tasks extends Component<TasksProps, TasksState> {
             />
           )}
         </div>
-      </div>
+        <NavigationBar />
+      </>
     )
   }
 
@@ -110,28 +110,28 @@ class Tasks extends Component<TasksProps, TasksState> {
     this.setState({ selectedTabIndex: value })
 }
 
-const styles: StyleRulesCallback = ({ spacing: { unit } }) =>
-  createStyles({
-    container: {
-      overflow: 'scroll',
-    },
-    tab: {
-      textTransform: 'none',
-    },
-    expansionPanelDetails: {
-      padding: 0,
-    },
-    expansionPanelSummary: {
-      justifyContent: 'center',
-    },
-    expansionList: {
-      marginTop: unit,
-      marginBottom: unit,
-    },
-    expansionTitle: {
-      fontSize: '2rem',
-    },
-  })
+const styles: StyleRulesCallback = theme => ({
+  container: {
+    ...pageContentNotScrollableWithNavigationBar(theme),
+    overflow: 'scroll',
+  },
+  tab: {
+    textTransform: 'none',
+  },
+  expansionPanelDetails: {
+    padding: 0,
+  },
+  expansionPanelSummary: {
+    justifyContent: 'center',
+  },
+  expansionList: {
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+  },
+  expansionTitle: {
+    fontSize: '2rem',
+  },
+})
 
 interface TasksProps extends WithStyles<typeof styles> {}
 interface TasksState {

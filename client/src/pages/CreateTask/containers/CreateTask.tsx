@@ -2,10 +2,7 @@ import { StyleRulesCallback } from '@material-ui/core'
 import { WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { Component } from 'react'
 import { PageHeader } from '~generic'
-import {
-  pageContentNotScrollableStyles,
-  pageWithTopAndBottomNavStyles,
-} from '~pages/styles'
+import { pageContentNotScrollableWithTopBar } from '~pages/styles'
 import { OnChange } from '~typings/react'
 import Step from '../components/Step'
 import StepList from '../components/StepList'
@@ -35,7 +32,7 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
     } = this
 
     return (
-      <div style={{ ...pageWithTopAndBottomNavStyles }}>
+      <>
         <PageHeader title="Nowe zadanie" />
         <div className={classes.container}>
           <StepList {...{ step, onSubmitClick, updateStep }}>
@@ -56,7 +53,7 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
             </Step>
           </StepList>
         </div>
-      </div>
+      </>
     )
   }
 
@@ -75,7 +72,7 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
 
 const styles: StyleRulesCallback = theme => ({
   container: {
-    ...pageContentNotScrollableStyles,
+    ...pageContentNotScrollableWithTopBar(theme),
     backgroundColor: theme.palette.background.paper,
     padding: '0',
   },

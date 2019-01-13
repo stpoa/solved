@@ -82,8 +82,6 @@ class App extends Component<AppProps, {}> {
 
 const styles = createStyles({
   container: {
-    display: 'grid',
-    gridAutoRows: '1fr',
     height: '100%',
   },
 })

@@ -1,17 +1,16 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { tasks } from '~data'
 import { NavigationBar, TaskList } from '~generic'
-import { pageWithBottomNavStyles } from '~pages/styles'
 
-class Home extends React.Component<{}> {
-  public render() {
-    return (
-      <div style={{ ...pageWithBottomNavStyles }}>
-        <TaskList tasks={tasks} />
-        <NavigationBar />
-      </div>
-    )
-  }
+const Home: FC<HomeProps> = () => {
+  return (
+    <>
+      <TaskList tasks={tasks} />
+      <NavigationBar />
+    </>
+  )
 }
+
+interface HomeProps {}
 
 export default Home

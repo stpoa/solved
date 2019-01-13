@@ -19,14 +19,13 @@ import {
 import React, { FunctionComponent } from 'react'
 import { NavigationBar } from '~generic'
 import { isNumber } from '~lib/math'
-import { pageWithBottomNavStyles } from '~pages/styles'
 
 const Profile: FunctionComponent<ProfilePropsStyled> = ({
   isPrivate = false,
   balance,
   classes,
 }) => (
-  <div style={{ ...pageWithBottomNavStyles }}>
+  <div>
     <div className={classes.root}>
       <div className={classes.title}>
         <Typography className={classes.titleText} variant="title">

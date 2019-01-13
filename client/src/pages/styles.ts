@@ -1,33 +1,42 @@
+import { Theme } from '@material-ui/core/styles'
 import { CSSProperties } from '@material-ui/core/styles/withStyles'
 
-const pageStyles: CSSProperties = {
-  display: 'grid',
+const setNotScrollablePageDimension = (cssPropName: string, theme: Theme) => ({
+  [cssPropName]: 56,
+  [`${theme.breakpoints.up('xs')} and (orientation: landscape)`]: {
+    [cssPropName]: 48,
+  },
+  [theme.breakpoints.up('sm')]: {
+    [cssPropName]: 64,
+  },
+})
+
+const pageContentNotScrollable: CSSProperties = {
+  position: 'fixed',
   overflow: 'hidden',
+  width: '100%',
 }
 
-export const pageWithoutNavStyles: CSSProperties = {
-  ...pageStyles,
-  gridTemplateRows: '1fr',
-}
+export const pageContentNotScrollableWithTopBar = (
+  theme: Theme,
+): CSSProperties => ({
+  ...setNotScrollablePageDimension('top', theme),
+  ...pageContentNotScrollable,
+  bottom: 0,
+})
 
-export const pageWithBottomNavStyles: CSSProperties = {
-  ...pageStyles,
-  gridTemplateRows: '1fr auto',
-}
+export const pageContentNotScrollableWithNavigationBar = (
+  theme: Theme,
+): CSSProperties => ({
+  ...setNotScrollablePageDimension('bottom', theme),
+  ...pageContentNotScrollable,
+  top: 0,
+})
 
-export const pageWithTopAndBottomNavStyles: CSSProperties = {
-  ...pageStyles,
-  gridTemplateRows: 'auto 1fr auto',
-}
-
-export const pageContentScrollableStyles: CSSProperties = {
-  display: 'grid',
-  WebkitOverflowScrolling: 'touch',
-  overflow: 'auto',
-}
-
-export const pageContentNotScrollableStyles: CSSProperties = {
-  display: 'grid',
-  WebkitOverflowScrolling: 'auto',
-  overflow: 'hidden',
-}
+export const pageContentNotScrollableWithBothBars = (
+  theme: Theme,
+): CSSProperties => ({
+  ...setNotScrollablePageDimension('top', theme),
+  ...setNotScrollablePageDimension('bottom', theme),
+  ...pageContentNotScrollable,
+})

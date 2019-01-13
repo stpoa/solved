@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { categories, tags } from '~data'
-import { pageWithBottomNavStyles } from '~pages/styles'
+import { NavigationBar } from '~generic'
 import SearchFilter, { SearchFilterProps } from '../components/SearchFilter'
 
 export default class SearchFilterContainer extends Component<
@@ -16,7 +16,7 @@ export default class SearchFilterContainer extends Component<
 
   public render() {
     return (
-      <div style={{ ...pageWithBottomNavStyles }}>
+      <>
         <SearchFilter
           categories={this.state.categories}
           categoryValue={this.state.categoryValue}
@@ -27,7 +27,8 @@ export default class SearchFilterContainer extends Component<
           tabValue={this.state.tabValue}
           tags={this.state.tags}
         />
-      </div>
+        <NavigationBar />
+      </>
     )
   }
 

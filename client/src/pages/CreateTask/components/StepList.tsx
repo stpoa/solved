@@ -68,6 +68,7 @@ const styles: StyleRulesCallback = theme => ({
   container: {
     display: 'grid',
     gridTemplateRows: 'auto 1fr',
+    height: '100%',
     backgroundColor: theme.palette.primary.dark,
   },
   circle: {
