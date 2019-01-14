@@ -17,9 +17,10 @@ import {
   SelectTags,
   SelectTagsProps,
 } from '~generic'
+import { pageContentNotScrollableWithNavigationBar } from '~pages/styles'
 
 const SearchFilter: FunctionComponent<SearchFilterProps> = ({
-  classes: { container, item },
+  classes,
   categories,
   onClickCategory,
   onChangeTab,
@@ -28,10 +29,10 @@ const SearchFilter: FunctionComponent<SearchFilterProps> = ({
   tags,
   tabValue,
 }) => (
-  <div className={container}>
+  <div className={classes.container}>
     <Tabs fullWidth onChange={onChangeTab} value={tabValue}>
-      <Tab className={item} label="Kategorie" />
-      <Tab className={item} label="Tagi" />
+      <Tab className={classes.item} label="Kategorie" />
+      <Tab className={classes.item} label="Tagi" />
     </Tabs>
     <Fragment>
       {tabValue === 0 && (
@@ -46,11 +47,10 @@ const SearchFilter: FunctionComponent<SearchFilterProps> = ({
   </div>
 )
 
-const styles: StyleRulesCallback = () =>
+const styles: StyleRulesCallback = theme =>
   createStyles({
     container: {
-      display: 'grid',
-      gridTemplateRows: 'max-content auto',
+      ...pageContentNotScrollableWithNavigationBar(theme),
     },
     item: {
       justifyContent: 'center',

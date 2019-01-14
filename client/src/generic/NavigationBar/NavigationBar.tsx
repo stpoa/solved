@@ -42,37 +42,46 @@ const menuLinks = [
 
 const NavigationBar: FunctionComponent<NavigationBarProps> = ({ classes }) => {
   return (
-    <AppBar position="sticky" color="primary">
-      <Toolbar className={classes.toolbar}>
-        {menuLinks.map(
-          ({ childIcon: Children, displayName, path, generalButton }) => (
-            <WrappedLink
-              wrapper={IconButton}
-              className={classes.link}
-              variant={displayName}
-              color="inherit"
-              key={displayName}
-              to={path}
-              exact
-              activeClassName={classes.highlight}
-            >
-              <Children
-                className={
-                  generalButton ? classes.generalButton : classes.buttons
-                }
-              />
-            </WrappedLink>
-          ),
-        )}
-      </Toolbar>
-    </AppBar>
+    <div className={classes.container}>
+      <AppBar className={classes.appBar} position="fixed" color="primary">
+        <Toolbar className={classes.toolbar}>
+          {menuLinks.map(
+            ({ childIcon: Children, displayName, path, generalButton }) => (
+              <WrappedLink
+                wrapper={IconButton}
+                className={classes.link}
+                variant={displayName}
+                color="inherit"
+                key={displayName}
+                to={path}
+                exact
+                activeClassName={classes.highlight}
+              >
+                <Children
+                  className={
+                    generalButton ? classes.generalButton : classes.buttons
+                  }
+                />
+              </WrappedLink>
+            ),
+          )}
+        </Toolbar>
+      </AppBar>
+    </div>
   )
 }
 
-const styles = ({ spacing, palette: { secondary, grey } }: Theme) =>
+const styles = ({ spacing, palette: { secondary, grey }, mixins }: Theme) =>
   createStyles({
+    appBar: {
+      top: 'auto',
+      bottom: 0,
+    },
     buttons: {
       fontSize: 32,
+    },
+    container: {
+      ...mixins.toolbar,
     },
     generalButton: {
       color: secondary.main,
