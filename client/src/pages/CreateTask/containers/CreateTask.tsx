@@ -1,7 +1,8 @@
 import { StyleRulesCallback } from '@material-ui/core'
 import { WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { Component } from 'react'
-import PageHeader from '~generic/PageHeader/PageHeader'
+import { PageHeader } from '~generic'
+import { pageContentNotScrollableWithTopBar } from '~pages/styles'
 import { OnChange } from '~typings/react'
 import Step from '../components/Step'
 import StepList from '../components/StepList'
@@ -31,26 +32,28 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
     } = this
 
     return (
-      <div className={classes.container}>
+      <>
         <PageHeader title="Nowe zadanie" />
-        <StepList {...{ step, onSubmitClick, updateStep }}>
-          <Step>
-            <TaskDescriptionEdit {...{ description, onDescriptionUpdate }} />
-          </Step>
-          <Step>
-            <TaskPhotoEdit files={files} onFilesUpdate={onFilesUpdate} />
-          </Step>
-          <Step>
-            <TaskCategoryEdit />
-          </Step>
-          <Step>
-            <TaskTagsEdit />
-          </Step>
-          <Step>
-            <TaskPriceTermEdit />
-          </Step>
-        </StepList>
-      </div>
+        <div className={classes.container}>
+          <StepList {...{ step, onSubmitClick, updateStep }}>
+            <Step>
+              <TaskDescriptionEdit {...{ description, onDescriptionUpdate }} />
+            </Step>
+            <Step>
+              <TaskPhotoEdit files={files} onFilesUpdate={onFilesUpdate} />
+            </Step>
+            <Step>
+              <TaskCategoryEdit />
+            </Step>
+            <Step>
+              <TaskTagsEdit />
+            </Step>
+            <Step>
+              <TaskPriceTermEdit />
+            </Step>
+          </StepList>
+        </div>
+      </>
     )
   }
 
@@ -69,9 +72,8 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
 
 const styles: StyleRulesCallback = theme => ({
   container: {
+    ...pageContentNotScrollableWithTopBar(theme),
     backgroundColor: theme.palette.background.paper,
-    display: 'grid',
-    gridTemplateRows: 'max-content auto',
     padding: '0',
   },
   form: {

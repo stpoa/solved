@@ -17,6 +17,7 @@ import {
   Update,
 } from '@material-ui/icons'
 import React, { FunctionComponent } from 'react'
+import { NavigationBar } from '~generic'
 import { isNumber } from '~lib/math'
 
 const Profile: FunctionComponent<ProfilePropsStyled> = ({
@@ -24,54 +25,57 @@ const Profile: FunctionComponent<ProfilePropsStyled> = ({
   balance,
   classes,
 }) => (
-  <div className={classes.root}>
-    <div className={classes.title}>
-      <Typography className={classes.titleText} variant="title">
-        Profile
-      </Typography>
-    </div>
-    {isPrivate && (
-      <List subheader={<ListSubheader>Info</ListSubheader>}>
-        {isNumber(balance) ? (
-          <ListItem className={classes.balance}>
-            <ListItemIcon>
-              <AccountBalanceWallet />
-            </ListItemIcon>
-            <ListItemText>Balance: {balance}</ListItemText>
-          </ListItem>
-        ) : null}
-      </List>
-    )}
-    <List subheader={<ListSubheader>Activity</ListSubheader>}>
-      <ListItem button>
-        <ListItemIcon>
-          <Update />
-        </ListItemIcon>
-        <ListItemText primary="Tasks in progress" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <Inbox />
-        </ListItemIcon>
-        <ListItemText primary={'Finished tasks'} />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <Spellcheck />
-        </ListItemIcon>
-        <ListItemText primary={'Reviews'} />
-      </ListItem>
-    </List>
-    {isPrivate && (
-      <List subheader={<ListSubheader>Preferences</ListSubheader>}>
+  <div>
+    <div className={classes.root}>
+      <div className={classes.title}>
+        <Typography className={classes.titleText} variant="title">
+          Profile
+        </Typography>
+      </div>
+      {isPrivate && (
+        <List subheader={<ListSubheader>Info</ListSubheader>}>
+          {isNumber(balance) ? (
+            <ListItem className={classes.balance}>
+              <ListItemIcon>
+                <AccountBalanceWallet />
+              </ListItemIcon>
+              <ListItemText>Balance: {balance}</ListItemText>
+            </ListItem>
+          ) : null}
+        </List>
+      )}
+      <List subheader={<ListSubheader>Activity</ListSubheader>}>
         <ListItem button>
           <ListItemIcon>
-            <Settings />
+            <Update />
           </ListItemIcon>
-          <ListItemText primary="Settings" />
+          <ListItemText primary="Tasks in progress" />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <Inbox />
+          </ListItemIcon>
+          <ListItemText primary={'Finished tasks'} />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <Spellcheck />
+          </ListItemIcon>
+          <ListItemText primary={'Reviews'} />
         </ListItem>
       </List>
-    )}
+      {isPrivate && (
+        <List subheader={<ListSubheader>Preferences</ListSubheader>}>
+          <ListItem button>
+            <ListItemIcon>
+              <Settings />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
+          </ListItem>
+        </List>
+      )}
+    </div>
+    <NavigationBar />
   </div>
 )
 

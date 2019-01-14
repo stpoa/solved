@@ -1,16 +1,18 @@
-import { Button, Snackbar, TextField } from '@material-ui/core'
 import {
-  createStyles,
-  StyleRules,
-  withStyles,
-  WithStyles,
-} from '@material-ui/core/styles'
+  Button,
+  Snackbar,
+  StyleRulesCallback,
+  TextField,
+} from '@material-ui/core'
+import { withStyles, WithStyles } from '@material-ui/core/styles'
 import React, { ChangeEventHandler, Component, MouseEventHandler } from 'react'
 import { Redirect } from 'react-router-dom'
 import isEmail from 'validator/lib/isEmail'
 import isLength from 'validator/lib/isLength'
 import { withAuth, WithAuth } from '~auth'
+import { NavigationBar } from '~generic'
 import { Status } from '~interfaces'
+import { pageContentNotScrollableWithNavigationBar } from '~pages/styles'
 import SignInError from './components/SignInError'
 
 class SignIn extends Component<SignInProps, SignInState> {
@@ -48,52 +50,55 @@ class SignIn extends Component<SignInProps, SignInState> {
     const isPending = status === Status.Pending
 
     return (
-      <div className={container}>
-        <Snackbar
-          autoHideDuration={4000}
-          open={showSignInError}
-          onClose={this.hideSignInError}
-        >
-          <SignInError />
-        </Snackbar>
-        <TextField
-          autoFocus
-          className={item}
-          disabled={isPending}
-          error={Boolean(emailError)}
-          margin="dense"
-          label="Email Address"
-          helperText={emailError}
-          required
-          name="email"
-          type="email"
-          value={email}
-          fullWidth
-          onChange={this.onChangeText}
-        />
-        <TextField
-          margin="dense"
-          className={item}
-          disabled={isPending}
-          error={Boolean(passwordError)}
-          label="Password"
-          helperText={passwordError}
-          required
-          name="password"
-          type="password"
-          value={password}
-          fullWidth
-          onChange={this.onChangeText}
-        />
-        <Button
-          className={`${item} ${button}`}
-          disabled={isPending}
-          onClick={this.onSubmit}
-          fullWidth
-        >
-          Sign in
-        </Button>
-      </div>
+      <>
+        <div className={container}>
+          <Snackbar
+            autoHideDuration={4000}
+            open={showSignInError}
+            onClose={this.hideSignInError}
+          >
+            <SignInError />
+          </Snackbar>
+          <TextField
+            autoFocus
+            className={item}
+            disabled={isPending}
+            error={Boolean(emailError)}
+            margin="dense"
+            label="Email Address"
+            helperText={emailError}
+            required
+            name="email"
+            type="email"
+            value={email}
+            fullWidth
+            onChange={this.onChangeText}
+          />
+          <TextField
+            margin="dense"
+            className={item}
+            disabled={isPending}
+            error={Boolean(passwordError)}
+            label="Password"
+            helperText={passwordError}
+            required
+            name="password"
+            type="password"
+            value={password}
+            fullWidth
+            onChange={this.onChangeText}
+          />
+          <Button
+            className={`${item} ${button}`}
+            disabled={isPending}
+            onClick={this.onSubmit}
+            fullWidth
+          >
+            Sign in
+          </Button>
+        </div>
+        <NavigationBar />
+      </>
     )
   }
 
@@ -146,12 +151,13 @@ class SignIn extends Component<SignInProps, SignInState> {
   }
 }
 
-const styles: StyleRules = createStyles({
+const styles: StyleRulesCallback = theme => ({
   button: {
     marginBottom: 4,
     marginTop: 12,
   },
   container: {
+    ...pageContentNotScrollableWithNavigationBar(theme),
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
