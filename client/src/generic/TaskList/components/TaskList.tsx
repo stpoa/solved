@@ -69,12 +69,13 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }) =>
   createStyles({
     container: {
       margin: 0,
-      width: '100%',
+      overflow: 'auto',
+      width: '100vw',
     },
     grid: {
       marginTop: unit,
       margin: 0,
-      width: '100%',
+      width: '100vw',
     },
     gridItem: {
       padding: `${0}px ${unit}px ${unit}px ${unit}px`,
