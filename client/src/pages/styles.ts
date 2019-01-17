@@ -11,6 +11,7 @@ const setNotScrollablePageDimension = (cssPropName: string, theme: Theme) => ({
   },
 })
 
+
 export const pageContentNotScrollable: CSSProperties = {
   position: 'fixed',
   overflow: 'hidden',
