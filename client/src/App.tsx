@@ -45,6 +45,14 @@ const theme = createMuiTheme({
   typography: {
     htmlFontSize: 10,
     useNextVariants: true,
+    h1: {
+      fontSize: '3.2rem',
+      color: 'rgba(0,0,0,0.87)',
+      fontWeight: 'normal',
+    },
+    body2: {
+      color: '#818181',
+    },
   },
 })
 
@@ -63,6 +71,7 @@ class App extends Component<AppProps, {}> {
                   component={Pages.ProfilePrivate}
                 />
                 <PrivateRoute path="/tasks" component={Pages.Tasks} />
+                <Route path="/prelogin" component={Pages.Prelogin} />
                 <Route path="/profile-public" component={Pages.ProfilePublic} />
                 <Route path="/create-task" component={Pages.CreateTask} />
                 <Route path="/sign-in" component={Pages.SignIn} />
