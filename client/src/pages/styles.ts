@@ -11,9 +11,10 @@ const setNotScrollablePageDimension = (cssPropName: string, theme: Theme) => ({
   },
 })
 
-const pageContentNotScrollable: CSSProperties = {
+export const pageContentNotScrollable: CSSProperties = {
   position: 'fixed',
   overflow: 'hidden',
+  height: '100%',
   width: '100%',
 }
 
