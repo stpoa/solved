@@ -49,11 +49,27 @@ const Prelogin: FunctionComponent<PreloginProps> = ({ classes }) => {
           Zaloguj
         </WrappedLink>
       </div>
+      <WrappedLink
+        wrapper={Button}
+        className={classes.skipButton}
+        to="/"
+        variant="outlined"
+      >
+        Pomiń
+      </WrappedLink>
     </div>
   )
 }
 
 const styles: StyleRulesCallback = theme => ({
+  skipButton: {
+    position: 'fixed',
+    top: 0,
+    right: 0,
+    margin: '1rem',
+    border: 0,
+    color: theme.palette.secondary.main,
+  },
   container: {
     ...pageContentNotScrollable,
     height: '100%',
