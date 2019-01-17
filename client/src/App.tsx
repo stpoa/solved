@@ -45,6 +45,14 @@ const theme = createMuiTheme({
   typography: {
     htmlFontSize: 10,
     useNextVariants: true,
+    h1: {
+      fontSize: '3.2rem',
+      color: 'rgba(0,0,0,0.87)',
+      fontWeight: 'normal',
+    },
+    body2: {
+      color: '#818181',
+    },
   },
 })
 
