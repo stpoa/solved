@@ -6,7 +6,6 @@ import { pageContentNotScrollableWithTopBar } from '~pages/styles'
 import { OnChange } from '~typings/react'
 import Step from '../components/Step'
 import StepList from '../components/StepList'
-import { TaskCategoryEdit } from '../components/TaskCategoryEdit'
 import TaskDescriptionEdit from '../components/TaskDescriptionEdit'
 import TaskPhotoEdit, { ExtendedFile } from '../components/TaskPhotoEdit'
 import { TaskPriceTermEdit } from '../components/TaskPriceTermEdit'
@@ -41,9 +40,6 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
             </Step>
             <Step>
               <TaskPhotoEdit files={files} onFilesUpdate={onFilesUpdate} />
-            </Step>
-            <Step>
-              <TaskCategoryEdit />
             </Step>
             <Step>
               <TaskTagsEdit />
