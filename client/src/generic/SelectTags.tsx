@@ -7,23 +7,52 @@ import {
 import React, { FunctionComponent } from 'react'
 import Tag from './TaskList/components/Tag'
 
+const limitVisibleTags = (limit: number) => (tags: TagValue[]) => {
+  const selectedNum = tags.reduce((acc, tag) => acc + (tag.selected ? 1 : 0), 0)
+  let addedSelectedNum = 0
+  let addedVisibleNum = 0
+
+  return tags.map(tag => {
+    if (addedSelectedNum + addedVisibleNum === limit) {
+      return { ...tag, visible: false }
+    }
+
+    if (tag.selected && limit - addedSelectedNum > 0) {
+      addedSelectedNum++
+      return tag
+    }
+
+    if (tag.visible && limit - addedVisibleNum - selectedNum > 0) {
+      addedVisibleNum++
+      return tag
+    }
+
+    return { ...tag, visible: false }
+  })
+}
+
 const SelectTags: FunctionComponent<SelectTagsProps> = ({
-  tags,
+  tags: manyTags,
   classes: { container },
   onClick,
-}) => (
-  <div className={container}>
-    {tags.map(({ selected, name }, i) => (
-      <Tag
-        selected={selected}
-        clickable
-        onClick={onClick(name)}
-        key={i}
-        text={name}
-      />
-    ))}
-  </div>
-)
+}) => {
+  const tags = limitVisibleTags(10)(manyTags)
+
+  return (
+    <div className={container}>
+      {tags.map(({ selected, name, visible }, i) => (
+        <Tag
+          visible={visible}
+          selected={selected}
+          clickable
+          onClick={onClick(name)}
+          key={i}
+          text={name}
+        />
+      ))}
+    </div>
+  )
+}
 
 const styles: StyleRulesCallback = () =>
   createStyles({
@@ -37,6 +66,7 @@ const styles: StyleRulesCallback = () =>
 
 export interface TagValue {
   name: string
+  visible: boolean
   selected: boolean
 }
 

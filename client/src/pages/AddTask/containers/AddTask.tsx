@@ -12,7 +12,7 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
     image: '',
     status: undefined,
     tabValue: false,
-    tags: tagsData.map(tag => ({ name: tag, selected: false })),
+    tags: tagsData.map(tag => ({ name: tag, selected: false, visible: true })),
   }
 
   public async componentDidUpdate(_: {}, prevState: AddTaskContainerState) {
@@ -66,7 +66,7 @@ class AddTaskContainer extends Component<{}, AddTaskContainerState> {
         tag.name !== tagName
           ? tag
           : {
-              name: tag.name,
+              ...tag,
               selected: !tag.selected,
             },
       ),

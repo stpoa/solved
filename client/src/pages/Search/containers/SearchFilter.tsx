@@ -11,7 +11,7 @@ export default class SearchFilterContainer extends Component<
     categories,
     categoryValue: '',
     tabValue: 0,
-    tags: tags.map(tag => ({ name: tag, selected: false })),
+    tags: tags.map(tag => ({ name: tag, selected: false, visible: true })),
   }
 
   public render() {
@@ -47,12 +47,7 @@ export default class SearchFilterContainer extends Component<
   ) => () => {
     this.setState(prevState => ({
       tags: prevState.tags.map(tag =>
-        tag.name !== tagName
-          ? tag
-          : {
-              name: tag.name,
-              selected: !tag.selected,
-            },
+        tag.name !== tagName ? tag : { ...tag, selected: !tag.selected },
       ),
     }))
   }
