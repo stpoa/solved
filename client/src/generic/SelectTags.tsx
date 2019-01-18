@@ -4,7 +4,7 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core/styles'
-import React, { FunctionComponent, MouseEventHandler } from 'react'
+import React, { FunctionComponent } from 'react'
 import Tag from './TaskList/components/Tag'
 
 const SelectTags: FunctionComponent<SelectTagsProps> = ({
@@ -35,16 +35,14 @@ const styles: StyleRulesCallback = () =>
     },
   })
 
-interface TagValue {
+export interface TagValue {
   name: string
   selected: boolean
 }
 
-interface TagList extends Array<TagValue> {}
-
 export interface SelectTagsProps extends WithStyles<typeof styles> {
-  tags: TagList
-  onClick: (tagName: string) => MouseEventHandler<HTMLElement>
+  tags: TagValue[]
+  onClick: (tagName: string) => () => void
 }
 
 export default withStyles(styles)(SelectTags)
