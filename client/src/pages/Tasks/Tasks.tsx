@@ -23,40 +23,44 @@ const ExpansionList: FunctionComponent<ExpansionListProps> = ({
   taskGroup,
   isEditable,
   isDeletable,
-}) => (
-  <div className={classes.expansionList}>
-    <ExpansionPanel defaultExpanded>
-      <ExpansionPanelSummary
-        classes={{ content: classes.expansionPanelSummary }}
-        expandIcon={<ExpandMoreIcon />}
-      >
-        <Typography className={classes.expansionTitle} color="secondary">
-          My tasks
-        </Typography>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetails className={classes.expansionPanelDetails}>
-        <TaskList
-          isEditable={isEditable}
-          isDeletable={isDeletable}
-          tasks={taskGroup.myTasks}
-        />
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
-    <ExpansionPanel>
-      <ExpansionPanelSummary
-        classes={{ content: classes.expansionPanelSummary }}
-        expandIcon={<ExpandMoreIcon />}
-      >
-        <Typography className={classes.expansionTitle} color="secondary">
-          Someone's tasks
-        </Typography>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetails className={classes.expansionPanelDetails}>
-        <TaskList isDeletable={isDeletable} tasks={taskGroup.someoneTasks} />
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
-  </div>
-)
+}) => {
+  const panelClass = { content: classes.expansionPanelSummary }
+
+  return (
+    <div className={classes.expansionList}>
+      <ExpansionPanel defaultExpanded>
+        <ExpansionPanelSummary
+          classes={panelClass}
+          expandIcon={<ExpandMoreIcon />}
+        >
+          <Typography className={classes.expansionTitle} color="secondary">
+            My tasks
+          </Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails className={classes.expansionPanelDetails}>
+          <TaskList
+            isEditable={isEditable}
+            isDeletable={isDeletable}
+            tasks={taskGroup.myTasks}
+          />
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+      <ExpansionPanel>
+        <ExpansionPanelSummary
+          classes={panelClass}
+          expandIcon={<ExpandMoreIcon />}
+        >
+          <Typography className={classes.expansionTitle} color="secondary">
+            Someone's tasks
+          </Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails className={classes.expansionPanelDetails}>
+          <TaskList isDeletable={isDeletable} tasks={taskGroup.someoneTasks} />
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+    </div>
+  )
+}
 
 class Tasks extends Component<TasksProps, TasksState> {
   public state = {

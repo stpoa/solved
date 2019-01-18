@@ -13,23 +13,27 @@ const SelectCategory: FunctionComponent<SelectCategoryProps> = ({
   classes: { container, item, list },
   onClick,
   value,
-}) => (
-  <div className={container}>
-    <List disablePadding classes={{ root: list }}>
-      {categories.map(({ id, name }) => (
-        <MenuItem
-          button
-          className={item}
-          key={id}
-          onClick={onClick.bind(null, id)}
-          selected={value === id}
-        >
-          {name}
-        </MenuItem>
-      ))}
-    </List>
-  </div>
-)
+}) => {
+  const classes = { root: list }
+
+  return (
+    <div className={container}>
+      <List disablePadding {...{ classes }}>
+        {categories.map(({ id, name }) => (
+          <MenuItem
+            button
+            className={item}
+            key={id}
+            onClick={onClick.bind(null, id)}
+            selected={value === id}
+          >
+            {name}
+          </MenuItem>
+        ))}
+      </List>
+    </div>
+  )
+}
 
 const styles: StyleRules = createStyles({
   container: {

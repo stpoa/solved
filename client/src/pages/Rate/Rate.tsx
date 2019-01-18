@@ -51,6 +51,8 @@ const Rate: FunctionComponent<RateProps> = ({ classes }) => {
   const thumbUpColor = isPositive ? 'default' : 'secondary'
   const thumbDownColor = isPositive ? 'secondary' : 'default'
 
+  const style = { marginTop: '8em' }
+
   return (
     <div className={classes.container}>
       <Typography
@@ -62,21 +64,19 @@ const Rate: FunctionComponent<RateProps> = ({ classes }) => {
         Oceń rozwiązującego
       </Typography>
 
-      <div style={{ marginTop: '8em' }}>
+      <div {...{ style }}>
         <IconButton
           onClick={handleClickThumbDown}
-          style={{ paddingTop: '6%' }}
           color={thumbUpColor}
-          className={classes.thumbIcon}
+          className={[classes.thumbicon, classes.padTop].join(' ')}
         >
           <ThumbDown className={classes.thumbIcon} />
         </IconButton>
 
         <IconButton
           onClick={handleClickThumbUp}
-          style={{ paddingBottom: '6%' }}
           color={thumbDownColor}
-          className={classes.thumbIcon}
+          className={[classes.thumbicon, classes.padBottom].join(' ')}
         >
           <ThumbUp className={classes.thumbIcon} />
         </IconButton>
@@ -125,6 +125,12 @@ const styles: StyleRulesCallback = theme => ({
   thumbIcon: {
     height: '50%',
     width: '50%',
+  },
+  padTop: {
+    paddingTop: '6%',
+  },
+  padBottom: {
+    paddingBottom: '6%',
   },
   title: {
     fontSize: '20px',

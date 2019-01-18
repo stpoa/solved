@@ -11,19 +11,21 @@ const Description: FunctionComponent<DescriptionProps> = ({
   classes,
   onChange,
   value,
-}) => (
-  <TextField
-    id="multiline-static"
-    multiline
-    rows="20"
-    placeholder="Opis zadania"
-    onChange={onChange}
-    className={classes.description}
-    InputProps={{ disableUnderline: true, style: { padding: 0 } }}
-    value={value}
-    margin="normal"
-  />
-)
+}) => {
+  const InputProps = { disableUnderline: true, style: { padding: 0 } }
+
+  return (
+    <TextField
+      id="multiline-static"
+      multiline
+      rows="20"
+      placeholder="Opis zadania"
+      className={classes.description}
+      margin="normal"
+      {...{ InputProps, value, onChange }}
+    />
+  )
+}
 
 const styles: StyleRules = createStyles({
   description: {

@@ -16,6 +16,8 @@ const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({
   tagsQuery,
   onTagsQueryUpdate,
 }) => {
+  const InputLabelProps = { shrink: true }
+
   return (
     <div className={classes.container}>
       <div className={classes.title}>
@@ -30,9 +32,7 @@ const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({
           label="Zacznij wpisywać"
           value={tagsQuery}
           onChange={onTagsQueryUpdate}
-          InputLabelProps={{
-            shrink: true,
-          }}
+          {...{ InputLabelProps }}
         />
       </div>
       <div className={classes.tags}>

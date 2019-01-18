@@ -78,7 +78,7 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
     this.setState({ tagsQuery, tags })
   }
 
-  public onTagSelectionUpdate: (name: string) => () => void = name => () => {
+  public onTagSelectionUpdate = (name: string) => () => {
     const tags = this.state.tags.map(tag =>
       tag.name === name
         ? { ...tag, visible: true, selected: !tag.selected }
