@@ -85,7 +85,7 @@ const TaskListElement = ({
           </Fragment>
         )}
       </div>
-      <Typography variant="h6" color="textSecondary">
+      <Typography variant="h2" color="textSecondary">
         <p className={classes.shortDescription}>{shortDescription}</p>
         <TagList tags={tags} />
         <div className={classes.footer}>

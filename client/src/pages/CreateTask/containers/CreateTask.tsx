@@ -26,12 +26,15 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
   public render() {
     const {
       props: { classes },
-      state: { description, step, files },
+      state: { description, step, files, tagsQuery },
       onDescriptionUpdate,
       onFilesUpdate,
       updateStep,
       onSubmitClick,
+      onTagSelectionUpdate,
+      onTagsQueryUpdate,
     } = this
+    const tags = this.state.tags.filter(tag => tag.visible)
 
     return (
       <>
@@ -40,10 +43,12 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
           <StepList {...{ step, onSubmitClick, updateStep }}>
             <Step>
               <TaskTagsEdit
-                onTagSelectionUpdate={this.onTagSelectionUpdate}
-                tags={this.state.tags.filter(tag => tag.visible)}
-                onTagsQueryUpdate={this.onTagsQueryUpdate}
-                tagsQuery={this.state.tagsQuery}
+                {...{
+                  onTagSelectionUpdate,
+                  tags,
+                  onTagsQueryUpdate,
+                  tagsQuery,
+                }}
               />
             </Step>
 

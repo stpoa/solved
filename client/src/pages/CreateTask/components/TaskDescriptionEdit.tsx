@@ -16,7 +16,7 @@ const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
     <Typography
       className={classes.title}
       gutterBottom
-      variant="h6"
+      variant="h2"
       component="h2"
     >
       Opis
@@ -38,9 +38,10 @@ const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
   </div>
 )
 
-const styles: StyleRulesCallback = () => ({
+const styles: StyleRulesCallback = theme => ({
   title: {
     textAlign: 'center',
+    color: theme.palette.secondary.main,
   },
   container: {},
   form: {

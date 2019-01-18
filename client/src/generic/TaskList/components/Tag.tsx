@@ -13,24 +13,30 @@ const Tag = ({ classes, text, onClick, selected = false }: TagProps) => {
 }
 
 const styles: StyleRulesCallback = theme => {
-  const backgroundColor = theme.palette.secondary.light
+  const backgroundColor = theme.palette.secondary.main
+  const borderColor = theme.palette.secondary.main
 
   return {
     chip: {
       backgroundColor: theme.palette.primary.main,
-      boxShadow: '0px 0px 4px 0px #000000',
-      fontSize: '1.1rem',
-      height: '2rem',
+      border: '1px solid',
+      borderColor: theme.palette.grey[400],
+      fontSize: '1.4rem',
+      height: '3.2rem',
       margin: theme.spacing.unit,
+      padding: '0.5rem',
     },
     selected: {
       '&:focus': {
         backgroundColor,
+        borderColor,
       },
       '&:hover': {
         backgroundColor,
+        borderColor,
       },
       backgroundColor,
+      borderColor,
     },
   }
 }

@@ -21,18 +21,23 @@ import { PrivateRoute } from '~generic'
 import * as Pages from '~pages'
 
 // Theme
+const blue = '#4481EB'
+const grey = '#818181'
+const black = 'rgba(0,0,0,0.87)'
+const white = '#FFFFFF'
+
 const theme = createMuiTheme({
   palette: {
     primary: {
       dark: '#FAFAFA',
-      light: '#FFFFFF',
-      main: '#FFFFFF',
+      light: white,
+      main: white,
       // contrastText: getContrastText(palette.secondary.A400),
     },
     secondary: {
-      dark: '#479AC8',
-      light: '#4481EB',
-      main: '#4481EB',
+      dark: blue,
+      light: blue,
+      main: blue,
       //   contrastText: getContrastText(palette.secondary.A400),
     },
     // error: {
@@ -47,11 +52,21 @@ const theme = createMuiTheme({
     useNextVariants: true,
     h1: {
       fontSize: '3.2rem',
-      color: 'rgba(0,0,0,0.87)',
       fontWeight: 'normal',
+      color: black,
+    },
+    h2: {
+      fontSize: '2rem',
+      fontWeight: 'normal',
+      color: black,
+    },
+    h3: {
+      fontSize: '2rem',
+      fontWeight: 'normal',
+      color: blue,
     },
     body2: {
-      color: '#818181',
+      color: grey,
     },
   },
 })

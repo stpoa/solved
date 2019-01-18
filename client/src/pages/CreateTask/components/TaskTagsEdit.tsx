@@ -1,6 +1,6 @@
 import {
-  Input,
   StyleRulesCallback,
+  TextField,
   Typography,
   WithStyles,
   withStyles,
@@ -18,28 +18,57 @@ const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({
 }) => {
   return (
     <div className={classes.container}>
-      <Typography
-        className={classes.title}
-        gutterBottom
-        variant="h6"
-        component="h2"
-      >
-        <div className={classes.search}>
-          Search
-          <Input value={tagsQuery} onChange={onTagsQueryUpdate} />
-        </div>
-        Tagi
-      </Typography>
-      <SelectTags {...{ tags }} onClick={onTagSelectionUpdate} />
+      <div className={classes.title}>
+        <Typography variant="h3" component="h3">
+          Tagi
+          <hr className={classes.underline} />
+        </Typography>
+      </div>
+      <div className={classes.search}>
+        <TextField
+          className={classes.input}
+          label="Zacznij wpisywać"
+          value={tagsQuery}
+          onChange={onTagsQueryUpdate}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </div>
+      <div className={classes.tags}>
+        <SelectTags {...{ tags }} onClick={onTagSelectionUpdate} />
+      </div>
     </div>
   )
 }
 
-const styles: StyleRulesCallback = () => ({
+const styles: StyleRulesCallback = theme => ({
+  container: {
+    padding: theme.spacing.unit * 2,
+    display: 'grid',
+    gridTemplateRows: 'auto auto 1fr',
+    gridGap: '2rem',
+  },
   title: {
     textAlign: 'center',
   },
-  container: {},
+  search: {
+    display: 'flex',
+    justifyContent: 'center',
+    textAlign: 'left',
+    width: '100%',
+  },
+  tags: {
+    height: '1fr',
+  },
+  input: {
+    width: '100%',
+  },
+  underline: {
+    height: '1px',
+    border: 'none',
+    backgroundColor: theme.palette.grey[300],
+  },
 })
 
 interface TaskTagsEditProps extends WithStyles<typeof styles> {
