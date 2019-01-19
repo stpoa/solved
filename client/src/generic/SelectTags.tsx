@@ -37,22 +37,31 @@ const limitVisibleTags = (limit: number) => (tags: TagValue[]) => {
 const SelectTags: FunctionComponent<SelectTagsProps> = ({
   tags: manyTags,
   classes: { container },
-  onClick,
+  onTagSelect,
 }) => {
   const tags = limitVisibleTags(10)(manyTags)
+  const limit = 4
+  const selectedCount = tags.reduce(
+    (count, tag) => (tag.selected ? count + 1 : count),
+    0,
+  )
 
   return (
     <div className={container}>
-      {tags.map(({ selected, name, visible }, i) => (
-        <Tag
-          visible={visible}
-          selected={selected}
-          clickable
-          onClick={onClick(name)}
-          key={i}
-          text={name}
-        />
-      ))}
+      {tags.map(({ selected, name, visible }, i) => {
+        const isClickable = !selected && selectedCount === limit
+
+        return (
+          <Tag
+            visible={visible}
+            selected={selected}
+            clickable
+            onClick={isClickable ? () => undefined : onTagSelect(name)}
+            key={i}
+            text={name}
+          />
+        )
+      })}
     </div>
   )
 }
@@ -75,7 +84,7 @@ export interface TagValue {
 
 export interface SelectTagsProps extends WithStyles<typeof styles> {
   tags: TagValue[]
-  onClick: (tagName: string) => () => void
+  onTagSelect: (tagName: string) => () => void
 }
 
 export default withStyles(styles)(SelectTags)

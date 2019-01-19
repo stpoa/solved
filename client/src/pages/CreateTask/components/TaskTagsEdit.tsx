@@ -36,7 +36,7 @@ const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({
         />
       </div>
       <div className={classes.tags}>
-        <SelectTags {...{ tags }} onClick={onTagSelectionUpdate} />
+        <SelectTags {...{ tags }} onTagSelect={onTagSelectionUpdate} />
       </div>
     </div>
   )
