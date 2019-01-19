@@ -44,6 +44,7 @@ const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({
 
 const styles: StyleRulesCallback = theme => ({
   container: {
+    height: '100%',
     padding: theme.spacing.unit * 2,
     display: 'grid',
     gridTemplateRows: 'auto auto 1fr',
@@ -59,7 +60,8 @@ const styles: StyleRulesCallback = theme => ({
     width: '100%',
   },
   tags: {
-    height: '1fr',
+    maxHeight: '-webkit-fill-available',
+    overflow: 'scroll',
   },
   input: {
     width: '100%',

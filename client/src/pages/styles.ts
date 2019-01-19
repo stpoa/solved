@@ -6,14 +6,11 @@ const setNotScrollablePageDimension = (
   theme: Theme,
 ) => ({
   [cssPropName]: 56,
-  height: `calc(100% - 56)`,
   [`${theme.breakpoints.up('xs')} and (orientation: landscape)`]: {
     [cssPropName]: 48,
-    height: `calc(100% - 48)`,
   },
   [theme.breakpoints.up('sm')]: {
     [cssPropName]: 64,
-    height: `calc(100% - 48)`,
   },
 })
 
