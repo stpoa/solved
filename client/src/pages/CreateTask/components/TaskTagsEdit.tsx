@@ -62,6 +62,7 @@ const styles: StyleRulesCallback = theme => ({
   tags: {
     overflowY: 'auto',
     overflowX: 'hidden',
+    overflowScrolling: 'touch',
   },
   input: {
     width: '100%',
