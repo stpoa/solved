@@ -60,8 +60,8 @@ const styles: StyleRulesCallback = theme => ({
     width: '100%',
   },
   tags: {
-    maxHeight: 'fill-available',
-    overflow: 'scroll',
+    overflowY: 'auto',
+    overflowX: 'hidden',
   },
   input: {
     width: '100%',

@@ -73,6 +73,7 @@ const styles: StyleRulesCallback = () =>
       display: 'flex',
       flexWrap: 'wrap',
       justifyContent: 'center',
+      height: 0,
     },
   })
 
