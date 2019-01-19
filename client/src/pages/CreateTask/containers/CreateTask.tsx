@@ -1,21 +1,23 @@
 import { StyleRulesCallback } from '@material-ui/core'
 import { WithStyles, withStyles } from '@material-ui/core/styles'
 import React, { Component } from 'react'
+import { tags as tagNames } from '~data'
 import { PageHeader } from '~generic'
 import { pageContentNotScrollableWithTopBar } from '~pages/styles'
 import { OnChange } from '~typings/react'
 import Step from '../components/Step'
 import StepList from '../components/StepList'
-import { TaskCategoryEdit } from '../components/TaskCategoryEdit'
 import TaskDescriptionEdit from '../components/TaskDescriptionEdit'
 import TaskPhotoEdit, { ExtendedFile } from '../components/TaskPhotoEdit'
 import { TaskPriceTermEdit } from '../components/TaskPriceTermEdit'
-import { TaskTagsEdit } from '../components/TaskTagsEdit'
+import TaskTagsEdit from '../components/TaskTagsEdit'
 
 const initialState = {
   step: 1,
   description: '',
   files: [] as ExtendedFile[],
+  tags: tagNames.map(tag => ({ name: tag, selected: false, visible: true })),
+  tagsQuery: '',
 }
 
 class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
@@ -24,12 +26,15 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
   public render() {
     const {
       props: { classes },
-      state: { description, step, files },
+      state: { description, step, files, tagsQuery },
       onDescriptionUpdate,
       onFilesUpdate,
       updateStep,
       onSubmitClick,
+      onTagSelectionUpdate,
+      onTagsQueryUpdate,
     } = this
+    const tags = this.state.tags.filter(tag => tag.visible)
 
     return (
       <>
@@ -37,16 +42,21 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
         <div className={classes.container}>
           <StepList {...{ step, onSubmitClick, updateStep }}>
             <Step>
+              <TaskTagsEdit
+                {...{
+                  onTagSelectionUpdate,
+                  tags,
+                  onTagsQueryUpdate,
+                  tagsQuery,
+                }}
+              />
+            </Step>
+
+            <Step>
               <TaskDescriptionEdit {...{ description, onDescriptionUpdate }} />
             </Step>
             <Step>
               <TaskPhotoEdit files={files} onFilesUpdate={onFilesUpdate} />
-            </Step>
-            <Step>
-              <TaskCategoryEdit />
-            </Step>
-            <Step>
-              <TaskTagsEdit />
             </Step>
             <Step>
               <TaskPriceTermEdit />
@@ -55,6 +65,35 @@ class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
         </div>
       </>
     )
+  }
+
+  public onTagsQueryUpdate: OnChange = e => {
+    const tagsQuery = e.target.value
+
+    const tags = this.state.tags.map(tag =>
+      tag.selected || tag.name.toLowerCase().includes(tagsQuery.toLowerCase())
+        ? { ...tag, visible: true }
+        : { ...tag, visible: false },
+    )
+    this.setState({ tagsQuery, tags })
+  }
+
+  public onTagSelectionUpdate = (name: string) => () => {
+    const clickedTag = this.state.tags.find(t => t.name === name)!
+
+    if (clickedTag.selected) {
+      const tags = this.state.tags.map(tag =>
+        tag.name === name ? { ...tag, selected: false } : { ...tag },
+      )
+      this.setState({ tags })
+    } else {
+      const tags = this.state.tags.map(tag =>
+        tag.name === name
+          ? { ...tag, visible: true, selected: true }
+          : { ...tag, visible: true },
+      )
+      this.setState({ tags, tagsQuery: '' })
+    }
   }
 
   public onDescriptionUpdate: OnChange = e => {

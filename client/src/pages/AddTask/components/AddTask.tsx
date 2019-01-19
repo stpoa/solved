@@ -62,7 +62,7 @@ const AddTask: FunctionComponent<AddTaskProps> = ({
           value={categoryValue}
         />
       )}
-      {tabValue === 1 && <SelectTags onClick={onClickTag} tags={tags} />}
+      {tabValue === 1 && <SelectTags onTagSelect={onClickTag} tags={tags} />}
     </Fragment>
   </div>
 )
@@ -90,7 +90,7 @@ const styles: StyleRulesCallback = () =>
 export interface AddTaskProps extends WithStyles<typeof styles> {
   categories: SelectCategoryProps['categories']
   onClickCategory: SelectCategoryProps['onClick']
-  onClickTag: SelectTagsProps['onClick']
+  onClickTag: SelectTagsProps['onTagSelect']
   onSubmit: MouseEventHandler
   onCapturePhoto: CapturePhotoProps['onCapture']
   onChangeDescription: DescriptionProps['onChange']

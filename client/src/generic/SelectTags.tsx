@@ -4,26 +4,67 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core/styles'
-import React, { FunctionComponent, MouseEventHandler } from 'react'
+import React, { FunctionComponent } from 'react'
 import Tag from './TaskList/components/Tag'
 
+const limitVisibleTags = (limit: number) => (tags: TagValue[]) => {
+  const selectedCount = tags.reduce(
+    (acc, tag) => acc + (tag.selected ? 1 : 0),
+    0,
+  )
+  let addedSelectedCount = 0
+  let addedVisibleCount = 0
+
+  return tags.map(tag => {
+    if (limit - addedSelectedCount - addedVisibleCount < 0) {
+      return { ...tag, visible: false }
+    }
+
+    if (tag.selected && limit - addedSelectedCount > 0) {
+      addedSelectedCount++
+      return tag
+    }
+
+    if (tag.visible && limit - addedVisibleCount - selectedCount > 0) {
+      addedVisibleCount++
+      return tag
+    }
+
+    return { ...tag, visible: false }
+  })
+}
+
 const SelectTags: FunctionComponent<SelectTagsProps> = ({
-  tags,
+  tags: manyTags,
   classes: { container },
-  onClick,
-}) => (
-  <div className={container}>
-    {tags.map(({ selected, name }, i) => (
-      <Tag
-        selected={selected}
-        clickable
-        onClick={onClick(name)}
-        key={i}
-        text={name}
-      />
-    ))}
-  </div>
-)
+  onTagSelect,
+}) => {
+  const tags = limitVisibleTags(10)(manyTags)
+  const limit = 4
+  const selectedCount = tags.reduce(
+    (count, tag) => (tag.selected ? count + 1 : count),
+    0,
+  )
+
+  return (
+    <div className={container}>
+      {tags.map(({ selected, name, visible }, i) => {
+        const isClickable = !selected && selectedCount === limit
+
+        return (
+          <Tag
+            visible={visible}
+            selected={selected}
+            clickable
+            onClick={isClickable ? () => undefined : onTagSelect(name)}
+            key={i}
+            text={name}
+          />
+        )
+      })}
+    </div>
+  )
+}
 
 const styles: StyleRulesCallback = () =>
   createStyles({
@@ -32,19 +73,19 @@ const styles: StyleRulesCallback = () =>
       display: 'flex',
       flexWrap: 'wrap',
       justifyContent: 'center',
+      height: 0,
     },
   })
 
-interface TagValue {
+export interface TagValue {
   name: string
+  visible: boolean
   selected: boolean
 }
 
-interface TagList extends Array<TagValue> {}
-
 export interface SelectTagsProps extends WithStyles<typeof styles> {
-  tags: TagList
-  onClick: (tagName: string) => MouseEventHandler<HTMLElement>
+  tags: TagValue[]
+  onTagSelect: (tagName: string) => () => void
 }
 
 export default withStyles(styles)(SelectTags)

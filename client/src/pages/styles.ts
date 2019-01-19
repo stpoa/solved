@@ -1,7 +1,10 @@
 import { Theme } from '@material-ui/core/styles'
 import { CSSProperties } from '@material-ui/core/styles/withStyles'
 
-const setNotScrollablePageDimension = (cssPropName: string, theme: Theme) => ({
+const setNotScrollablePageDimension = (
+  cssPropName: 'top' | 'bottom',
+  theme: Theme,
+) => ({
   [cssPropName]: 56,
   [`${theme.breakpoints.up('xs')} and (orientation: landscape)`]: {
     [cssPropName]: 48,
@@ -11,11 +14,9 @@ const setNotScrollablePageDimension = (cssPropName: string, theme: Theme) => ({
   },
 })
 
-
 export const pageContentNotScrollable: CSSProperties = {
   position: 'fixed',
   overflow: 'hidden',
-  height: '100%',
   width: '100%',
 }
 

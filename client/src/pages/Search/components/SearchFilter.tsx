@@ -42,7 +42,7 @@ const SearchFilter: FunctionComponent<SearchFilterProps> = ({
           value={categoryValue}
         />
       )}
-      {tabValue === 1 && <SelectTags onClick={onClickTag} tags={tags} />}
+      {tabValue === 1 && <SelectTags onTagSelect={onClickTag} tags={tags} />}
     </Fragment>
   </div>
 )
@@ -63,7 +63,7 @@ export default withStyles(styles)(SearchFilter)
 export interface SearchFilterProps extends WithStyles<typeof styles> {
   categories: SelectCategoryProps['categories']
   onClickCategory: SelectCategoryProps['onClick']
-  onClickTag: SelectTagsProps['onClick']
+  onClickTag: SelectTagsProps['onTagSelect']
   onSubmit: MouseEventHandler
   onChangeTab: (e: ChangeEvent<{}>, value: number) => void
   categoryValue: SelectCategoryProps['value']

@@ -24,7 +24,12 @@ const PageHeader: FunctionComponent<PageHeaderProps> = ({
         <IconButton className={classes.button} onClick={handleClick(history)}>
           <ArrowBack className={classes.backIcon} />
         </IconButton>
-        <Typography className={classes.typography} align="center" variant="h6">
+        <Typography
+          className={classes.typography}
+          align="center"
+          component="h2"
+          variant="h2"
+        >
           {title}
         </Typography>
       </Toolbar>
