@@ -8,22 +8,25 @@ import React, { FunctionComponent } from 'react'
 import Tag from './TaskList/components/Tag'
 
 const limitVisibleTags = (limit: number) => (tags: TagValue[]) => {
-  const selectedNum = tags.reduce((acc, tag) => acc + (tag.selected ? 1 : 0), 0)
-  let addedSelectedNum = 0
-  let addedVisibleNum = 0
+  const selectedCount = tags.reduce(
+    (acc, tag) => acc + (tag.selected ? 1 : 0),
+    0,
+  )
+  let addedSelectedCount = 0
+  let addedVisibleCount = 0
 
   return tags.map(tag => {
-    if (addedSelectedNum + addedVisibleNum === limit) {
+    if (limit - addedSelectedCount - addedVisibleCount < 0) {
       return { ...tag, visible: false }
     }
 
-    if (tag.selected && limit - addedSelectedNum > 0) {
-      addedSelectedNum++
+    if (tag.selected && limit - addedSelectedCount > 0) {
+      addedSelectedCount++
       return tag
     }
 
-    if (tag.visible && limit - addedVisibleNum - selectedNum > 0) {
-      addedVisibleNum++
+    if (tag.visible && limit - addedVisibleCount - selectedCount > 0) {
+      addedVisibleCount++
       return tag
     }
 
