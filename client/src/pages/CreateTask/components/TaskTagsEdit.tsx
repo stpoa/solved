@@ -60,7 +60,7 @@ const styles: StyleRulesCallback = theme => ({
     width: '100%',
   },
   tags: {
-    maxHeight: '-webkit-fill-available',
+    maxHeight: 'fill-available',
     overflow: 'scroll',
   },
   input: {
