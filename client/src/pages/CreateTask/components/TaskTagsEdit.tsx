@@ -48,7 +48,7 @@ const styles: StyleRulesCallback = theme => ({
     height: '100%',
     paddingBottom: '0 !important',
     display: 'grid',
-    gridTemplateRows: 'auto auto minmax(200px, 1fr)',
+    gridTemplateRows: 'auto auto minmax(10rem, 1fr)',
     gridGap: '2rem',
   },
   title: {
