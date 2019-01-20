@@ -1,4 +1,5 @@
 import {
+  CardContent,
   StyleRulesCallback,
   TextField,
   Typography,
@@ -19,7 +20,7 @@ const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({
   const InputLabelProps = { shrink: true }
 
   return (
-    <div className={classes.container}>
+    <CardContent className={classes.container}>
       <div className={classes.title}>
         <Typography variant="h3" component="h3">
           Tagi
@@ -38,16 +39,16 @@ const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({
       <div className={classes.tags}>
         <SelectTags {...{ tags }} onTagSelect={onTagSelectionUpdate} />
       </div>
-    </div>
+    </CardContent>
   )
 }
 
 const styles: StyleRulesCallback = theme => ({
   container: {
     height: '100%',
-    padding: theme.spacing.unit * 2,
+    paddingBottom: '0 !important',
     display: 'grid',
-    gridTemplateRows: 'auto auto 1fr',
+    gridTemplateRows: 'auto auto minmax(200px, 1fr)',
     gridGap: '2rem',
   },
   title: {

@@ -13,7 +13,7 @@ import React, { ChangeEvent, FunctionComponent } from 'react'
 const filesLength = 3
 
 const createFileId = (file: File) =>
-  btoa(`${file.name}:${file.size}:${file.type}:${file.lastModified}`)
+  btoa(`${file.size}:${file.type}:${file.lastModified}`)
 
 const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({
   files,
@@ -50,34 +50,36 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({
           color="textSecondary"
           variant="title"
         >
-          <p className={classes.browsePhotoParagraph}>Browse photo</p>
+          <p className={classes.browsePhotoParagraph}>Wybierz zdjęcie</p>
           <AddAPhoto className={classes.photoIcon} />
         </Typography>
       </label>
     </Paper>
   )
 
-  const photoItem = ({ id, url, name }: ExtendedFile) => (
-    <Paper key={id} className={classes.photoPaper}>
-      <div className={classes.photoNameContainer}>
-        <Typography className={classes.photoName} color="textSecondary">
-          {name}
-        </Typography>
-      </div>
-      <div className={classes.filePicture}>
-        <img className={classes.image} src={url} />
-      </div>
-      <HighlightOff
-        className={classes.closeIcon}
-        onClick={handleFileRemoval(id)}
-      />
-    </Paper>
-  )
+  const photoItem = ({ id, url, name }: ExtendedFile) => {
+    const backgroundImageStyle = { backgroundImage: `url(${url})` }
+    return (
+      <Paper key={id} className={classes.photoPaper}>
+        <div className={classes.photoNameContainer}>
+          <Typography className={classes.photoName} color="textSecondary">
+            {name}
+          </Typography>
+        </div>
+        <div className={classes.filePicture} style={backgroundImageStyle} />
+        <HighlightOff
+          className={classes.closeIcon}
+          onClick={handleFileRemoval(id)}
+        />
+      </Paper>
+    )
+  }
 
   return (
     <CardContent className={classes.cardContent}>
-      <Typography className={classes.header} color="secondary" variant="h5">
-        Photos
+      <Typography variant="h3" component="h3">
+        Zdjęcia
+        <hr className={classes.underline} />
       </Typography>
       <input
         className={classes.fileInput}
@@ -94,10 +96,10 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({
 
 const styles: StyleRulesCallback = (theme: Theme) => ({
   cardContent: {
-    display: 'grid',
-    gridTemplateRows: 'max-content',
     height: '100%',
     paddingBottom: '0 !important',
+    display: 'grid',
+    gridTemplateRows: 'max-content',
   },
   closeIcon: {
     position: 'absolute',
@@ -116,7 +118,7 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   },
   photoPaper: {
     display: 'grid',
-    gridTemplateColumns: '60% 40%',
+    gridTemplateColumns: '2fr 1fr',
     margin: '0.5rem 0 0.5rem',
   },
   photoIcon: {
@@ -130,9 +132,6 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   photoName: {
     width: '100%',
     wordBreak: 'break-all',
-  },
-  header: {
-    margin: '0 0 20px',
   },
   browsePhotoContainer: {
     height: '100%',
@@ -153,16 +152,16 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     display: 'none',
   },
   filePicture: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'black',
     borderRadius: '5px',
-    overflow: 'hidden',
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
   },
-  image: {
-    maxWidth: '100%',
-    maxHeight: '100%',
+  underline: {
+    height: '1px',
+    border: 'none',
+    backgroundColor: theme.palette.grey[300],
   },
 })
 
