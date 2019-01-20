@@ -69,6 +69,22 @@ const theme = createMuiTheme({
       color: grey,
     },
   },
+  overrides: {
+    MuiFormLabel: {
+      root: {
+        '&$focused': {
+          color: 'rgba(0, 0, 0, 0.87)',
+        },
+      },
+    },
+    MuiInput: {
+      underline: {
+        '&:after': {
+          borderBottom: '2px solid rgba(0, 0, 0, 0.87)',
+        },
+      },
+    },
+  },
 })
 
 const redirectToHome = () => <Redirect to="/" />
