@@ -1,4 +1,5 @@
 import {
+  CardContent,
   StyleRulesCallback,
   TextField,
   Typography,
@@ -12,30 +13,24 @@ const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
   description,
   onDescriptionUpdate,
 }) => (
-  <div className={classes.container}>
-    <Typography
-      className={classes.title}
-      gutterBottom
-      variant="h2"
-      component="h2"
-    >
+  <CardContent className={classes.cardContent}>
+    <Typography variant="h3" component="h3">
       Opis
+      <hr className={classes.underline} />
     </Typography>
 
     <form className={classes.form} noValidate autoComplete="off">
       <TextField
         fullWidth
         id="multiline-static"
-        className={classes.textField}
         margin="normal"
         label="Tutaj wpisz lub wklej treść zadania"
         multiline
-        rows="4"
         value={description}
         onChange={onDescriptionUpdate}
       />
     </form>
-  </div>
+  </CardContent>
 )
 
 const styles: StyleRulesCallback = theme => ({
@@ -43,9 +38,21 @@ const styles: StyleRulesCallback = theme => ({
     textAlign: 'center',
     color: theme.palette.secondary.main,
   },
-  container: {},
+  cardContent: {
+    height: '100%',
+    display: 'grid',
+    gridTemplateRows: 'max-content minmax(200px, 50vh)',
+  },
   form: {
     padding: '2rem',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    overflowScrolling: 'touch',
+  },
+  underline: {
+    height: '1px',
+    border: 'none',
+    backgroundColor: theme.palette.grey[300],
   },
 })
 
