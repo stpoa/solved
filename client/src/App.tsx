@@ -81,7 +81,15 @@ const theme = createMuiTheme({
       underline: {
         '&:after': {
           borderBottom: '2px solid rgba(0, 0, 0, 0.87)',
+        }
+      }
+    },
+    MuiOutlinedInput: {
+      root: {
+        '&$focused $notchedOutline': {
+          borderColor: blue,
         },
+        color: blue,
       },
     },
   },

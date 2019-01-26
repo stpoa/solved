@@ -7,6 +7,9 @@ export const initialStore = {
   description: '',
   tags: tags.map(name => ({ name, visible: true, selected: false })),
   tagsQuery: '',
+  startDate: 0,
+  finishDate: 0,
+  price: 0,
 }
 
 export enum ActionTypes {
@@ -15,6 +18,9 @@ export enum ActionTypes {
   updateDescription = 'UPDATE_DESCRIPTION',
   updateTags = 'UPDATE_TAGS',
   updateTagsQuery = 'UPDATE_TAGS_QUERY',
+  updateStartDate = 'UPDATE_START_DATE',
+  updateFinishDate = 'UPDATE_FINISH_DATE',
+  updatePrice = 'UPDATE_PRICE',
 }
 
 export const reducer: Reducer = (state, action) => {
@@ -29,6 +35,12 @@ export const reducer: Reducer = (state, action) => {
       return { ...state, tags: action.payload }
     case ActionTypes.updateTagsQuery:
       return { ...state, tagsQuery: action.payload }
+    case ActionTypes.updateStartDate:
+      return { ...state, startDate: action.payload }
+    case ActionTypes.updateFinishDate:
+      return { ...state, finishDate: action.payload }
+    case ActionTypes.updatePrice:
+      return { ...state, price: action.payload }
     default:
       return state
   }
