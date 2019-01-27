@@ -1,5 +1,4 @@
 import { StyleRulesCallback, withStyles, WithStyles } from '@material-ui/core'
-import { Check } from '@material-ui/icons'
 import { range } from 'ramda'
 import React, { Component } from 'react'
 
@@ -29,13 +28,12 @@ class StepList extends Component<StepListProps, StepListState> {
     const className = (...names: string[]) => names.join(' ')
 
     const stepsIndicator = (
-      <div className={classes.indicatorContainer}>
+      <div className={classes.progressBar}>
         {range(1, totalSteps + 1).map(step => {
-          const isActive = step === currentStep
+          const isActive = step <= currentStep
           const isDisabled = step > currentStep
-          const disabledClass = isDisabled ? 'disabled' : ''
-          const activeClass = isActive ? 'active' : ''
-          const icon = isActive ? step : isDisabled ? '' : <Check />
+          const disabledClass = isDisabled ? classes.disabled : ''
+          const activeClass = isActive ? classes.active : ''
 
           return (
             <div
@@ -45,11 +43,7 @@ class StepList extends Component<StepListProps, StepListState> {
                 disabledClass,
                 activeClass,
               )}
-            >
-              <div className={classes.circle}>
-                <span className={classes.current}>{icon}</span>
-              </div>
-            </div>
+            />
           )
         })}
       </div>
@@ -65,39 +59,29 @@ class StepList extends Component<StepListProps, StepListState> {
 }
 
 const styles: StyleRulesCallback = theme => ({
+  active: {
+    backgroundColor: theme.palette.secondary.main,
+  },
   container: {
     display: 'grid',
     gridTemplateRows: 'auto 1fr',
     height: '100%',
     backgroundColor: theme.palette.primary.dark,
   },
-  circle: {
-    background: theme.palette.secondary.main,
-    width: '25px',
-    height: '25px',
-    borderRadius: '50%',
-  },
-  indicatorContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    margin: '1.6rem',
-    textAlign: 'center',
-  },
   indicator: {
-    color: theme.palette.primary.main,
-    fontFamily: theme.typography.body1.fontFamily,
-    textAlign: 'center',
-    lineHeight: '2.4rem',
-    fontSize: '1.4rem',
-    display: 'inline-block',
-    width: '2.4rem',
-    paddingRight: '2.4rem',
-    height: '2.4rem',
-    margin: '0px 0.8rem',
+    height: '100%',
+    width: '100%',
   },
   disabled: {
     color: theme.palette.grey[400],
     fill: theme.palette.grey[400],
+  },
+  progressBar: {
+    marginBottom: '1.5rem',
+    backgroundColor: theme.palette.grey[300],
+    height: '0.5rem',
+    display: 'flex',
+    flexDirection: 'row',
   },
 })
 
