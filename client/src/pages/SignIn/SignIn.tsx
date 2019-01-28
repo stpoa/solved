@@ -1,11 +1,10 @@
 import {
-  Button,
   Snackbar,
   StyleRulesCallback,
   TextField,
-  Typography,
+  withStyles,
+  WithStyles,
 } from '@material-ui/core'
-import { withStyles, WithStyles } from '@material-ui/core/styles'
 import React, {
   ChangeEvent,
   ChangeEventHandler,
@@ -13,12 +12,15 @@ import React, {
   MouseEventHandler,
 } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import isEmail from 'validator/lib/isEmail'
 import isLength from 'validator/lib/isLength'
 import { withAuth, WithAuth } from '~auth'
-import { NavigationBar } from '~generic'
+import {
+  Email,
+  SignBaseButton as Button,
+  SignBaseContainer as Container,
+} from '~generic'
 import { Status } from '~interfaces'
-import { pageContentNotScrollableWithNavigationBar } from '~pages/styles'
+import { emailValidator } from '~lib/validators'
 import Checkbox from './components/Checkbox'
 import SnackbarError from './components/SnackbarError'
 
@@ -59,92 +61,62 @@ class SignIn extends Component<SignInProps, SignInState> {
     const isPending = status === Status.Pending
 
     return (
-      <>
-        <div className={classes.container}>
-          <Snackbar
-            autoHideDuration={4000}
-            open={showSignInError}
-            onClose={this.hideSignInError}
-          >
-            <SnackbarError message="Logowanie się nie powiodło!" />
-          </Snackbar>
-          <div className={classes.header}>
-            <Typography
-              align="left"
-              variant="h1"
-              component="header"
-              className={classes.headerItem}
-            >
-              Logowanie
-            </Typography>
-          </div>
-          <div className={classes.textFields}>
-            <TextField
-              autoFocus={false}
-              className={classes.textField}
-              disabled={isPending}
-              error={Boolean(emailError)}
-              margin="dense"
-              label="Email"
-              helperText={emailError}
-              required
-              name="email"
-              type="email"
-              value={email}
-              fullWidth
-              onChange={this.handleChangeText}
-            />
-            <TextField
-              autoFocus={false}
-              margin="dense"
-              className={classes.textField}
-              disabled={isPending}
-              error={Boolean(passwordError)}
-              label="Hasło"
-              helperText={passwordError}
-              required
-              name="password"
-              type="password"
-              value={password}
-              fullWidth
-              onChange={this.handleChangeText}
-            />
-          </div>
-          <div className={classes.checkboxForm}>
-            <Checkbox
-              disabled={isPending}
-              checked={rememberMe}
-              onChange={this.handleChangeCheckbox}
-              name="rememberMe"
-              label="Zapamiętaj mnie"
-            />
-            <Link className={classes.link} to="/">
-              Nie pamiętam hasła
-            </Link>
-          </div>
-          <div className={classes.buttonContainer}>
-            <Button
-              variant="extendedFab"
-              color="secondary"
-              disabled={isPending}
-              className={classes.button}
-              size="large"
-              onClick={this.handleSubmit}
-            >
-              Zaloguj
-            </Button>
-            <div className={classes.noAccount}>
-              <span>
-                {'Nie posiadasz konta? '}
-                <Link className={classes.link} to="/register">
-                  Załóż teraz!
-                </Link>
-              </span>
-            </div>
-          </div>
-          <NavigationBar />
+      <Container header="Logowanie">
+        <Snackbar
+          autoHideDuration={4000}
+          open={showSignInError}
+          onClose={this.hideSignInError}
+        >
+          <SnackbarError message="Logowanie się nie powiodło!" />
+        </Snackbar>
+        <div className={classes.emailContainer}>
+          <Email
+            disabled={isPending}
+            error={emailError}
+            value={email}
+            onChange={this.handleChangeText}
+          />
         </div>
-      </>
+        <div className={classes.passwordContainer}>
+          <TextField
+            autoFocus={false}
+            className={classes.textField}
+            disabled={isPending}
+            error={Boolean(passwordError)}
+            label="Hasło"
+            helperText={passwordError}
+            required
+            name="password"
+            type="password"
+            value={password}
+            fullWidth
+            onChange={this.handleChangeText}
+          />
+        </div>
+        <div className={classes.checkboxForm}>
+          <Checkbox
+            disabled={isPending}
+            checked={rememberMe}
+            onChange={this.handleChangeCheckbox}
+            name="rememberMe"
+            label="Zapamiętaj mnie"
+          />
+          <Link className={classes.link} to="/remind-password">
+            Nie pamiętam hasła
+          </Link>
+        </div>
+        <Button disabled={isPending} onClick={this.handleSubmit}>
+          Zaloguj
+        </Button>
+        <div className={classes.noAccount}>
+          <span>
+            {'Nie posiadasz konta? '}
+            <Link className={classes.link} to="/register">
+              Załóż teraz!
+            </Link>
+          </span>
+        </div>
+      </Container>
     )
   }
 
@@ -163,16 +135,10 @@ class SignIn extends Component<SignInProps, SignInState> {
   }
 
   private validate({ email, password }: SignInState): Errors {
-    const fieldRequiredMsg = 'Pole jest wymagane!'
-
     return {
-      emailError: !email
-        ? fieldRequiredMsg
-        : !isEmail(email)
-        ? 'Nieprawidłowy adres email!'
-        : '',
+      emailError: emailValidator(email),
       passwordError: !password
-        ? fieldRequiredMsg
+        ? 'Pole jest wymagane!'
         : !isLength(password, { min: 6 })
         ? 'Nieprawidłowe hasło!'
         : '',
@@ -209,47 +175,24 @@ class SignIn extends Component<SignInProps, SignInState> {
 }
 
 const styles: StyleRulesCallback = theme => ({
-  button: {
-    margin: 'auto',
-    marginBottom: '5%',
-    width: '50%',
-  },
   buttonContainer: {
-    display: 'grid',
-    gridTemplateColumns: '1fr',
-    gridRow: '8',
-  },
-  container: {
-    ...pageContentNotScrollableWithNavigationBar(theme),
+    gridRow: '10',
+    width: '50%',
+    margin: 'auto',
     height: '100%',
-    width: '100%',
-    padding: theme.spacing.unit * 2,
-    display: 'grid',
-    gridTemplateColumns: '1fr',
-    gridTemplateRows: '1fr auto 0.5fr auto 0.25fr auto 0.75fr auto 1fr',
   },
-  header: {
-    gridRow: '2/3',
-    paddingLeft: '1rem',
-  },
-  headerItem: {
-    fontSize: '2.8rem',
-    borderBottom: `2px solid ${theme.palette.secondary.main}`,
-    paddingBottom: '4%',
-    display: 'inline-block',
-  },
-  textFields: {
-    gridRow: '4/5',
+  emailContainer: {
+    gridRow: '4',
     fontSize: theme.typography.body2.fontSize,
-    padding: '1rem',
   },
-  textField: {
-    color: 'red',
+  passwordContainer: {
+    gridRow: '6',
+    fontSize: theme.typography.body2.fontSize,
   },
   checkboxForm: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
-    gridRow: '6',
+    gridRow: '8',
     paddingLeft: '2rem',
   },
   link: {
@@ -262,6 +205,7 @@ const styles: StyleRulesCallback = theme => ({
   },
   noAccount: {
     textAlign: 'center',
+    gridRow: '12',
   },
 })
 

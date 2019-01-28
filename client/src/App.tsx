@@ -108,6 +108,10 @@ class App extends Component<AppProps, {}> {
                 <Route path="/sign-in" component={Pages.SignIn} />
                 <Route path="/rate" component={Pages.Rate} />
                 <Route path="/register" component={Pages.Register} />
+                <Route
+                  path="/remind-password"
+                  component={Pages.RemindPassword}
+                />
                 <Route path="/search" component={Pages.Search} />
                 <Route exact path="/" component={Pages.Home} />
                 <Route path="*" render={redirectToHome} />
