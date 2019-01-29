@@ -7,31 +7,38 @@ import {
   withStyles,
 } from '@material-ui/core'
 import React, { FunctionComponent } from 'react'
+import { ActionTypes } from '~/stores/CreateTask'
+import { useCreateTaskStore } from '~stores/CreateTask/connect'
+import { OnChange } from '~typings/react'
 
 const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
   classes,
-  description,
-  onDescriptionUpdate,
-}) => (
-  <CardContent className={classes.cardContent}>
-    <Typography variant="h3" component="h3">
-      Opis
-      <hr className={classes.underline} />
-    </Typography>
+}) => {
+  const [store, dispatch] = useCreateTaskStore()
+  const handleDescriptionChange: OnChange = e =>
+    dispatch({ type: ActionTypes.updateDescription, payload: e.target.value })
 
-    <form className={classes.form} noValidate autoComplete="off">
-      <TextField
-        fullWidth
-        id="multiline-static"
-        margin="normal"
-        label="Tutaj wpisz lub wklej treść zadania"
-        multiline
-        value={description}
-        onChange={onDescriptionUpdate}
-      />
-    </form>
-  </CardContent>
-)
+  return (
+    <CardContent className={classes.cardContent}>
+      <Typography variant="h3" component="h3">
+        Opis
+        <hr className={classes.underline} />
+      </Typography>
+
+      <form className={classes.form} noValidate autoComplete="off">
+        <TextField
+          fullWidth
+          id="multiline-static"
+          margin="normal"
+          label="Tutaj wpisz lub wklej treść zadania"
+          multiline
+          value={store.description}
+          onChange={handleDescriptionChange}
+        />
+      </form>
+    </CardContent>
+  )
+}
 
 const styles: StyleRulesCallback = theme => ({
   title: {
@@ -56,9 +63,6 @@ const styles: StyleRulesCallback = theme => ({
   },
 })
 
-interface TaskDescriptionEditProps extends WithStyles<typeof styles> {
-  description: string
-  onDescriptionUpdate: (e: any) => void
-}
+interface TaskDescriptionEditProps extends WithStyles<typeof styles> {}
 
 export default withStyles(styles)(TaskDescriptionEdit)

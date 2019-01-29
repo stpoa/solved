@@ -9,20 +9,23 @@ import {
 } from '@material-ui/core'
 import { AddAPhoto, HighlightOff } from '@material-ui/icons'
 import React, { ChangeEvent, FunctionComponent } from 'react'
+import { ActionTypes } from '~/stores/CreateTask'
+import { useCreateTaskStore } from '~stores/CreateTask/connect'
 
 const filesLength = 3
 
 const createFileId = (file: File) =>
   btoa(`${file.size}:${file.type}:${file.lastModified}`)
 
-const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({
-  files,
-  classes,
-  onFilesUpdate,
-}) => {
+const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
+  const [store, dispatch] = useCreateTaskStore()
+
   const handleFileRemoval = (id?: string) => () => {
     const doesFileExist = (file: ExtendedFile) => file.id !== id
-    onFilesUpdate(files.filter(doesFileExist))
+    dispatch({
+      type: ActionTypes.updateFiles,
+      payload: store.files.filter(doesFileExist),
+    })
   }
 
   const handleBrowsePhotoClick = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,9 +40,14 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({
       !prevFiles.map(prevFile => prevFile.id).includes(file.id)
 
     const newFiles =
-      eventFiles && eventFiles.map(extendFile).filter(isNewFile(files))
+      eventFiles && eventFiles.map(extendFile).filter(isNewFile(store.files))
 
-    newFiles && newFiles.length && onFilesUpdate([...files, ...newFiles])
+    newFiles &&
+      newFiles.length &&
+      dispatch({
+        type: ActionTypes.updateFiles,
+        payload: [...store.files, ...newFiles],
+      })
   }
 
   const browsePhotoHolder = (
@@ -88,8 +96,8 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({
         accept="image/*"
         id="upload-photo"
       />
-      {files.length < filesLength && browsePhotoHolder}
-      {Array.from(files).map(photoItem)}
+      {store.files.length < filesLength && browsePhotoHolder}
+      {Array.from(store.files).map(photoItem)}
     </CardContent>
   )
 }
@@ -166,8 +174,8 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
 })
 
 interface TaskPhotoEditProps extends WithStyles<typeof styles> {
-  files: ExtendedFile[]
-  onFilesUpdate: (files: ExtendedFile[]) => void
+  // files: ExtendedFile[]
+  // onFilesUpdate: (files: ExtendedFile[]) => void
 }
 
 export interface ExtendedFile extends File {

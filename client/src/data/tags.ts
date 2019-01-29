@@ -1,6 +1,7 @@
+import { TagValue } from '~generic/SelectTags'
 import { TagList } from '~interfaces'
 
-const tags: TagList = [
+const tagNames: TagList = [
   'matematyka',
   'fizyka',
   'biologia',
@@ -21,4 +22,10 @@ const tags: TagList = [
   'sesja',
 ]
 
-export default tags
+export const tags: TagValue[] = tagNames.map(name => ({
+  name,
+  visible: true,
+  selected: false,
+}))
+
+export default tagNames
