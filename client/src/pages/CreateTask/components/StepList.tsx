@@ -85,9 +85,6 @@ const styles: StyleRulesCallback = theme => ({
 
 interface StepListProps extends WithStyles<typeof styles> {
   children: Array<React.ReactElement<any>>
-  // onSubmitClick: () => void
-  // updateStep: (step: number) => void
-  // step: number
 }
 
 export default withStyles(styles)(StepList)
