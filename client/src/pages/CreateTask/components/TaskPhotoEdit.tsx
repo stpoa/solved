@@ -173,10 +173,7 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   },
 })
 
-interface TaskPhotoEditProps extends WithStyles<typeof styles> {
-  // files: ExtendedFile[]
-  // onFilesUpdate: (files: ExtendedFile[]) => void
-}
+interface TaskPhotoEditProps extends WithStyles<typeof styles> {}
 
 export interface ExtendedFile extends File {
   id?: string
