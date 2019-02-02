@@ -14,7 +14,7 @@ import { OnChange } from '~typings/react'
 const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
   classes,
 }) => {
-  const [store, dispatch] = useCreateTaskStore()
+  const [{ description }, dispatch] = useCreateTaskStore()
   const handleDescriptionChange: OnChange = e =>
     dispatch({ type: ActionTypes.updateDescription, payload: e.target.value })
 
@@ -32,7 +32,7 @@ const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
           margin="normal"
           label="Tutaj wpisz lub wklej treść zadania"
           multiline
-          value={store.description}
+          value={description}
           onChange={handleDescriptionChange}
         />
       </form>

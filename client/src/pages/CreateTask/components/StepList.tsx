@@ -5,8 +5,7 @@ import { ActionTypes } from '~/stores/CreateTask'
 import { useCreateTaskStore } from '~stores/CreateTask/connect'
 
 const StepList: FC<StepListProps> = props => {
-  const [store, dispatch] = useCreateTaskStore()
-  const { step: currentStep } = store
+  const [{ step: currentStep }, dispatch] = useCreateTaskStore()
   const goToPreviousStep = () =>
     dispatch({ type: ActionTypes.updateStep, payload: currentStep - 1 })
   const goToNextStep = () =>

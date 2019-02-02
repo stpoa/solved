@@ -18,13 +18,13 @@ const createFileId = (file: File) =>
   btoa(`${file.size}:${file.type}:${file.lastModified}`)
 
 const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
-  const [store, dispatch] = useCreateTaskStore()
+  const [{ files }, dispatch] = useCreateTaskStore()
 
   const handleFileRemoval = (id?: string) => () => {
     const doesFileExist = (file: ExtendedFile) => file.id !== id
     dispatch({
       type: ActionTypes.updateFiles,
-      payload: store.files.filter(doesFileExist),
+      payload: files.filter(doesFileExist),
     })
   }
 
@@ -40,13 +40,13 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
       !prevFiles.map(prevFile => prevFile.id).includes(file.id)
 
     const newFiles =
-      eventFiles && eventFiles.map(extendFile).filter(isNewFile(store.files))
+      eventFiles && eventFiles.map(extendFile).filter(isNewFile(files))
 
     newFiles &&
       newFiles.length &&
       dispatch({
         type: ActionTypes.updateFiles,
-        payload: [...store.files, ...newFiles],
+        payload: [...files, ...newFiles],
       })
   }
 
@@ -96,8 +96,8 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
         accept="image/*"
         id="upload-photo"
       />
-      {store.files.length < filesLength && browsePhotoHolder}
-      {Array.from(store.files).map(photoItem)}
+      {files.length < filesLength && browsePhotoHolder}
+      {Array.from(files).map(photoItem)}
     </CardContent>
   )
 }

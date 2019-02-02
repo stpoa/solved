@@ -12,32 +12,29 @@ import TaskPhotoEdit from '../components/TaskPhotoEdit'
 import { TaskPriceTermEdit } from '../components/TaskPriceTermEdit'
 import TaskTagsEdit from '../components/TaskTagsEdit'
 
-const CreateTask: FC<CreateTaskProps> = ({ classes }) => {
-  return (
-    <>
-      <PageHeader title="Nowe zadanie" />
-      <div className={classes.container}>
-        <CreateTaskProvider {...{ reducer }}>
-          <StepList>
-            <Step>
-              <TaskTagsEdit />
-            </Step>
-            <Step>
-              <TaskDescriptionEdit />
-            </Step>
-            <Step>
-              <TaskPhotoEdit />
-            </Step>
-            <Step>
-              <TaskPriceTermEdit />
-            </Step>
-          </StepList>
-        </CreateTaskProvider>
-      </div>
-    </>
-  )
-}
-
+const CreateTask: FC<CreateTaskProps> = ({ classes }) => (
+  <>
+    <PageHeader title="Nowe zadanie" />
+    <div className={classes.container}>
+      <CreateTaskProvider {...{ reducer }}>
+        <StepList>
+          <Step>
+            <TaskTagsEdit />
+          </Step>
+          <Step>
+            <TaskDescriptionEdit />
+          </Step>
+          <Step>
+            <TaskPhotoEdit />
+          </Step>
+          <Step>
+            <TaskPriceTermEdit />
+          </Step>
+        </StepList>
+      </CreateTaskProvider>
+    </div>
+  </>
+)
 const styles: StyleRulesCallback = theme => ({
   container: {
     ...pageContentNotScrollableWithTopBar(theme),

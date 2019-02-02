@@ -5,7 +5,7 @@ export const initialStore = {
   step: 1,
   files: [] as ExtendedFile[],
   description: '',
-  tags,
+  tags: tags.map(name => ({ name, visible: true, selected: false })),
   tagsQuery: '',
 }
 
@@ -20,30 +20,15 @@ export enum ActionTypes {
 export const reducer: Reducer = (state, action) => {
   switch (action.type) {
     case ActionTypes.updateStep:
-      return {
-        ...state,
-        step: action.payload,
-      }
+      return { ...state, step: action.payload }
     case ActionTypes.updateFiles:
-      return {
-        ...state,
-        files: action.payload,
-      }
+      return { ...state, files: action.payload }
     case ActionTypes.updateDescription:
-      return {
-        ...state,
-        description: action.payload,
-      }
+      return { ...state, description: action.payload }
     case ActionTypes.updateTags:
-      return {
-        ...state,
-        tags: action.payload,
-      }
+      return { ...state, tags: action.payload }
     case ActionTypes.updateTagsQuery:
-      return {
-        ...state,
-        tagsQuery: action.payload,
-      }
+      return { ...state, tagsQuery: action.payload }
     default:
       return state
   }

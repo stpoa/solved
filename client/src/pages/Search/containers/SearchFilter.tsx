@@ -11,7 +11,7 @@ export default class SearchFilterContainer extends Component<
     categories,
     categoryValue: '',
     tabValue: 0,
-    tags: tags.map(tag => ({ name: tag.name, selected: false, visible: true })),
+    tags: tags.map(tag => ({ name: tag, selected: false, visible: true })),
   }
 
   public render() {

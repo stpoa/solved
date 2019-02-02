@@ -5,8 +5,7 @@ interface Category {
 
 type CategoryList = Category[]
 
-interface TagList extends Array<string> {}
-
+type TagList = string[]
 interface Task {
   id: string
   category: string

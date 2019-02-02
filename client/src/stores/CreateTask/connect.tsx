@@ -1,7 +1,10 @@
 import React, { createContext, FC, useContext, useReducer } from 'react'
 import { Action, initialStore, Reducer, Store } from './'
 
-const initialContext: [Store, React.Dispatch<Action>] = [initialStore, () => 0]
+const initialContext: [Store, React.Dispatch<Action>] = [
+  initialStore,
+  action => action,
+]
 const createTaskContext = createContext(initialContext)
 
 export const CreateTaskProvider: FC<ProviderProps> = ({

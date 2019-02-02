@@ -1,4 +1,3 @@
-import { TagValue } from '~generic/SelectTags'
 import { TagList } from '~interfaces'
 
 const tagNames: TagList = [
@@ -21,11 +20,5 @@ const tagNames: TagList = [
   'przetrwanie',
   'sesja',
 ]
-
-export const tags: TagValue[] = tagNames.map(name => ({
-  name,
-  visible: true,
-  selected: false,
-}))
 
 export default tagNames
