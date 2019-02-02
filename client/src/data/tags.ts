@@ -1,6 +1,6 @@
 import { TagList } from '~interfaces'
 
-const tags: TagList = [
+const tagNames: TagList = [
   'matematyka',
   'fizyka',
   'biologia',
@@ -21,4 +21,4 @@ const tags: TagList = [
   'sesja',
 ]
 
-export default tags
+export default tagNames

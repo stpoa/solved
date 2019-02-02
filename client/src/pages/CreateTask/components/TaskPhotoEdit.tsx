@@ -9,20 +9,23 @@ import {
 } from '@material-ui/core'
 import { AddAPhoto, HighlightOff } from '@material-ui/icons'
 import React, { ChangeEvent, FunctionComponent } from 'react'
+import { ActionTypes } from '~/stores/CreateTask'
+import { useCreateTaskStore } from '~stores/CreateTask/connect'
 
 const filesLength = 3
 
 const createFileId = (file: File) =>
   btoa(`${file.size}:${file.type}:${file.lastModified}`)
 
-const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({
-  files,
-  classes,
-  onFilesUpdate,
-}) => {
+const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
+  const [{ files }, dispatch] = useCreateTaskStore()
+
   const handleFileRemoval = (id?: string) => () => {
     const doesFileExist = (file: ExtendedFile) => file.id !== id
-    onFilesUpdate(files.filter(doesFileExist))
+    dispatch({
+      type: ActionTypes.updateFiles,
+      payload: files.filter(doesFileExist),
+    })
   }
 
   const handleBrowsePhotoClick = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +42,12 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({
     const newFiles =
       eventFiles && eventFiles.map(extendFile).filter(isNewFile(files))
 
-    newFiles && newFiles.length && onFilesUpdate([...files, ...newFiles])
+    newFiles &&
+      newFiles.length &&
+      dispatch({
+        type: ActionTypes.updateFiles,
+        payload: [...files, ...newFiles],
+      })
   }
 
   const browsePhotoHolder = (
@@ -165,10 +173,7 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   },
 })
 
-interface TaskPhotoEditProps extends WithStyles<typeof styles> {
-  files: ExtendedFile[]
-  onFilesUpdate: (files: ExtendedFile[]) => void
-}
+interface TaskPhotoEditProps extends WithStyles<typeof styles> {}
 
 export interface ExtendedFile extends File {
   id?: string

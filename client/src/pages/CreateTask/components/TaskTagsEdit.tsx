@@ -7,17 +7,45 @@ import {
   withStyles,
 } from '@material-ui/core'
 import React, { FunctionComponent } from 'react'
-import SelectTags, { TagValue } from '~generic/SelectTags'
+import { ActionTypes } from '~/stores/CreateTask'
+import SelectTags from '~generic/SelectTags'
+import { useCreateTaskStore } from '~stores/CreateTask/connect'
 import { OnChange } from '~typings/react'
 
-const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({
-  classes,
-  tags,
-  onTagSelectionUpdate,
-  tagsQuery,
-  onTagsQueryUpdate,
-}) => {
+const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({ classes }) => {
+  const [store, dispatch] = useCreateTaskStore()
   const InputLabelProps = { shrink: true }
+
+  const handleTagsQueryUpdate: OnChange = e => {
+    const tagsQuery = e.target.value
+
+    const tags = store.tags.map(tag =>
+      tag.selected || tag.name.toLowerCase().includes(tagsQuery.toLowerCase())
+        ? { ...tag, visible: true }
+        : { ...tag, visible: false },
+    )
+    dispatch({ type: ActionTypes.updateTagsQuery, payload: tagsQuery })
+    dispatch({ type: ActionTypes.updateTags, payload: tags })
+  }
+
+  const handleTagSelectionUpdate = (name: string) => () => {
+    const clickedTag = store.tags.find(t => t.name === name)!
+
+    if (clickedTag.selected) {
+      const tags = store.tags.map(tag =>
+        tag.name === name ? { ...tag, selected: false } : { ...tag },
+      )
+      dispatch({ type: ActionTypes.updateTags, payload: tags })
+    } else {
+      const tags = store.tags.map(tag =>
+        tag.name === name
+          ? { ...tag, visible: true, selected: true }
+          : { ...tag, visible: true },
+      )
+      dispatch({ type: ActionTypes.updateTagsQuery, payload: '' })
+      dispatch({ type: ActionTypes.updateTags, payload: tags })
+    }
+  }
 
   return (
     <CardContent className={classes.container}>
@@ -31,13 +59,13 @@ const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({
         <TextField
           className={classes.input}
           label="Zacznij wpisywać"
-          value={tagsQuery}
-          onChange={onTagsQueryUpdate}
+          value={store.tagsQuery}
+          onChange={handleTagsQueryUpdate}
           {...{ InputLabelProps }}
         />
       </div>
       <div className={classes.tags}>
-        <SelectTags {...{ tags }} onTagSelect={onTagSelectionUpdate} />
+        <SelectTags tags={store.tags} onTagSelect={handleTagSelectionUpdate} />
       </div>
     </CardContent>
   )
@@ -75,11 +103,6 @@ const styles: StyleRulesCallback = theme => ({
   },
 })
 
-interface TaskTagsEditProps extends WithStyles<typeof styles> {
-  tags: TagValue[]
-  tagsQuery: string
-  onTagSelectionUpdate: (tagName: string) => () => void
-  onTagsQueryUpdate: OnChange
-}
+interface TaskTagsEditProps extends WithStyles<typeof styles> {}
 
 export default withStyles(styles)(TaskTagsEdit)

@@ -1,4 +1,3 @@
-import AddTask from './AddTask'
 import CreateTask from './CreateTask'
 import Home from './Home/Home'
 import Prelogin from './Prelogin'
@@ -11,7 +10,6 @@ import SignIn from './SignIn'
 import Tasks from './Tasks/Tasks'
 
 export {
-  AddTask,
   CreateTask,
   Home,
   Prelogin,

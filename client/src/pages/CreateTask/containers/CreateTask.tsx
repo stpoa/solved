@@ -1,114 +1,40 @@
 import { StyleRulesCallback } from '@material-ui/core'
 import { WithStyles, withStyles } from '@material-ui/core/styles'
-import React, { Component } from 'react'
-import { tags as tagNames } from '~data'
+import React, { FC } from 'react'
 import { PageHeader } from '~generic'
 import { pageContentNotScrollableWithTopBar } from '~pages/styles'
-import { OnChange } from '~typings/react'
+import { reducer } from '~stores/CreateTask'
+import { CreateTaskProvider } from '~stores/CreateTask/connect'
 import Step from '../components/Step'
 import StepList from '../components/StepList'
 import TaskDescriptionEdit from '../components/TaskDescriptionEdit'
-import TaskPhotoEdit, { ExtendedFile } from '../components/TaskPhotoEdit'
+import TaskPhotoEdit from '../components/TaskPhotoEdit'
 import { TaskPriceTermEdit } from '../components/TaskPriceTermEdit'
 import TaskTagsEdit from '../components/TaskTagsEdit'
 
-const initialState = {
-  step: 1,
-  description: '',
-  files: [] as ExtendedFile[],
-  tags: tagNames.map(tag => ({ name: tag, selected: false, visible: true })),
-  tagsQuery: '',
-}
-
-class CreateTask extends Component<CreateTaskProps, CreateTaskState> {
-  public readonly state: CreateTaskState = initialState
-
-  public render() {
-    const {
-      props: { classes },
-      state: { description, step, files, tagsQuery },
-      onDescriptionUpdate,
-      onFilesUpdate,
-      updateStep,
-      onSubmitClick,
-      onTagSelectionUpdate,
-      onTagsQueryUpdate,
-    } = this
-    const tags = this.state.tags.filter(tag => tag.visible)
-
-    return (
-      <>
-        <PageHeader title="Nowe zadanie" />
-        <div className={classes.container}>
-          <StepList {...{ step, onSubmitClick, updateStep }}>
-            <Step>
-              <TaskTagsEdit
-                {...{
-                  onTagSelectionUpdate,
-                  tags,
-                  onTagsQueryUpdate,
-                  tagsQuery,
-                }}
-              />
-            </Step>
-
-            <Step>
-              <TaskDescriptionEdit {...{ description, onDescriptionUpdate }} />
-            </Step>
-            <Step>
-              <TaskPhotoEdit files={files} onFilesUpdate={onFilesUpdate} />
-            </Step>
-            <Step>
-              <TaskPriceTermEdit />
-            </Step>
-          </StepList>
-        </div>
-      </>
-    )
-  }
-
-  public onTagsQueryUpdate: OnChange = e => {
-    const tagsQuery = e.target.value
-
-    const tags = this.state.tags.map(tag =>
-      tag.selected || tag.name.toLowerCase().includes(tagsQuery.toLowerCase())
-        ? { ...tag, visible: true }
-        : { ...tag, visible: false },
-    )
-    this.setState({ tagsQuery, tags })
-  }
-
-  public onTagSelectionUpdate = (name: string) => () => {
-    const clickedTag = this.state.tags.find(t => t.name === name)!
-
-    if (clickedTag.selected) {
-      const tags = this.state.tags.map(tag =>
-        tag.name === name ? { ...tag, selected: false } : { ...tag },
-      )
-      this.setState({ tags })
-    } else {
-      const tags = this.state.tags.map(tag =>
-        tag.name === name
-          ? { ...tag, visible: true, selected: true }
-          : { ...tag, visible: true },
-      )
-      this.setState({ tags, tagsQuery: '' })
-    }
-  }
-
-  public onDescriptionUpdate: OnChange = e => {
-    this.setState({ description: e.target.value })
-  }
-
-  public onFilesUpdate = (files: ExtendedFile[]) => this.setState({ files })
-
-  public updateStep = (step: number) => {
-    this.setState({ step })
-  }
-
-  public onSubmitClick = () => window.alert('Submit')
-}
-
+const CreateTask: FC<CreateTaskProps> = ({ classes }) => (
+  <>
+    <PageHeader title="Nowe zadanie" />
+    <div className={classes.container}>
+      <CreateTaskProvider {...{ reducer }}>
+        <StepList>
+          <Step>
+            <TaskTagsEdit />
+          </Step>
+          <Step>
+            <TaskDescriptionEdit />
+          </Step>
+          <Step>
+            <TaskPhotoEdit />
+          </Step>
+          <Step>
+            <TaskPriceTermEdit />
+          </Step>
+        </StepList>
+      </CreateTaskProvider>
+    </div>
+  </>
+)
 const styles: StyleRulesCallback = theme => ({
   container: {
     ...pageContentNotScrollableWithTopBar(theme),
@@ -137,6 +63,5 @@ const styles: StyleRulesCallback = theme => ({
   },
 })
 
-interface CreateTaskState extends Readonly<typeof initialState> {}
 export interface CreateTaskProps extends WithStyles<typeof styles> {}
 export default withStyles(styles)(CreateTask)
