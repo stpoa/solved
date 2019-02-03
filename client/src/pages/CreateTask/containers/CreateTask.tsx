@@ -9,7 +9,7 @@ import Step from '../components/Step'
 import StepList from '../components/StepList'
 import TaskDescriptionEdit from '../components/TaskDescriptionEdit'
 import TaskPhotoEdit from '../components/TaskPhotoEdit'
-import { TaskPriceTermEdit } from '../components/TaskPriceTermEdit'
+import TaskPriceTermEdit from '../components/TaskPriceTermEdit'
 import TaskTagsEdit from '../components/TaskTagsEdit'
 
 const CreateTask: FC<CreateTaskProps> = ({ classes }) => (
@@ -28,7 +28,7 @@ const CreateTask: FC<CreateTaskProps> = ({ classes }) => (
             <TaskPhotoEdit />
           </Step>
           <Step>
-            <TaskPriceTermEdit />
+            <TaskPriceTermEdit balance={100} />
           </Step>
         </StepList>
       </CreateTaskProvider>
