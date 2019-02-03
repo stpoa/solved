@@ -82,7 +82,7 @@ class SignIn extends Component<SignInProps, SignInState> {
             autoFocus={false}
             className={classes.textField}
             disabled={isPending}
-            error={Boolean(passwordError)}
+            error={!!passwordError}
             label="Hasło"
             helperText={passwordError}
             required
