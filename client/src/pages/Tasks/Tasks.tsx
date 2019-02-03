@@ -117,7 +117,9 @@ class Tasks extends Component<TasksProps, TasksState> {
 const styles: StyleRulesCallback = theme => ({
   container: {
     ...pageContentNotScrollableWithNavigationBar(theme),
-    overflow: 'scroll',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    overflowScrolling: 'touch',
   },
   tab: {
     textTransform: 'none',
