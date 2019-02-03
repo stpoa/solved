@@ -12,7 +12,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom'
-import { Provider as AuthProvider } from '~auth'
+import { BasicAuth, Provider as AuthProvider } from '~auth'
 
 // Generic
 import { PrivateRoute } from '~generic'
@@ -92,30 +92,35 @@ const redirectToHome = () => <Redirect to="/" />
 class App extends Component<AppProps, {}> {
   public render() {
     return (
-      <MuiThemeProvider theme={theme}>
-        <AuthProvider>
-          <Router>
-            <div className={this.props.classes.container}>
-              <Switch>
-                <PrivateRoute
-                  path="/profile"
-                  component={Pages.ProfilePrivate}
-                />
-                <PrivateRoute path="/tasks" component={Pages.Tasks} />
-                <Route path="/prelogin" component={Pages.Prelogin} />
-                <Route path="/profile-public" component={Pages.ProfilePublic} />
-                <Route path="/create-task" component={Pages.CreateTask} />
-                <Route path="/sign-in" component={Pages.SignIn} />
-                <Route path="/rate" component={Pages.Rate} />
-                <Route path="/register" component={Pages.Register} />
-                <Route path="/search" component={Pages.Search} />
-                <Route exact path="/" component={Pages.Home} />
-                <Route path="*" render={redirectToHome} />
-              </Switch>
-            </div>
-          </Router>
-        </AuthProvider>
-      </MuiThemeProvider>
+      <BasicAuth>
+        <MuiThemeProvider theme={theme}>
+          <AuthProvider>
+            <Router>
+              <div className={this.props.classes.container}>
+                <Switch>
+                  <PrivateRoute
+                    path="/profile"
+                    component={Pages.ProfilePrivate}
+                  />
+                  <PrivateRoute path="/tasks" component={Pages.Tasks} />
+                  <Route path="/prelogin" component={Pages.Prelogin} />
+                  <Route
+                    path="/profile-public"
+                    component={Pages.ProfilePublic}
+                  />
+                  <Route path="/create-task" component={Pages.CreateTask} />
+                  <Route path="/sign-in" component={Pages.SignIn} />
+                  <Route path="/rate" component={Pages.Rate} />
+                  <Route path="/register" component={Pages.Register} />
+                  <Route path="/search" component={Pages.Search} />
+                  <Route exact path="/" component={Pages.Home} />
+                  <Route path="*" render={redirectToHome} />
+                </Switch>
+              </div>
+            </Router>
+          </AuthProvider>
+        </MuiThemeProvider>
+      </BasicAuth>
     )
   }
 }
