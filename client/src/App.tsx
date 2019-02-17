@@ -106,16 +106,9 @@ class App extends Component<AppProps, {}> {
             <Router>
               <div className={this.props.classes.container}>
                 <Switch>
-                  <PrivateRoute
-                    path="/profile"
-                    component={Pages.ProfilePrivate}
-                  />
+                  <PrivateRoute path="/profile" component={Pages.Profile} />
                   <PrivateRoute path="/tasks" component={Pages.Tasks} />
                   <Route path="/prelogin" component={Pages.Prelogin} />
-                  <Route
-                    path="/profile-public"
-                    component={Pages.ProfilePublic}
-                  />
                   <Route path="/create-task" component={Pages.CreateTask} />
                   <Route path="/sign-in" component={Pages.SignIn} />
                   <Route path="/rate" component={Pages.Rate} />

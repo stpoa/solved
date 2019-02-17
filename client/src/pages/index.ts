@@ -1,8 +1,7 @@
 import CreateTask from './CreateTask'
 import Home from './Home/Home'
 import Prelogin from './Prelogin'
-import ProfilePrivate from './ProfilePrivate/ProfilePrivate'
-import ProfilePublic from './ProfilePublic/ProfilePublic'
+import Profile from './Profile/Profile'
 import Rate from './Rate/Rate'
 import Register from './Register/Register'
 import RemindPassword from './RemindPassword'
@@ -14,8 +13,7 @@ export {
   CreateTask,
   Home,
   Prelogin,
-  ProfilePrivate,
-  ProfilePublic,
+  Profile,
   Rate,
   Register,
   RemindPassword,
