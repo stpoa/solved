@@ -1,83 +1,66 @@
 import {
+  Divider,
   List,
   ListItem,
   ListItemIcon,
+  ListItemSecondaryAction,
   ListItemText,
-  ListSubheader,
   StyleRulesCallback,
-  Typography,
+  Switch,
   WithStyles,
   withStyles,
 } from '@material-ui/core'
-import {
-  AccountBalanceWallet,
-  Inbox,
-  Settings,
-  Spellcheck,
-  Update,
-} from '@material-ui/icons'
-import React, { FunctionComponent } from 'react'
-import { NavigationBar } from '~generic'
-import { isNumber } from '~lib/math'
+import { Settings } from '@material-ui/icons'
+import React, { FunctionComponent, useState } from 'react'
+import { NavigationBar, PageHeader } from '~generic'
 
-const Profile: FunctionComponent<ProfilePropsStyled> = ({
-  isPrivate = false,
-  balance,
-  classes,
-}) => (
-  <div>
-    <div className={classes.root}>
-      <div className={classes.title}>
-        <Typography className={classes.titleText} variant="title">
-          Profile
-        </Typography>
-      </div>
-      {isPrivate && (
-        <List subheader={<ListSubheader>Info</ListSubheader>}>
-          {isNumber(balance) ? (
-            <ListItem className={classes.balance}>
-              <ListItemIcon>
-                <AccountBalanceWallet />
-              </ListItemIcon>
-              <ListItemText>Balance: {balance}</ListItemText>
-            </ListItem>
-          ) : null}
-        </List>
-      )}
-      <List subheader={<ListSubheader>Activity</ListSubheader>}>
-        <ListItem button>
-          <ListItemIcon>
-            <Update />
-          </ListItemIcon>
-          <ListItemText primary="Tasks in progress" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <Inbox />
-          </ListItemIcon>
-          <ListItemText primary={'Finished tasks'} />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <Spellcheck />
-          </ListItemIcon>
-          <ListItemText primary={'Reviews'} />
-        </ListItem>
-      </List>
-      {isPrivate && (
-        <List subheader={<ListSubheader>Preferences</ListSubheader>}>
-          <ListItem button>
-            <ListItemIcon>
+const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true)
+  const handleNotificationSwitch = (_: any, checked: boolean) => {
+    setNotificationsEnabled(checked)
+  }
+
+  return (
+    <>
+      <PageHeader title="Profil" />
+      <div className={classes.root}>
+        <List>
+          <ListItem color="secondary" className={classes.category}>
+            <ListItemIcon className={classes.icon}>
               <Settings />
             </ListItemIcon>
-            <ListItemText primary="Settings" />
+            <ListItemText>
+              <span className={classes.categoryText}>Ustawienia</span>
+            </ListItemText>
+          </ListItem>
+
+          <ListItem button className={classes.nested}>
+            <ListItemText>Zmień nick</ListItemText>
+          </ListItem>
+
+          <Divider />
+
+          <ListItem button className={classes.nested}>
+            <ListItemText>Zmień hasło</ListItemText>
+          </ListItem>
+
+          <Divider />
+
+          <ListItem className={classes.nested}>
+            <ListItemText primary="Powiadomienia" />
+            <ListItemSecondaryAction>
+              <Switch
+                onChange={handleNotificationSwitch}
+                checked={notificationsEnabled}
+              />
+            </ListItemSecondaryAction>
           </ListItem>
         </List>
-      )}
-    </div>
-    <NavigationBar />
-  </div>
-)
+      </div>
+      <NavigationBar />
+    </>
+  )
+}
 
 const styles: StyleRulesCallback = theme => ({
   balance: {
@@ -92,12 +75,24 @@ const styles: StyleRulesCallback = theme => ({
   titleText: {
     color: theme.palette.grey['700'],
   },
+  nested: {
+    paddingLeft: theme.spacing.unit * 7,
+  },
+  icon: {
+    marginRight: 0,
+    color: theme.palette.secondary.main,
+  },
+  category: {
+    color: theme.palette.secondary.main,
+  },
+  categoryText: {
+    color: theme.palette.secondary.main,
+  },
 })
 
-export interface ProfileProps {
+export interface ProfileProps extends WithStyles<typeof styles> {
   balance?: number
   isPrivate?: boolean
 }
-interface ProfilePropsStyled extends ProfileProps, WithStyles<typeof styles> {}
 
 export default withStyles(styles)(Profile)
