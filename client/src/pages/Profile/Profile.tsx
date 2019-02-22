@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core'
 import {
   CreditCard,
+  ExitToApp,
   InfoOutlined,
   Settings,
   ThumbDownOutlined,
@@ -46,9 +47,10 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
               olgusia_olgusia@krolowaswiata.com
             </Typography>
             <Typography className={classes.ratings}>
-              100
+              843
               <ThumbUpOutlined color="action" />
-              <ThumbDownOutlined color="action" />0
+              <ThumbDownOutlined color="action" />
+              134
             </Typography>
           </div>
         </div>
@@ -145,6 +147,19 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
             </ListItem>
           </List>
         </div>
+
+        <div className={classes.group}>
+          <List>
+            <ListItem button color="secondary" className={classes.category}>
+              <ListItemIcon className={classes.icon}>
+                <ExitToApp />
+              </ListItemIcon>
+              <ListItemText>
+                <span className={classes.categoryText}>Wyloguj</span>
+              </ListItemText>
+            </ListItem>
+          </List>
+        </div>
       </div>
       <NavigationBar />
     </>
@@ -156,7 +171,7 @@ const styles: StyleRulesCallback = theme => ({
     fontSize: '10em',
   },
   root: {
-    // margin: theme.spacing.unit,
+    marginBottom: theme.spacing.unit * 6,
   },
   title: {
     margin: theme.spacing.unit * 2,
@@ -201,7 +216,7 @@ const styles: StyleRulesCallback = theme => ({
   },
   ratings: {
     display: 'grid',
-    gridTemplateColumns: '1fr 0fr 0fr 1fr',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr',
     color: theme.palette.text.primary,
     padding: '0 35%',
   },
