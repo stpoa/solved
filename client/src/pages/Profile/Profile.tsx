@@ -12,6 +12,8 @@ import {
   withStyles,
 } from '@material-ui/core'
 import {
+  CreditCard,
+  InfoOutlined,
   Settings,
   ThumbDownOutlined,
   ThumbUpOutlined,
@@ -82,6 +84,64 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
                   checked={notificationsEnabled}
                 />
               </ListItemSecondaryAction>
+            </ListItem>
+          </List>
+        </div>
+
+        <div className={classes.group}>
+          <List>
+            <ListItem color="secondary" className={classes.category}>
+              <ListItemIcon className={classes.icon}>
+                <CreditCard />
+              </ListItemIcon>
+              <ListItemText>
+                <span className={classes.categoryText}>Płatności</span>
+              </ListItemText>
+            </ListItem>
+
+            <ListItem button className={classes.nested}>
+              <ListItemText>Jak to działa</ListItemText>
+            </ListItem>
+
+            <Divider />
+
+            <ListItem button className={classes.nested}>
+              <ListItemText>Doładowanie konta</ListItemText>
+            </ListItem>
+
+            <Divider />
+
+            <ListItem button className={classes.nested}>
+              <ListItemText>Konfiguracja</ListItemText>
+            </ListItem>
+          </List>
+        </div>
+
+        <div className={classes.group}>
+          <List>
+            <ListItem color="secondary" className={classes.category}>
+              <ListItemIcon className={classes.icon}>
+                <InfoOutlined />
+              </ListItemIcon>
+              <ListItemText>
+                <span className={classes.categoryText}>Aplikacja</span>
+              </ListItemText>
+            </ListItem>
+
+            <ListItem button className={classes.nested}>
+              <ListItemText>Feedback</ListItemText>
+            </ListItem>
+
+            <Divider />
+
+            <ListItem button className={classes.nested}>
+              <ListItemText>O aplikacji</ListItemText>
+            </ListItem>
+
+            <Divider />
+
+            <ListItem button className={classes.nested}>
+              <ListItemText>Usuń konto</ListItemText>
             </ListItem>
           </List>
         </div>
