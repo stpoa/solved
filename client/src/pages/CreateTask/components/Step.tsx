@@ -1,11 +1,11 @@
 import {
+  Button,
   Card,
   StyleRulesCallback,
   WithStyles,
   withStyles,
 } from '@material-ui/core'
 import React, { FunctionComponent } from 'react'
-import StepButton from './StepButton'
 
 const Step: FunctionComponent<StepProps> = props => {
   const {
@@ -26,32 +26,48 @@ const Step: FunctionComponent<StepProps> = props => {
     <Card className={props.classes.cardContainer} elevation={1}>
       <div className={props.classes.container}>
         <div>{component ? React.createElement(component) : children}</div>
-        <div className={props.classes.buttons}>
-          <StepButton
-            key={0}
-            isActive={displayPrevious}
-            onClick={goToPreviousStep}
-          >
-            prev
-          </StepButton>
-          <StepButton key={1} isActive={displayNext} onClick={goToNextStep}>
-            next
-          </StepButton>
-          <StepButton
-            key={2}
-            isActive={displaySubmit}
-            type="submit"
-            onClick={submit}
-          >
-            Submit
-          </StepButton>
+        <div
+          className={
+            displayPrevious ? props.classes.buttons : props.classes.singleButton
+          }
+        >
+          {displayPrevious && (
+            <Button
+              className={[
+                props.classes.button,
+                props.classes.reverseButton,
+              ].join(' ')}
+              variant="outlined"
+              onClick={goToPreviousStep}
+            >
+              Wstecz
+            </Button>
+          )}
+          {displayNext && (
+            <Button
+              className={props.classes.button}
+              variant="extendedFab"
+              onClick={goToNextStep}
+            >
+              Dalej
+            </Button>
+          )}
+          {displaySubmit && (
+            <Button
+              className={props.classes.button}
+              variant="extendedFab"
+              onClick={submit}
+            >
+              Utwórz
+            </Button>
+          )}
         </div>
       </div>
     </Card>
   )
 }
 
-const styles: StyleRulesCallback = () => ({
+const styles: StyleRulesCallback = theme => ({
   container: {
     height: '100%',
     display: 'grid',
@@ -61,8 +77,28 @@ const styles: StyleRulesCallback = () => ({
     height: '100%',
     textAlign: 'center',
   },
+  button: {
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.primary.main,
+  },
+  singleButton: {
+    display: 'grid',
+    justifyContent: 'center',
+    gridTemplateColumns: '0.5fr',
+    padding: theme.spacing.unit,
+  },
   buttons: {
-    textAlign: 'center',
+    display: 'grid',
+    gridColumnGap: '1rem',
+    gridTemplateColumns: '1fr 1fr',
+    padding: theme.spacing.unit,
+  },
+  reverseButton: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
+    borderColor: theme.palette.secondary.main,
+    borderRadius: '24px',
+    borderWidth: '0.2vh',
   },
 })
 
