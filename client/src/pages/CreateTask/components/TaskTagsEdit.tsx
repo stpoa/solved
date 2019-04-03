@@ -14,6 +14,7 @@ import { OnChange } from '~typings/react'
 
 const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({ classes }) => {
   const [store, dispatch] = useCreateTaskStore()
+
   const InputLabelProps = { shrink: true }
 
   const handleTagsQueryUpdate: OnChange = e => {

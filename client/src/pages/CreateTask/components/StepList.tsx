@@ -2,14 +2,32 @@ import { StyleRulesCallback, withStyles, WithStyles } from '@material-ui/core'
 import { range } from 'ramda'
 import React, { FC } from 'react'
 import { ActionTypes } from '~/stores/CreateTask'
-import { useCreateTaskStore } from '~stores/CreateTask/connect'
+import { useCreateTaskStore } from '~/stores/CreateTask/connect'
+import { steps as orderedSteps } from '../containers/CreateTask'
+import { validateCurrentPage } from '../validations'
 
 const StepList: FC<StepListProps> = props => {
-  const [{ step: currentStep }, dispatch] = useCreateTaskStore()
-  const goToPreviousStep = () =>
-    dispatch({ type: ActionTypes.updateStep, payload: currentStep - 1 })
-  const goToNextStep = () =>
-    dispatch({ type: ActionTypes.updateStep, payload: currentStep + 1 })
+  const [store, dispatch] = useCreateTaskStore()
+  const goToPreviousStep = () => {
+    store.pageValid &&
+      dispatch({ type: ActionTypes.updatePageValidation, payload: false })
+    dispatch({ type: ActionTypes.updateStep, payload: store.step - 1 })
+  }
+
+  const isPageValid = validateCurrentPage(store, orderedSteps)
+
+  const goToNextStep = () => {
+    if (isPageValid && !store.pageValid) {
+      dispatch({ type: ActionTypes.updateStep, payload: store.step + 1 })
+      dispatch({ type: ActionTypes.updatePageValidation, payload: false })
+    }
+  }
+  const submit = () => {
+    if (isPageValid && !store.pageValid) {
+      window.alert('Submit')
+    }
+  }
+
   const { classes, children } = props
   const totalSteps = children.length
 
@@ -17,13 +35,14 @@ const StepList: FC<StepListProps> = props => {
     const step = index + 1
     return React.cloneElement(child, {
       key: step,
-      isActive: step === currentStep,
-      displayPrevious: currentStep > 1,
-      displayNext: currentStep < totalSteps,
-      displaySubmit: currentStep === totalSteps,
+      isActive: step === store.step,
+      displayPrevious: store.step > 1,
+      displayNext: store.step < totalSteps,
+      displaySubmit: store.step === totalSteps,
       goToPreviousStep,
       goToNextStep,
-      submit: () => window.alert('Submit'),
+      submit,
+      isPageValid,
     })
   })
 
@@ -32,8 +51,8 @@ const StepList: FC<StepListProps> = props => {
   const stepsIndicator = (
     <div className={classes.progressBar}>
       {range(1, totalSteps + 1).map(step => {
-        const isActive = step <= currentStep
-        const isDisabled = step > currentStep
+        const isActive = step <= store.step
+        const isDisabled = step > store.step
         const disabledClass = isDisabled ? classes.disabled : ''
         const activeClass = isActive ? classes.active : ''
 

@@ -18,6 +18,7 @@ const Step: FunctionComponent<StepProps> = props => {
     goToPreviousStep,
     goToNextStep,
     submit,
+    isPageValid,
   } = props
 
   if (isActive === false) return null
@@ -48,6 +49,7 @@ const Step: FunctionComponent<StepProps> = props => {
               className={props.classes.button}
               variant="extendedFab"
               onClick={goToNextStep}
+              disabled={!isPageValid}
             >
               Dalej
             </Button>
@@ -57,6 +59,7 @@ const Step: FunctionComponent<StepProps> = props => {
               className={props.classes.button}
               variant="extendedFab"
               onClick={submit}
+              disabled={!isPageValid}
             >
               Utwórz
             </Button>
@@ -80,6 +83,9 @@ const styles: StyleRulesCallback = theme => ({
   button: {
     backgroundColor: theme.palette.secondary.main,
     color: theme.palette.primary.main,
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
+    },
   },
   singleButton: {
     display: 'grid',
@@ -104,6 +110,7 @@ const styles: StyleRulesCallback = theme => ({
 
 interface StepProps extends WithStyles<typeof styles> {
   isActive?: boolean
+  isPageValid?: boolean
   displayPrevious?: boolean
   displayNext?: boolean
   displaySubmit?: boolean
