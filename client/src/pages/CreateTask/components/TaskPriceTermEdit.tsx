@@ -8,32 +8,27 @@ import {
 } from '@material-ui/core'
 import { AccountBalanceWallet, Event, EventAvailable } from '@material-ui/icons'
 import { format } from 'date-fns'
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { ActionTypes } from '~/stores/CreateTask'
 import { useCreateTaskStore } from '~stores/CreateTask/connect'
 import { OnChange } from '~typings/react'
-
-const dateSmallerThanActualTimeErrorMessage = (timeStamp: number) =>
-  timeStamp && new Date(timeStamp).getTime() < Date.now()
-    ? 'Data nie moze być wcześniejsza niż aktualny czas'
-    : ''
-
-const finishDateSmallerThanStartDateErrorMessage = (
-  startDateTimeStamp: number,
-  finishDateTimeStamp: number,
-) =>
-  startDateTimeStamp &&
-  finishDateTimeStamp &&
-  new Date(startDateTimeStamp).getTime() >
-    new Date(finishDateTimeStamp).getTime()
-    ? 'Data rozwiązania zadania nie może byc wcześniejsza niż data dodania treści'
-    : ''
+import {
+  invalidateDateWithActualTime,
+  invalidatePrice,
+  invalidateStartDateWithFinishDate,
+} from '../validations'
 
 const TaskPriceTermEdit: FC<TaskPriceTermEditProps> = ({
   balance,
   classes,
 }) => {
   const [{ startDate, finishDate, price }, dispatch] = useCreateTaskStore()
+
+  useEffect(() => {
+    // Mount
+    dispatch({ type: ActionTypes.updateBalance, payload: balance })
+  }, [])
+
   const withTaskContent = false // TODO get from checkbox in photoEdit page
   const dateInputStyles = {
     classes: {
@@ -48,16 +43,12 @@ const TaskPriceTermEdit: FC<TaskPriceTermEditProps> = ({
     endAdornment: <div className={classes.endAdornment}>PLN</div>,
   }
 
-  const priceErrorMessage =
-    balance && balance < price
-      ? 'Nie masz wystarczających środków na koncie'
-      : ''
-
-  const startDateErrorMessage = dateSmallerThanActualTimeErrorMessage(startDate)
+  const startDateErrorMessage = invalidateDateWithActualTime(startDate)
   const finishDateErrorMessages = [
-    dateSmallerThanActualTimeErrorMessage(finishDate),
-    finishDateSmallerThanStartDateErrorMessage(startDate, finishDate),
+    invalidateDateWithActualTime(finishDate),
+    invalidateStartDateWithFinishDate(startDate, finishDate),
   ]
+  const priceErrorMessage = invalidatePrice(balance, price)
 
   const handleStartDateChange: OnChange = e => {
     const timeStamp = new Date(e.target.value).getTime()
@@ -217,7 +208,7 @@ const styles: StyleRulesCallback = theme => ({
 })
 
 interface TaskPriceTermEditProps extends WithStyles<typeof styles> {
-  balance?: number
+  balance: number
   withTaskContent?: boolean
 }
 

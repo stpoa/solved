@@ -12,24 +12,34 @@ import TaskPhotoEdit from '../components/TaskPhotoEdit'
 import TaskPriceTermEdit from '../components/TaskPriceTermEdit'
 import TaskTagsEdit from '../components/TaskTagsEdit'
 
+export const steps: Step[] = [
+  {
+    stepName: 'tags',
+    component: <TaskTagsEdit />,
+  },
+  {
+    stepName: 'description',
+    component: <TaskDescriptionEdit />,
+  },
+  {
+    stepName: 'photo',
+    component: <TaskPhotoEdit />,
+  },
+  {
+    stepName: 'priceAndTerm',
+    component: <TaskPriceTermEdit balance={100} />,
+  },
+]
+
 const CreateTask: FC<CreateTaskProps> = ({ classes }) => (
   <>
     <PageHeader title="Nowe zadanie" />
     <div className={classes.container}>
       <CreateTaskProvider {...{ reducer }}>
         <StepList>
-          <Step>
-            <TaskTagsEdit />
-          </Step>
-          <Step>
-            <TaskDescriptionEdit />
-          </Step>
-          <Step>
-            <TaskPhotoEdit />
-          </Step>
-          <Step>
-            <TaskPriceTermEdit balance={100} />
-          </Step>
+          {steps.map(({ component, stepName }: Step) => (
+            <Step key={stepName}>{component}</Step>
+          ))}
         </StepList>
       </CreateTaskProvider>
     </div>
@@ -63,5 +73,9 @@ const styles: StyleRulesCallback = theme => ({
   },
 })
 
+export interface Step {
+  stepName: string
+  component: JSX.Element
+}
 export interface CreateTaskProps extends WithStyles<typeof styles> {}
 export default withStyles(styles)(CreateTask)
