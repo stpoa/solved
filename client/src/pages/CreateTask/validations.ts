@@ -4,9 +4,10 @@ import { Step } from './containers/CreateTask'
 
 export const validateTagsPage = (
   tags: Array<{ name: string; visible: boolean; selected: boolean }>,
-) => tags.find(({ selected }) => selected)
+) => tags.filter(({ selected }) => selected).length >= 2
 
-export const validateDescriptionPage = (description: string) => !!description
+export const validateDescriptionPage = (description: string) =>
+  description.length >= 25
 
 export const validatePhotoPage = (files: ExtendedFile[]) => files.length
 
