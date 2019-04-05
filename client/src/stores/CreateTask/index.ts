@@ -1,7 +1,7 @@
 import { tags } from '~data'
 import { ExtendedFile } from '~pages/CreateTask/components/TaskPhotoEdit'
 
-export const initialStore = {
+export const initialState = {
   step: 1,
   files: [] as ExtendedFile[],
   balance: 0,
@@ -27,7 +27,7 @@ export enum ActionTypes {
   updatePageValidation = 'UPDATE_PAGE_VALIDATION',
 }
 
-export const reducer: Reducer = (state, action): Store => {
+export const reducer: Reducer = (state, action): State => {
   const { type, ...updates } = action
   return { ...state, ...updates }
 }
@@ -99,5 +99,5 @@ export type Action =
   | ActionUpdatePrice
   | ActionUpdatePageValidation 
 
-export type Store = typeof initialStore
-export type Reducer = (state: Store, action: Action) => Store
+export type State = typeof initialState
+export type Reducer = (state: State, action: Action) => State
