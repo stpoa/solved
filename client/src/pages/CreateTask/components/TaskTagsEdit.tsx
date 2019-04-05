@@ -25,8 +25,8 @@ const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({ classes }) => {
         ? { ...tag, visible: true }
         : { ...tag, visible: false },
     )
-    dispatch({ type: ActionTypes.updateTagsQuery, payload: tagsQuery })
-    dispatch({ type: ActionTypes.updateTags, payload: tags })
+    dispatch({ type: ActionTypes.updateTagsQuery, tagsQuery })
+    dispatch({ type: ActionTypes.updateTags, tags })
   }
 
   const handleTagSelectionUpdate = (name: string) => () => {
@@ -36,15 +36,15 @@ const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({ classes }) => {
       const tags = store.tags.map(tag =>
         tag.name === name ? { ...tag, selected: false } : { ...tag },
       )
-      dispatch({ type: ActionTypes.updateTags, payload: tags })
+      dispatch({ type: ActionTypes.updateTags, tags })
     } else {
       const tags = store.tags.map(tag =>
         tag.name === name
           ? { ...tag, visible: true, selected: true }
           : { ...tag, visible: true },
       )
-      dispatch({ type: ActionTypes.updateTagsQuery, payload: '' })
-      dispatch({ type: ActionTypes.updateTags, payload: tags })
+      dispatch({ type: ActionTypes.updateTagsQuery, tagsQuery: '' })
+      dispatch({ type: ActionTypes.updateTags, tags })
     }
   }
 
