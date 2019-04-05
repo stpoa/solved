@@ -10,16 +10,28 @@ const StepList: FC<StepListProps> = props => {
   const [store, dispatch] = useCreateTaskStore()
   const goToPreviousStep = () => {
     store.pageValid &&
-      dispatch({ type: ActionTypes.updatePageValidation, payload: false })
-    dispatch({ type: ActionTypes.updateStep, payload: store.step - 1 })
+      dispatch({
+        type: ActionTypes.updatePageValidation,
+        payload: { pageValid: false },
+      })
+    dispatch({
+      type: ActionTypes.updateStep,
+      payload: { step: store.step - 1 },
+    })
   }
 
   const isPageValid = validateCurrentPage(store, orderedSteps)
 
   const goToNextStep = () => {
     if (isPageValid && !store.pageValid) {
-      dispatch({ type: ActionTypes.updateStep, payload: store.step + 1 })
-      dispatch({ type: ActionTypes.updatePageValidation, payload: false })
+      dispatch({
+        type: ActionTypes.updateStep,
+        payload: { step: store.step + 1 },
+      })
+      dispatch({
+        type: ActionTypes.updatePageValidation,
+        payload: { pageValid: false },
+      })
     }
   }
   const submit = () => {

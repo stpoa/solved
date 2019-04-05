@@ -1,12 +1,14 @@
 import { tags } from '~data'
 import { ExtendedFile } from '~pages/CreateTask/components/TaskPhotoEdit'
 
-export const initialStore = {
+export const initialState = {
   step: 1,
   files: [] as ExtendedFile[],
   balance: 0,
   description: '',
-  tags: tags.map(name => ({ name, visible: true, selected: false })),
+  tags: tags.map(
+    (name): TagValue => ({ name, visible: true, selected: false }),
+  ),
   tagsQuery: '',
   startDate: 0,
   finishDate: 0,
@@ -27,37 +29,77 @@ export enum ActionTypes {
   updatePageValidation = 'UPDATE_PAGE_VALIDATION',
 }
 
-export const reducer: Reducer = (state, action) => {
-  switch (action.type) {
-    case ActionTypes.updateStep:
-      return { ...state, step: action.payload }
-    case ActionTypes.updateFiles:
-      return { ...state, files: action.payload }
-    case ActionTypes.updateBalance:
-      return { ...state, balance: action.payload }
-    case ActionTypes.updateDescription:
-      return { ...state, description: action.payload }
-    case ActionTypes.updateTags:
-      return { ...state, tags: action.payload }
-    case ActionTypes.updateTagsQuery:
-      return { ...state, tagsQuery: action.payload }
-    case ActionTypes.updateStartDate:
-      return { ...state, startDate: action.payload }
-    case ActionTypes.updateFinishDate:
-      return { ...state, finishDate: action.payload }
-    case ActionTypes.updatePrice:
-      return { ...state, price: action.payload }
-    case ActionTypes.updatePageValidation:
-      return { ...state, pageValid: action.payload }
-    default:
-      return state
-  }
+export const reducer: Reducer = (state, action): State => ({
+  ...state,
+  ...action.payload,
+})
+
+export interface TagValue {
+  name: string
+  visible: boolean
+  selected: boolean
 }
 
-export interface Action {
-  type: ActionTypes
-  payload: any
+export interface ActionUpdateStep {
+  type: ActionTypes.updateStep
+  payload: { step: number }
 }
 
-export type Store = typeof initialStore
-export type Reducer = (state: Store, action: Action) => Store
+export interface ActionUpdateFiles {
+  type: ActionTypes.updateFiles
+  payload: { files: ExtendedFile[] }
+}
+
+export interface ActionUpdateBalance {
+  type: ActionTypes.updateBalance
+  payload: { balance: number }
+}
+
+export interface ActionUpdateDescription {
+  type: ActionTypes.updateDescription
+  payload: { description: string }
+}
+
+export interface ActionUpdateTags {
+  type: ActionTypes.updateTags
+  payload: { tags: TagValue[] }
+}
+
+export interface ActionUpdateTagsQuery {
+  type: ActionTypes.updateTagsQuery
+  payload: { tagsQuery: string }
+}
+
+export interface ActionUpdateStartDate {
+  type: ActionTypes.updateStartDate
+  payload: { startDate: number }
+}
+
+export interface ActionUpdateFinishDate {
+  type: ActionTypes.updateFinishDate
+  payload: { finishDate: number }
+}
+export interface ActionUpdatePrice {
+  type: ActionTypes.updatePrice
+  payload: { price: number }
+}
+
+export interface ActionUpdatePageValidation {
+  type: ActionTypes.updatePageValidation
+  payload: { pageValid: boolean }
+}
+
+export type Action =
+  | ActionUpdateStep
+  | ActionUpdateFiles
+  | ActionUpdateBalance
+  | ActionUpdateDescription
+  | ActionUpdateTags
+  | ActionUpdateTagsQuery
+  | ActionUpdateStartDate
+  | ActionUpdateFinishDate
+  | ActionUpdatePrice
+  | ActionUpdatePageValidation
+
+export type State = typeof initialState
+export type Reducer = (state: State, action: Action) => State

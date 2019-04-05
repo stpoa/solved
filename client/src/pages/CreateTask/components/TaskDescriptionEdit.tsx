@@ -16,7 +16,10 @@ const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
 }) => {
   const [{ description }, dispatch] = useCreateTaskStore()
   const handleDescriptionChange: OnChange = e =>
-    dispatch({ type: ActionTypes.updateDescription, payload: e.target.value })
+    dispatch({
+      type: ActionTypes.updateDescription,
+      payload: { description: e.target.value },
+    })
 
   return (
     <CardContent className={classes.cardContent}>

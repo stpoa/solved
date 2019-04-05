@@ -1,5 +1,5 @@
 import { ExtendedFile } from '~pages/CreateTask/components/TaskPhotoEdit'
-import { Store } from '~stores/CreateTask'
+import { State } from '~stores/CreateTask'
 import { Step } from './containers/CreateTask'
 
 export const validateTagsPage = (
@@ -45,7 +45,7 @@ export const validatePriceAndTermPage = (
   !invalidateStartDateWithFinishDate(startDate, finishDate) &&
   !invalidatePrice(balance, price)
 
-export const validateCurrentPage = (createTaskStore: Store, steps: Step[]) => {
+export const validateCurrentPage = (createTaskStore: State, steps: Step[]) => {
   const actualStep = steps[createTaskStore.step - 1]
   switch (actualStep.stepName) {
     case 'tags':

@@ -1,6 +1,6 @@
 import { StyleRulesCallback, WithStyles, withStyles } from '@material-ui/core'
 import React from 'react'
-import Tag from './Tag'
+import Tag from '../../Tag'
 
 const TagList = ({ tags, classes }: TagListProps) => (
   <div className={classes.container}>
