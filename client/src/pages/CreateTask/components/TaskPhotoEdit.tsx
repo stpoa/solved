@@ -24,7 +24,7 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
     const doesFileExist = (file: ExtendedFile) => file.id !== id
     dispatch({
       type: ActionTypes.updateFiles,
-      files: files.filter(doesFileExist),
+      payload: { files: files.filter(doesFileExist) },
     })
   }
 
@@ -46,7 +46,7 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
       newFiles.length &&
       dispatch({
         type: ActionTypes.updateFiles,
-        files: [...files, ...newFiles],
+        payload: { files: [...files, ...newFiles] },
       })
   }
 

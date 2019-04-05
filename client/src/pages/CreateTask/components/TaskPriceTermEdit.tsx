@@ -26,7 +26,7 @@ const TaskPriceTermEdit: FC<TaskPriceTermEditProps> = ({
 
   useEffect(() => {
     // Mount
-    dispatch({ type: ActionTypes.updateBalance, balance })
+    dispatch({ type: ActionTypes.updateBalance, payload: { balance } })
   }, [])
 
   const withTaskContent = false // TODO get from checkbox in photoEdit page
@@ -52,16 +52,25 @@ const TaskPriceTermEdit: FC<TaskPriceTermEditProps> = ({
 
   const handleStartDateChange: OnChange = e => {
     const timeStamp = new Date(e.target.value).getTime()
-    dispatch({ type: ActionTypes.updateStartDate, startDate: timeStamp })
+    dispatch({
+      type: ActionTypes.updateStartDate,
+      payload: { startDate: timeStamp },
+    })
   }
 
   const handleFinishDateChange: OnChange = e => {
     const timeStamp = new Date(e.target.value).getTime()
-    dispatch({ type: ActionTypes.updateFinishDate, finishDate: timeStamp })
+    dispatch({
+      type: ActionTypes.updateFinishDate,
+      payload: { finishDate: timeStamp },
+    })
   }
 
   const handlePriceChange: OnChange = e =>
-    dispatch({ type: ActionTypes.updatePrice, price: Number(e.target.value) })
+    dispatch({
+      type: ActionTypes.updatePrice,
+      payload: { price: Number(e.target.value) },
+    })
 
   return (
     <CardContent className={classes.cardContent}>

@@ -18,7 +18,7 @@ const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
   const handleDescriptionChange: OnChange = e =>
     dispatch({
       type: ActionTypes.updateDescription,
-      description: e.target.value,
+      payload: { description: e.target.value },
     })
 
   return (

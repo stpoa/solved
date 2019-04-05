@@ -29,10 +29,10 @@ export enum ActionTypes {
   updatePageValidation = 'UPDATE_PAGE_VALIDATION',
 }
 
-export const reducer: Reducer = (state, action): State => {
-  const { type, ...updates } = action
-  return { ...state, ...updates }
-}
+export const reducer: Reducer = (state, action): State => ({
+  ...state,
+  ...action.payload,
+})
 
 export interface TagValue {
   name: string
@@ -42,51 +42,51 @@ export interface TagValue {
 
 export interface ActionUpdateStep {
   type: ActionTypes.updateStep
-  step: number
+  payload: { step: number }
 }
 
 export interface ActionUpdateFiles {
   type: ActionTypes.updateFiles
-  files: ExtendedFile[]
+  payload: { files: ExtendedFile[] }
 }
 
 export interface ActionUpdateBalance {
   type: ActionTypes.updateBalance
-  balance: number
+  payload: { balance: number }
 }
 
 export interface ActionUpdateDescription {
   type: ActionTypes.updateDescription
-  description: string
+  payload: { description: string }
 }
 
 export interface ActionUpdateTags {
   type: ActionTypes.updateTags
-  tags: TagValue[]
+  payload: { tags: TagValue[] }
 }
 
 export interface ActionUpdateTagsQuery {
   type: ActionTypes.updateTagsQuery
-  tagsQuery: string
+  payload: { tagsQuery: string }
 }
 
 export interface ActionUpdateStartDate {
   type: ActionTypes.updateStartDate
-  startDate: number
+  payload: { startDate: number }
 }
 
 export interface ActionUpdateFinishDate {
   type: ActionTypes.updateFinishDate
-  finishDate: number
+  payload: { finishDate: number }
 }
 export interface ActionUpdatePrice {
   type: ActionTypes.updatePrice
-  price: number
+  payload: { price: number }
 }
 
 export interface ActionUpdatePageValidation {
   type: ActionTypes.updatePageValidation
-  pageValid: boolean
+  payload: { pageValid: boolean }
 }
 
 export type Action =
