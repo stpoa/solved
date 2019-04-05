@@ -28,30 +28,8 @@ export enum ActionTypes {
 }
 
 export const reducer: Reducer = (state, action): Store => {
-  switch (action.type) {
-    case ActionTypes.updateStep:
-      return { ...state, step: action.step }
-    case ActionTypes.updateFiles:
-      return { ...state, files: action.files }
-    case ActionTypes.updateBalance:
-      return { ...state, balance: action.balance }
-    case ActionTypes.updateDescription:
-      return { ...state, description: action.description }
-    case ActionTypes.updateTags:
-      return { ...state, tags: action.tags }
-    case ActionTypes.updateTagsQuery:
-      return { ...state, tagsQuery: action.tagsQuery }
-    case ActionTypes.updateStartDate:
-      return { ...state, startDate: action.startDate }
-    case ActionTypes.updateFinishDate:
-      return { ...state, finishDate: action.finishDate }
-    case ActionTypes.updatePrice:
-      return { ...state, price: action.price }
-    case ActionTypes.updatePageValidation:
-      return { ...state, pageValid: action.pageValid }
-    default:
-      return state
-  }
+  const { type, ...updates } = action
+  return { ...state, ...updates }
 }
 
 export interface Tag {
