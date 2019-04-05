@@ -60,7 +60,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "tslint --project ./",
+      "tslint --project ./ --fix",
       "prettier --write",
       "git add"
     ]

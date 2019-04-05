@@ -5,8 +5,8 @@ import {
   WithStyles,
 } from '@material-ui/core/styles'
 import React, { FunctionComponent } from 'react'
+import Tag from '~generic/Tag'
 import TagAdd from '~generic/TagAdd'
-import Tag from '~generic/TaskList/components/Tag'
 import { TagValue } from '~stores/CreateTask'
 
 const showTagAdd = (tags: TagValue[], tagsQuery?: string) =>
