@@ -5,7 +5,16 @@ import {
   WithStyles,
 } from '@material-ui/core/styles'
 import React, { FunctionComponent } from 'react'
-import Tag from './TaskList/components/Tag'
+import TagAdd from '~generic/TagAdd'
+import Tag from '~generic/TaskList/components/Tag'
+import { TagValue } from '~stores/CreateTask'
+
+const showTagAdd = (tags: TagValue[], tagsQuery?: string) =>
+  tags.filter(tag => tag.selected).length < 4 &&
+  !!tagsQuery &&
+  tagsQuery.length > 2 &&
+  tagsQuery.length < 17 &&
+  !tags.some(tag => tag.name === tagsQuery)
 
 const limitVisibleTags = (limit: number) => (tags: TagValue[]) => {
   const selectedCount = tags.reduce(
@@ -38,9 +47,11 @@ const SelectTags: FunctionComponent<SelectTagsProps> = ({
   tags: manyTags,
   classes: { container },
   onTagSelect,
+  onTagAdd,
+  selectedTagsLimit = 4,
+  tagsQuery,
 }) => {
   const tags = limitVisibleTags(10)(manyTags)
-  const limit = 4
   const selectedCount = tags.reduce(
     (count, tag) => (tag.selected ? count + 1 : count),
     0,
@@ -49,7 +60,7 @@ const SelectTags: FunctionComponent<SelectTagsProps> = ({
   return (
     <div className={container}>
       {tags.map(({ selected, name, visible }, i) => {
-        const isClickable = !selected && selectedCount === limit
+        const isClickable = !selected && selectedCount === selectedTagsLimit
 
         return (
           <Tag
@@ -62,6 +73,11 @@ const SelectTags: FunctionComponent<SelectTagsProps> = ({
           />
         )
       })}
+      <TagAdd
+        text={tagsQuery}
+        onClick={onTagAdd && onTagAdd(tagsQuery)}
+        visible={showTagAdd(tags, tagsQuery)}
+      />
     </div>
   )
 }
@@ -77,15 +93,12 @@ const styles: StyleRulesCallback = () =>
     },
   })
 
-export interface TagValue {
-  name: string
-  visible: boolean
-  selected: boolean
-}
-
 export interface SelectTagsProps extends WithStyles<typeof styles> {
   tags: TagValue[]
   onTagSelect: (tagName: string) => () => void
+  onTagAdd?: (tagName?: string) => () => void
+  tagsQuery?: string
+  selectedTagsLimit?: number
 }
 
 export default withStyles(styles)(SelectTags)

@@ -6,7 +6,9 @@ export const initialState = {
   files: [] as ExtendedFile[],
   balance: 0,
   description: '',
-  tags: tags.map((name): Tag => ({ name, visible: true, selected: false })),
+  tags: tags.map(
+    (name): TagValue => ({ name, visible: true, selected: false }),
+  ),
   tagsQuery: '',
   startDate: 0,
   finishDate: 0,
@@ -32,7 +34,7 @@ export const reducer: Reducer = (state, action): State => {
   return { ...state, ...updates }
 }
 
-export interface Tag {
+export interface TagValue {
   name: string
   visible: boolean
   selected: boolean
@@ -50,7 +52,7 @@ export interface ActionUpdateFiles {
 
 export interface ActionUpdateBalance {
   type: ActionTypes.updateBalance
-  balance: number;
+  balance: number
 }
 
 export interface ActionUpdateDescription {
@@ -60,7 +62,7 @@ export interface ActionUpdateDescription {
 
 export interface ActionUpdateTags {
   type: ActionTypes.updateTags
-  tags: Tag[]
+  tags: TagValue[]
 }
 
 export interface ActionUpdateTagsQuery {
@@ -97,7 +99,7 @@ export type Action =
   | ActionUpdateStartDate
   | ActionUpdateFinishDate
   | ActionUpdatePrice
-  | ActionUpdatePageValidation 
+  | ActionUpdatePageValidation
 
 export type State = typeof initialState
 export type Reducer = (state: State, action: Action) => State
