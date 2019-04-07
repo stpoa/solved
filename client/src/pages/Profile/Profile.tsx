@@ -20,14 +20,29 @@ import {
   ThumbUpOutlined,
 } from '@material-ui/icons'
 import React, { FunctionComponent, useState } from 'react'
-import { NavigationBar, PageHeader } from '~generic'
+import { ConfirmationDialog, NavigationBar, PageHeader } from '~generic'
 import avatar from '~icons/avatar.png'
 
 const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true)
+  const [logoutModalVisible, setLogoutModalVisible] = useState(false)
+  const [deleteAccountModalVisible, setDeleteAccountModalVisible] = useState(
+    false,
+  )
+
   const handleNotificationSwitch = (_: any, checked: boolean) => {
     setNotificationsEnabled(checked)
   }
+
+  const handleLogoutClick = () => setLogoutModalVisible(true)
+  const handleLogoutModalConfirm = () => setLogoutModalVisible(false)
+  const handleLogoutModalClose = () => setLogoutModalVisible(false)
+
+  const handleDeleteAccountClick = () => setDeleteAccountModalVisible(true)
+  const handleDeleteAccountModalConfirm = () =>
+    setDeleteAccountModalVisible(false)
+  const handleDeleteAccountModalClose = () =>
+    setDeleteAccountModalVisible(false)
 
   return (
     <>
@@ -142,7 +157,11 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
 
             <Divider />
 
-            <ListItem button className={classes.nested}>
+            <ListItem
+              button
+              onClick={handleDeleteAccountClick}
+              className={classes.nested}
+            >
               <ListItemText>Usuń konto</ListItemText>
             </ListItem>
           </List>
@@ -150,7 +169,12 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
 
         <div className={classes.group}>
           <List>
-            <ListItem button color="secondary" className={classes.category}>
+            <ListItem
+              button
+              onClick={handleLogoutClick}
+              color="secondary"
+              className={classes.category}
+            >
               <ListItemIcon className={classes.icon}>
                 <ExitToApp />
               </ListItemIcon>
@@ -161,6 +185,25 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
           </List>
         </div>
       </div>
+
+      <ConfirmationDialog
+        open={deleteAccountModalVisible}
+        handleClose={handleDeleteAccountModalClose}
+        handleConfirm={handleDeleteAccountModalConfirm}
+        titleText={'Usunięcie konta'}
+        contentText={
+          'Usunięcie konta wymaga potwierdzenia poprzez kliknięcie w link znajdujący się w wiadomości email. Czy chcesz otrzymać wiadomość z linkiem usuwającym konto?'
+        }
+        confirmText={'Wyślij email'}
+      />
+
+      <ConfirmationDialog
+        open={logoutModalVisible}
+        handleClose={handleLogoutModalClose}
+        handleConfirm={handleLogoutModalConfirm}
+        confirmText={'Wyloguj'}
+      />
+
       <NavigationBar />
     </>
   )

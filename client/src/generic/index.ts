@@ -1,4 +1,5 @@
 import Button from './Button'
+import ConfirmationDialog from './ConfirmationDialog'
 import Email from './Email'
 import NavigationBar from './NavigationBar/NavigationBar'
 import PageHeader from './PageHeader/PageHeader'
@@ -24,4 +25,5 @@ export {
   TaskList,
   WrappedLink,
   PrivateRoute,
+  ConfirmationDialog,
 }
