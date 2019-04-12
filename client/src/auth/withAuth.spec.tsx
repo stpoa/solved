@@ -41,7 +41,7 @@ describe('withAuth()', () => {
 
     expect(consumer).not.toBe(component)
 
-    const componentAuthProps = component.props().auth
+    const componentAuthProps = (component.props() as any).auth
 
     componentAuthProps.signIn('email', 'password')
     wrapper.update()

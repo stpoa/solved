@@ -21,6 +21,7 @@ import { distanceInWordsToNow } from 'date-fns'
 import * as locale from 'date-fns/locale/en'
 import React, { Fragment } from 'react'
 import { Task } from '~interfaces'
+import { OnClick } from '~typings/react'
 import TagList from './TagList'
 
 const TaskListElement = ({
@@ -178,7 +179,7 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
 
 interface TaskListElementProps extends WithStyles<typeof styles>, Task {
   anchorEl: HTMLElement | null
-  onMoreButtonClick: (id: number, event: Event) => void
+  onMoreButtonClick: (id: string) => OnClick
   onExpandedMenuLeave: () => void
   isMoreExpanded: boolean
   isEditable: boolean

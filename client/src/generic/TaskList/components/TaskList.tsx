@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core'
 import React, { Component } from 'react'
 import { Task } from '~interfaces'
+import { OnClick } from '~typings/react'
 import TaskListElement from './TaskListElement'
 
 class TaskList extends Component<TaskListProps, TaskListState> {
@@ -58,7 +59,7 @@ class TaskList extends Component<TaskListProps, TaskListState> {
         : null,
     )
 
-  private handleMoreButtonClick = (id: number, e: Event) =>
+  private handleMoreButtonClick = (id: string): OnClick => e =>
     this.setState({
       expandedDropdownId: id,
       expandedDropdownAnchorEl: e.currentTarget,
@@ -89,7 +90,7 @@ interface TaskListProps extends WithStyles<typeof styles> {
 }
 
 interface TaskListState {
-  expandedDropdownId: number | null
+  expandedDropdownId: string | null
   expandedDropdownAnchorEl: EventTarget | null
 }
 
