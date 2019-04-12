@@ -9,17 +9,6 @@ import React from 'react'
 
 const Transition = (props: {}) => <Slide direction="up" {...props} />
 
-interface Props {
-  open: boolean
-  handleConfirm: () => void
-  handleReject?: () => void
-  handleClose: () => void
-  titleText?: string
-  contentText?: string
-  confirmText?: string
-  rejectText?: string
-}
-
 const ConfirmationDialog = ({
   open,
   handleConfirm,
@@ -29,7 +18,7 @@ const ConfirmationDialog = ({
   contentText,
   confirmText,
   rejectText,
-}: Props) => {
+}: ConfirmationDialogProps) => {
   const rejectTxt = rejectText || 'Anuluj'
   const confirmTxt = confirmText || 'Potwirdź'
   const contentTxt =
@@ -66,3 +55,14 @@ const ConfirmationDialog = ({
 }
 
 export default ConfirmationDialog
+
+export interface ConfirmationDialogProps {
+  open: boolean
+  handleConfirm: () => void
+  handleReject?: () => void
+  handleClose: () => void
+  titleText?: string
+  contentText?: string
+  confirmText?: string
+  rejectText?: string
+}
