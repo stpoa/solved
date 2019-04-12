@@ -27,7 +27,7 @@
     "strictNullChecks": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "noUnusedLocals": true, 
+    "noUnusedLocals": true,
   },
   "include": [
     "src/**/*"

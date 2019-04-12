@@ -20,7 +20,12 @@ import {
   ThumbUpOutlined,
 } from '@material-ui/icons'
 import React, { FunctionComponent, useState } from 'react'
-import { ConfirmationDialog, NavigationBar, PageHeader } from '~generic'
+import {
+  ConfirmationDialog,
+  NavigationBar,
+  PageHeader,
+  ScreenModal,
+} from '~generic'
 import avatar from '~icons/avatar.png'
 
 const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
@@ -29,10 +34,15 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
   const [deleteAccountModalVisible, setDeleteAccountModalVisible] = useState(
     false,
   )
+  const [notificationsModalVisible, setNotificationsModalVisible] = useState(
+    false,
+  )
 
   const handleNotificationSwitch = (_: any, checked: boolean) => {
     setNotificationsEnabled(checked)
   }
+  const handleNotificationsButtonClick = () =>
+    setNotificationsModalVisible(true)
 
   const handleLogoutClick = () => setLogoutModalVisible(true)
   const handleLogoutModalConfirm = () => setLogoutModalVisible(false)
@@ -43,6 +53,8 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
     setDeleteAccountModalVisible(false)
   const handleDeleteAccountModalClose = () =>
     setDeleteAccountModalVisible(false)
+  const handleNotificationsModalClose = () =>
+    setNotificationsModalVisible(false)
 
   return (
     <>
@@ -93,7 +105,11 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
 
             <Divider />
 
-            <ListItem className={classes.nested}>
+            <ListItem
+              button
+              className={classes.nested}
+              onClick={handleNotificationsButtonClick}
+            >
               <ListItemText primary="Powiadomienia" />
               <ListItemSecondaryAction>
                 <Switch
@@ -203,6 +219,28 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
         handleConfirm={handleLogoutModalConfirm}
         confirmText={'Wyloguj'}
       />
+
+      <ScreenModal
+        open={notificationsModalVisible}
+        handleClose={handleNotificationsModalClose}
+        titleText="Powiadomienia"
+      >
+        <List>
+          <ListItem
+            button
+            className={classes.nested}
+            onClick={handleNotificationsButtonClick}
+          >
+            <ListItemText primary="Powiadomienia" />
+            <ListItemSecondaryAction>
+              <Switch
+                onChange={handleNotificationSwitch}
+                checked={notificationsEnabled}
+              />
+            </ListItemSecondaryAction>
+          </ListItem>
+        </List>
+      </ScreenModal>
 
       <NavigationBar />
     </>

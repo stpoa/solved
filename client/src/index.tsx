@@ -3,6 +3,8 @@ import React, { Fragment } from 'react'
 import { render } from 'react-dom'
 import App from '~App'
 
+import './bootstrap'
+
 const Root = () => (
   <Fragment>
     <CssBaseline />

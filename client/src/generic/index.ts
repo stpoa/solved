@@ -4,6 +4,7 @@ import Email from './Email'
 import NavigationBar from './NavigationBar/NavigationBar'
 import PageHeader from './PageHeader/PageHeader'
 import PrivateRoute from './PrivateRoute'
+import ScreenModal from './ScreenModal'
 import SelectCategory, { SelectCategoryProps } from './SelectCategory'
 import SelectTags, { SelectTagsProps } from './SelectTags'
 import SignBaseButton from './SignBaseButton'
@@ -26,4 +27,5 @@ export {
   WrappedLink,
   PrivateRoute,
   ConfirmationDialog,
+  ScreenModal,
 }

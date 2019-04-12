@@ -18,5 +18,5 @@ module.exports = {
   "moduleNameMapper": {
     "^~(.*)$": "<rootDir>/src/$1"
   },
-  "setupTestFrameworkScriptFile": "<rootDir>/setupTests.ts"
+  "setupFilesAfterEnv": ["<rootDir>/setupTests.ts"]
 }
