@@ -1,7 +1,6 @@
 import {
   Snackbar,
   StyleRulesCallback,
-  TextField,
   withStyles,
   WithStyles,
 } from '@material-ui/core'
@@ -11,16 +10,19 @@ import React, {
   Component,
   MouseEventHandler,
 } from 'react'
-import { Link, Redirect } from 'react-router-dom'
-import isLength from 'validator/lib/isLength'
+import { Redirect } from 'react-router-dom'
 import { withAuth, WithAuth } from '~auth'
 import {
+  Advice,
+  Button,
+  Container,
   Email,
-  SignBaseButton as Button,
-  SignBaseContainer as Container,
-} from '~generic'
+  FieldContainer,
+  Link,
+  Password,
+} from '~generic/Sign'
 import { Status } from '~interfaces'
-import { emailValidator } from '~lib/validators'
+import { emailValidator, passwordLengthValidator } from '~lib/validators'
 import Checkbox from './components/Checkbox'
 import SnackbarError from './components/SnackbarError'
 
@@ -69,30 +71,22 @@ class SignIn extends Component<SignInProps, SignInState> {
         >
           <SnackbarError message="Logowanie się nie powiodło!" />
         </Snackbar>
-        <div className={classes.emailContainer}>
+        <FieldContainer>
           <Email
             disabled={isPending}
             error={emailError}
             value={email}
             onChange={this.handleChangeText}
           />
-        </div>
-        <div className={classes.passwordContainer}>
-          <TextField
-            autoFocus={false}
-            className={classes.textField}
+        </FieldContainer>
+        <FieldContainer secondary>
+          <Password
             disabled={isPending}
-            error={!!passwordError}
-            label="Hasło"
-            helperText={passwordError}
-            required
-            name="password"
-            type="password"
+            error={passwordError}
             value={password}
-            fullWidth
             onChange={this.handleChangeText}
           />
-        </div>
+        </FieldContainer>
         <div className={classes.checkboxForm}>
           <Checkbox
             disabled={isPending}
@@ -101,21 +95,16 @@ class SignIn extends Component<SignInProps, SignInState> {
             name="rememberMe"
             label="Zapamiętaj mnie"
           />
-          <Link className={classes.link} to="/remind-password">
-            Nie pamiętam hasła
-          </Link>
+          <Link to="/remind-password">Nie pamiętam hasła</Link>
         </div>
         <Button disabled={isPending} onClick={this.handleSubmit}>
           Zaloguj
         </Button>
-        <div className={classes.noAccount}>
-          <span>
-            {'Nie posiadasz konta? '}
-            <Link className={classes.link} to="/register">
-              Załóż teraz!
-            </Link>
-          </span>
-        </div>
+        <Advice
+          text="Nie posiadasz konta? "
+          linkText="Załóż teraz!"
+          linkTo="/register"
+        />
       </Container>
     )
   }
@@ -134,21 +123,19 @@ class SignIn extends Component<SignInProps, SignInState> {
     >)
   }
 
-  private validate({ email, password }: SignInState): Errors {
-    return {
-      emailError: emailValidator(email),
-      passwordError: !password
-        ? 'Pole jest wymagane!'
-        : !isLength(password, { min: 6 })
-        ? 'Nieprawidłowe hasło!'
-        : '',
-    }
-  }
-
   private handleSubmit: MouseEventHandler<HTMLElement> = () => {
     this.setState((state, props) => {
-      const errors = this.validate(state)
-      const hasErrors = Object.values(errors).some(error => error.length)
+      const errors = {
+        emailError: emailValidator(state.email),
+        passwordError: passwordLengthValidator(
+          state.password,
+          'Nieprawidłowe hasło!',
+        ),
+      }
+
+      const hasErrors = Object.values(errors).some(error =>
+        Boolean(error.length),
+      )
 
       if (hasErrors) return { ...errors }
 
@@ -174,38 +161,12 @@ class SignIn extends Component<SignInProps, SignInState> {
   }
 }
 
-const styles: StyleRulesCallback = theme => ({
-  buttonContainer: {
-    gridRow: '10',
-    width: '50%',
-    margin: 'auto',
-    height: '100%',
-  },
-  emailContainer: {
-    gridRow: '4',
-    fontSize: theme.typography.body2.fontSize,
-  },
-  passwordContainer: {
-    gridRow: '6',
-    fontSize: theme.typography.body2.fontSize,
-  },
+const styles: StyleRulesCallback = () => ({
   checkboxForm: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gridRow: '8',
     paddingLeft: '2rem',
-  },
-  link: {
-    color: theme.palette.secondary.main,
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    textDecoration: 'none',
-    paddingRight: '2rem',
-  },
-  noAccount: {
-    textAlign: 'center',
-    gridRow: '12',
   },
 })
 
