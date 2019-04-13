@@ -1,4 +1,6 @@
 import {
+  DialogContent,
+  DialogContentText,
   Divider,
   List,
   ListItem,
@@ -20,6 +22,7 @@ import {
   ThumbUpOutlined,
 } from '@material-ui/icons'
 import React, { FunctionComponent, useState } from 'react'
+import { termsAndConditionsText } from '~data/tasks'
 import {
   ConfirmationDialog,
   NavigationBar,
@@ -37,12 +40,14 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
   const [notificationsModalVisible, setNotificationsModalVisible] = useState(
     false,
   )
+  const [termsModalVisible, setTermsModalVisible] = useState(false)
 
   const handleNotificationSwitch = (_: any, checked: boolean) => {
     setNotificationsEnabled(checked)
   }
   const handleNotificationsButtonClick = () =>
     setNotificationsModalVisible(true)
+  const handleTermsButtonClick = () => setTermsModalVisible(true)
 
   const handleLogoutClick = () => setLogoutModalVisible(true)
   const handleLogoutModalConfirm = () => setLogoutModalVisible(false)
@@ -55,6 +60,7 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
     setDeleteAccountModalVisible(false)
   const handleNotificationsModalClose = () =>
     setNotificationsModalVisible(false)
+  const handleTermsModalClose = () => setTermsModalVisible(false)
 
   return (
     <>
@@ -167,6 +173,16 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
 
             <Divider />
 
+            <ListItem
+              button
+              onClick={handleTermsButtonClick}
+              className={classes.nested}
+            >
+              <ListItemText>Regulamin</ListItemText>
+            </ListItem>
+
+            <Divider />
+
             <ListItem button className={classes.nested}>
               <ListItemText>O aplikacji</ListItemText>
             </ListItem>
@@ -240,6 +256,18 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
             </ListItemSecondaryAction>
           </ListItem>
         </List>
+      </ScreenModal>
+
+      <ScreenModal
+        open={termsModalVisible}
+        handleClose={handleTermsModalClose}
+        titleText="Regulamin"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            {termsAndConditionsText}
+          </DialogContentText>
+        </DialogContent>
       </ScreenModal>
 
       <NavigationBar />
