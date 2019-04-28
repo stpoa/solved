@@ -112,6 +112,10 @@ class App extends Component<AppProps, {}> {
                   <Route path="/create-task" component={Pages.CreateTask} />
                   <Route path="/sign-in" component={Pages.SignIn} />
                   <Route path="/rate" component={Pages.Rate} />
+                  <Route
+                    path="/remind-password"
+                    component={Pages.RemindPassword}
+                  />
                   <Route path="/register" component={Pages.Register} />
                   <Route path="/search" component={Pages.Search} />
                   <Route exact path="/" component={Pages.Home} />

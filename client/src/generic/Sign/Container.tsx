@@ -8,11 +8,7 @@ import React, { FC } from 'react'
 import { NavigationBar } from '~generic'
 import { pageContentNotScrollableWithNavigationBar } from '~pages/styles'
 
-const SignBaseContainer: FC<SignBaseContainerProps> = ({
-  children,
-  classes,
-  header,
-}) => (
+const Container: FC<ContainerProps> = ({ children, classes, header }) => (
   <div className={classes.container}>
     <div className={classes.header}>
       <Typography
@@ -32,7 +28,22 @@ const SignBaseContainer: FC<SignBaseContainerProps> = ({
 // calculating each row height in terms of percentages
 // the height values are taken from the design and divided by
 // the height of the viewport in the design
-const gridTemplateRows = [100, 48, 70, 52, 34, 52, 57, 19, 103, 48, 24, 19, 98]
+// 56 / 2 is 1/2 height of the navigation
+const gridTemplateRows = [
+  100,
+  48,
+  70 - 56 / 2,
+  52,
+  34 - 8,
+  52 + 56 / 2 + 8,
+  57,
+  19,
+  103,
+  48,
+  24,
+  19,
+  98,
+]
   .map(width => ((width / 724) * 100).toFixed(0) + '%')
   .join(' ')
 
@@ -58,8 +69,8 @@ const styles: StyleRulesCallback = theme => ({
   },
 })
 
-interface SignBaseContainerProps extends WithStyles<typeof styles> {
+interface ContainerProps extends WithStyles<typeof styles> {
   header: string
 }
 
-export default withStyles(styles)(SignBaseContainer)
+export default withStyles(styles)(Container)

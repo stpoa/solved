@@ -5,11 +5,7 @@ import {
   WithStyles,
 } from '@material-ui/core'
 import React, { ChangeEventHandler, MouseEventHandler } from 'react'
-import {
-  Email,
-  SignBaseButton as Button,
-  SignBaseContainer as Container,
-} from '~generic'
+import { Button, Container, Email, FieldContainer } from '~generic/Sign'
 import { Status } from '~interfaces'
 import { emailValidator } from '~lib/validators'
 
@@ -32,25 +28,27 @@ class RemindPassword extends React.Component<
 
     if (this.state.status === Status.Success) {
       Component = (
-        <Typography
-          component="div"
-          className={`${classes.info} ${classes.textContainer}`}
-        >
-          Na podany adres email została wysłana wiadomość z nowym hasłem!
-          <p>Sprawdź pocztę</p>
-        </Typography>
+        <FieldContainer>
+          <Typography
+            component="div"
+            className={`${classes.info} ${classes.textContainer}`}
+          >
+            Na podany adres email została wysłana wiadomość z nowym hasłem!
+            <p>Sprawdź pocztę</p>
+          </Typography>
+        </FieldContainer>
       )
     } else {
       Component = (
         <>
-          <div className={classes.textContainer}>
+          <FieldContainer>
             <Email
               disabled={isPending}
               error={this.state.emailError}
               onChange={this.handleChangeText}
               value={this.state.email}
             />
-          </div>
+          </FieldContainer>
           <Button disabled={isPending} onClick={this.handleSubmit}>
             Wyślij
           </Button>
@@ -83,10 +81,6 @@ class RemindPassword extends React.Component<
 }
 
 const styles: StyleRulesCallback = theme => ({
-  textContainer: {
-    gridRow: '4',
-    fontSize: theme.typography.body2.fontSize,
-  },
   info: {
     color: theme.typography.body1.color,
   },

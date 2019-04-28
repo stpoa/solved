@@ -1,234 +1,176 @@
+import { Typography, withStyles, WithStyles } from '@material-ui/core'
+import React, {
+  ChangeEvent,
+  ChangeEventHandler,
+  Component,
+  MouseEventHandler,
+} from 'react'
+import { withAuth, WithAuth } from '~auth'
 import {
+  Advice,
   Button,
-  Checkbox,
-  StyleRulesCallback,
-  TextField,
-} from '@material-ui/core'
-import { withStyles, WithStyles } from '@material-ui/core/styles'
-import React, { ChangeEventHandler, Component, MouseEventHandler } from 'react'
-import isEmail from 'validator/lib/isEmail'
-import isLength from 'validator/lib/isLength'
-import { NavigationBar } from '~generic'
-import { pageContentNotScrollableWithNavigationBar } from '~pages/styles'
+  Container,
+  Email,
+  FieldContainer,
+  Link,
+  Password,
+} from '~generic/Sign'
+import { Status } from '~interfaces'
+import {
+  emailValidator,
+  passwordValidator,
+  requiredValidator,
+} from '~lib/validators'
+import Switch from './Switch'
 
 class Register extends Component<RegisterProps, RegisterState> {
   public readonly state: RegisterState = {
-    errors: {
-      emailError: '',
-      passwordError: '',
-      regulationsCheckBoxError: '',
-      retypedPasswordError: '',
-    },
-    fields: {
-      email: '',
-      password: '',
-      regulationsCheckBox: false,
-      retypedPassword: '',
-    },
+    email: '',
+    emailError: '',
+    password: '',
+    passwordError: '',
+    showSignInError: false,
+    acceptDataProcessingTerms: false,
+    acceptError: '',
+    acceptTermsOfService: false,
   }
 
   public render() {
-    const { classes } = this.props
     const {
-      emailError,
-      passwordError,
-      retypedPasswordError,
-      regulationsCheckBoxError,
-    } = this.state.errors
+      auth: { status },
+      classes,
+    } = this.props
     const {
+      acceptDataProcessingTerms,
+      acceptTermsOfService,
       email,
+      emailError,
       password,
-      regulationsCheckBox,
-      retypedPassword,
-    } = this.state.fields
+      passwordError,
+    } = this.state
+    const isPending = status === Status.Pending
 
     return (
-      <>
-        <div className={classes.container}>
-          <div className={classes.content}>
-            <div className={classes.formWrapper}>
-              <div className={classes.form}>
-                <TextField
-                  margin="dense"
-                  label="Email"
-                  required
-                  name="email"
-                  type="email"
-                  fullWidth
-                  error={Boolean(emailError)}
-                  helperText={emailError}
-                  onChange={this.onTextChange}
-                  value={email}
-                />
-                <TextField
-                  margin="dense"
-                  label="Password"
-                  required
-                  name="password"
-                  type="password"
-                  fullWidth
-                  error={Boolean(passwordError)}
-                  helperText={passwordError}
-                  onChange={this.onTextChange}
-                  value={password}
-                />
-                <TextField
-                  margin="dense"
-                  label="Confirm password"
-                  required
-                  name="retypedPassword"
-                  type="password"
-                  fullWidth
-                  error={Boolean(retypedPasswordError)}
-                  helperText={retypedPasswordError}
-                  onChange={this.onTextChange}
-                  value={retypedPassword}
-                />
-              </div>
-            </div>
-            <div className={classes.regulationsHolder}>
-              <div>
-                <Checkbox
-                  checked={regulationsCheckBox}
-                  onChange={this.onCheckboxChange}
-                />
-                Regulations
-              </div>
-              <div className={classes.errorMessage}>
-                {regulationsCheckBoxError}
-              </div>
-            </div>
-          </div>
-          <Button onClick={this.onSubmit} fullWidth>
-            Utwórz profil
-          </Button>
+      <Container header="Rejestracja">
+        <FieldContainer>
+          <Email
+            disabled={isPending}
+            error={emailError}
+            value={email}
+            onChange={this.handleChangeText}
+          />
+        </FieldContainer>
+        <FieldContainer secondary>
+          <Password
+            disabled={isPending}
+            error={passwordError}
+            value={password}
+            onChange={this.handleChangeText}
+          />
+          <Typography className={classes.passwordInfo}>
+            Hasło powinno zawierać minimum 6 znaków, w tym jedną wielką literę i
+            cyfrę
+          </Typography>
+        </FieldContainer>
+        <div className={classes.checkboxForm}>
+          <Switch
+            label={
+              <span>
+                Akceptuję <Link to="/">regulamin.</Link>
+              </span>
+            }
+            checked={acceptTermsOfService}
+            disabled={isPending}
+            onChange={this.handleChangeCheckbox}
+            name="acceptTermsOfService"
+          />
+          <Switch
+            label="Zgadzam się na przetwarzanie moich danych osobowych."
+            checked={acceptDataProcessingTerms}
+            disabled={isPending}
+            onChange={this.handleChangeCheckbox}
+            name="acceptDataProcessingTerms"
+          />
         </div>
-        <NavigationBar />
-      </>
+        <Button disabled={isPending} onClick={this.handleSubmit}>
+          Zarejestruj
+        </Button>
+        <Advice
+          text="Posiadasz już konto? "
+          linkText="Zaloguj się"
+          linkTo="/sign-in"
+        />
+      </Container>
     )
   }
 
-  private validate = (fields: RegisterState['fields']): Errors => {
-    const { email, password, retypedPassword, regulationsCheckBox } = fields
-
-    const preparedPassword = password.trim()
-    const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s])/
-
-    return {
-      emailError: !email
-        ? 'Field required'
-        : !isEmail(email)
-        ? 'Incorrect email address'
-        : '',
-      passwordError: !preparedPassword
-        ? 'Field required'
-        : !isLength(preparedPassword, { min: 6 })
-        ? 'Password should have at least 6 characters'
-        : !passwordRegex.test(preparedPassword)
-        ? 'Password should have at least one upper case, ' +
-          'one lower case, one digit and one special character'
-        : '',
-      regulationsCheckBoxError: !regulationsCheckBox
-        ? 'Regulations are required'
-        : '',
-      retypedPasswordError: !retypedPassword
-        ? 'Field required'
-        : preparedPassword !== retypedPassword
-        ? 'Password does not match the confirm password'
-        : '',
-    }
-  }
-
-  private onSubmit: MouseEventHandler<HTMLElement> = () => {
+  private handleSubmit: MouseEventHandler<HTMLElement> = () => {
     this.setState(state => {
-      const errors = this.validate(state.fields)
-      const hasErrors = Object.values(errors).some(error => error.length)
+      const errors = {
+        emailError: emailValidator(state.email),
+        passwordError: passwordValidator(state.password),
+        acceptError:
+          requiredValidator(state.acceptTermsOfService) ||
+          requiredValidator(state.acceptDataProcessingTerms) ||
+          '',
+      }
 
-      if (hasErrors) return { errors }
+      const hasErrors = Object.values(errors).some(error =>
+        Boolean(error.length),
+      )
+
+      if (hasErrors) return { ...errors }
 
       return null
     })
   }
 
-  private onTextChange: ChangeEventHandler<HTMLInputElement> = e => {
-    const { name, value } = e.target
+  private handleChangeText: ChangeEventHandler<HTMLInputElement> = e => {
+    const state = {
+      [e.target.name]: e.target.value,
+      emailError: '',
+      passwordError: '',
+    } as any
 
-    this.setState(({ errors, fields }) => ({
-      errors: {
-        ...errors,
-        [`${name}Error`]: '',
-      },
-      fields: {
-        ...fields,
-        [name]: value,
-      },
-    }))
+    // https://github.com/Microsoft/TypeScript/issues/13948
+    this.setState(state)
   }
 
-  private onCheckboxChange: ChangeEventHandler<HTMLInputElement> = () => {
-    this.setState(({ errors, fields }) => ({
-      errors: {
-        ...errors,
-        regulationsCheckBoxError: '',
-      },
-      fields: {
-        ...fields,
-        regulationsCheckBox: !fields.regulationsCheckBox,
-      },
-    }))
+  private handleChangeCheckbox = (
+    e: ChangeEvent<HTMLInputElement>,
+    checked: boolean,
+  ) => {
+    this.setState({ [e.target.name]: checked } as any)
   }
 }
 
-const styles: StyleRulesCallback = theme => ({
-  container: {
-    ...pageContentNotScrollableWithNavigationBar(theme),
+const styles = {
+  checkboxForm: {
     display: 'grid',
-    gridTemplateRows: 'auto max-content',
+    gridTemplateRows: '1fr 1fr',
+    gridRow: '8',
+    paddingLeft: '2rem',
   },
-  content: {
-    display: 'grid',
-    gridTemplateRows: 'auto max-content',
+  passwordInfo: {
+    marginTop: '5%',
+    fontSize: '1.2rem',
   },
-  errorMessage: {
-    color: '#f44336',
-    margin: '5px',
-  },
-  form: {
-    display: 'grid',
-    width: '90%',
-  },
-  formWrapper: {
-    alignItems: 'center',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  regulationsHolder: {
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-})
+}
 
-interface RegisterProps extends WithStyles<typeof styles> {}
+interface RegisterProps extends WithAuth, WithStyles<typeof styles> {}
 
 interface Errors {
   emailError: string
-  regulationsCheckBoxError: string
-  retypedPasswordError: string
   passwordError: string
 }
 
-interface RegisterStateFields {
+interface RegisterState extends Errors {
   email: string
   password: string
-  regulationsCheckBox: boolean
-  retypedPassword: string
-}
-interface RegisterState {
-  errors: Errors
-  fields: RegisterStateFields
+  showSignInError: boolean
+  acceptDataProcessingTerms: boolean
+  acceptError: string
+  acceptTermsOfService: boolean
 }
 
-export default withStyles(styles)(Register)
+export default withAuth(withStyles(styles)(Register))
