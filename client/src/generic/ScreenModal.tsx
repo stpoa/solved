@@ -1,7 +1,9 @@
+import { Card } from '@material-ui/core'
 import AppBar from '@material-ui/core/AppBar'
 import Dialog from '@material-ui/core/Dialog'
 import IconButton from '@material-ui/core/IconButton'
 import Slide from '@material-ui/core/Slide'
+import { StyleRules } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import CloseIcon from '@material-ui/icons/Close'
@@ -42,20 +44,31 @@ const ScreenModal: FC<ScreenModalProps> = ({
             </Typography>
           </Toolbar>
         </AppBar>
-        {children}
+        <Card className={classes.card}>{children}</Card>
       </Dialog>
     </div>
   )
 }
 
-const useStyles = makeStyles({
+const styles: StyleRules = {
   appBar: {
     position: 'relative',
   },
   flex: {
     flex: 1,
   },
-})
+  card: {
+    marginTop: '1.5rem',
+    height: '100%',
+    overflowX: 'hidden',
+    overflowY: 'scroll',
+  },
+  cardContent: {
+    padding: 0,
+  },
+}
+
+const useStyles = makeStyles(styles)
 
 export default ScreenModal
 
