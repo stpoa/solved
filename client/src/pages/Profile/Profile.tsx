@@ -32,7 +32,13 @@ import {
 import avatar from '~icons/avatar.png'
 
 const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
+  // Options
   const [notificationsEnabled, setNotificationsEnabled] = useState(true)
+  const handleNotificationSwitch = (_: any, checked: boolean) => {
+    setNotificationsEnabled(checked)
+  }
+
+  // Modals
   const [logoutModalVisible, setLogoutModalVisible] = useState(false)
   const [deleteAccountModalVisible, setDeleteAccountModalVisible] = useState(
     false,
@@ -42,9 +48,6 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
   )
   const [termsModalVisible, setTermsModalVisible] = useState(false)
 
-  const handleNotificationSwitch = (_: any, checked: boolean) => {
-    setNotificationsEnabled(checked)
-  }
   const handleNotificationsButtonClick = () =>
     setNotificationsModalVisible(true)
   const handleTermsButtonClick = () => setTermsModalVisible(true)

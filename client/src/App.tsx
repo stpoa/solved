@@ -96,6 +96,7 @@ const theme = createMuiTheme({
 })
 
 const redirectToHome = () => <Redirect to="/" />
+const NotImplmented = () => <h1>Not implemented yet!</h1>
 
 class App extends Component<AppProps, {}> {
   public render() {
@@ -118,6 +119,11 @@ class App extends Component<AppProps, {}> {
                   />
                   <Route path="/register" component={Pages.Register} />
                   <Route path="/search" component={Pages.Search} />
+                  <Route
+                    exact
+                    path="/remind-password"
+                    component={NotImplmented}
+                  />
                   <Route exact path="/" component={Pages.Home} />
                   <Route path="*" render={redirectToHome} />
                 </Switch>
