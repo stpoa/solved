@@ -10,8 +10,8 @@ import {
   StyleRulesCallback,
   Switch,
   Typography,
-  WithStyles,
   withStyles,
+  WithStyles,
 } from '@material-ui/core'
 import {
   CreditCard,
@@ -30,18 +30,19 @@ import {
   ScreenModal,
 } from '~generic'
 import avatar from '~icons/avatar.png'
+import Feedback from '~pages/Profile/components/Feedback'
 
 const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true)
   const handleNotificationSwitch = (_: any, checked: boolean) => {
     setNotificationsEnabled(checked)
   }
-
   enum modals {
     Logout = 'LOGOUT',
     DeleteAccount = 'DELETE_ACCOUNT',
     Notifications = 'NOTIFICATIONS',
     Terms = 'TERMS',
+    Feedback = 'FEEDBACK',
     None = 'NONE',
   }
   const [modalVisible, setModalVisible] = useState<modals>(modals.None)
@@ -153,7 +154,11 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
               </ListItemText>
             </ListItem>
 
-            <ListItem button className={classes.nested}>
+            <ListItem
+              button
+              onClick={showModal(modals.Feedback)}
+              className={classes.nested}
+            >
               <ListItemText>Feedback</ListItemText>
             </ListItem>
 
@@ -256,6 +261,11 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
         </DialogContent>
       </ScreenModal>
 
+      <Feedback
+        open={modalVisible === modals.Feedback}
+        handleClose={showModal(modals.None)}
+      />
+
       <NavigationBar />
     </>
   )
@@ -314,6 +324,9 @@ const styles: StyleRulesCallback = theme => ({
     gridTemplateColumns: '1fr 1fr 1fr 1fr',
     color: theme.palette.text.primary,
     padding: '0 35%',
+  },
+  fileInput: {
+    display: 'none',
   },
 })
 
