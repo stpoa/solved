@@ -17,6 +17,7 @@ interface Task {
 
 interface User {
   email: string
+  nick: string
 }
 
 enum Status {
