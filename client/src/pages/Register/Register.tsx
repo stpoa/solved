@@ -81,14 +81,14 @@ class Register extends Component<RegisterProps, RegisterState> {
             }
             checked={acceptTermsOfService}
             disabled={isPending}
-            onChange={this.handleChangeCheckbox}
+            onChange={this.handleChangeCheckbox('acceptTermsOfService')}
             name="acceptTermsOfService"
           />
           <Switch
             label="Zgadzam się na przetwarzanie moich danych osobowych."
             checked={acceptDataProcessingTerms}
             disabled={isPending}
-            onChange={this.handleChangeCheckbox}
+            onChange={this.handleChangeCheckbox('acceptDataProcessingTerms')}
             name="acceptDataProcessingTerms"
           />
         </div>
@@ -137,10 +137,14 @@ class Register extends Component<RegisterProps, RegisterState> {
   }
 
   private handleChangeCheckbox = (
-    e: ChangeEvent<HTMLInputElement>,
-    checked: boolean,
-  ) => {
-    this.setState({ [e.target.name]: checked } as any)
+    name: 'acceptDataProcessingTerms' | 'acceptTermsOfService',
+  ) => (_: ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    switch (name) {
+      case 'acceptDataProcessingTerms':
+        return this.setState({ [name]: checked })
+      case 'acceptTermsOfService':
+        return this.setState({ [name]: checked })
+    }
   }
 }
 

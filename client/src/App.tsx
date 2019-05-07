@@ -96,6 +96,7 @@ const theme = createMuiTheme({
 })
 
 const redirectToHome = () => <Redirect to="/" />
+const NotImplmented = () => <h1>Not implemented yet!</h1>
 
 class App extends Component<AppProps, {}> {
   public render() {
@@ -107,6 +108,10 @@ class App extends Component<AppProps, {}> {
               <div className={this.props.classes.container}>
                 <Switch>
                   <PrivateRoute path="/profile" component={Pages.Profile} />
+                  <PrivateRoute
+                    path="/profile/test"
+                    component={NotImplmented}
+                  />
                   <PrivateRoute path="/tasks" component={Pages.Tasks} />
                   <Route path="/prelogin" component={Pages.Prelogin} />
                   <Route path="/create-task" component={Pages.CreateTask} />
@@ -118,6 +123,11 @@ class App extends Component<AppProps, {}> {
                   />
                   <Route path="/register" component={Pages.Register} />
                   <Route path="/search" component={Pages.Search} />
+                  <Route
+                    exact
+                    path="/remind-password"
+                    component={NotImplmented}
+                  />
                   <Route exact path="/" component={Pages.Home} />
                   <Route path="*" render={redirectToHome} />
                 </Switch>

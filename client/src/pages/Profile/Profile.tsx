@@ -10,8 +10,8 @@ import {
   StyleRulesCallback,
   Switch,
   Typography,
-  WithStyles,
   withStyles,
+  WithStyles,
 } from '@material-ui/core'
 import {
   CreditCard,
@@ -30,37 +30,24 @@ import {
   ScreenModal,
 } from '~generic'
 import avatar from '~icons/avatar.png'
+import Feedback from '~pages/Profile/components/Feedback'
 
 const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true)
-  const [logoutModalVisible, setLogoutModalVisible] = useState(false)
-  const [deleteAccountModalVisible, setDeleteAccountModalVisible] = useState(
-    false,
-  )
-  const [notificationsModalVisible, setNotificationsModalVisible] = useState(
-    false,
-  )
-  const [termsModalVisible, setTermsModalVisible] = useState(false)
-
   const handleNotificationSwitch = (_: any, checked: boolean) => {
     setNotificationsEnabled(checked)
   }
-  const handleNotificationsButtonClick = () =>
-    setNotificationsModalVisible(true)
-  const handleTermsButtonClick = () => setTermsModalVisible(true)
-
-  const handleLogoutClick = () => setLogoutModalVisible(true)
-  const handleLogoutModalConfirm = () => setLogoutModalVisible(false)
-  const handleLogoutModalClose = () => setLogoutModalVisible(false)
-
-  const handleDeleteAccountClick = () => setDeleteAccountModalVisible(true)
-  const handleDeleteAccountModalConfirm = () =>
-    setDeleteAccountModalVisible(false)
-  const handleDeleteAccountModalClose = () =>
-    setDeleteAccountModalVisible(false)
-  const handleNotificationsModalClose = () =>
-    setNotificationsModalVisible(false)
-  const handleTermsModalClose = () => setTermsModalVisible(false)
+  enum modals {
+    Logout = 'LOGOUT',
+    DeleteAccount = 'DELETE_ACCOUNT',
+    Notifications = 'NOTIFICATIONS',
+    Terms = 'TERMS',
+    Feedback = 'FEEDBACK',
+    None = 'NONE',
+  }
+  const [modalVisible, setModalVisible] = useState<modals>(modals.None)
+  const showModal = (modal: modals) => () => setModalVisible(modal)
+  const hideModals = () => setModalVisible(modals.None)
 
   return (
     <>
@@ -114,7 +101,7 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
             <ListItem
               button
               className={classes.nested}
-              onClick={handleNotificationsButtonClick}
+              onClick={showModal(modals.Notifications)}
             >
               <ListItemText primary="Powiadomienia" />
               <ListItemSecondaryAction>
@@ -167,7 +154,11 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
               </ListItemText>
             </ListItem>
 
-            <ListItem button className={classes.nested}>
+            <ListItem
+              button
+              onClick={showModal(modals.Feedback)}
+              className={classes.nested}
+            >
               <ListItemText>Feedback</ListItemText>
             </ListItem>
 
@@ -175,7 +166,7 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
 
             <ListItem
               button
-              onClick={handleTermsButtonClick}
+              onClick={showModal(modals.Terms)}
               className={classes.nested}
             >
               <ListItemText>Regulamin</ListItemText>
@@ -191,7 +182,7 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
 
             <ListItem
               button
-              onClick={handleDeleteAccountClick}
+              onClick={showModal(modals.DeleteAccount)}
               className={classes.nested}
             >
               <ListItemText>Usuń konto</ListItemText>
@@ -203,7 +194,7 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
           <List>
             <ListItem
               button
-              onClick={handleLogoutClick}
+              onClick={showModal(modals.Logout)}
               color="secondary"
               className={classes.category}
             >
@@ -219,9 +210,9 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
       </div>
 
       <ConfirmationDialog
-        open={deleteAccountModalVisible}
-        handleClose={handleDeleteAccountModalClose}
-        handleConfirm={handleDeleteAccountModalConfirm}
+        open={modalVisible === modals.DeleteAccount}
+        handleClose={hideModals}
+        handleConfirm={hideModals}
         titleText={'Usunięcie konta'}
         contentText={
           'Usunięcie konta wymaga potwierdzenia poprzez kliknięcie w link znajdujący się w wiadomości email. Czy chcesz otrzymać wiadomość z linkiem usuwającym konto?'
@@ -230,22 +221,22 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
       />
 
       <ConfirmationDialog
-        open={logoutModalVisible}
-        handleClose={handleLogoutModalClose}
-        handleConfirm={handleLogoutModalConfirm}
+        open={modalVisible === modals.Logout}
+        handleClose={hideModals}
+        handleConfirm={hideModals}
         confirmText={'Wyloguj'}
       />
 
       <ScreenModal
-        open={notificationsModalVisible}
-        handleClose={handleNotificationsModalClose}
+        open={modalVisible === modals.Notifications}
+        handleClose={hideModals}
         titleText="Powiadomienia"
       >
         <List>
           <ListItem
             button
             className={classes.nested}
-            onClick={handleNotificationsButtonClick}
+            onClick={showModal(modals.Notifications)}
           >
             <ListItemText primary="Powiadomienia" />
             <ListItemSecondaryAction>
@@ -259,8 +250,8 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
       </ScreenModal>
 
       <ScreenModal
-        open={termsModalVisible}
-        handleClose={handleTermsModalClose}
+        open={modalVisible === modals.Terms}
+        handleClose={showModal(modals.None)}
         titleText="Regulamin"
       >
         <DialogContent>
@@ -269,6 +260,11 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
           </DialogContentText>
         </DialogContent>
       </ScreenModal>
+
+      <Feedback
+        open={modalVisible === modals.Feedback}
+        handleClose={showModal(modals.None)}
+      />
 
       <NavigationBar />
     </>
@@ -328,6 +324,9 @@ const styles: StyleRulesCallback = theme => ({
     gridTemplateColumns: '1fr 1fr 1fr 1fr',
     color: theme.palette.text.primary,
     padding: '0 35%',
+  },
+  fileInput: {
+    display: 'none',
   },
 })
 

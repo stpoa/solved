@@ -7,7 +7,7 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core'
-import { AddAPhoto, HighlightOff } from '@material-ui/icons'
+import { AddAPhoto as AddPhotoIcon, HighlightOff } from '@material-ui/icons'
 import React, { ChangeEvent, FunctionComponent } from 'react'
 import { ActionTypes } from '~/stores/CreateTask'
 import { useCreateTaskStore } from '~stores/CreateTask/connect'
@@ -30,11 +30,10 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
 
   const handleBrowsePhotoClick = (e: ChangeEvent<HTMLInputElement>) => {
     const eventFiles = e.target.files && Array.from(e.target.files)
-    const extendFile = (file: ExtendedFile) => {
+    const extendFile = (file: File): ExtendedFile => {
       const fileUrl = URL.createObjectURL(file)
-      file.id = createFileId(file)
-      file.url = fileUrl
-      return file
+      Object.assign(file, { id: createFileId(file), url: fileUrl })
+      return file as ExtendedFile
     }
     const isNewFile = (prevFiles: ExtendedFile[]) => (file: ExtendedFile) =>
       !prevFiles.map(prevFile => prevFile.id).includes(file.id)
@@ -59,7 +58,7 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
           variant="title"
         >
           <p className={classes.browsePhotoParagraph}>Wybierz zdjęcie</p>
-          <AddAPhoto className={classes.photoIcon} />
+          <AddPhotoIcon className={classes.photoIcon} />
         </Typography>
       </label>
     </Paper>
@@ -176,8 +175,8 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
 interface TaskPhotoEditProps extends WithStyles<typeof styles> {}
 
 export interface ExtendedFile extends File {
-  id?: string
-  url?: string
+  id: string
+  url: string
 }
 
 export default withStyles(styles)(TaskPhotoEdit)

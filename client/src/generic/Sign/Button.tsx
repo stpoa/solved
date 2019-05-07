@@ -1,22 +1,17 @@
 import { Button, withStyles, WithStyles } from '@material-ui/core'
-import React, { FC, MouseEventHandler } from 'react'
+import { ButtonProps } from '@material-ui/core/Button'
+import React, { FC } from 'react'
 
-const SignBaseButton: FC<SignBaseButtonProps> = ({
-  children,
-  classes,
-  disabled,
-  onClick,
-}) => (
+const SignBaseButton: FC<SignBaseButtonProps> = ({ classes, ...props }) => (
   <div className={classes.buttonContainer}>
     <Button
+      {...props}
       variant="extendedFab"
       color="secondary"
-      disabled={disabled}
       className={classes.button}
       size="large"
-      onClick={onClick}
     >
-      {children}
+      {props.children}
     </Button>
   </div>
 )
@@ -35,9 +30,6 @@ const styles = {
   },
 }
 
-interface SignBaseButtonProps extends WithStyles<typeof styles> {
-  disabled: boolean
-  onClick: MouseEventHandler<HTMLElement>
-}
+type SignBaseButtonProps = ButtonProps & WithStyles<typeof styles>
 
 export default withStyles(styles)(SignBaseButton)
