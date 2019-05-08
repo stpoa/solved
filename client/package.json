@@ -13,6 +13,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-svg-inline": "^2.1.1",
+    "react-swipeable-views": "^0.13.1",
     "utility-types": "^3.5.0",
     "validator": "^10.11.0"
   },
@@ -26,6 +27,7 @@
     "@types/react-dom": "^16.8.4",
     "@types/react-router-dom": "^4.3.2",
     "@types/react-svg-inline": "^2.1.1",
+    "@types/react-swipeable-views": "^0.13.0",
     "@types/validator": "^10.11.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",

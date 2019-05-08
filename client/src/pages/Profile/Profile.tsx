@@ -30,6 +30,7 @@ import {
   ScreenModal,
 } from '~generic'
 import avatar from '~icons/avatar.png'
+import About from '~pages/Profile/components/About'
 import ChangeNick from '~pages/Profile/components/ChangeNick'
 import Feedback from '~pages/Profile/components/Feedback'
 
@@ -42,9 +43,10 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
     Notifications = 'NOTIFICATIONS',
     Terms = 'TERMS',
     Feedback = 'FEEDBACK',
+    About = 'ABOUT',
     None = 'NONE',
   }
-  const [modalVisible, setModalVisible] = useState<modals>(modals.ChangeNick)
+  const [modalVisible, setModalVisible] = useState(modals.None)
   const [user] = useState(users[0])
 
   const handleNotificationSwitch = (_: any, checked: boolean) => {
@@ -182,7 +184,11 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
 
             <Divider />
 
-            <ListItem button className={classes.nested}>
+            <ListItem
+              button
+              onClick={showModal(modals.About)}
+              className={classes.nested}
+            >
               <ListItemText>O aplikacji</ListItemText>
             </ListItem>
 
@@ -280,6 +286,11 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
       />
 
       <NavigationBar />
+
+      <About
+        open={modalVisible === modals.About}
+        handleClose={showModal(modals.None)}
+      />
     </>
   )
 }
