@@ -22,7 +22,7 @@ import {
   ThumbUpOutlined,
 } from '@material-ui/icons'
 import React, { FunctionComponent, useState } from 'react'
-import { termsAndConditionsText } from '~data/tasks'
+import { termsAndConditionsText, users } from '~data'
 import {
   ConfirmationDialog,
   NavigationBar,
@@ -30,22 +30,26 @@ import {
   ScreenModal,
 } from '~generic'
 import avatar from '~icons/avatar.png'
+import ChangeNick from '~pages/Profile/components/ChangeNick'
 import Feedback from '~pages/Profile/components/Feedback'
 
 const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true)
-  const handleNotificationSwitch = (_: any, checked: boolean) => {
-    setNotificationsEnabled(checked)
-  }
   enum modals {
     Logout = 'LOGOUT',
     DeleteAccount = 'DELETE_ACCOUNT',
+    ChangeNick = 'CHANGE_NICK',
     Notifications = 'NOTIFICATIONS',
     Terms = 'TERMS',
     Feedback = 'FEEDBACK',
     None = 'NONE',
   }
-  const [modalVisible, setModalVisible] = useState<modals>(modals.None)
+  const [modalVisible, setModalVisible] = useState<modals>(modals.ChangeNick)
+  const [user] = useState(users[0])
+
+  const handleNotificationSwitch = (_: any, checked: boolean) => {
+    setNotificationsEnabled(checked)
+  }
   const showModal = (modal: modals) => () => setModalVisible(modal)
   const hideModals = () => setModalVisible(modals.None)
 
@@ -61,10 +65,10 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
           <img className={classes.avatar} src={avatar} />
           <div>
             <Typography className={classes.nick} color="textPrimary">
-              olgusia_olgusia
+              {user.nick}
             </Typography>
             <Typography className={classes.email} color="textSecondary">
-              olgusia_olgusia@krolowaswiata.com
+              {user.email}
             </Typography>
             <Typography className={classes.ratings}>
               843
@@ -86,7 +90,11 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
               </ListItemText>
             </ListItem>
 
-            <ListItem button className={classes.nested}>
+            <ListItem
+              button
+              onClick={showModal(modals.ChangeNick)}
+              className={classes.nested}
+            >
               <ListItemText>Zmień nick</ListItemText>
             </ListItem>
 
@@ -263,6 +271,11 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
 
       <Feedback
         open={modalVisible === modals.Feedback}
+        handleClose={showModal(modals.None)}
+      />
+
+      <ChangeNick
+        open={modalVisible === modals.ChangeNick}
         handleClose={showModal(modals.None)}
       />
 
