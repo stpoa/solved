@@ -71,7 +71,7 @@ const NavigationBar: FunctionComponent<NavigationBarProps> = ({ classes }) => {
   )
 }
 
-const styles = ({ spacing, palette: { secondary, grey }, mixins }: Theme) =>
+const styles = ({ palette: { secondary, grey }, mixins }: Theme) =>
   createStyles({
     appBar: {
       top: 'auto',
@@ -99,8 +99,6 @@ const styles = ({ spacing, palette: { secondary, grey }, mixins }: Theme) =>
       color: grey[500],
       display: 'flex',
       justifyContent: 'space-between',
-      marginLeft: spacing.unit,
-      marginRight: spacing.unit,
     },
   })
 
