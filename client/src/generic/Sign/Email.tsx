@@ -7,6 +7,7 @@ const Email: FC<EmailProps> = ({
   onChange,
   error,
   value,
+  placeholder = '',
 }) => {
   return (
     <TextField
@@ -22,6 +23,7 @@ const Email: FC<EmailProps> = ({
       fullWidth
       onChange={onChange}
       value={value}
+      placeholder={placeholder}
     />
   )
 }
@@ -32,6 +34,7 @@ interface EmailProps {
   value: string
   onChange: ChangeEventHandler<HTMLElement>
   error: string
+  placeholder?: string
 }
 
 export default Email
