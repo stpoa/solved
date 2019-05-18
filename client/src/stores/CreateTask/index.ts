@@ -1,13 +1,13 @@
 import { tags } from '~data'
 import { ExtendedFile } from '~pages/CreateTask/components/TaskPhotoEdit'
-import mapTags from '~sharedFunctions/mapTags'
+import { extendTags } from '~utils/tags'
 
 export const initialState = {
   step: 1,
   files: [] as ExtendedFile[],
   balance: 0,
   description: '',
-  tags: mapTags(tags),
+  tags: extendTags(tags),
   tagsQuery: '',
   startDate: 0,
   finishDate: 0,

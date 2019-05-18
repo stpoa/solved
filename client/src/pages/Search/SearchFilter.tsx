@@ -12,10 +12,10 @@ import React, {
   MouseEventHandler,
   useState,
 } from 'react'
+import { extendTags } from 'utils/tags'
 import { tags, tasks } from '~data'
 import { NavigationBar, SelectTags, TaskList } from '~generic'
 import { SortingOption } from '~generic/TaskList/components/TaskList'
-import mapTags from '~sharedFunctions/mapTags'
 import { TagValue } from '~stores/CreateTask'
 
 const fetchTasks = (
@@ -29,7 +29,7 @@ const fetchTasks = (
 
 const SearchFilter: FunctionComponent<SearchFilterProps> = ({ classes }) => {
   const [searchValue, setSearchValue] = useState('')
-  const [savedTags, updateTags] = useState(mapTags(tags))
+  const [savedTags, updateTags] = useState(extendTags(tags))
   const [selectedSortOption, updateSortOption] = useState(
     SortingOption.TIME_SHORT,
   )
