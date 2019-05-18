@@ -41,12 +41,13 @@ class RemindPassword extends React.Component<
     } else {
       Component = (
         <>
-          <FieldContainer>
+          <FieldContainer secondary>
             <Email
               disabled={isPending}
               error={this.state.emailError}
               onChange={this.handleChangeText}
               value={this.state.email}
+              placeholder="Podaj adres email"
             />
           </FieldContainer>
           <Button disabled={isPending} onClick={this.handleSubmit}>
