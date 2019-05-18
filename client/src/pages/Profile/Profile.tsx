@@ -30,7 +30,7 @@ import {
   ScreenModal,
 } from '~generic'
 import avatar from '~icons/avatar.png'
-import About from '~pages/Profile/components/About'
+import About from '~pages/Profile/components/About/About'
 import ChangeNick from '~pages/Profile/components/ChangeNick'
 import Feedback from '~pages/Profile/components/Feedback'
 
