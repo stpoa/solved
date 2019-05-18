@@ -31,11 +31,12 @@ const ScreenModal: FC<ScreenModalProps> = ({
         TransitionComponent={Transition}
       >
         <AppBar className={classes.appBar}>
-          <Toolbar>
+          <Toolbar className={classes.toolbar}>
             <IconButton
               color="inherit"
               onClick={handleClose}
               aria-label="Close"
+              className={classes.closeButton}
             >
               <CloseIcon />
             </IconButton>
@@ -53,6 +54,7 @@ const ScreenModal: FC<ScreenModalProps> = ({
 const styles: StyleRules = {
   appBar: {
     position: 'relative',
+    textAlign: 'center',
   },
   flex: {
     flex: 1,
@@ -65,6 +67,9 @@ const styles: StyleRules = {
   },
   cardContent: {
     padding: 0,
+  },
+  closeButton: {
+    position: 'absolute',
   },
 }
 
