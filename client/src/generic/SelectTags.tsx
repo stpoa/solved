@@ -1,9 +1,3 @@
-import {
-  createStyles,
-  StyleRulesCallback,
-  withStyles,
-  WithStyles,
-} from '@material-ui/core/styles'
 import React, { FunctionComponent } from 'react'
 import Tag from '~generic/Tag'
 import TagAdd from '~generic/TagAdd'
@@ -45,7 +39,6 @@ const limitVisibleTags = (limit: number) => (tags: TagValue[]) => {
 
 const SelectTags: FunctionComponent<SelectTagsProps> = ({
   tags: manyTags,
-  classes: { container },
   onTagSelect,
   onTagAdd,
   selectedTagsLimit = 4,
@@ -58,7 +51,7 @@ const SelectTags: FunctionComponent<SelectTagsProps> = ({
   )
 
   return (
-    <div className={container}>
+    <>
       {tags.map(({ selected, name, visible }, i) => {
         const isClickable = !selected && selectedCount === selectedTagsLimit
 
@@ -78,22 +71,11 @@ const SelectTags: FunctionComponent<SelectTagsProps> = ({
         onClick={onTagAdd && onTagAdd(tagsQuery)}
         visible={showTagAdd(tags, tagsQuery)}
       />
-    </div>
+    </>
   )
 }
 
-const styles: StyleRulesCallback = () =>
-  createStyles({
-    container: {
-      alignSelf: 'flex-start',
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      height: 0,
-    },
-  })
-
-export interface SelectTagsProps extends WithStyles<typeof styles> {
+export interface SelectTagsProps {
   tags: TagValue[]
   onTagSelect: (tagName: string) => () => void
   onTagAdd?: (tagName?: string) => () => void
@@ -101,4 +83,4 @@ export interface SelectTagsProps extends WithStyles<typeof styles> {
   selectedTagsLimit?: number
 }
 
-export default withStyles(styles)(SelectTags)
+export default SelectTags

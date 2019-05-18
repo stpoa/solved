@@ -5,7 +5,7 @@ import Profile from './Profile/Profile'
 import Rate from './Rate/Rate'
 import Register from './Register/Register'
 import RemindPassword from './RemindPassword'
-import Search from './Search'
+import Search from './Search/SearchFilter'
 import SignIn from './SignIn'
 import Tasks from './Tasks/Tasks'
 

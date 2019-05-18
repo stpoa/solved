@@ -88,12 +88,14 @@ const TaskTagsEdit: FunctionComponent<TaskTagsEditProps> = ({ classes }) => {
           {...{ InputLabelProps }}
         />
       </div>
-      <div className={classes.tags}>
-        <SelectTags
-          tags={state.tags}
-          tagsQuery={state.tagsQuery}
-          {...{ onTagSelect, onTagAdd }}
-        />
+      <div className={classes.tagsContainer}>
+        <div className={classes.tags}>
+          <SelectTags
+            tags={state.tags}
+            tagsQuery={state.tagsQuery}
+            {...{ onTagSelect, onTagAdd }}
+          />
+        </div>
       </div>
     </CardContent>
   )
@@ -116,10 +118,17 @@ const styles: StyleRulesCallback = theme => ({
     textAlign: 'left',
     width: '100%',
   },
-  tags: {
+  tagsContainer: {
     overflowY: 'auto',
     overflowX: 'hidden',
     overflowScrolling: 'touch',
+  },
+  tags: {
+    alignSelf: 'flex-start',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    height: 0,
   },
   input: {
     width: '100%',

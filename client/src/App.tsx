@@ -22,6 +22,7 @@ import * as Pages from '~pages'
 
 // Theme
 const blue = '#4481EB'
+const lightBlue = '#E4EDFF'
 const grey = '#818181'
 const black = 'rgba(0,0,0,0.87)'
 const white = '#FFFFFF'
@@ -90,6 +91,14 @@ const theme = createMuiTheme({
           borderColor: blue,
         },
         color: blue,
+      },
+    },
+    MuiListItem: {
+      root: {
+        '&$selected': {
+          color: blue,
+          backgroundColor: lightBlue,
+        },
       },
     },
   },
