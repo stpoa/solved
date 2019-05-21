@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core'
 import React, { FunctionComponent } from 'react'
 import { ActionTypes } from '~/stores/CreateTask'
+import LineSeparator from '~generic/LineSeparator'
 import { useCreateTaskStore } from '~stores/CreateTask/connect'
 import { OnChange } from '~typings/react'
 
@@ -25,7 +26,7 @@ const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
     <CardContent className={classes.cardContent}>
       <Typography variant="h3" component="h3">
         Opis
-        <hr className={classes.underline} />
+        <LineSeparator />
       </Typography>
 
       <form className={classes.form} noValidate autoComplete="off">
@@ -58,11 +59,6 @@ const styles: StyleRulesCallback = theme => ({
     overflowY: 'auto',
     overflowX: 'hidden',
     overflowScrolling: 'touch',
-  },
-  underline: {
-    height: '1px',
-    border: 'none',
-    backgroundColor: theme.palette.grey[300],
   },
 })
 

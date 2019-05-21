@@ -1,6 +1,4 @@
-import { TagList } from '~interfaces'
-
-const tagNames: TagList = [
+const tagNames = [
   'matematyka',
   'fizyka',
   'biologia',

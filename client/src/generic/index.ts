@@ -1,4 +1,4 @@
-import Button from './Button'
+import Button from './Buttons/Button'
 import ConfirmationDialog from './ConfirmationDialog'
 import NavigationBar from './NavigationBar/NavigationBar'
 import PageHeader from './PageHeader/PageHeader'

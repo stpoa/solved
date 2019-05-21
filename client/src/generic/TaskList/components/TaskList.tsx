@@ -12,7 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 import { UnfoldMore } from '@material-ui/icons'
 import React, { Component } from 'react'
-import { Task } from '~interfaces'
+import { TaskListTask } from '~interfaces'
 import TaskListElement from './TaskListElement'
 
 export enum SortingOption {
@@ -44,6 +44,7 @@ class TaskList extends Component<TaskListProps, TaskListState> {
       infoBarWithSort,
     } = this.props
     const { expandedDropdownId, expandedDropdownAnchorEl } = this.state
+
     return (
       <div className={classes.container}>
         {infoBarWithSort && (
@@ -196,7 +197,7 @@ const styles: StyleRulesCallback = ({ spacing: { unit }, palette }) =>
 interface TaskListProps extends WithStyles<typeof styles> {
   isEditable: boolean
   isDeletable: boolean
-  tasks: Task[]
+  tasks: TaskListTask[]
   infoBarWithSort?: boolean
   onSortChange?: (option: SortingOption) => void
   selectedSortOption?: string
