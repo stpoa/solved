@@ -32,6 +32,7 @@ import {
 import avatar from '~icons/avatar.png'
 import About from '~pages/Profile/components/About/About'
 import ChangeNick from '~pages/Profile/components/ChangeNick'
+import ChangePassword from '~pages/Profile/components/ChangePassword'
 import Feedback from '~pages/Profile/components/Feedback'
 
 const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
@@ -40,6 +41,7 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
     Logout = 'LOGOUT',
     DeleteAccount = 'DELETE_ACCOUNT',
     ChangeNick = 'CHANGE_NICK',
+    ChangePassword = 'CHANGE_PASSWORD',
     Notifications = 'NOTIFICATIONS',
     Terms = 'TERMS',
     Feedback = 'FEEDBACK',
@@ -102,7 +104,11 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
 
             <Divider />
 
-            <ListItem button className={classes.nested}>
+            <ListItem
+              button
+              onClick={showModal(modals.ChangePassword)}
+              className={classes.nested}
+            >
               <ListItemText>Zmień hasło</ListItemText>
             </ListItem>
 
@@ -282,6 +288,11 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
 
       <ChangeNick
         open={modalVisible === modals.ChangeNick}
+        handleClose={showModal(modals.None)}
+      />
+
+      <ChangePassword
+        open={modalVisible === modals.ChangePassword}
         handleClose={showModal(modals.None)}
       />
 
