@@ -13,7 +13,6 @@ import Select from '@material-ui/core/Select'
 import { UnfoldMore } from '@material-ui/icons'
 import React, { Component } from 'react'
 import { Task } from '~interfaces'
-import { OnClick } from '~typings/react'
 import TaskListElement from './TaskListElement'
 
 export enum SortingOption {
@@ -133,7 +132,9 @@ class TaskList extends Component<TaskListProps, TaskListState> {
         : null,
     )
 
-  private handleMoreButtonClick = (id: string): OnClick => e =>
+  private handleMoreButtonClick = (id: string) => (
+    e: React.MouseEvent<HTMLElement, MouseEvent>,
+  ) =>
     this.setState({
       expandedDropdownId: id,
       expandedDropdownAnchorEl: e.currentTarget,
