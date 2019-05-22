@@ -34,7 +34,7 @@ const ExpansionList: FunctionComponent<ExpansionListProps> = ({
           expandIcon={<ExpandMoreIcon />}
         >
           <Typography className={classes.expansionTitle} color="secondary">
-            My tasks
+            Moje zadania
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.expansionPanelDetails}>
@@ -51,7 +51,7 @@ const ExpansionList: FunctionComponent<ExpansionListProps> = ({
           expandIcon={<ExpandMoreIcon />}
         >
           <Typography className={classes.expansionTitle} color="secondary">
-            Someone's tasks
+            Rozwiązywane zadania
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.expansionPanelDetails}>
@@ -79,9 +79,9 @@ class Tasks extends Component<TasksProps, TasksState> {
             fullWidth
             textColor="secondary"
           >
-            <Tab className={classes.tab} label="Waiting" />
-            <Tab className={classes.tab} label="Ongoing" />
-            <Tab className={classes.tab} label="Finished" />
+            <Tab className={classes.tab} label="Oczekujące" />
+            <Tab className={classes.tab} label="Trwające" />
+            <Tab className={classes.tab} label="Zakończone" />
           </Tabs>
           {selectedTabIndex === 0 && (
             <TaskList
