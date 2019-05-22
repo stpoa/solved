@@ -75,10 +75,14 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
               {user.email}
             </Typography>
             <Typography className={classes.ratings}>
-              843
-              <ThumbUpOutlined color="action" />
-              <ThumbDownOutlined color="action" />
-              134
+              <div className={classes.raitingElement}>
+                <div className={classes.raitingNumber}>843</div>
+                <ThumbUpOutlined color="action" />
+              </div>
+              <div className={classes.raitingElement}>
+                <ThumbDownOutlined color="action" />
+                <div className={classes.raitingNumber}>134</div>
+              </div>
             </Typography>
           </div>
         </div>
@@ -355,10 +359,19 @@ const styles: StyleRulesCallback = theme => ({
     lineHeight: 3,
   },
   ratings: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr 1fr',
+    display: 'flex',
+    justifyContent: 'center',
     color: theme.palette.text.primary,
-    padding: '0 35%',
+  },
+  raitingElement: {
+    display: 'flex',
+    margin: '1rem',
+  },
+  raitingNumber: {
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
+    display: 'flex',
+    alignItems: 'center',
   },
   fileInput: {
     display: 'none',
