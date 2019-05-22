@@ -61,7 +61,7 @@ export const passwordLengthValidator: Validator = (
 
 export const passwordValidator: Validator = value => {
   const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s])/
-  const trimmedValue = value.trim()
+  const trimmedValue = value && value.trim()
 
   return passwordLengthValidator(trimmedValue) ||
     !passwordRegex.test(trimmedValue)

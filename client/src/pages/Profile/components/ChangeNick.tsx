@@ -18,7 +18,7 @@ import {
   nickValidator,
 } from '~lib/validators'
 
-const Feedback: FC<FeedbackProps> = ({ open, handleClose, classes }) => {
+const ChangeNick: FC<ChangeNickProps> = ({ open, handleClose, classes }) => {
   const [nickText, setNickText] = useState('')
 
   const handleChangeNick = (e: any) => {
@@ -36,7 +36,7 @@ const Feedback: FC<FeedbackProps> = ({ open, handleClose, classes }) => {
   const nickError = nickValidator(nickText)
 
   return (
-    <ScreenModal {...{ open, handleClose }} titleText="Feedback">
+    <ScreenModal {...{ open, handleClose }} titleText="Zmień nick">
       <DialogContent>
         <Typography className={classes.infoText}>
           Pamiętaj, ze nick mozna zmieniac raz na 3 miesiace
@@ -66,7 +66,7 @@ const Feedback: FC<FeedbackProps> = ({ open, handleClose, classes }) => {
   )
 }
 
-interface FeedbackProps extends WithStyles {
+interface ChangeNickProps extends WithStyles {
   open: boolean
   handleClose: () => void
 }
@@ -83,4 +83,4 @@ const styles: StyleRulesCallback = _ => ({
   },
 })
 
-export default withStyles(styles)(Feedback)
+export default withStyles(styles)(ChangeNick)

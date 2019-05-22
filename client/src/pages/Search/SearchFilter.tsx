@@ -12,11 +12,11 @@ import React, {
   MouseEventHandler,
   useState,
 } from 'react'
-import { extendTags } from 'utils/tags'
 import { tags, tasks } from '~data'
 import { NavigationBar, SelectTags, TaskList } from '~generic'
 import { SortingOption } from '~generic/TaskList/components/TaskList'
 import { TagValue } from '~stores/CreateTask'
+import { extendTags } from '~utils/tags'
 
 const fetchTasks = (
   prefferedTags: TagValue[],
