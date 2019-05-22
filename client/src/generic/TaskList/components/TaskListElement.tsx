@@ -176,6 +176,7 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
   },
   tags: {
     marginLeft: -unit,
+    marginRight: -unit,
   },
 })
 
