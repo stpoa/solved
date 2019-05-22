@@ -31,7 +31,7 @@ const styles: StyleRulesCallback = theme => {
       borderColor: theme.palette.grey[400],
       fontSize: '1.4rem',
       height: '3.2rem',
-      margin: theme.spacing.unit,
+      margin: `${theme.spacing.unit}px 0.3rem`,
       padding: '0.5rem',
     },
     selected: {

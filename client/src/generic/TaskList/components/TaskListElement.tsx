@@ -14,14 +14,13 @@ import {
   AccessTime,
   Delete,
   Edit,
-  MonetizationOn,
+  MonetizationOnOutlined,
   MoreVertRounded,
 } from '@material-ui/icons'
 import { distanceInWordsToNow } from 'date-fns'
 import * as locale from 'date-fns/locale/en'
 import React, { Fragment } from 'react'
 import { Task } from '~interfaces'
-import { OnClick } from '~typings/react'
 import TagList from './TagList'
 
 const TaskListElement = ({
@@ -30,7 +29,6 @@ const TaskListElement = ({
   isMoreExpanded,
   isEditable,
   isDeletable,
-  category,
   onExpandedMenuLeave,
   onMoreButtonClick,
   tags,
@@ -41,16 +39,29 @@ const TaskListElement = ({
 }: TaskListElementProps) => (
   <Card className={classes.root} elevation={1}>
     <CardContent className={classes.content}>
-      <div className={classes.headerWrapper}>
-        <Typography color="secondary" className={classes.header} variant="h5">
-          {category}
-        </Typography>
+      <Typography variant="h2" color="textSecondary">
+        <p className={classes.shortDescription}>{shortDescription}</p>
+        <TagList tags={tags} />
+        <div className={classes.footer}>
+          <span className={classes.indicatorIconLeft}>
+            <AccessTime className={classes.indicatorIcon} />
+            <span className={classes.indicatorText}>
+              {distanceInWordsToNow(expiredAt, { locale })}
+            </span>
+          </span>
+          <span className={classes.indicatorIconRight}>
+            <MonetizationOnOutlined className={classes.indicatorIcon} />
+            <span>{price}</span>
+          </span>
+        </div>
+      </Typography>
+      <div className={classes.moreOptionsWrapper}>
         {(isEditable || isDeletable) && (
           <Fragment>
             <IconButton
               aria-label="More"
               aria-haspopup="true"
-              onClick={onMoreButtonClick.bind(null, id)}
+              onClick={onMoreButtonClick(id)}
               className={classes.moreButton}
             >
               <MoreVertRounded />
@@ -58,7 +69,7 @@ const TaskListElement = ({
             <Menu
               anchorEl={anchorEl}
               open={isMoreExpanded}
-              onBlur={onExpandedMenuLeave}
+              onClose={onExpandedMenuLeave}
             >
               {isEditable && (
                 <MenuItem className={classes.expandedMenu}>
@@ -86,22 +97,6 @@ const TaskListElement = ({
           </Fragment>
         )}
       </div>
-      <Typography variant="h2" color="textSecondary">
-        <p className={classes.shortDescription}>{shortDescription}</p>
-        <TagList tags={tags} />
-        <div className={classes.footer}>
-          <span className={classes.indicator}>
-            <AccessTime className={classes.indicatorIconLeft} />
-            <span className={classes.indicatorText}>
-              {distanceInWordsToNow(expiredAt, { locale })}
-            </span>
-          </span>
-          <span className={classes.indicator}>
-            <span className={classes.indicator}>{price}</span>
-            <MonetizationOn className={classes.indicatorIconRight} />
-          </span>
-        </div>
-      </Typography>
     </CardContent>
   </Card>
 )
@@ -111,7 +106,13 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
     display: 'flex',
   },
   content: {
+    padding: '1rem',
     flex: '1 0 auto',
+    display: 'flex',
+    justifyContent: 'space-between',
+    '&:last-child': {
+      padding: '1rem',
+    },
   },
   controls: {
     alignItems: 'center',
@@ -131,21 +132,17 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
     display: 'flex',
     fontSize: '1.2rem',
     height: '2.4rem',
-    justifyContent: 'space-between',
     lineHeight: '2.4rem',
     marginTop: unit,
   },
   header: {
     fontSize: '1.6rem',
   },
-  indicator: {
+  indicatorIconLeft: { display: 'flex', marginRight: '0.4rem' },
+  indicatorIconRight: { display: 'flex', marginLeft: '0.4rem' },
+  indicatorIcon: {
     verticalAlign: 'middle',
-  },
-  indicatorIconLeft: { verticalAlign: 'middle', marginRight: '0.4rem' },
-  indicatorIconRight: { verticalAlign: 'middle', marginLeft: '0.4rem' },
-  headerWrapper: {
-    display: 'flex',
-    justifyContent: 'space-between',
+    marginRight: '0.5rem',
   },
   moreButton: {
     paddingTop: 0,
@@ -173,13 +170,15 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
     fontSize: '1.4rem',
     fontWeight: 300,
     lineHeight: '1.4',
-    margin: '1rem 0',
+    margin: '0',
   },
 })
 
 interface TaskListElementProps extends WithStyles<typeof styles>, Task {
   anchorEl: HTMLElement | null
-  onMoreButtonClick: (id: string) => OnClick
+  onMoreButtonClick: (
+    id: string,
+  ) => (e: React.MouseEvent<HTMLElement, MouseEvent>) => void
   onExpandedMenuLeave: () => void
   isMoreExpanded: boolean
   isEditable: boolean
