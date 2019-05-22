@@ -14,15 +14,34 @@ const Tag = ({
   visible = true,
 }: TagProps) => {
   const className = `${classes.chip} ${selected ? classes.selected : ''}`
-
+  const additionalStyles = {
+    deleteIcon: classes.deleteIcon,
+    label: classes.label,
+  }
+  const handleDelete = selected ? onClick : undefined
   return visible ? (
-    <Chip label={text} onClick={onClick} className={className} />
+    <Chip
+      classes={additionalStyles}
+      label={text}
+      onClick={onClick}
+      className={className}
+      onDelete={handleDelete}
+    />
   ) : null
 }
 
 const styles: StyleRulesCallback = theme => {
-  const backgroundColor = theme.palette.secondary.main
   const borderColor = theme.palette.secondary.main
+
+  const unSelectedTagStyles = {
+    backgroundColor: 'white',
+    border: `1px dashed ${borderColor}`,
+  }
+  const selectedTagStyles = {
+    backgroundColor: 'white',
+    border: `1px solid ${borderColor}`,
+    color: theme.palette.secondary.main,
+  }
 
   return {
     chip: {
@@ -33,18 +52,22 @@ const styles: StyleRulesCallback = theme => {
       height: '3.2rem',
       margin: `${theme.spacing.unit}px 0.3rem`,
       padding: '0.5rem',
+      '&:hover': unSelectedTagStyles,
+      '&:focus': unSelectedTagStyles,
     },
     selected: {
-      '&:focus': {
-        backgroundColor,
-        borderColor,
-      },
-      '&:hover': {
-        backgroundColor,
-        borderColor,
-      },
-      backgroundColor,
-      borderColor,
+      '&:focus': selectedTagStyles,
+      '&:hover': selectedTagStyles,
+      ...selectedTagStyles,
+    },
+    label: {
+      paddingLeft: '0.5rem',
+      paddingRight: '0.5rem',
+    },
+    deleteIcon: {
+      margin: 0,
+      color: theme.palette.secondary.main,
+      width: '2rem',
     },
   }
 }
