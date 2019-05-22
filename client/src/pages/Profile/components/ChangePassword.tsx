@@ -42,8 +42,8 @@ const ChangePassword: FC<ChangePasswordProps> = ({
           helperText={oldPassword !== undefined && oldPasswordError}
           label="Stare hasło"
           required
-          name="nick"
-          type="nick"
+          name="oldPassword"
+          type="password"
           fullWidth
           onChange={handleOldPasswordChange}
           value={oldPassword}
@@ -60,8 +60,8 @@ const ChangePassword: FC<ChangePasswordProps> = ({
           }
           label="Nowe hasło"
           required
-          name="nick"
-          type="nick"
+          name="newPassword"
+          type="password"
           fullWidth
           onChange={handleNewPasswordChange}
           value={newPassword}
