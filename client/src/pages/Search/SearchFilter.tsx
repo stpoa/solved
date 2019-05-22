@@ -136,6 +136,8 @@ const styles: StyleRulesCallback = theme =>
     },
     tags: {
       display: 'inline-flex',
+      marginLeft: '0.5rem',
+      marginRight: '0.5rem',
       paddingTop: theme.spacing.unit,
       paddingBottom: theme.spacing.unit,
     },

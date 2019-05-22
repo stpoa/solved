@@ -1,4 +1,4 @@
-import { StyleRulesCallback, WithStyles, withStyles } from '@material-ui/core'
+import { WithStyles, withStyles } from '@material-ui/core'
 import React from 'react'
 import Tag from '../../Tag'
 
@@ -10,11 +10,12 @@ const TagList = ({ tags, classes }: TagListProps) => (
   </div>
 )
 
-const styles: StyleRulesCallback = theme => ({
+const styles = {
   container: {
-    marginLeft: -theme.spacing.unit,
+    marginLeft: '0.5rem',
+    marginRight: '0.5rem',
   },
-})
+}
 
 interface TagListProps extends WithStyles<typeof styles> {
   tags: string[]

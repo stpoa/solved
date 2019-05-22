@@ -41,7 +41,9 @@ const TaskListElement = ({
     <CardContent className={classes.content}>
       <Typography variant="h2" color="textSecondary">
         <p className={classes.shortDescription}>{shortDescription}</p>
-        <TagList tags={tags} />
+        <div className={classes.tags}>
+          <TagList tags={tags} />
+        </div>
         <div className={classes.footer}>
           <span className={classes.indicatorIconLeft}>
             <AccessTime className={classes.indicatorIcon} />
@@ -78,7 +80,7 @@ const TaskListElement = ({
                     color="textSecondary"
                   >
                     <Edit className={classes.expandedMenuIcon} />
-                    Edit
+                    Edytuj
                   </Typography>
                 </MenuItem>
               )}
@@ -89,7 +91,7 @@ const TaskListElement = ({
                     color="textSecondary"
                   >
                     <Delete className={classes.expandedMenuIcon} />
-                    Delete
+                    Usuń
                   </Typography>
                 </MenuItem>
               )}
@@ -171,6 +173,10 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
     fontWeight: 300,
     lineHeight: '1.4',
     margin: '0',
+  },
+  tags: {
+    marginLeft: -unit,
+    marginRight: -unit,
   },
 })
 
