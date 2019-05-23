@@ -10,10 +10,10 @@ import {
   Typography,
   WithStyles,
 } from '@material-ui/core'
-import { AddAPhoto as AddPhotoIcon } from '@material-ui/icons'
 import { withStyles } from '@material-ui/styles'
 import React, { FC, MouseEventHandler, useState } from 'react'
 import { ScreenModal } from '~generic'
+import Photos, { ExtendedFile } from '~generic/Photos'
 import Button from '~generic/Sign/Button'
 
 const handleFeedbackSubmit: MouseEventHandler<HTMLElement> = e => {
@@ -27,11 +27,13 @@ const radioOptions = {
 }
 
 const Feedback: FC<FeedbackProps> = ({ open, handleClose, classes }) => {
+  const [files, updateFiles] = useState<ExtendedFile[]>([])
   const [selected, setSelected] = useState()
   const [text, setText] = useState('')
 
   const handleRadioSelect = (e: any) => setSelected(e.target.value)
   const handleTextChange = (e: any) => setText(e.target.value)
+  const handleFilesUpdate = (newFiles: ExtendedFile[]) => updateFiles(newFiles)
 
   const disabled =
     !Object.values(radioOptions).some(v => selected === v) || text.length < 20
@@ -68,7 +70,7 @@ const Feedback: FC<FeedbackProps> = ({ open, handleClose, classes }) => {
             id="multiline-static"
             className={classes.textField}
             margin="normal"
-            label="Tutaj napisz kilka zdań od siebie (min. 20 znaków)"
+            placeholder="Tutaj napisz kilka zdań od siebie (min. 20 znaków)"
             multiline
             rows="4"
             variant="outlined"
@@ -76,23 +78,14 @@ const Feedback: FC<FeedbackProps> = ({ open, handleClose, classes }) => {
             onChange={handleTextChange}
           />
 
-          <input
-            {...{ disabled }}
-            className={classes.fileInput}
-            type="file"
-            accept="image/*"
-            id="upload-photo"
-            hidden
-          />
-
           <Typography component="h2">Możesz załączyć zdjęcie</Typography>
-          <label
-            className={classes.browsePhotoContainer}
-            htmlFor="upload-photo"
-          >
-            <AddPhotoIcon className={classes.photoIcon} />
-          </label>
-
+          <div className={classes.photos}>
+            <Photos
+              files={files}
+              filesLength={3}
+              onFilesUpdate={handleFilesUpdate}
+            />
+          </div>
           <Button
             {...{ disabled }}
             type="submit"
@@ -128,6 +121,14 @@ const styles: StyleRulesCallback = _ => ({
     display: 'block',
     fontSize: '6rem',
     padding: '1rem',
+  },
+  photos: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(30%, 1fr))',
+    minHeight: '8rem',
+    gridGap: '1rem',
+    gridTemplateRows: '1fr',
+    margin: '2rem 0',
   },
   formControl: {
     width: '100%',

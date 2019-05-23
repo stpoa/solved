@@ -14,16 +14,16 @@ import TaskTagsEdit from '../components/TaskTagsEdit'
 
 export const steps: Step[] = [
   {
+    stepName: 'photo',
+    component: <TaskPhotoEdit />,
+  },
+  {
     stepName: 'tags',
     component: <TaskTagsEdit />,
   },
   {
     stepName: 'description',
     component: <TaskDescriptionEdit />,
-  },
-  {
-    stepName: 'photo',
-    component: <TaskPhotoEdit />,
   },
   {
     stepName: 'priceAndTerm',
