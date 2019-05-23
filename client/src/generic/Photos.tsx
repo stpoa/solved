@@ -120,11 +120,10 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     position: 'relative',
   },
   photoPaperWithTitle: {
-    minHeight: '7rem',
-    maxHeight: '7rem',
     display: 'grid',
     gridTemplateColumns: '2fr 1fr',
     position: 'relative',
+    maxHeight: '15rem',
   },
   photoIcon: {
     margin: '1rem 0',

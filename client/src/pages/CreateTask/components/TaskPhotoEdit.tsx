@@ -27,7 +27,11 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
         Zdjęcia
         <hr className={classes.underline} />
       </Typography>
-      <div className={classes.content}>
+      <div
+        className={
+          !files.length ? classes.contentWithAddPhotoLater : classes.content
+        }
+      >
         <div className={classes.photosWrapper}>
           <Photos
             files={files}
@@ -78,8 +82,14 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     display: 'grid',
     gridTemplateRows: 'max-content',
   },
-  content: {
+  contentWithAddPhotoLater: {
     height: '100%',
+    display: 'grid',
+    gridTemplateRows: '6fr 5fr',
+  },
+  content: {
+    display: 'grid',
+    gridTemplateRows: '1fr',
   },
   closeIcon: {
     position: 'absolute',
@@ -98,9 +108,8 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   },
   photosWrapper: {
     display: 'grid',
-    gridAutoRows: '1fr',
     gridGap: '1rem',
-    gridTemplateRows: 'max-content',
+    marginTop: '2rem',
   },
   photoPaper: {
     display: 'grid',
@@ -134,8 +143,15 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   browsePhotoParagraph: {
     margin: '0 0 2rem',
   },
+  addPhotosLaterContainer: {
+    display: 'grid',
+    gridTemplateRows: 'max-content',
+  },
   addPhotosLater: {
-    padding: '2rem',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    marginBottom: '2rem',
   },
   addPhotosLaterTitle: {
     padding: '1rem',
