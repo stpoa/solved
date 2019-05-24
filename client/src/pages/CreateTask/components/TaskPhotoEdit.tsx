@@ -4,83 +4,22 @@ import {
   StyleRulesCallback,
   Theme,
   Typography,
-  withStyles,
   WithStyles,
+  withStyles,
 } from '@material-ui/core'
-import { AddAPhoto as AddPhotoIcon, HighlightOff } from '@material-ui/icons'
-import React, { ChangeEvent, FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 import { ActionTypes } from '~/stores/CreateTask'
+import Photos from '~generic/Photos'
 import { useCreateTaskStore } from '~stores/CreateTask/connect'
 
-const filesLength = 3
-
-const createFileId = (file: File) =>
-  btoa(`${file.size}:${file.type}:${file.lastModified}`)
-
 const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
-  const [{ files }, dispatch] = useCreateTaskStore()
+  const [{ files, step }, dispatch] = useCreateTaskStore()
 
-  const handleFileRemoval = (id?: string) => () => {
-    const doesFileExist = (file: ExtendedFile) => file.id !== id
-    dispatch({
-      type: ActionTypes.updateFiles,
-      payload: { files: files.filter(doesFileExist) },
-    })
-  }
+  const handleFilesUpdate = (newFiles: ExtendedFile[]) =>
+    dispatch({ type: ActionTypes.updateFiles, payload: { files: newFiles } })
 
-  const handleBrowsePhotoClick = (e: ChangeEvent<HTMLInputElement>) => {
-    const eventFiles = e.target.files && Array.from(e.target.files)
-    const extendFile = (file: File): ExtendedFile => {
-      const fileUrl = URL.createObjectURL(file)
-      Object.assign(file, { id: createFileId(file), url: fileUrl })
-      return file as ExtendedFile
-    }
-    const isNewFile = (prevFiles: ExtendedFile[]) => (file: ExtendedFile) =>
-      !prevFiles.map(prevFile => prevFile.id).includes(file.id)
-
-    const newFiles =
-      eventFiles && eventFiles.map(extendFile).filter(isNewFile(files))
-
-    newFiles &&
-      newFiles.length &&
-      dispatch({
-        type: ActionTypes.updateFiles,
-        payload: { files: [...files, ...newFiles] },
-      })
-  }
-
-  const browsePhotoHolder = (
-    <Paper className={classes.paper}>
-      <label className={classes.browsePhotoContainer} htmlFor="upload-photo">
-        <Typography
-          className={classes.browsePhotoTitle}
-          color="textSecondary"
-          variant="title"
-        >
-          <p className={classes.browsePhotoParagraph}>Wybierz zdjęcie</p>
-          <AddPhotoIcon className={classes.photoIcon} />
-        </Typography>
-      </label>
-    </Paper>
-  )
-
-  const photoItem = ({ id, url, name }: ExtendedFile) => {
-    const backgroundImageStyle = { backgroundImage: `url(${url})` }
-    return (
-      <Paper key={id} className={classes.photoPaper}>
-        <div className={classes.photoNameContainer}>
-          <Typography className={classes.photoName} color="textSecondary">
-            {name}
-          </Typography>
-        </div>
-        <div className={classes.filePicture} style={backgroundImageStyle} />
-        <HighlightOff
-          className={classes.closeIcon}
-          onClick={handleFileRemoval(id)}
-        />
-      </Paper>
-    )
-  }
+  const handleaddPhotosLaterClick = () =>
+    dispatch({ type: ActionTypes.updateStep, payload: { step: step + 1 } })
 
   return (
     <CardContent className={classes.cardContent}>
@@ -88,15 +27,50 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
         Zdjęcia
         <hr className={classes.underline} />
       </Typography>
-      <input
-        className={classes.fileInput}
-        onChange={handleBrowsePhotoClick}
-        type="file"
-        accept="image/*"
-        id="upload-photo"
-      />
-      {files.length < filesLength && browsePhotoHolder}
-      {Array.from(files).map(photoItem)}
+      <div
+        className={
+          !files.length ? classes.contentWithAddPhotoLater : classes.content
+        }
+      >
+        <div className={classes.photosWrapper}>
+          <Photos
+            files={files}
+            filesLength={4}
+            fullWidth
+            onFilesUpdate={handleFilesUpdate}
+          />
+        </div>
+        {!files.length && (
+          <div className={classes.addPhotosLaterContainer}>
+            <Typography
+              color="textPrimary"
+              variant="subtitle2"
+              className={classes.orTitle}
+            >
+              LUB
+            </Typography>
+            <Paper
+              className={classes.addPhotosLater}
+              onClick={handleaddPhotosLaterClick}
+            >
+              <Typography
+                color="textPrimary"
+                variant="subtitle1"
+                className={classes.addPhotosLaterTitle}
+              >
+                Dodaj zdjęcia w innym terminie
+              </Typography>
+              <Typography
+                color="textSecondary"
+                variant="subtitle2"
+                className={classes.addPhotosLaterSubtitle}
+              >
+                Później zdeklarujesz termin dodania
+              </Typography>
+            </Paper>
+          </div>
+        )}
+      </div>
     </CardContent>
   )
 }
@@ -107,6 +81,15 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     paddingBottom: '0 !important',
     display: 'grid',
     gridTemplateRows: 'max-content',
+  },
+  contentWithAddPhotoLater: {
+    height: '100%',
+    display: 'grid',
+    gridTemplateRows: '6fr 5fr',
+  },
+  content: {
+    display: 'grid',
+    gridTemplateRows: '1fr',
   },
   closeIcon: {
     position: 'absolute',
@@ -122,6 +105,11 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     maxHeight: '100%',
     margin: '0.5rem 0 0.5rem',
     cursor: 'pointer',
+  },
+  photosWrapper: {
+    display: 'grid',
+    gridGap: '1rem',
+    marginTop: '2rem',
   },
   photoPaper: {
     display: 'grid',
@@ -154,6 +142,25 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   },
   browsePhotoParagraph: {
     margin: '0 0 2rem',
+  },
+  addPhotosLaterContainer: {
+    display: 'grid',
+    gridTemplateRows: 'max-content',
+  },
+  addPhotosLater: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    marginBottom: '2rem',
+  },
+  addPhotosLaterTitle: {
+    padding: '1rem',
+  },
+  addPhotosLaterSubtitle: {
+    padding: '1rem',
+  },
+  orTitle: {
+    margin: '1rem',
   },
   fileInput: {
     display: 'none',

@@ -98,6 +98,14 @@ const theme = createMuiTheme({
         '&$selected': {
           color: blue,
           backgroundColor: lightBlue,
+          '&:hover': {
+            color: blue,
+            backgroundColor: lightBlue,
+          },
+          '&:focus': {
+            color: blue,
+            backgroundColor: lightBlue,
+          },
         },
       },
     },
