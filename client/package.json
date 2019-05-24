@@ -11,6 +11,7 @@
     "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-quick-pinch-zoom": "^2.0.12",
     "react-router-dom": "^5.0.0",
     "react-svg-inline": "^2.1.1",
     "react-swipeable-views": "^0.13.1",

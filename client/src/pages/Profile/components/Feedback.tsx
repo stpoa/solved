@@ -124,10 +124,10 @@ const styles: StyleRulesCallback = _ => ({
   },
   photos: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(30%, 1fr))',
+    gridTemplateColumns: '1fr 1fr 1fr',
+    gridAutoRows: '1fr',
     minHeight: '8rem',
     gridGap: '1rem',
-    gridTemplateRows: '1fr',
     margin: '2rem 0',
   },
   formControl: {

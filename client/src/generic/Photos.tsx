@@ -7,7 +7,8 @@ import {
   WithStyles,
 } from '@material-ui/core'
 import { AddAPhoto as AddPhotoIcon, HighlightOff } from '@material-ui/icons'
-import React, { ChangeEvent, FunctionComponent } from 'react'
+import React, { ChangeEvent, FunctionComponent, useState } from 'react'
+import PhotoPreviewModal from './PhotoPreviewModal'
 
 const createFileId = (file: File) =>
   btoa(`${file.size}:${file.type}:${file.lastModified}`)
@@ -19,6 +20,8 @@ const Photos: FunctionComponent<PhotosProps> = ({
   fullWidth,
   onFilesUpdate,
 }) => {
+  const [previewPhotoId, updatePreviewPhotoId] = useState('')
+
   const handleFileRemoval = (id?: string) => () => {
     const doesFileExist = (file: ExtendedFile) => file.id !== id
     onFilesUpdate(files.filter(doesFileExist))
@@ -39,6 +42,10 @@ const Photos: FunctionComponent<PhotosProps> = ({
 
     newFiles && newFiles.length && onFilesUpdate([...files, ...newFiles])
   }
+
+  const handlePhotoClick = (id: string) => () => updatePreviewPhotoId(id)
+
+  const handlePreviewClose = () => updatePreviewPhotoId('')
 
   const browsePhotoHolder = (
     <Paper className={classes.photoContainer}>
@@ -62,23 +69,36 @@ const Photos: FunctionComponent<PhotosProps> = ({
   const photoItem = ({ id, url, name }: ExtendedFile) => {
     const backgroundImageStyle = { backgroundImage: `url(${url})` }
     return (
-      <Paper
-        key={id}
-        className={fullWidth ? classes.photoPaperWithTitle : classes.photoPaper}
-      >
-        {fullWidth && (
-          <div className={classes.photoNameContainer}>
-            <Typography className={classes.photoName} color="textSecondary">
-              {name}
-            </Typography>
-          </div>
-        )}
-        <div className={classes.filePicture} style={backgroundImageStyle} />
-        <HighlightOff
-          className={classes.closeIcon}
-          onClick={handleFileRemoval(id)}
-        />
-      </Paper>
+      <>
+        <Paper
+          key={id}
+          className={
+            fullWidth ? classes.photoPaperWithTitle : classes.photoPaper
+          }
+        >
+          {fullWidth && (
+            <div className={classes.photoNameContainer}>
+              <Typography className={classes.photoName} color="textSecondary">
+                {name}
+              </Typography>
+            </div>
+          )}
+          <div
+            className={classes.filePicture}
+            style={backgroundImageStyle}
+            onClick={handlePhotoClick(id)}
+          />
+          <HighlightOff
+            className={classes.closeIcon}
+            onClick={handleFileRemoval(id)}
+          />
+          <PhotoPreviewModal
+            open={id === previewPhotoId}
+            url={url}
+            handleClose={handlePreviewClose}
+          />
+        </Paper>
+      </>
     )
   }
 
@@ -117,13 +137,15 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   photoPaper: {
     display: 'grid',
     gridTemplateColumns: '1fr',
+    gridTemplateRows: '1fr',
     position: 'relative',
   },
   photoPaperWithTitle: {
     display: 'grid',
     gridTemplateColumns: '2fr 1fr',
+    gridTemplateRows: '1fr',
     position: 'relative',
-    maxHeight: '15rem',
+    maxHeight: '16rem',
   },
   photoIcon: {
     margin: '1rem 0',
@@ -166,6 +188,14 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
+  },
+  previewPicture: {
+    backgroundColor: 'black',
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    height: '100%',
+    borderRadius: 0,
   },
   underline: {
     height: '1px',
