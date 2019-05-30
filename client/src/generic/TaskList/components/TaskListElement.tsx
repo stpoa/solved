@@ -11,16 +11,17 @@ import {
   WithStyles,
 } from '@material-ui/core'
 import {
-  AccessTime,
+  AccessTime as TimeIcon,
   Delete,
   Edit,
-  MonetizationOnOutlined,
+  MonetizationOnOutlined as MoneyIcon,
   MoreVertRounded,
 } from '@material-ui/icons'
 import { distanceInWordsToNow } from 'date-fns'
-import * as locale from 'date-fns/locale/en'
+import * as locale from 'date-fns/locale/pl'
 import React, { Fragment } from 'react'
-import { Task } from '~interfaces'
+import { NavLink } from 'react-router-dom'
+import { TaskListTask } from '~interfaces'
 import TagList from './TagList'
 
 const TaskListElement = ({
@@ -39,24 +40,26 @@ const TaskListElement = ({
 }: TaskListElementProps) => (
   <Card className={classes.root} elevation={1}>
     <CardContent className={classes.content}>
-      <Typography variant="h2" color="textSecondary">
-        <p className={classes.shortDescription}>{shortDescription}</p>
-        <div className={classes.tags}>
-          <TagList tags={tags} />
-        </div>
-        <div className={classes.footer}>
-          <span className={classes.indicatorIconLeft}>
-            <AccessTime className={classes.indicatorIcon} />
-            <span className={classes.indicatorText}>
-              {distanceInWordsToNow(expiredAt, { locale })}
+      <NavLink className={classes.navLink} to={'task/' + id}>
+        <Typography variant="h2" color="textSecondary">
+          <p className={classes.shortDescription}>{shortDescription}</p>
+          <div className={classes.tags}>
+            <TagList tags={tags} />
+          </div>
+          <div className={classes.footer}>
+            <span className={classes.indicatorIconLeft}>
+              <TimeIcon className={classes.indicatorIcon} />
+              <span className={classes.indicatorText}>
+                {distanceInWordsToNow(expiredAt, { locale })}
+              </span>
             </span>
-          </span>
-          <span className={classes.indicatorIconRight}>
-            <MonetizationOnOutlined className={classes.indicatorIcon} />
-            <span>{price}</span>
-          </span>
-        </div>
-      </Typography>
+            <span className={classes.indicatorIconRight}>
+              <MoneyIcon className={classes.indicatorIcon} />
+              <span>{price}</span>
+            </span>
+          </div>
+        </Typography>
+      </NavLink>
       <div className={classes.moreOptionsWrapper}>
         {(isEditable || isDeletable) && (
           <Fragment>
@@ -103,7 +106,7 @@ const TaskListElement = ({
   </Card>
 )
 
-const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
+const styles: StyleRulesCallback = (theme: Theme) => ({
   card: {
     display: 'flex',
   },
@@ -119,8 +122,8 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
   controls: {
     alignItems: 'center',
     display: 'flex',
-    paddingBottom: unit,
-    paddingLeft: unit,
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit,
   },
   cover: {
     height: 151,
@@ -135,7 +138,7 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
     fontSize: '1.2rem',
     height: '2.4rem',
     lineHeight: '2.4rem',
-    marginTop: unit,
+    marginTop: theme.spacing.unit,
   },
   header: {
     fontSize: '1.6rem',
@@ -175,12 +178,18 @@ const styles: StyleRulesCallback = ({ spacing: { unit } }: Theme) => ({
     margin: '0',
   },
   tags: {
-    marginLeft: -unit,
-    marginRight: -unit,
+    marginLeft: -theme.spacing.unit,
+    marginRight: -theme.spacing.unit,
+  },
+  navLink: {
+    color: theme.palette.primary.main,
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
+    },
   },
 })
 
-interface TaskListElementProps extends WithStyles<typeof styles>, Task {
+interface TaskListElementProps extends WithStyles<typeof styles>, TaskListTask {
   anchorEl: HTMLElement | null
   onMoreButtonClick: (
     id: string,
