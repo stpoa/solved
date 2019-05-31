@@ -8,7 +8,7 @@ export const register: Register = (email, password) => {
 
       if (doesEmailExist) return reject(new Error('Email already taken'))
 
-      const newUser: User = { email, nick: '' }
+      const newUser: User = { email, nick: '', id: '2' }
 
       accounts.push({ email, password })
       users.push(newUser)

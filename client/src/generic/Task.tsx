@@ -23,7 +23,7 @@ import { Task } from '~interfaces'
 
 const Task = ({
   description,
-  expiredAt,
+  dateExpired: expiredAt,
   photos,
   price,
   tags,
