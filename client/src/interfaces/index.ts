@@ -20,6 +20,7 @@ export interface Task {
   solver?: string
   dateCreated?: number
   dateAssigned?: number
+  dateStarted?: number
   dateExpired: number
   category: string
   tags: string[]

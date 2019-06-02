@@ -8,7 +8,8 @@ const description = `Napisz program, który poprosi uzytkownika o podanie liczb 
 
 const task: Task = {
   id: '1',
-  author: '1',
+  author: '2',
+  solver: '3',
   dateExpired: addTime(Date.now(), 2, 4, 5),
   category: 'Informatyka',
   price: 100,
