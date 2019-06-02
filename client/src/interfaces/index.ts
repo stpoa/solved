@@ -1,29 +1,36 @@
-interface Category {
+export interface Category {
   id: string
   name: string
 }
 
-type CategoryList = Category[]
+export type CategoryList = Category[]
 
-type TagList = string[]
-interface Task {
+export interface TaskListTask {
   id: string
   category: string
-  tags: TagList
+  tags: string[]
   shortDescription: string
   price: number
   expiredAt: number
 }
 
-interface User {
+export interface Task {
+  id: string
+  category: string
+  tags: string[]
+  description: string
+  photos: string[]
+  price: number
+  expiredAt: number
+}
+
+export interface User {
   email: string
   nick: string
 }
 
-enum Status {
+export enum Status {
   Success = 'success',
   Failure = 'failure',
   Pending = 'pending',
 }
-
-export { Category, CategoryList, Status, Task, TagList, User }

@@ -15,7 +15,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import React, { ChangeEvent, Component, FunctionComponent } from 'react'
 import { taskCategories } from '~data'
 import { NavigationBar, TaskList } from '~generic'
-import { Task } from '~interfaces'
+import { TaskListTask } from '~interfaces'
 import { pageContentNotScrollableWithNavigationBar } from '~pages/styles'
 
 const ExpansionList: FunctionComponent<ExpansionListProps> = ({
@@ -145,8 +145,8 @@ interface TasksState {
 }
 interface ExpansionListProps extends WithStyles<typeof styles> {
   taskGroup: {
-    myTasks: Task[]
-    someoneTasks: Task[]
+    myTasks: TaskListTask[]
+    someoneTasks: TaskListTask[]
   }
   isEditable?: boolean
   isDeletable?: boolean
