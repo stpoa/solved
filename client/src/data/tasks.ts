@@ -1,20 +1,9 @@
-import { addDays, addHours, addMinutes } from 'date-fns'
+import { limitWords } from '~lib/text'
+import { addTime } from '~lib/time'
 
-type DateLike = number | string | Date
 const now = Date.now()
 
-const addTime = (
-  fromDate: DateLike,
-  minutes: number,
-  hours: number,
-  days: number,
-) => {
-  const withMinutes = addMinutes(fromDate, minutes)
-  const withHours = addHours(withMinutes, hours)
-  const withDays = addDays(withHours, days)
-
-  return withDays.getTime()
-}
+const description = `Napisz program, który poprosi uzytkownika o podanie liczb godzin i minut. Funkcja main() ma przekazać obie te wartości do funkcji typu  void, które je wyświetli w formacie jak ponziej`
 
 const waitingTasks = [
   {
@@ -22,9 +11,7 @@ const waitingTasks = [
     expiredAt: addTime(now, 2, 4, 5),
     id: '1',
     price: 100,
-    shortDescription:
-      'Napisz program, który poprosi użytkownika o podanie' +
-      'liczb godzin i minut. Funkcja main() ma',
+    shortDescription: limitWords(60)(description) + ' ...',
     tags: ['rownania', 'analiza'],
   },
   {
@@ -93,9 +80,9 @@ const finishedTasks = {
 
 const tasks = [
   {
+    id: '1',
     category: 'Informatyka',
     expiredAt: addTime(now, 2, 4, 5),
-    id: '1',
     price: 100,
     shortDescription:
       'Napisz program, który poprosi użytkownika o podanie' +
@@ -103,33 +90,33 @@ const tasks = [
     tags: ['rownania', 'analiza'],
   },
   {
+    id: '2',
     category: 'Fizyka',
     expiredAt: addTime(now, 2, 4, 5),
-    id: '2',
     price: 100,
     shortDescription: 'Masa marsa',
     tags: ['astrologia'],
   },
   {
-    category: 'Muzyka',
-    expiredAt: addTime(now, 2, 4, 5),
     id: '3',
+    category: 'Muzyka',
+    expiredAt: addTime(now, 2, 4, 5),
     price: 140,
     shortDescription: 'Odczytaj nuty i zagraj',
     tags: ['nuty'],
   },
   {
-    category: 'Muzyka',
-    expiredAt: addTime(now, 2, 4, 5),
     id: '4',
+    category: 'Muzyka',
+    expiredAt: addTime(now, 2, 4, 5),
     price: 140,
     shortDescription: 'Odczytaj nuty i zagraj',
     tags: ['nuty'],
   },
   {
+    id: '5',
     category: 'Muzyka',
     expiredAt: addTime(now, 2, 4, 5),
-    id: '5',
     price: 140,
     shortDescription: 'Odczytaj nuty i zagraj',
     tags: ['nuty'],
@@ -143,33 +130,33 @@ const tasks = [
     tags: ['nuty'],
   },
   {
-    category: 'Muzyka',
-    expiredAt: addTime(now, 2, 4, 5),
     id: '7',
+    category: 'Muzyka',
+    expiredAt: addTime(now, 2, 4, 5),
     price: 140,
     shortDescription: 'Odczytaj nuty i zagraj',
     tags: ['nuty'],
   },
   {
-    category: 'Muzyka',
-    expiredAt: addTime(now, 2, 4, 5),
     id: '8',
+    category: 'Muzyka',
+    expiredAt: addTime(now, 2, 4, 5),
     price: 140,
     shortDescription: 'Odczytaj nuty i zagraj',
     tags: ['nuty'],
   },
   {
-    category: 'Muzyka',
-    expiredAt: addTime(now, 2, 4, 5),
     id: '9',
+    category: 'Muzyka',
+    expiredAt: addTime(now, 2, 4, 5),
     price: 140,
     shortDescription: 'Odczytaj nuty i zagraj',
     tags: ['nuty'],
   },
   {
+    id: '10',
     category: 'Muzyka',
     expiredAt: addTime(now, 2, 4, 5),
-    id: '10',
     price: 140,
     shortDescription: 'Odczytaj nuty i zagraj',
     tags: ['nuty'],

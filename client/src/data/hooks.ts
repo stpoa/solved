@@ -10,7 +10,7 @@ export const useQuery = <T>(_query: string, mockedData?: T) => {
       setData(mockedData)
       setLoading(false)
     }, 1000)
-  })
+  }, [])
 
-  return { data, error, loading }
+  return { data, error: error as Error | null, loading }
 }

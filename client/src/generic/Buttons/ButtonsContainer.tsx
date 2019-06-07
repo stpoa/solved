@@ -7,11 +7,13 @@ const ButtonContainer: FC<ButtonContainerProps> = ({
   className,
   ...props
 }) => {
-  const childrenWithStyles = React.Children.map(children, (child, i) =>
-    React.cloneElement(child as ReactElement<any>, {
-      style: { gridColumn: i + 1 },
-    }),
-  )
+  const childrenWithStyles = React.Children.toArray(children)
+    .filter(child => !!child)
+    .map((child, i) =>
+      React.cloneElement(child as ReactElement<any>, {
+        style: { gridColumn: i + 1 },
+      }),
+    )
 
   return (
     <div {...props} className={[classes.container, className || ''].join(' ')}>

@@ -16,15 +16,21 @@ export interface TaskListTask {
 
 export interface Task {
   id: string
+  author: string
+  solver?: string
+  dateCreated?: number
+  dateAssigned?: number
+  dateStarted?: number
+  dateExpired: number
   category: string
   tags: string[]
   description: string
   photos: string[]
   price: number
-  expiredAt: number
 }
 
 export interface User {
+  id: string
   email: string
   nick: string
 }
