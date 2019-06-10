@@ -1,7 +1,7 @@
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
 import { useQuery } from '~data/hooks'
-import taskData from '~data/task'
+import tasksData from '~data/tasks'
 import usersData from '~data/users'
 import { NavigationBar, PageHeader } from '~generic'
 import Task from '~generic/Task/components/Task'
@@ -15,7 +15,7 @@ const TaskPage = ({ match }: TaskPageProps) => {
 
   const { data: task, error: errorTask, loading: loadingTask } = useQuery<
     TaskData
-  >(GET_TASK, taskData)
+  >(GET_TASK, tasksData[0])
 
   const { data: user, error: errorUser, loading: loadingUser } = useQuery<
     UserData

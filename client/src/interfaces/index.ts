@@ -5,19 +5,11 @@ export interface Category {
 
 export type CategoryList = Category[]
 
-export interface TaskListTask {
-  id: string
-  category: string
-  tags: string[]
-  shortDescription: string
-  price: number
-  expiredAt: number
-}
-
 export interface Task {
   id: string
   author: string
   solver?: string
+  solution?: SolutionEntry[]
   dateCreated?: number
   dateAssigned?: number
   dateStarted?: number
@@ -25,8 +17,15 @@ export interface Task {
   category: string
   tags: string[]
   description: string
+  shortDescription: string
   photos: string[]
   price: number
+}
+
+export interface SolutionEntry {
+  dateCreated: number
+  comment: string
+  images: string
 }
 
 export interface User {

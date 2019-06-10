@@ -12,8 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 import { UnfoldMore } from '@material-ui/icons'
 import React, { Component } from 'react'
-import { TaskListTask } from '~interfaces'
-import TaskListElement from './TaskListElement'
+import TaskListElement, { TaskListTask } from './TaskListElement'
 
 export enum SortingOption {
   PRICE_LOW = 'PRICE_LOW',
@@ -117,7 +116,7 @@ class TaskList extends Component<TaskListProps, TaskListState> {
                 isEditable={isEditable}
                 isDeletable={isDeletable}
                 isMoreExpanded={task.id === expandedDropdownId}
-                {...task}
+                {...{ task }}
               />
             </Grid>
           ))}

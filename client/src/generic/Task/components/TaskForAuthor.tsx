@@ -6,6 +6,7 @@ import Button from '~generic/Buttons/Button'
 import ButtonContainer from '~generic/Buttons/ButtonsContainer'
 import { Task as TaskData } from '~interfaces'
 import { getTaskStatus, TaskStatus } from '../utils'
+import Solution from './Solution'
 import TaskBase from './TaskBase'
 
 const Task = ({ task, classes }: TaskProps) => {
@@ -32,21 +33,24 @@ const Task = ({ task, classes }: TaskProps) => {
   )
 
   return (
-    <TaskBase {...{ task }}>
-      {(() => {
-        const taskStatus = getTaskStatus(task)
-        if (
-          taskStatus === TaskStatus.Created ||
-          taskStatus === TaskStatus.Taken
-        ) {
-          return editButtons
-        } else if (taskStatus === TaskStatus.Ended) {
-          return rateButtons
-        } else {
-          return null
-        }
-      })()}
-    </TaskBase>
+    <>
+      <TaskBase {...{ task }}>
+        {(() => {
+          const taskStatus = getTaskStatus(task)
+          if (
+            taskStatus === TaskStatus.Created ||
+            taskStatus === TaskStatus.Taken
+          ) {
+            return editButtons
+          } else if (taskStatus === TaskStatus.Ended) {
+            return rateButtons
+          } else {
+            return null
+          }
+        })()}
+      </TaskBase>
+      {task.solution && <Solution solution={task.solution} />}
+    </>
   )
 }
 
