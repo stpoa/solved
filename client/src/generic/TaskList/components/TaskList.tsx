@@ -100,13 +100,13 @@ class TaskList extends Component<TaskListProps, TaskListState> {
           </div>
         )}
         <Grid className={classes.grid} container>
-          {tasks.map((task, i) => (
+          {tasks.map(task => (
             <Grid
               item
               xs={12}
               sm={6}
               md={3}
-              key={i}
+              key={task.id}
               className={classes.gridItem}
             >
               <TaskListElement

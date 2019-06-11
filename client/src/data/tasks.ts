@@ -5,6 +5,9 @@ import { MockBuilder } from './types'
 
 const now = Date.now()
 
+const generateShortDescription = (description: string) =>
+  limitWords(60)(description) + ' ...'
+
 const buildTask: MockBuilder<Task> = task => {
   const description = `Napisz program, który poprosi uzytkownika o podanie liczb godzin i minut. Funkcja main() ma przekazać obie te wartości do funkcji typu  void, które je wyświetli w formacie jak ponziej`
   const defaults: Task = {
@@ -16,7 +19,7 @@ const buildTask: MockBuilder<Task> = task => {
     price: 100,
     tags: ['rownania', 'analiza'],
     description,
-    shortDescription: limitWords(60)(task.description || description) + ' ...',
+    shortDescription: generateShortDescription(description),
     photos: [
       'https://cdn.mamadu.pl/3d6c819cddd788cfff6e629075468689,780,0,0,0.jpg',
       'https://1.bp.blogspot.com/-Xza06X5jnlU/Uul8IQsB_oI/AAAAAAAABZ8/t5cFSra4H6o/s1600/IMG_3411.JPG',
@@ -24,7 +27,11 @@ const buildTask: MockBuilder<Task> = task => {
     ],
   }
 
-  return { ...defaults, ...task }
+  const overwrites = {
+    shortDescription: generateShortDescription(task.description || description),
+  }
+
+  return { ...defaults, ...task, ...overwrites }
 }
 
 const waitingTasks = [buildTask({ id: '1' }), buildTask({ id: '2' })]
@@ -40,7 +47,6 @@ const finishedTasks = {
 }
 
 const createdTask = buildTask({
-  id: '1',
   category: 'Informatyka',
   dateExpired: addTime(now, 2, 4, 5),
   price: 100,
@@ -53,20 +59,19 @@ const takenTask = buildTask({
   ...createdTask,
   description:
     'To jest wzięte zadanie. Zadanie nie powinno sie wyświetlać na liście',
-  id: '2',
   price: 200,
   solver: '3',
 })
 
 const startedTask = buildTask({
   ...takenTask,
-  id: '3',
+  description: 'To zadanie jest zaczęte',
   dateStarted: subTime(now, 10, 1, 0),
 })
 
 const endedTask = buildTask({
   ...startedTask,
-  id: '4',
+  description: 'Zadanie zakończone',
   dateExpired: subTime(now, 10, 0, 0),
 })
 
@@ -79,7 +84,7 @@ const tasks: Task[] = [
   takenTask,
   startedTask,
   endedTask,
-]
+].map((task, i) => buildTask({ ...task, id: i + 1 + '' }))
 
 export const taskCategories = {
   waitingTasks,

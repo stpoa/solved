@@ -13,7 +13,7 @@ const TaskPage = ({ match, auth: { user } }: TaskPageProps) => {
 
   const { data: task, error: errorTask, loading: loadingTask } = useQuery<
     TaskData
-  >(GET_TASK, tasksData[0])
+  >(GET_TASK, tasksData[Number(taskId) - 1])
 
   const Content = () => {
     if (errorTask) {

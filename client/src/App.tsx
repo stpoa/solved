@@ -18,6 +18,7 @@ import { BasicAuth, Provider as AuthProvider } from '~auth'
 import { PrivateRoute } from '~generic'
 
 // Pages
+import { PrivateRouteWithAuth } from '~generic/PrivateRoute'
 import * as Pages from '~pages'
 
 // Theme
@@ -124,7 +125,10 @@ class App extends Component<AppProps, {}> {
             <Router>
               <div className={this.props.classes.container}>
                 <Switch>
-                  <PrivateRoute path="/profile" component={Pages.Profile} />
+                  <PrivateRouteWithAuth
+                    path="/profile"
+                    component={Pages.Profile}
+                  />
                   <PrivateRoute
                     path="/profile/test"
                     component={NotImplmented}
