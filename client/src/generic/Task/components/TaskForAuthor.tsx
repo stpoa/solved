@@ -33,24 +33,22 @@ const Task = ({ task, classes }: TaskProps) => {
   )
 
   return (
-    <>
-      <TaskBase {...{ task }}>
-        {(() => {
-          const taskStatus = getTaskStatus(task)
-          if (
-            taskStatus === TaskStatus.Created ||
-            taskStatus === TaskStatus.Taken
-          ) {
-            return editButtons
-          } else if (taskStatus === TaskStatus.Ended) {
-            return rateButtons
-          } else {
-            return null
-          }
-        })()}
-      </TaskBase>
+    <TaskBase {...{ task }}>
+      {(() => {
+        const taskStatus = getTaskStatus(task)
+        if (
+          taskStatus === TaskStatus.Created ||
+          taskStatus === TaskStatus.Taken
+        ) {
+          return editButtons
+        } else if (taskStatus === TaskStatus.Ended) {
+          return rateButtons
+        } else {
+          return null
+        }
+      })()}
       {task.solution && <Solution solution={task.solution} />}
-    </>
+    </TaskBase>
   )
 }
 

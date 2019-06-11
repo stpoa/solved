@@ -17,6 +17,8 @@ const Task = ({ task, user }: TaskProps) => {
   } else {
     return null
   }
+
+  // return <TaskForAuthor {...{ task }} /> // FIXME: Delete
 }
 
 interface TaskProps {

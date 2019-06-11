@@ -13,7 +13,6 @@ const buildTask: MockBuilder<Task> = task => {
   const defaults: Task = {
     id: '1',
     author: '2',
-    solver: '3',
     dateExpired: addTime(now, 2, 4, 5),
     category: 'Informatyka',
     price: 100,
@@ -66,13 +65,21 @@ const takenTask = buildTask({
 const startedTask = buildTask({
   ...takenTask,
   description: 'To zadanie jest zaczęte',
-  dateStarted: subTime(now, 10, 1, 0),
+  dateStarted: subTime(now, 10, 1),
+  solution: [
+    {
+      image:
+        'http://bi.gazeta.pl/im/5f/e0/16/z23988319IH,Zadanie-matematyczne-dla-drugoklasisty.jpg',
+      comment: 'Przepisz to debilu głupi, i potem oceniaj pozytywnie',
+      dateCreated: subTime(now, 2),
+    },
+  ],
 })
 
 const endedTask = buildTask({
   ...startedTask,
   description: 'Zadanie zakończone',
-  dateExpired: subTime(now, 10, 0, 0),
+  dateExpired: subTime(now, 10),
 })
 
 const tasks: Task[] = [

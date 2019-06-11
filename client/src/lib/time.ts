@@ -15,8 +15,8 @@ export const wait = (seconds: number) =>
 export const addTime = (
   fromDate: DateLike,
   minutes: number,
-  hours: number,
-  days: number,
+  hours = 0,
+  days = 0,
 ) => {
   const withMinutes = addMinutes(fromDate, minutes)
   const withHours = addHours(withMinutes, hours)
@@ -28,8 +28,8 @@ export const addTime = (
 export const subTime = (
   fromDate: DateLike,
   minutes: number,
-  hours: number,
-  days: number,
+  hours = 0,
+  days = 0,
 ) => {
   const withMinutes = subMinutes(fromDate, minutes)
   const withHours = subHours(withMinutes, hours)

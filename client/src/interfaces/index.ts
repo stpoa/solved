@@ -25,7 +25,7 @@ export interface Task {
 export interface SolutionEntry {
   dateCreated: number
   comment: string
-  images: string
+  image: string
 }
 
 export interface User {
