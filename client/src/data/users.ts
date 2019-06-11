@@ -4,22 +4,26 @@ const users: User[] = [
   {
     id: '1',
     nick: 'guest',
-    email: 'user@notowork.com',
+    email: 'guest@notowork.com',
+    password: 'guest',
   },
   {
     id: '2',
     nick: 'author',
-    email: 'user@notowork.com',
+    email: 'author@notowork.com',
+    password: 'author',
   },
   {
     id: '3',
     nick: 'solver',
-    email: 'user@notowork.com',
+    email: 'solver@notowork.com',
+    password: 'solver',
   },
   {
     id: '4',
     nick: 'mediator',
-    email: 'user@notowork.com',
+    email: 'mediator@notowork.com',
+    password: 'mediator',
   },
 ]
 

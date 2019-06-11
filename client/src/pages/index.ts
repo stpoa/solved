@@ -7,6 +7,7 @@ import Register from './Register/Register'
 import RemindPassword from './RemindPassword'
 import Search from './Search/SearchFilter'
 import SignIn from './SignIn'
+import Task from './Task/Task'
 import Tasks from './Tasks/Tasks'
 
 export {
@@ -20,4 +21,5 @@ export {
   Search,
   SignIn,
   Tasks,
+  Task,
 }

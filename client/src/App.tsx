@@ -19,7 +19,6 @@ import { PrivateRoute } from '~generic'
 
 // Pages
 import * as Pages from '~pages'
-import Task from '~pages/Task/Task'
 
 // Theme
 const blue = '#4481EB'
@@ -147,7 +146,7 @@ class App extends Component<AppProps, {}> {
                     component={NotImplmented}
                   />
                   <Route exact path="/" component={Pages.Home} />
-                  <Route path="/task/:id" component={Task} />
+                  <Route path="/task/:id" component={Pages.Task} />
                   <Route path="*" render={redirectToHome} />
                 </Switch>
               </div>

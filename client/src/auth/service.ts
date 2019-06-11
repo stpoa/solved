@@ -1,21 +1,17 @@
-import { accounts, users } from '~data'
+import { users } from '~data'
 import { User } from '~interfaces'
+import { isTest } from '~lib/env'
+import { wait } from '~lib/time'
 
-const delay = process.env.NODE_ENV === 'test' ? 0 : 2000
+const delay = isTest() ? 0 : 1
 
-export const signIn: SignIn = (email, password) => {
-  return new Promise(resolve => {
-    window.setTimeout(() => {
-      const matchedAccount = accounts.find(
-        account => account.email === email && account.password === password,
-      )
+export const signIn: SignIn = async (email, password) => {
+  await wait(delay)
+  const user = users.find(
+    account => account.email === email && account.password === password,
+  )
 
-      const matchedUser =
-        (matchedAccount && users.find(user => user.email === email)) || null
-
-      resolve(matchedUser)
-    }, delay)
-  })
+  return user || null
 }
 
 type SignIn = (email: string, password: string) => Promise<User | null>

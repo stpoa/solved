@@ -21,7 +21,7 @@ const Task = ({ task, user }: TaskProps) => {
 
 interface TaskProps {
   task: TaskData
-  user: UserData
+  user: UserData | null
 }
 
 export default Task

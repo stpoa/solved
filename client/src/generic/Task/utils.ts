@@ -7,11 +7,13 @@ export enum UserType {
   Solver = 'solver',
 }
 
-export const getUserType = (task: Task) => (user: User): UserType =>
-  user.id === task.author
-    ? UserType.Author
-    : user.id === task.solver
-    ? UserType.Solver
+export const getUserType = (task: Task) => (user: User | null): UserType =>
+  user
+    ? user.id === task.author
+      ? UserType.Author
+      : user.id === task.solver
+      ? UserType.Solver
+      : UserType.Guest
     : UserType.Guest
 
 export enum TaskStatus {

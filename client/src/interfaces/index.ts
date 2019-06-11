@@ -32,6 +32,7 @@ export interface User {
   id: string
   email: string
   nick: string
+  password: string
 }
 
 export enum Status {

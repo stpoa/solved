@@ -22,6 +22,7 @@ import {
   Password,
 } from '~generic/Sign'
 import { Status } from '~interfaces'
+import { logError } from '~lib/log';
 import { emailValidator, passwordLengthValidator } from '~lib/validators'
 import Checkbox from './components/Checkbox'
 import SnackbarError from './components/SnackbarError'
@@ -139,9 +140,7 @@ class SignIn extends Component<SignInProps, SignInState> {
 
       if (hasErrors) return { ...errors }
 
-      props.auth.signIn(state.email, state.password).catch(() => {
-        return
-      })
+      props.auth.signIn(state.email, state.password).catch(logError)
 
       return null
     })
