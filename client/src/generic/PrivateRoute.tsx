@@ -27,7 +27,7 @@ interface PrivateRouteProps extends WithAuth, RouteProps {
 }
 
 interface PrivateRouteWithAuthProps extends WithAuth, RouteProps {
-  component: any
+  component: ComponentType<any>
 }
 
 export default withAuth(PrivateRoute)
