@@ -1,16 +1,23 @@
-import { accounts, users } from '~data'
+import { users } from '~data'
 import { User } from '~interfaces'
+
+export const generateUserNick = (email: string) =>
+  email
+    .split('@')[0]
+    .replace('+', '')
+    .replace('-', '')
 
 export const register: Register = (email, password) => {
   return new Promise((resolve, reject) => {
     window.setTimeout(() => {
-      const doesEmailExist = accounts.find(account => account.email === email)
+      const doesEmailExist = users.find(user => user.email === email)
 
       if (doesEmailExist) return reject(new Error('Email already taken'))
 
-      const newUser: User = { email, nick: '', id: '2' }
+      const nick = generateUserNick(email)
+      const id = users.length + ''
+      const newUser: User = { email, nick, id, password }
 
-      accounts.push({ email, password })
       users.push(newUser)
 
       resolve(newUser)

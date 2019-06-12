@@ -5,7 +5,6 @@ import React from 'react'
 import Button from '~generic/Buttons/Button'
 import ButtonContainer from '~generic/Buttons/ButtonsContainer'
 import { Task as TaskData } from '~interfaces'
-import { logDebug } from '~lib/log'
 import { getTaskStatus, TaskStatus } from '../utils'
 import TaskBase from './TaskBase'
 
@@ -27,7 +26,6 @@ const Task = ({ task, classes }: TaskProps) => {
     <TaskBase {...{ task }}>
       {(() => {
         const taskStatus = getTaskStatus(task)
-        logDebug({ taskStatus })
 
         if (taskStatus === TaskStatus.Created) {
           return solveButtons

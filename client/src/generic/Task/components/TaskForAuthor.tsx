@@ -1,11 +1,16 @@
 import { StyleRulesCallback, withStyles } from '@material-ui/core'
-import { Delete as DeleteIcon, Edit as EditIcon } from '@material-ui/icons'
+import {
+  Delete as DeleteIcon,
+  Edit as EditIcon,
+  RateReview as ReviewIcon,
+} from '@material-ui/icons'
 import { WithStyles } from '@material-ui/styles'
 import React from 'react'
 import Button from '~generic/Buttons/Button'
 import ButtonContainer from '~generic/Buttons/ButtonsContainer'
 import { Task as TaskData } from '~interfaces'
 import { getTaskStatus, TaskStatus } from '../utils'
+import Solution from './Solution'
 import TaskBase from './TaskBase'
 
 const Task = ({ task, classes }: TaskProps) => {
@@ -25,7 +30,7 @@ const Task = ({ task, classes }: TaskProps) => {
   const rateButtons = (
     <ButtonContainer className={classes.buttonContainer}>
       <Button styleVariant="empty">
-        <DeleteIcon />
+        <ReviewIcon />
         Oceń
       </Button>
     </ButtonContainer>
@@ -46,6 +51,7 @@ const Task = ({ task, classes }: TaskProps) => {
           return null
         }
       })()}
+      {task.solution && <Solution solution={task.solution} />}
     </TaskBase>
   )
 }

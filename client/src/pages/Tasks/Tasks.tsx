@@ -15,7 +15,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import React, { ChangeEvent, Component, FunctionComponent } from 'react'
 import { taskCategories } from '~data'
 import { NavigationBar, TaskList } from '~generic'
-import { TaskListTask } from '~interfaces'
+import { TaskListTask } from '~generic/TaskList/components/TaskListElement'
 import { pageContentNotScrollableWithNavigationBar } from '~pages/styles'
 
 const ExpansionList: FunctionComponent<ExpansionListProps> = ({

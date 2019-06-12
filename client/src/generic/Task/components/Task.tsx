@@ -17,11 +17,13 @@ const Task = ({ task, user }: TaskProps) => {
   } else {
     return null
   }
+
+  // return <TaskForAuthor {...{ task }} /> // FIXME: Delete
 }
 
 interface TaskProps {
   task: TaskData
-  user: UserData
+  user: UserData | null
 }
 
 export default Task

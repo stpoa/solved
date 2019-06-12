@@ -22,6 +22,7 @@ import {
   ThumbUpOutlined,
 } from '@material-ui/icons'
 import React, { FunctionComponent, useState } from 'react'
+import { WithAuth, withAuth } from '~auth'
 import { termsAndConditionsText, users } from '~data'
 import {
   ConfirmationDialog,
@@ -35,7 +36,7 @@ import ChangeNick from '~pages/Profile/components/ChangeNick'
 import ChangePassword from '~pages/Profile/components/ChangePassword'
 import Feedback from '~pages/Profile/components/Feedback'
 
-const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
+const Profile: FunctionComponent<ProfileProps> = ({ classes, auth }) => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true)
   enum modals {
     Logout = 'LOGOUT',
@@ -56,6 +57,10 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
   }
   const showModal = (modal: modals) => () => setModalVisible(modal)
   const hideModals = () => setModalVisible(modals.None)
+  const handleLogout = () => {
+    auth.signOut()
+    hideModals()
+  }
 
   return (
     <>
@@ -247,7 +252,7 @@ const Profile: FunctionComponent<ProfileProps> = ({ classes }) => {
       <ConfirmationDialog
         open={modalVisible === modals.Logout}
         handleClose={hideModals}
-        handleConfirm={hideModals}
+        handleConfirm={handleLogout}
         confirmText={'Wyloguj'}
       />
 
@@ -378,9 +383,9 @@ const styles: StyleRulesCallback = theme => ({
   },
 })
 
-export interface ProfileProps extends WithStyles<typeof styles> {
+export interface ProfileProps extends WithStyles<typeof styles>, WithAuth {
   balance?: number
   isPrivate?: boolean
 }
 
-export default withStyles(styles)(Profile)
+export default withAuth(withStyles(styles)(Profile))

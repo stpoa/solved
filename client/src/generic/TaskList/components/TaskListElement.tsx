@@ -21,21 +21,16 @@ import { distanceInWordsToNow } from 'date-fns'
 import * as locale from 'date-fns/locale/pl'
 import React, { Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
-import { TaskListTask } from '~interfaces'
 import TagList from './TagList'
 
 const TaskListElement = ({
+  task: { id, tags, shortDescription, price, dateExpired },
   anchorEl,
-  id,
   isMoreExpanded,
   isEditable,
   isDeletable,
   onExpandedMenuLeave,
   onMoreButtonClick,
-  tags,
-  shortDescription,
-  price,
-  expiredAt,
   classes,
 }: TaskListElementProps) => (
   <Card className={classes.root} elevation={1}>
@@ -50,7 +45,7 @@ const TaskListElement = ({
             <span className={classes.indicatorIconLeft}>
               <TimeIcon className={classes.indicatorIcon} />
               <span className={classes.indicatorText}>
-                {distanceInWordsToNow(expiredAt, { locale })}
+                {distanceInWordsToNow(dateExpired, { locale })}
               </span>
             </span>
             <span className={classes.indicatorIconRight}>
@@ -189,7 +184,17 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   },
 })
 
-interface TaskListElementProps extends WithStyles<typeof styles>, TaskListTask {
+export interface TaskListTask {
+  id: string
+  category: string
+  tags: string[]
+  shortDescription: string
+  price: number
+  dateExpired: number
+}
+
+interface TaskListElementProps extends WithStyles<typeof styles> {
+  task: TaskListTask
   anchorEl: HTMLElement | null
   onMoreButtonClick: (
     id: string,

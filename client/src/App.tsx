@@ -18,8 +18,8 @@ import { BasicAuth, Provider as AuthProvider } from '~auth'
 import { PrivateRoute } from '~generic'
 
 // Pages
+import { PrivateRouteWithAuth } from '~generic/PrivateRoute'
 import * as Pages from '~pages'
-import Task from '~pages/Task/Task'
 
 // Theme
 const blue = '#4481EB'
@@ -125,7 +125,10 @@ class App extends Component<AppProps, {}> {
             <Router>
               <div className={this.props.classes.container}>
                 <Switch>
-                  <PrivateRoute path="/profile" component={Pages.Profile} />
+                  <PrivateRouteWithAuth
+                    path="/profile"
+                    component={Pages.Profile}
+                  />
                   <PrivateRoute
                     path="/profile/test"
                     component={NotImplmented}
@@ -147,7 +150,7 @@ class App extends Component<AppProps, {}> {
                     component={NotImplmented}
                   />
                   <Route exact path="/" component={Pages.Home} />
-                  <Route path="/task/:id" component={Task} />
+                  <Route path="/task/:id" component={Pages.Task} />
                   <Route path="*" render={redirectToHome} />
                 </Switch>
               </div>

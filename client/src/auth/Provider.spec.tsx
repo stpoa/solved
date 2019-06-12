@@ -1,5 +1,6 @@
 import { mount } from 'enzyme'
 import React, { FunctionComponent } from 'react'
+import { users } from '~data'
 import { Status } from '~interfaces'
 import context from './context'
 import Provider from './Provider'
@@ -77,7 +78,7 @@ describe('<Provider />', () => {
     }
 
     it('when signIn() succeeds', done => {
-      testSignIn('user@notowork.com', '123456', wrapper => {
+      testSignIn(users[0].email, users[0].password, wrapper => {
         const value = getValue(wrapper)
 
         expect(value.signedIn).toBe(true)
