@@ -1,4 +1,8 @@
-import { DoneAll as ConfirmIcon, Edit as EditIcon } from '@material-ui/icons'
+import {
+  Add as AddIcon,
+  DoneAll as ConfirmIcon,
+  Edit as EditIcon,
+} from '@material-ui/icons'
 import React, { FC } from 'react'
 import Button from '~generic/Buttons/Button'
 import ButtonsContainer from '~generic/Buttons/ButtonsContainer'
@@ -21,6 +25,15 @@ const Task: FC<TaskProps> = ({ task }) => {
     </ButtonsContainer>
   )
 
+  const addSolutionButtons = (
+    <ButtonsContainer>
+      <Button>
+        <AddIcon />
+        Dodaj
+      </Button>
+    </ButtonsContainer>
+  )
+
   const taskStatus = getTaskStatus(task)
 
   const canEditSolution =
@@ -29,7 +42,9 @@ const Task: FC<TaskProps> = ({ task }) => {
   return (
     <TaskBase {...{ task }}>
       {task.solution && <Solution solution={task.solution} />}
-      {canEditSolution && editSolutionButtons}
+      {canEditSolution && task.solution![0]
+        ? editSolutionButtons
+        : addSolutionButtons}
     </TaskBase>
   )
 }

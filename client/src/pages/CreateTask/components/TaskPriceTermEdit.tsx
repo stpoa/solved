@@ -8,10 +8,7 @@ import {
 } from '@material-ui/core'
 import { AccountBalanceWallet, Event, EventAvailable } from '@material-ui/icons'
 import { format } from 'date-fns'
-import React, { FC, useEffect } from 'react'
-import { ActionTypes } from '~/stores/CreateTask'
-import { useCreateTaskStore } from '~stores/CreateTask/connect'
-import { OnChange } from '~typings/react'
+import React, { FC } from 'react'
 import {
   invalidateDateWithActualTime,
   invalidatePrice,
@@ -21,14 +18,13 @@ import {
 const TaskPriceTermEdit: FC<TaskPriceTermEditProps> = ({
   balance,
   classes,
+  startDate,
+  handleStartDateChange,
+  finishDate,
+  handleFinishDateChange,
+  price,
+  handlePriceChange,
 }) => {
-  const [{ startDate, finishDate, price }, dispatch] = useCreateTaskStore()
-
-  useEffect(() => {
-    // Mount
-    dispatch({ type: ActionTypes.updateBalance, payload: { balance } })
-  }, [])
-
   const withTaskContent = false // TODO get from checkbox in photoEdit page
   const dateInputStyles = {
     classes: {
@@ -49,28 +45,6 @@ const TaskPriceTermEdit: FC<TaskPriceTermEditProps> = ({
     invalidateStartDateWithFinishDate(startDate, finishDate),
   ]
   const priceErrorMessage = invalidatePrice(balance, price)
-
-  const handleStartDateChange: OnChange = e => {
-    const timeStamp = new Date(e.target.value).getTime()
-    dispatch({
-      type: ActionTypes.updateStartDate,
-      payload: { startDate: timeStamp },
-    })
-  }
-
-  const handleFinishDateChange: OnChange = e => {
-    const timeStamp = new Date(e.target.value).getTime()
-    dispatch({
-      type: ActionTypes.updateFinishDate,
-      payload: { finishDate: timeStamp },
-    })
-  }
-
-  const handlePriceChange: OnChange = e =>
-    dispatch({
-      type: ActionTypes.updatePrice,
-      payload: { price: Number(e.target.value) },
-    })
 
   return (
     <CardContent className={classes.cardContent}>
@@ -218,6 +192,12 @@ const styles: StyleRulesCallback = theme => ({
 
 interface TaskPriceTermEditProps extends WithStyles<typeof styles> {
   balance: number
+  startDate: number
+  handleStartDateChange: any
+  finishDate: number
+  handleFinishDateChange: any
+  price: number
+  handlePriceChange: any
   withTaskContent?: boolean
 }
 

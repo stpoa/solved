@@ -7,21 +7,13 @@ import {
   withStyles,
 } from '@material-ui/core'
 import React, { FunctionComponent } from 'react'
-import { ActionTypes } from '~/stores/CreateTask'
 import LineSeparator from '~generic/LineSeparator'
-import { useCreateTaskStore } from '~stores/CreateTask/connect'
-import { OnChange } from '~typings/react'
 
 const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
   classes,
+  description,
+  onDescriptionUpdate,
 }) => {
-  const [{ description }, dispatch] = useCreateTaskStore()
-  const handleDescriptionChange: OnChange = e =>
-    dispatch({
-      type: ActionTypes.updateDescription,
-      payload: { description: e.target.value },
-    })
-
   return (
     <CardContent className={classes.cardContent}>
       <Typography variant="h3" component="h3">
@@ -37,7 +29,7 @@ const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
           label="Tutaj wpisz lub wklej treść zadania"
           multiline
           value={description}
-          onChange={handleDescriptionChange}
+          onChange={onDescriptionUpdate}
         />
       </form>
     </CardContent>
@@ -62,6 +54,9 @@ const styles: StyleRulesCallback = theme => ({
   },
 })
 
-interface TaskDescriptionEditProps extends WithStyles<typeof styles> {}
+interface TaskDescriptionEditProps extends WithStyles<typeof styles> {
+  description: string
+  onDescriptionUpdate: (e: any) => void
+}
 
 export default withStyles(styles)(TaskDescriptionEdit)

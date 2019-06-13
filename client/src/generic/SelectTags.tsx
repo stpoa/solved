@@ -1,7 +1,12 @@
 import React, { FunctionComponent } from 'react'
 import Tag from '~generic/Tag'
 import TagAdd from '~generic/TagAdd'
-import { TagValue } from '~stores/CreateTask'
+
+export interface TagValue {
+  name: string
+  visible: boolean
+  selected: boolean
+}
 
 const showTagAdd = (tags: TagValue[], tagsQuery?: string) =>
   tags.filter(tag => tag.selected).length < 4 &&

@@ -8,19 +8,15 @@ import {
   withStyles,
 } from '@material-ui/core'
 import React, { FunctionComponent } from 'react'
-import { ActionTypes } from '~/stores/CreateTask'
 import Photos from '~generic/Photos'
-import { useCreateTaskStore } from '~stores/CreateTask/connect'
+import { OnClick } from '~typings/react'
 
-const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
-  const [{ files, step }, dispatch] = useCreateTaskStore()
-
-  const handleFilesUpdate = (newFiles: ExtendedFile[]) =>
-    dispatch({ type: ActionTypes.updateFiles, payload: { files: newFiles } })
-
-  const handleaddPhotosLaterClick = () =>
-    dispatch({ type: ActionTypes.updateStep, payload: { step: step + 1 } })
-
+const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({
+  classes,
+  files,
+  onFilesUpdate,
+  onFilesLater,
+}) => {
   return (
     <CardContent className={classes.cardContent}>
       <Typography variant="h3" component="h3">
@@ -33,12 +29,7 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
         }
       >
         <div className={classes.photosWrapper}>
-          <Photos
-            files={files}
-            filesLength={4}
-            fullWidth
-            onFilesUpdate={handleFilesUpdate}
-          />
+          <Photos filesLength={4} fullWidth {...{ files, onFilesUpdate }} />
         </div>
         {!files.length && (
           <div className={classes.addPhotosLaterContainer}>
@@ -49,10 +40,7 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({ classes }) => {
             >
               LUB
             </Typography>
-            <Paper
-              className={classes.addPhotosLater}
-              onClick={handleaddPhotosLaterClick}
-            >
+            <Paper className={classes.addPhotosLater} onClick={onFilesLater}>
               <Typography
                 color="textPrimary"
                 variant="subtitle1"
@@ -179,7 +167,11 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   },
 })
 
-interface TaskPhotoEditProps extends WithStyles<typeof styles> {}
+interface TaskPhotoEditProps extends WithStyles<typeof styles> {
+  files: ExtendedFile[]
+  onFilesUpdate: (files: ExtendedFile[]) => void
+  onFilesLater: OnClick
+}
 
 export interface ExtendedFile extends File {
   id: string
