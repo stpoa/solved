@@ -8,6 +8,7 @@ const StepList: FC<StepListProps> = ({
   onSubmitClick,
   classes,
   children,
+  submitButtonName,
 }) => {
   const goToPreviousStep = () => {
     updateStep(step - 1)
@@ -31,6 +32,7 @@ const StepList: FC<StepListProps> = ({
       goToPreviousStep,
       goToNextStep,
       submit: onSubmitClick,
+      submitButtonName,
     })
   })
 
@@ -94,6 +96,7 @@ interface StepListProps extends WithStyles<typeof styles> {
   onSubmitClick: () => void
   updateStep: (step: number) => void
   step: number
+  submitButtonName: string
 }
 
 export default withStyles(styles)(StepList)

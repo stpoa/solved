@@ -19,6 +19,7 @@ const Photos: FunctionComponent<PhotosProps> = ({
   filesLength,
   fullWidth,
   onFilesUpdate,
+  photosPlaceholderText = 'Dodaj zdjęcia zadania',
 }) => {
   const [previewPhotoId, updatePreviewPhotoId] = useState('')
 
@@ -57,7 +58,7 @@ const Photos: FunctionComponent<PhotosProps> = ({
         >
           {fullWidth && (
             <p className={classes.browsePhotoParagraph}>
-              Dodaj zdjęcia zadania
+              {photosPlaceholderText}
             </p>
           )}
           <AddPhotoIcon className={classes.photoIcon} />
@@ -209,6 +210,7 @@ interface PhotosProps extends WithStyles<typeof styles> {
   filesLength: number
   fullWidth?: boolean
   onFilesUpdate: (files: ExtendedFile[]) => void
+  photosPlaceholderText?: string
 }
 
 export interface ExtendedFile extends File {

@@ -19,6 +19,7 @@ const Step: FunctionComponent<StepProps> = props => {
     goToNextStep,
     submit,
     isValid,
+    submitButtonName,
   } = props
 
   if (isActive === false) return null
@@ -61,7 +62,7 @@ const Step: FunctionComponent<StepProps> = props => {
               onClick={submit}
               disabled={!isValid}
             >
-              Utwórz
+              {submitButtonName}
             </Button>
           )}
         </div>
@@ -119,6 +120,7 @@ interface StepProps extends WithStyles<typeof styles> {
   goToPreviousStep?: () => void
   goToNextStep?: () => void
   submit?: () => void
+  submitButtonName?: string
 }
 
 export interface StepItem {

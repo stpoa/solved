@@ -106,7 +106,10 @@ const CreateTask: FC<CreateTaskProps> = ({ classes }) => {
     <>
       <PageHeader title="Nowe zadanie" />
       <div className={classes.container}>
-        <StepList {...{ step, onSubmitClick, updateStep }}>
+        <StepList
+          {...{ step, onSubmitClick, updateStep }}
+          submitButtonName="Utwórz"
+        >
           <Step isValid={validateTagsPage(tags)}>
             <TaskTagsEdit
               {...{

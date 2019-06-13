@@ -5,6 +5,7 @@ import {
 } from '@material-ui/icons'
 import { WithStyles } from '@material-ui/styles'
 import React, { useState } from 'react'
+import { RouteComponentProps, withRouter } from 'react-router'
 import Button from '~generic/Buttons/Button'
 import ButtonContainer from '~generic/Buttons/ButtonsContainer'
 import InfoDialog from '~generic/InfoDialog'
@@ -12,9 +13,12 @@ import { Task as TaskData } from '~interfaces'
 import { getTaskStatus, TaskStatus } from '../utils'
 import TaskBase from './TaskBase'
 
-const Task = ({ task, classes }: TaskProps) => {
+const Task = ({ task, classes, history }: TaskProps) => {
   const [isModalOpened, setModalOpened] = useState(false)
-  const handleModalClose = () => setModalOpened(false)
+  const handleModalClose = () => {
+    history.push('/task/' + task.id + '/add-solution')
+    setModalOpened(false)
+  }
   const handleOpenClick = () => setModalOpened(true)
 
   const title = 'Dodaj rozwiązania!'
@@ -63,8 +67,8 @@ const styles: StyleRulesCallback = _ => ({
   },
 })
 
-interface TaskProps extends WithStyles<typeof styles> {
+interface TaskProps extends WithStyles<typeof styles>, RouteComponentProps<{}> {
   task: TaskData
 }
 
-export default withStyles(styles)(Task)
+export default withStyles(styles)(withRouter(Task))
