@@ -9,7 +9,7 @@ export const useQuery = <T>(_query: string, mockedData?: T) => {
     setTimeout(() => {
       setData(mockedData)
       setLoading(false)
-    }, 100)
+    }, 1000)
   }, [])
 
   return { data, error: error as Error | null, loading }

@@ -4,6 +4,7 @@ import { withAuth, WithAuth } from '~auth'
 import { useQuery } from '~data/hooks'
 import tasksData from '~data/tasks'
 import { NavigationBar, PageHeader } from '~generic'
+import LoadingOverlay from '~generic/LoadingOverlay'
 import Task from '~generic/Task/components/Task'
 import { Task as TaskData } from '~interfaces'
 
@@ -20,11 +21,11 @@ const TaskPage = ({ match, auth: { user } }: TaskPageProps) => {
       return <div>Error</div>
     }
 
-    if (loadingTask || !task) {
-      return <div>Loading</div> // TODO: Create loading component
-    }
-
-    return <Task {...{ task, user }} />
+    return loadingTask || !task ? (
+      <LoadingOverlay />
+    ) : (
+      <Task {...{ task, user }} />
+    )
   }
 
   return (
