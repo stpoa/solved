@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core'
 import React, { FunctionComponent } from 'react'
 import LineSeparator from '~generic/LineSeparator'
+import { OnChange } from '~typings/react'
 
 const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
   classes,
@@ -56,7 +57,7 @@ const styles: StyleRulesCallback = theme => ({
 
 interface TaskDescriptionEditProps extends WithStyles<typeof styles> {
   description: string
-  onDescriptionUpdate: (e: any) => void
+  onDescriptionUpdate: OnChange
 }
 
 export default withStyles(styles)(TaskDescriptionEdit)

@@ -9,6 +9,7 @@ import {
 import { AccountBalanceWallet, Event, EventAvailable } from '@material-ui/icons'
 import { format } from 'date-fns'
 import React, { FC } from 'react'
+import { OnChange } from '~typings/react'
 import {
   invalidateDateWithActualTime,
   invalidatePrice,
@@ -193,11 +194,11 @@ const styles: StyleRulesCallback = theme => ({
 interface TaskPriceTermEditProps extends WithStyles<typeof styles> {
   balance: number
   startDate: number
-  handleStartDateChange: any
+  handleStartDateChange: OnChange
   finishDate: number
-  handleFinishDateChange: any
+  handleFinishDateChange: OnChange
   price: number
-  handlePriceChange: any
+  handlePriceChange: OnChange
   withTaskContent?: boolean
 }
 
