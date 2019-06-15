@@ -10,7 +10,7 @@ import React, { FunctionComponent } from 'react'
 import LineSeparator from '~generic/LineSeparator'
 import { OnChange } from '~typings/react'
 
-const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
+const SolutionDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
   classes,
   description,
   onDescriptionUpdate,
@@ -27,7 +27,7 @@ const TaskDescriptionEdit: FunctionComponent<TaskDescriptionEditProps> = ({
           fullWidth
           id="multiline-static"
           margin="normal"
-          label="Tutaj wpisz lub wklej treść zadania"
+          label="Wskazówki do treści rozwiązania"
           multiline
           value={description}
           onChange={onDescriptionUpdate}
@@ -60,4 +60,4 @@ interface TaskDescriptionEditProps extends WithStyles<typeof styles> {
   onDescriptionUpdate: OnChange
 }
 
-export default withStyles(styles)(TaskDescriptionEdit)
+export default withStyles(styles)(SolutionDescriptionEdit)

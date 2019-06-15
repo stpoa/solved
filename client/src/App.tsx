@@ -150,6 +150,10 @@ class App extends Component<AppProps, {}> {
                     component={NotImplmented}
                   />
                   <Route exact path="/" component={Pages.Home} />
+                  <Route
+                    path="/task/:id/add-solution"
+                    component={Pages.AddSolution}
+                  />
                   <Route path="/task/:id" component={Pages.Task} />
                   <Route path="*" render={redirectToHome} />
                 </Switch>

@@ -1,3 +1,4 @@
+import AddSolution from './AddSolution'
 import CreateTask from './CreateTask'
 import Home from './Home/Home'
 import Prelogin from './Prelogin'
@@ -22,4 +23,5 @@ export {
   SignIn,
   Tasks,
   Task,
+  AddSolution,
 }

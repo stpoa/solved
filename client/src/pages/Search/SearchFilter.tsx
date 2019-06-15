@@ -14,8 +14,8 @@ import React, {
 } from 'react'
 import { tags, tasks } from '~data'
 import { NavigationBar, SelectTags, TaskList } from '~generic'
+import { TagValue } from '~generic/SelectTags'
 import { SortingOption } from '~generic/TaskList/components/TaskList'
-import { TagValue } from '~stores/CreateTask'
 import { extendTags } from '~utils/tags'
 
 const fetchTasks = (
@@ -45,8 +45,8 @@ const SearchFilter: FunctionComponent<SearchFilterProps> = ({ classes }) => {
   }
 
   const handleTagChange = (name: string) => () => {
-    const clickedTag = savedTags.find(t => t.name === name)!
-    if (clickedTag.selected) {
+    const clickedTag = savedTags.find(t => t.name === name)
+    if (clickedTag && clickedTag.selected) {
       const newTags = savedTags.map(tag =>
         tag.name === name ? { ...tag, selected: false } : { ...tag },
       )

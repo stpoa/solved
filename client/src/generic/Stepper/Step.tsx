@@ -18,7 +18,8 @@ const Step: FunctionComponent<StepProps> = props => {
     goToPreviousStep,
     goToNextStep,
     submit,
-    isPageValid,
+    isValid,
+    submitButtonName,
   } = props
 
   if (isActive === false) return null
@@ -49,7 +50,7 @@ const Step: FunctionComponent<StepProps> = props => {
               className={props.classes.button}
               variant="extendedFab"
               onClick={goToNextStep}
-              disabled={!isPageValid}
+              disabled={!isValid}
             >
               Dalej
             </Button>
@@ -59,9 +60,9 @@ const Step: FunctionComponent<StepProps> = props => {
               className={props.classes.button}
               variant="extendedFab"
               onClick={submit}
-              disabled={!isPageValid}
+              disabled={!isValid}
             >
-              Utwórz
+              {submitButtonName}
             </Button>
           )}
         </div>
@@ -109,15 +110,17 @@ const styles: StyleRulesCallback = theme => ({
 })
 
 interface StepProps extends WithStyles<typeof styles> {
+  isValid: boolean
   isActive?: boolean
-  isPageValid?: boolean
+  isPageVa?: boolean
   displayPrevious?: boolean
   displayNext?: boolean
   displaySubmit?: boolean
-  component?: React.ComponentClass
+  component?: React.ComponentClass<any>
   goToPreviousStep?: () => void
   goToNextStep?: () => void
   submit?: () => void
+  submitButtonName?: string
 }
 
 export interface StepItem {

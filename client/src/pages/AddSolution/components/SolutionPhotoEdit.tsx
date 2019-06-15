@@ -1,6 +1,5 @@
 import {
   CardContent,
-  Paper,
   StyleRulesCallback,
   Theme,
   Typography,
@@ -15,7 +14,6 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({
   classes,
   files,
   onFilesUpdate,
-  onFilesLater,
 }) => {
   return (
     <CardContent className={classes.cardContent}>
@@ -29,35 +27,13 @@ const TaskPhotoEdit: FunctionComponent<TaskPhotoEditProps> = ({
         }
       >
         <div className={classes.photosWrapper}>
-          <Photos filesLength={4} fullWidth {...{ files, onFilesUpdate }} />
+          <Photos
+            photosPlaceholderText="Dodaj zdjęcie rozwiązania"
+            filesLength={1}
+            fullWidth
+            {...{ files, onFilesUpdate }}
+          />
         </div>
-        {!files.length && (
-          <div className={classes.addPhotosLaterContainer}>
-            <Typography
-              color="textPrimary"
-              variant="subtitle2"
-              className={classes.orTitle}
-            >
-              LUB
-            </Typography>
-            <Paper className={classes.addPhotosLater} onClick={onFilesLater}>
-              <Typography
-                color="textPrimary"
-                variant="subtitle1"
-                className={classes.addPhotosLaterTitle}
-              >
-                Dodaj zdjęcia w innym terminie
-              </Typography>
-              <Typography
-                color="textSecondary"
-                variant="subtitle2"
-                className={classes.addPhotosLaterSubtitle}
-              >
-                Później zdeklarujesz termin dodania
-              </Typography>
-            </Paper>
-          </div>
-        )}
       </div>
     </CardContent>
   )
@@ -130,25 +106,6 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   },
   browsePhotoParagraph: {
     margin: '0 0 2rem',
-  },
-  addPhotosLaterContainer: {
-    display: 'grid',
-    gridTemplateRows: 'max-content',
-  },
-  addPhotosLater: {
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    marginBottom: '2rem',
-  },
-  addPhotosLaterTitle: {
-    padding: '1rem',
-  },
-  addPhotosLaterSubtitle: {
-    padding: '1rem',
-  },
-  orTitle: {
-    margin: '1rem',
   },
   fileInput: {
     display: 'none',
