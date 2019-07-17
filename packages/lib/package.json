@@ -13,7 +13,11 @@
     "ramda": "^0.26.1"
   },
   "devDependencies": {
-    "@types/ramda": "^0.26.16"
+    "@types/jest": "^24.0.15",
+    "@types/ramda": "^0.26.16",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.3"
   },
   "description": ""
 }

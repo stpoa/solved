@@ -1,5 +1,4 @@
-import { isNumber } from '@stpoa/lib/math'
-import { sum } from './math'
+import { sum, isNumber } from './math'
 
 describe('sum', () => {
   test('sums 0 arguments', () => {
