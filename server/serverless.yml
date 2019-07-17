@@ -14,7 +14,7 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: src/gql/handler.handler
     events:
       - http:
           method: get

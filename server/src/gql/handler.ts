@@ -14,4 +14,4 @@ const resolvers = {
 
 const server = new ApolloServer({ typeDefs, resolvers })
 
-export const hello = server.createHandler()
+export const handler = server.createHandler()
