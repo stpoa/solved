@@ -4,10 +4,13 @@ branches:
 language: node_js
 node_js: node
 before_install:
-  - cd client
   - npm install -g npm@latest
-install: npm install
-test: npm test
+install:
+  - npm install
+  - npm run bootstrap
+  - cd packages/client
+test:
+  - npm test
 after_success:
   - npm run build
   - ./deploy.sh
