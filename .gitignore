@@ -1,6 +1,6 @@
 **/node_modules
-client/dist
-client/.cache
-client/lib
+packages/client/dist
+packages/client/.cache
+packates/client/lib
 .idea
 .DS_Store
