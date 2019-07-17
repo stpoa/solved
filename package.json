@@ -1,0 +1,27 @@
+{
+  "name": "notowork",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "npm run bootstrap",
+    "bootstrap": "lerna bootstrap"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stpoa/notowork.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stpoa/notowork/issues"
+  },
+  "homepage": "https://github.com/stpoa/notowork#readme",
+  "devDependencies": {
+    "lerna": "^3.15.0"
+  }
+}

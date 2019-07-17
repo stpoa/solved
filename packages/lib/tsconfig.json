@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "newLine": "LF",
+    "outDir": "./lib/",
+    "target": "es5",
+    "sourceMap": true,
+    "declaration": true,
+    "jsx": "react",
+    "lib": [
+      "es2015.promise",
+      "es2017",
+      "dom"
+    ],
+    "paths": {
+      "*": ["types/*"],
+      "~*": [
+        "./*"
+      ]
+    },
+    "strict": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+  },
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    ".git",
+    "node_modules"
+  ]
+}
