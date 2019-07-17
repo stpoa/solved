@@ -4,8 +4,8 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core'
-import { emailValidator } from '@stpoa/lib/validators'
-import { Status } from '@stpoa/models/interfaces'
+import { emailValidator } from '@notowork/lib/validators'
+import { Status } from '@notowork/models/interfaces'
 import React, { ChangeEventHandler, MouseEventHandler } from 'react'
 import { Button, Container, Email, FieldContainer } from '~generic/Sign'
 

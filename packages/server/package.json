@@ -1,5 +1,5 @@
 {
-  "name": "@stpoa/server",
+  "name": "@notowork/server",
   "version": "1.0.0",
   "description": "Serverless webpack example using Typescript",
   "main": "handler.js",
@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@stpoa/models": "*",
-    "@stpoa/lib": "*",
+    "@notowork/models": "*",
+    "@notowork/lib": "*",
     "apollo-server-lambda": "^2.5.0-rc.0",
     "graphql": "^14.4.1",
     "source-map-support": "^0.5.10"

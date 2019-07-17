@@ -1,6 +1,6 @@
 import { StyleRulesCallback, Typography, withStyles } from '@material-ui/core'
 import { WithStyles } from '@material-ui/styles'
-import { SolutionEntry } from '@stpoa/models/interfaces'
+import { SolutionEntry } from '@notowork/models/interfaces'
 import { distanceInWordsToNow } from 'date-fns'
 import * as locale from 'date-fns/locale/pl'
 import React from 'react'

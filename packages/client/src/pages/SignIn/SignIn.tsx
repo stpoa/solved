@@ -4,9 +4,9 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core'
-import { logError } from '@stpoa/lib/log'
-import { emailValidator, passwordLengthValidator } from '@stpoa/lib/validators'
-import { Status } from '@stpoa/models/interfaces'
+import { logError } from '@notowork/lib/log'
+import { emailValidator, passwordLengthValidator } from '@notowork/lib/validators'
+import { Status } from '@notowork/models/interfaces'
 import React, {
   ChangeEvent,
   ChangeEventHandler,

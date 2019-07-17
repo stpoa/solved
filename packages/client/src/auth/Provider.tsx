@@ -1,4 +1,4 @@
-import { Status } from '@stpoa/models/interfaces'
+import { Status } from '@notowork/models/interfaces'
 import React, { Component } from 'react'
 import context, { defaultValue, SignIn, SignOut, Value } from './context'
 import { signIn } from './service'

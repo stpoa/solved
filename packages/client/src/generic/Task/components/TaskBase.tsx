@@ -9,7 +9,7 @@ import {
   MonetizationOn as MoneyIcon,
 } from '@material-ui/icons'
 import { WithStyles } from '@material-ui/styles'
-import { Task as TaskData } from '@stpoa/models/interfaces'
+import { Task as TaskData } from '@notowork/models/interfaces'
 import { distanceInWordsToNow } from 'date-fns'
 import * as locale from 'date-fns/locale/pl'
 import React, { FC } from 'react'

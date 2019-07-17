@@ -5,7 +5,7 @@ import {
   RateReview as ReviewIcon,
 } from '@material-ui/icons'
 import { WithStyles } from '@material-ui/styles'
-import { Task as TaskData } from '@stpoa/models/interfaces'
+import { Task as TaskData } from '@notowork/models/interfaces'
 import React from 'react'
 import Button from '~generic/Buttons/Button'
 import ButtonContainer from '~generic/Buttons/ButtonsContainer'

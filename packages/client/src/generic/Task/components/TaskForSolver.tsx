@@ -3,7 +3,7 @@ import {
   DoneAll as ConfirmIcon,
   Edit as EditIcon,
 } from '@material-ui/icons'
-import { Task as TaskData } from '@stpoa/models/interfaces'
+import { Task as TaskData } from '@notowork/models/interfaces'
 import React, { FC } from 'react'
 import Button from '~generic/Buttons/Button'
 import ButtonsContainer from '~generic/Buttons/ButtonsContainer'

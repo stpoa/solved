@@ -5,7 +5,7 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core/styles'
-import { Category, CategoryList } from '@stpoa/models/interfaces'
+import { Category, CategoryList } from '@notowork/models/interfaces'
 import React, { FunctionComponent } from 'react'
 
 const SelectCategory: FunctionComponent<SelectCategoryProps> = ({

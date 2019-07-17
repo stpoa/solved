@@ -12,7 +12,7 @@ import {
   withStyles,
 } from '@material-ui/core/styles'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import { taskCategories } from '@stpoa/models/data'
+import { taskCategories } from '@notowork/models/data'
 import React, { ChangeEvent, Component, FunctionComponent } from 'react'
 import { NavigationBar, TaskList } from '~generic'
 import { TaskListTask } from '~generic/TaskList/components/TaskListElement'

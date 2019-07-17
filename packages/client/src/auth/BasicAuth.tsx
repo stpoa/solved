@@ -1,7 +1,7 @@
-import { calculateHash } from '@stpoa/lib/crypto'
-import { isProduction } from '@stpoa/lib/env'
-import { areArraysEqual } from '@stpoa/lib/fp'
-import { logError } from '@stpoa/lib/log'
+import { calculateHash } from '@notowork/lib/crypto'
+import { isProduction } from '@notowork/lib/env'
+import { areArraysEqual } from '@notowork/lib/fp'
+import { logError } from '@notowork/lib/log'
 import React, { FC, useState } from 'react'
 import { OnChange } from '~typings/react'
 

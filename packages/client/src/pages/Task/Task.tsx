@@ -1,5 +1,5 @@
-import tasksData from '@stpoa/models/data/tasks'
-import { Task as TaskData } from '@stpoa/models/interfaces'
+import tasksData from '@notowork/models/data/tasks'
+import { Task as TaskData } from '@notowork/models/interfaces'
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
 import { withAuth, WithAuth } from '~auth'

@@ -1,4 +1,4 @@
-import { Task, User } from '@stpoa/models/interfaces'
+import { Task, User } from '@notowork/models/interfaces'
 import { isPast } from 'date-fns'
 
 export enum UserType {

@@ -4,7 +4,7 @@ import {
   MoneyOff as MoneyOffIcon,
 } from '@material-ui/icons'
 import { WithStyles } from '@material-ui/styles'
-import { Task as TaskData } from '@stpoa/models/interfaces'
+import { Task as TaskData } from '@notowork/models/interfaces'
 import React, { useState } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router'
 import Button from '~generic/Buttons/Button'

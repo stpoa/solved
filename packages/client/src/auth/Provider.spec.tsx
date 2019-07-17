@@ -1,5 +1,5 @@
-import { users } from '@stpoa/models/data'
-import { Status } from '@stpoa/models/interfaces'
+import { users } from '@notowork/models/data'
+import { Status } from '@notowork/models/interfaces'
 import { mount } from 'enzyme'
 import React, { FunctionComponent } from 'react'
 import context from './context'

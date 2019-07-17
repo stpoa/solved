@@ -21,7 +21,7 @@ import {
   ThumbDownOutlined,
   ThumbUpOutlined,
 } from '@material-ui/icons'
-import { termsAndConditionsText, users } from '@stpoa/models/data'
+import { termsAndConditionsText, users } from '@notowork/models/data'
 import React, { FunctionComponent, useState } from 'react'
 import { WithAuth, withAuth } from '~auth'
 import {

@@ -3,8 +3,8 @@ import {
   emailValidator,
   passwordValidator,
   requiredValidator,
-} from '@stpoa/lib/validators'
-import { Status } from '@stpoa/models/interfaces'
+} from '@notowork/lib/validators'
+import { Status } from '@notowork/models/interfaces'
 import React, {
   ChangeEvent,
   ChangeEventHandler,

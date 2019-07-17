@@ -1,5 +1,5 @@
-import { users } from '@stpoa/models/data'
-import { User } from '@stpoa/models/interfaces'
+import { users } from '@notowork/models/data'
+import { User } from '@notowork/models/interfaces'
 
 export const generateUserNick = (email: string) =>
   email

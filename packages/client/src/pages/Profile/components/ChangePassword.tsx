@@ -6,7 +6,7 @@ import {
   WithStyles,
 } from '@material-ui/core'
 import { withStyles } from '@material-ui/styles'
-import { passwordValidator } from '@stpoa/lib/validators'
+import { passwordValidator } from '@notowork/lib/validators'
 import React, { ChangeEvent, FC, useState } from 'react'
 import { ScreenModal } from '~generic'
 import Button from '~generic/Sign/Button'

@@ -1,4 +1,4 @@
-import { Status, User } from '@stpoa/models/interfaces'
+import { Status, User } from '@notowork/models/interfaces'
 import { Context, createContext } from 'react'
 
 export const defaultValue: Value = {

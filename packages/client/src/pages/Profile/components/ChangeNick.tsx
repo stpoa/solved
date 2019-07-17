@@ -11,7 +11,7 @@ import {
   makeLengthLimit,
   makeNoFirstDigit,
   nickValidator,
-} from '@stpoa/lib/validators'
+} from '@notowork/lib/validators'
 import { pipe } from 'ramda'
 import React, { FC, useState } from 'react'
 import { ScreenModal } from '~generic'

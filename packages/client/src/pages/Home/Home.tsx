@@ -1,4 +1,4 @@
-import { tasks } from '@stpoa/models/data'
+import { tasks } from '@notowork/models/data'
 import React, { FC } from 'react'
 import { NavigationBar, TaskList } from '~generic'
 

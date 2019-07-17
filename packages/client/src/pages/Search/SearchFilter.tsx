@@ -6,7 +6,7 @@ import {
   withStyles,
 } from '@material-ui/core/styles'
 import { Close, Search } from '@material-ui/icons'
-import { tags, tasks } from '@stpoa/models/data'
+import { tags, tasks } from '@notowork/models/data'
 import React, {
   ChangeEvent,
   FunctionComponent,

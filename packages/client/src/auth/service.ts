@@ -1,7 +1,7 @@
-import { isTest } from '@stpoa/lib/env'
-import { wait } from '@stpoa/lib/time'
-import { users } from '@stpoa/models/data'
-import { User } from '@stpoa/models/interfaces'
+import { isTest } from '@notowork/lib/env'
+import { wait } from '@notowork/lib/time'
+import { users } from '@notowork/models/data'
+import { User } from '@notowork/models/interfaces'
 
 const delay = isTest() ? 0 : 1
 

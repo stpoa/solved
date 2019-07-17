@@ -1,5 +1,5 @@
-import { limitWords } from '@stpoa/lib/text'
-import { addTime, subTime } from '@stpoa/lib/time'
+import { limitWords } from '@notowork/lib/text'
+import { addTime, subTime } from '@notowork/lib/time'
 import { MockBuilder } from './types'
 import { Task } from '../interfaces'
 

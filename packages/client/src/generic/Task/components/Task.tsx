@@ -1,4 +1,4 @@
-import { Task as TaskData, User as UserData } from '@stpoa/models/interfaces'
+import { Task as TaskData, User as UserData } from '@notowork/models/interfaces'
 import React from 'react'
 import { getUserType, UserType } from '../utils'
 import TaskForAuthor from './TaskForAuthor'

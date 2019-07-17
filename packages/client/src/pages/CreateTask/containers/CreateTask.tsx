@@ -1,6 +1,6 @@
 import { StyleRulesCallback } from '@material-ui/core'
 import { WithStyles, withStyles } from '@material-ui/core/styles'
-import { tags as tagNames } from '@stpoa/models/data'
+import { tags as tagNames } from '@notowork/models/data'
 import React, { FC, useState } from 'react'
 import { PageHeader } from '~generic'
 import { ExtendedFile } from '~generic/Photos'
