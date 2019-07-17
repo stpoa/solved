@@ -4,10 +4,10 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core'
+import { emailValidator } from 'lib/validators'
+import { Status } from 'models/interfaces'
 import React, { ChangeEventHandler, MouseEventHandler } from 'react'
 import { Button, Container, Email, FieldContainer } from '~generic/Sign'
-import { Status } from '~interfaces'
-import { emailValidator } from '~lib/validators'
 
 class RemindPassword extends React.Component<
   RemindPasswordProps,

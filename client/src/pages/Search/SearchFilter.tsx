@@ -6,13 +6,13 @@ import {
   withStyles,
 } from '@material-ui/core/styles'
 import { Close, Search } from '@material-ui/icons'
+import { tags, tasks } from 'models/data'
 import React, {
   ChangeEvent,
   FunctionComponent,
   MouseEventHandler,
   useState,
 } from 'react'
-import { tags, tasks } from '~data'
 import { NavigationBar, SelectTags, TaskList } from '~generic'
 import { TagValue } from '~generic/SelectTags'
 import { SortingOption } from '~generic/TaskList/components/TaskList'

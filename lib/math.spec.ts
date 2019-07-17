@@ -1,4 +1,4 @@
-import { isNumber } from '~lib/math'
+import { isNumber } from 'lib/math'
 import { sum } from './math'
 
 describe('sum', () => {

@@ -1,4 +1,4 @@
-import { User } from '~interfaces'
+import { User } from '../../models/interfaces'
 
 const users: User[] = [
   {

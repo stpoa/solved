@@ -1,4 +1,10 @@
 import { Typography, withStyles, WithStyles } from '@material-ui/core'
+import {
+  emailValidator,
+  passwordValidator,
+  requiredValidator,
+} from 'lib/validators'
+import { Status } from 'models/interfaces'
 import React, {
   ChangeEvent,
   ChangeEventHandler,
@@ -15,12 +21,6 @@ import {
   Link,
   Password,
 } from '~generic/Sign'
-import { Status } from '~interfaces'
-import {
-  emailValidator,
-  passwordValidator,
-  requiredValidator,
-} from '~lib/validators'
 import Switch from './Switch'
 
 class Register extends Component<RegisterProps, RegisterState> {

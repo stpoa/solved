@@ -6,17 +6,17 @@ import {
   WithStyles,
 } from '@material-ui/core'
 import { withStyles } from '@material-ui/styles'
-import { pipe } from 'ramda'
-import React, { FC, useState } from 'react'
-import { ScreenModal } from '~generic'
-import { FieldContainer } from '~generic/Sign'
-import Button from '~generic/Sign/Button'
 import {
   makeAlphanumeric,
   makeLengthLimit,
   makeNoFirstDigit,
   nickValidator,
-} from '~lib/validators'
+} from 'lib/validators'
+import { pipe } from 'ramda'
+import React, { FC, useState } from 'react'
+import { ScreenModal } from '~generic'
+import { FieldContainer } from '~generic/Sign'
+import Button from '~generic/Sign/Button'
 
 const ChangeNick: FC<ChangeNickProps> = ({ open, handleClose, classes }) => {
   const [nickText, setNickText] = useState('')

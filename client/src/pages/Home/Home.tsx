@@ -1,5 +1,5 @@
+import { tasks } from 'models/data'
 import React, { FC } from 'react'
-import { tasks } from '~data'
 import { NavigationBar, TaskList } from '~generic'
 
 const Home: FC<HomeProps> = () => {

@@ -1,4 +1,4 @@
-import { CategoryList } from '~interfaces'
+import { CategoryList } from "../interfaces";
 
 const categories: CategoryList = [
   {

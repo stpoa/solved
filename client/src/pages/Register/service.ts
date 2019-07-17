@@ -1,5 +1,5 @@
-import { users } from '~data'
-import { User } from '~interfaces'
+import { users } from 'models/data'
+import { User } from 'models/interfaces'
 
 export const generateUserNick = (email: string) =>
   email

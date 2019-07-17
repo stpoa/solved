@@ -1,5 +1,5 @@
+import { Status } from 'models/interfaces'
 import React, { Component } from 'react'
-import { Status } from '~interfaces'
 import context, { defaultValue, SignIn, SignOut, Value } from './context'
 import { signIn } from './service'
 

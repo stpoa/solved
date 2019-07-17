@@ -1,8 +1,8 @@
+import { calculateHash } from 'lib/crypto'
+import { isProduction } from 'lib/env'
+import { areArraysEqual } from 'lib/fp'
+import { logError } from 'lib/log'
 import React, { FC, useState } from 'react'
-import { calculateHash } from '~lib/crypto'
-import { isProduction } from '~lib/env'
-import { areArraysEqual } from '~lib/fp'
-import { logError } from '~lib/log'
 import { OnChange } from '~typings/react'
 
 const BasicAuth: FC = ({ children }) => {

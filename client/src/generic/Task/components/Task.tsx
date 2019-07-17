@@ -1,5 +1,5 @@
+import { Task as TaskData, User as UserData } from 'models/interfaces'
 import React from 'react'
-import { Task as TaskData, User as UserData } from '~interfaces'
 import { getUserType, UserType } from '../utils'
 import TaskForAuthor from './TaskForAuthor'
 import TaskForGuest from './TaskForGuest'

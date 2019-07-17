@@ -5,8 +5,8 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core/styles'
+import { Category, CategoryList } from 'models/interfaces'
 import React, { FunctionComponent } from 'react'
-import { Category, CategoryList } from '~interfaces'
 
 const SelectCategory: FunctionComponent<SelectCategoryProps> = ({
   categories,

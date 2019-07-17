@@ -1,7 +1,7 @@
 import { StyleRulesCallback } from '@material-ui/core'
 import { WithStyles, withStyles } from '@material-ui/core/styles'
+import { tags as tagNames } from 'models/data'
 import React, { FC, useState } from 'react'
-import { tags as tagNames } from '~data'
 import { PageHeader } from '~generic'
 import { ExtendedFile } from '~generic/Photos'
 import Step from '~generic/Stepper/Step'

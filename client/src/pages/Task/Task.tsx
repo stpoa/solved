@@ -1,12 +1,12 @@
+import tasksData from 'models/data/tasks'
+import { Task as TaskData } from 'models/interfaces'
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
 import { withAuth, WithAuth } from '~auth'
-import { useQuery } from '~data/hooks'
-import tasksData from '~data/tasks'
 import { NavigationBar, PageHeader } from '~generic'
 import LoadingOverlay from '~generic/LoadingOverlay'
 import Task from '~generic/Task/components/Task'
-import { Task as TaskData } from '~interfaces'
+import { useQuery } from '~hooks'
 
 const TaskPage = ({ match, auth: { user } }: TaskPageProps) => {
   const taskId = match.params.id

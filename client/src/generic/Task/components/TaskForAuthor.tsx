@@ -5,10 +5,10 @@ import {
   RateReview as ReviewIcon,
 } from '@material-ui/icons'
 import { WithStyles } from '@material-ui/styles'
+import { Task as TaskData } from 'models/interfaces'
 import React from 'react'
 import Button from '~generic/Buttons/Button'
 import ButtonContainer from '~generic/Buttons/ButtonsContainer'
-import { Task as TaskData } from '~interfaces'
 import { getTaskStatus, TaskStatus } from '../utils'
 import Solution from './Solution'
 import TaskBase from './TaskBase'

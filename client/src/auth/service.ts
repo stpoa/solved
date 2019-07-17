@@ -1,7 +1,7 @@
-import { users } from '~data'
-import { User } from '~interfaces'
-import { isTest } from '~lib/env'
-import { wait } from '~lib/time'
+import { isTest } from 'lib/env'
+import { wait } from 'lib/time'
+import { users } from 'models/data'
+import { User } from 'models/interfaces'
 
 const delay = isTest() ? 0 : 1
 

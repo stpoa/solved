@@ -1,7 +1,7 @@
-import { Task } from '~interfaces'
-import { limitWords } from '~lib/text'
-import { addTime, subTime } from '~lib/time'
+import { limitWords } from 'lib/text'
+import { addTime, subTime } from 'lib/time'
 import { MockBuilder } from './types'
+import { Task } from '../interfaces'
 
 const now = Date.now()
 

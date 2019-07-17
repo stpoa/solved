@@ -6,10 +6,10 @@ import {
   WithStyles,
 } from '@material-ui/core'
 import { withStyles } from '@material-ui/styles'
+import { passwordValidator } from 'lib/validators'
 import React, { ChangeEvent, FC, useState } from 'react'
 import { ScreenModal } from '~generic'
 import Button from '~generic/Sign/Button'
-import { passwordValidator } from '~lib/validators'
 
 const ChangePassword: FC<ChangePasswordProps> = ({
   open,

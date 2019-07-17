@@ -1,7 +1,7 @@
 import { mount } from 'enzyme'
+import { users } from 'models/data'
+import { Status } from 'models/interfaces'
 import React, { FunctionComponent } from 'react'
-import { users } from '~data'
-import { Status } from '~interfaces'
 import context from './context'
 import Provider from './Provider'
 

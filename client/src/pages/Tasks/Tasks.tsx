@@ -12,8 +12,8 @@ import {
   withStyles,
 } from '@material-ui/core/styles'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { taskCategories } from 'models/data'
 import React, { ChangeEvent, Component, FunctionComponent } from 'react'
-import { taskCategories } from '~data'
 import { NavigationBar, TaskList } from '~generic'
 import { TaskListTask } from '~generic/TaskList/components/TaskListElement'
 import { pageContentNotScrollableWithNavigationBar } from '~pages/styles'

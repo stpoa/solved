@@ -4,6 +4,9 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core'
+import { logError } from 'lib/log'
+import { emailValidator, passwordLengthValidator } from 'lib/validators'
+import { Status } from 'models/interfaces'
 import React, {
   ChangeEvent,
   ChangeEventHandler,
@@ -21,9 +24,6 @@ import {
   Link,
   Password,
 } from '~generic/Sign'
-import { Status } from '~interfaces'
-import { logError } from '~lib/log';
-import { emailValidator, passwordLengthValidator } from '~lib/validators'
 import Checkbox from './components/Checkbox'
 import SnackbarError from './components/SnackbarError'
 

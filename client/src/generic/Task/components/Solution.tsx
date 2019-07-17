@@ -2,8 +2,8 @@ import { StyleRulesCallback, Typography, withStyles } from '@material-ui/core'
 import { WithStyles } from '@material-ui/styles'
 import { distanceInWordsToNow } from 'date-fns'
 import * as locale from 'date-fns/locale/pl'
+import { SolutionEntry } from 'models/interfaces'
 import React from 'react'
-import { SolutionEntry } from '~interfaces'
 
 const Solution = ({ solution, classes }: SolutionProps) => {
   return (

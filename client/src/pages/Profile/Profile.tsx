@@ -21,9 +21,9 @@ import {
   ThumbDownOutlined,
   ThumbUpOutlined,
 } from '@material-ui/icons'
+import { termsAndConditionsText, users } from 'models/data'
 import React, { FunctionComponent, useState } from 'react'
 import { WithAuth, withAuth } from '~auth'
-import { termsAndConditionsText, users } from '~data'
 import {
   ConfirmationDialog,
   NavigationBar,

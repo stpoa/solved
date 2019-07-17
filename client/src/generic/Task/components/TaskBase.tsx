@@ -11,11 +11,11 @@ import {
 import { WithStyles } from '@material-ui/styles'
 import { distanceInWordsToNow } from 'date-fns'
 import * as locale from 'date-fns/locale/pl'
+import { Task as TaskData } from 'models/interfaces'
 import React, { FC } from 'react'
 import LineSeparator from '~generic/LineSeparator'
 import PhotoList from '~generic/PhotoList'
 import TagList from '~generic/TaskList/components/TagList'
-import { Task as TaskData } from '~interfaces'
 
 const TaskBase: FC<TaskBaseProps> = ({ classes, task, children }) => {
   return (

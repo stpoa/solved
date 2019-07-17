@@ -1,5 +1,5 @@
 import { isPast } from 'date-fns'
-import { Task, User } from '~interfaces'
+import { Task, User } from 'models/interfaces'
 
 export enum UserType {
   Guest = 'guest',
