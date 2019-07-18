@@ -1,14 +1,22 @@
 import { ApolloServer, gql } from 'apollo-server-lambda'
+import { tasks } from '@notowork/models'
 
 const typeDefs = gql`
+  type Task {
+    id: String
+    author: String
+    dateExpired: Number
+    tags: [String]
+    description: [String]
+  }
   type Query {
-    hello: String
+    tasks: [Task]
   }
 `
 
 const resolvers = {
   Query: {
-    hello: () => 'Hello world!',
+    tasks: () => tasks,
   },
 }
 

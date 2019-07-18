@@ -4,3 +4,5 @@ packages/client/.cache
 packates/client/lib
 .idea
 .DS_Store
+dist
+.rpt2_cache

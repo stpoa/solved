@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "npm run bootstrap",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "lerna": "lerna"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,7 @@
   "homepage": "https://github.com/stpoa/notowork#readme",
   "devDependencies": {
     "lerna": "^3.15.0"
-  }
+  },
+  "workspaces": ["packages/*"],
+  "private": true
 }

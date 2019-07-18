@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2015",
+    "declaration": true,
+    "moduleResolution": "node",
+    "lib": ["es2017", "dom"],
+    "baseUrl": "./packages/",
+    "paths": {
+      "@notowork/*": ["./*"]
+    },
+    "resolveJsonModule": true,
+    "inlineSourceMap": true,
+    "noImplicitAny": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["node_modules", "**/*/node_modules", "**/*/dist"]
+}
