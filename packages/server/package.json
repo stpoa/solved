@@ -1,13 +1,13 @@
 {
   "name": "@notowork/server",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.ts",
   "scripts": {
     "local": "sls offline start --skipCacheInvalidation"
   },
   "dependencies": {
-    "@notowork/models": "*",
-    "@notowork/lib": "*",
+    "@notowork/lib": "^0.0.1",
+    "@notowork/models": "^0.0.1",
     "apollo-server-lambda": "^2.5.0-rc.0",
     "graphql": "^14.4.1",
     "source-map-support": "^0.5.10"
