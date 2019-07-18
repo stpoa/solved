@@ -1,5 +1,4 @@
-import { limitWords } from '@notowork/lib/text'
-import { addTime, subTime } from '@notowork/lib/time'
+import { addTime, subTime, limitWords } from '@notowork/lib'
 import { MockBuilder } from './types'
 import { Task } from '../interfaces'
 

@@ -8,6 +8,7 @@
     "dist"
   ],
   "scripts": {
+    "tsc": "tsc",
     "build": "rollup -c"
   },
   "dependencies": {
