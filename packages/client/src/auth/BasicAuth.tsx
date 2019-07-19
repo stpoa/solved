@@ -1,8 +1,8 @@
-import { calculateHash } from '@notowork/lib/crypto'
 import { isProduction } from '@notowork/lib/env'
 import { areArraysEqual } from '@notowork/lib/fp'
 import { logError } from '@notowork/lib/log'
 import React, { FC, useState } from 'react'
+import { calculateHash } from '~lib/crypto'
 import { OnChange } from '~typings/react'
 
 const BasicAuth: FC = ({ children }) => {
