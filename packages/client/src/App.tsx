@@ -5,7 +5,10 @@ import {
   WithStyles,
   withStyles,
 } from '@material-ui/core/styles'
+import ApolloClient from 'apollo-boost'
+import gql from 'graphql-tag'
 import React, { Component } from 'react'
+import { ApolloProvider } from 'react-apollo-hooks'
 import {
   BrowserRouter as Router,
   Redirect,
@@ -116,51 +119,55 @@ const theme = createMuiTheme({
 const redirectToHome = () => <Redirect to="/" />
 const NotImplmented = () => <h1>Not implemented yet!</h1>
 
+const client = new ApolloClient({ uri: 'http://localhost:5050/api/gql' })
+
 class App extends Component<AppProps, {}> {
   public render() {
     return (
       <BasicAuth>
-        <MuiThemeProvider theme={theme}>
-          <AuthProvider>
-            <Router>
-              <div className={this.props.classes.container}>
-                <Switch>
-                  <PrivateRouteWithAuth
-                    path="/profile"
-                    component={Pages.Profile}
-                  />
-                  <PrivateRoute
-                    path="/profile/test"
-                    component={NotImplmented}
-                  />
-                  <PrivateRoute path="/tasks" component={Pages.Tasks} />
-                  <Route path="/prelogin" component={Pages.Prelogin} />
-                  <Route path="/create-task" component={Pages.CreateTask} />
-                  <Route path="/sign-in" component={Pages.SignIn} />
-                  <Route path="/rate" component={Pages.Rate} />
-                  <Route
-                    path="/remind-password"
-                    component={Pages.RemindPassword}
-                  />
-                  <Route path="/register" component={Pages.Register} />
-                  <Route path="/search" component={Pages.Search} />
-                  <Route
-                    exact
-                    path="/remind-password"
-                    component={NotImplmented}
-                  />
-                  <Route exact path="/" component={Pages.Home} />
-                  <Route
-                    path="/task/:id/add-solution"
-                    component={Pages.AddSolution}
-                  />
-                  <Route path="/task/:id" component={Pages.Task} />
-                  <Route path="*" render={redirectToHome} />
-                </Switch>
-              </div>
-            </Router>
-          </AuthProvider>
-        </MuiThemeProvider>
+        <ApolloProvider client={client}>
+          <MuiThemeProvider theme={theme}>
+            <AuthProvider>
+              <Router>
+                <div className={this.props.classes.container}>
+                  <Switch>
+                    <PrivateRouteWithAuth
+                      path="/profile"
+                      component={Pages.Profile}
+                    />
+                    <PrivateRoute
+                      path="/profile/test"
+                      component={NotImplmented}
+                    />
+                    <PrivateRoute path="/tasks" component={Pages.Tasks} />
+                    <Route path="/prelogin" component={Pages.Prelogin} />
+                    <Route path="/create-task" component={Pages.CreateTask} />
+                    <Route path="/sign-in" component={Pages.SignIn} />
+                    <Route path="/rate" component={Pages.Rate} />
+                    <Route
+                      path="/remind-password"
+                      component={Pages.RemindPassword}
+                    />
+                    <Route path="/register" component={Pages.Register} />
+                    <Route path="/search" component={Pages.Search} />
+                    <Route
+                      exact
+                      path="/remind-password"
+                      component={NotImplmented}
+                    />
+                    <Route exact path="/" component={Pages.Home} />
+                    <Route
+                      path="/task/:id/add-solution"
+                      component={Pages.AddSolution}
+                    />
+                    <Route path="/task/:id" component={Pages.Task} />
+                    <Route path="*" render={redirectToHome} />
+                  </Switch>
+                </div>
+              </Router>
+            </AuthProvider>
+          </MuiThemeProvider>
+        </ApolloProvider>
       </BasicAuth>
     )
   }
