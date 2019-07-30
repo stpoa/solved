@@ -13,12 +13,12 @@ provider:
   runtime: nodejs10.x
 
 functions:
-  gql:
+  graphql:
     handler: src/gql/handler.handler
     events:
       - http:
+          path: api/gql
           method: get
-          path: gql
       - http:
+          path: api/gql
           method: post 
-          path: gql
