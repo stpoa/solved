@@ -10,7 +10,8 @@
     "@notowork/models": "^0.0.1",
     "apollo-server-lambda": "^2.5.0-rc.0",
     "graphql": "^14.4.1",
-    "source-map-support": "^0.5.10"
+    "source-map-support": "^0.5.10",
+    "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",

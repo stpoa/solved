@@ -5,9 +5,9 @@ const typeDefs = gql`
   type Task {
     id: String
     author: String
-    dateExpired: Number
+    dateExpired: Int 
     tags: [String]
-    description: [String]
+    description: String
   }
   type Query {
     tasks: [Task]
