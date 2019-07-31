@@ -17,15 +17,19 @@ const TaskPage = ({ match, auth: { user } }: TaskPageProps) => {
         id
         author
         solver
-        # solution
+        solution {
+          comment
+          image
+          dateCreated
+        }
         dateCreated
+        dateExpired
         dateAssigned
         dateStarted
-        # dateExpired
         category
         tags
         description
-        shortDescription
+        # shortDescription
         photos
         price
       }
@@ -49,8 +53,6 @@ const TaskPage = ({ match, auth: { user } }: TaskPageProps) => {
       <Task {...{ task: { ...data.task }, user }} />
     )
   }
-
-  console.log(data && data.task)
 
   return (
     <>

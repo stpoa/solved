@@ -190,7 +190,7 @@ export interface TaskListTask {
   tags: string[]
   shortDescription: string
   price: number
-  dateExpired: number
+  dateExpired: string
 }
 
 interface TaskListElementProps extends WithStyles<typeof styles> {

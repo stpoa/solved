@@ -3,7 +3,7 @@ import { tasks } from '@notowork/models'
 
 const typeDefs = gql`
   type SolutionEntry {
-    dateCreated: Int
+    dateCreated: String
     comment: String
     image: String
   }
@@ -12,16 +12,16 @@ const typeDefs = gql`
     author: String!
     solver: String
     solution: [SolutionEntry]
-    dateCreated: Int
-    dateAssigned: Int
-    dateStarted: Int
-    dateExpired: Int
-    category: String
-    tags: [String]
-    description: String
-    shortDescription: String
-    photos: [String]
-    price: Int
+    dateCreated: String!
+    dateExpired: String!
+    dateAssigned: String
+    dateStarted: String
+    category: String!
+    tags: [String]!
+    description: String!
+    shortDescription: String!
+    photos: [String]!
+    price: Int!
   }
   type Query {
     tasks: [Task]
@@ -32,11 +32,7 @@ const typeDefs = gql`
 const resolvers: any = {
   Query: {
     tasks: () => tasks,
-    task: (_: any, { id }: any) => {
-      const r = tasks[+id - 1]
-      console.log(r)
-      return r
-    },
+    task: (_: any, { id }: any) => tasks[+id - 1],
   },
   Task: {},
 }

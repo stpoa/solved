@@ -6,7 +6,6 @@ import {
   withStyles,
 } from '@material-ui/core/styles'
 import ApolloClient from 'apollo-boost'
-import gql from 'graphql-tag'
 import React, { Component } from 'react'
 import { ApolloProvider } from 'react-apollo-hooks'
 import {

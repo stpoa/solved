@@ -7,7 +7,11 @@
     "lib": "lib"
   },
   "scripts": {
-    "start": "npm run bootstrap",
+    "start": "run-p server client",
+    "build": "lerna run build",
+    "server": "lerna run local --scope @notowork/server",
+    "client": "lerna run start --scope @notowork/client",
+    "init": "npm run bootstrap",
     "bootstrap": "lerna bootstrap",
     "lerna": "lerna",
     "postinstall": "mkdir -p node_modules/@material-ui/core/node_modules/@types/jss && cp -r node_modules/@types/jss node_modules/@material-ui/core/node_modules/@types"
