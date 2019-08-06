@@ -1,36 +1,62 @@
-import tasksData from '@notowork/models/data/tasks'
 import { Task as TaskData } from '@notowork/models/interfaces'
+import gql from 'graphql-tag'
 import React from 'react'
+import { useQuery } from 'react-apollo-hooks'
 import { RouteComponentProps } from 'react-router'
 import { withAuth, WithAuth } from '~auth'
 import { NavigationBar, PageHeader } from '~generic'
 import LoadingOverlay from '~generic/LoadingOverlay'
 import Task from '~generic/Task/components/Task'
-import { useQuery } from '~hooks'
 
 const TaskPage = ({ match, auth: { user } }: TaskPageProps) => {
   const taskId = match.params.id
-  const GET_TASK = taskId + '?'
 
-  const { data: task, error: errorTask, loading: loadingTask } = useQuery<
-    TaskData
-  >(GET_TASK, tasksData[Number(taskId) - 1])
+  const GET_TASK = gql`
+    query Task($id: String!) {
+      task(id: $id) {
+        id
+        author
+        solver
+        solution {
+          comment
+          image
+          dateCreated
+        }
+        dateCreated
+        dateExpired
+        dateAssigned
+        dateStarted
+        category
+        tags
+        description
+        # shortDescription
+        photos
+        price
+      }
+    }
+  `
+
+  const result = useQuery<{ task: TaskData }>(GET_TASK, {
+    variables: { id: taskId },
+  })
+
+  const { data, error, loading } = result
 
   const Content = () => {
-    if (errorTask) {
+    if (error) {
       return <div>Error</div>
     }
 
-    return loadingTask || !task ? (
+    return loading || !data ? (
       <LoadingOverlay />
     ) : (
-      <Task {...{ task, user }} />
+      <Task {...{ task: { ...data.task }, user }} />
     )
   }
 
   return (
     <>
-      <PageHeader title={(task && task.category) || ''} />
+      <PageHeader title={(data && data.task.category) || ''} />
       <Content />
       <NavigationBar />
     </>

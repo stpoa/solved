@@ -1,28 +1,18 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "module": "commonjs",
+    "module": "es2015",
+    "target": "es2015",
     "moduleResolution": "node",
-    "newLine": "LF",
-    "outDir": "./lib/",
-    "target": "es5",
-    "sourceMap": true,
-    "declaration": true,
-    "jsx": "react",
-    "lib": ["es2015.promise", "es2017", "dom"],
+    "declarationDir": "./dist",
+    "outDir": "./dist",
+    "lib": ["es2017"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
     "paths": {
-      "*": ["types/*"],
-      "~*": ["./*"]
-    },
-    "strict": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true,
-    "noUnusedLocals": true
+      "*": ["../*"]
+    }
   },
-  "exclude": [".git", "node_modules"]
+  "include": ["**/*.ts"]
 }

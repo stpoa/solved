@@ -5,7 +5,10 @@ import {
   WithStyles,
 } from '@material-ui/core'
 import { logError } from '@notowork/lib/log'
-import { emailValidator, passwordLengthValidator } from '@notowork/lib/validators'
+import {
+  emailValidator,
+  passwordLengthValidator,
+} from '@notowork/lib/validators'
 import { Status } from '@notowork/models/interfaces'
 import React, {
   ChangeEvent,

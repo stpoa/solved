@@ -10,10 +10,10 @@ export interface Task {
   author: string
   solver?: string
   solution?: SolutionEntry[]
-  dateCreated?: number
-  dateAssigned?: number
-  dateStarted?: number
-  dateExpired: number
+  dateCreated: string
+  dateExpired: string
+  dateAssigned?: string
+  dateStarted?: string
   category: string
   tags: string[]
   description: string
@@ -23,7 +23,7 @@ export interface Task {
 }
 
 export interface SolutionEntry {
-  dateCreated: number
+  dateCreated: string 
   comment: string
   image: string
 }

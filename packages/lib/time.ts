@@ -22,7 +22,7 @@ export const addTime = (
   const withHours = addHours(withMinutes, hours)
   const withDays = addDays(withHours, days)
 
-  return withDays.getTime()
+  return withDays.toISOString()
 }
 
 export const subTime = (
@@ -35,5 +35,5 @@ export const subTime = (
   const withHours = subHours(withMinutes, hours)
   const withDays = subDays(withHours, days)
 
-  return withDays.getTime()
+  return withDays.toISOString()
 }

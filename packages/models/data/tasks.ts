@@ -2,7 +2,7 @@ import { addTime, subTime, limitWords } from '@notowork/lib'
 import { MockBuilder } from './types'
 import { Task } from '../interfaces'
 
-const now = Date.now()
+const now = new Date().toISOString()
 
 const generateShortDescription = (description: string) =>
   limitWords(60)(description) + ' ...'
@@ -13,6 +13,7 @@ const buildTask: MockBuilder<Task> = task => {
     id: '1',
     author: '2',
     dateExpired: addTime(now, 2, 4, 5),
+    dateCreated: now,
     category: 'Informatyka',
     price: 100,
     tags: ['rownania', 'analiza'],
