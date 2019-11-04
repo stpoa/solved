@@ -24,28 +24,31 @@ const entryFiles = Path.join(__dirname, 'src', 'index.html')
 // init the bundler
 const bundler = new Bundler(entryFiles, options)
 
-bundler.serve()
+try {
+  bundler.serve()
 
-// create a proxy server instance
-const proxy = createProxyServer()
+  // create a proxy server instance
+  const proxy = createProxyServer()
 
-// serve
-const server = createServer((req, res) => {
-  if (req.url.includes('/api/')) {
-    proxy.web(req, res, {
-      // back-end server, local tomcat or otherwise
-      target: backEnd,
-      changeOrigin: true,
-      autoRewrite: true,
-    })
-  } else {
-    // parcel's dev server
-    proxy.web(req, res, {
-      target: parcelEnd,
-      ws: true,
-    })
-  }
-})
+  // serve
+  const server = createServer((req, res) => {
+    if (req.url.includes('/api/')) {
+      proxy.web(req, res, {
+        // back-end server, local tomcat or otherwise
+        target: backEnd,
+        changeOrigin: true,
+        autoRewrite: true,
+      })
+    } else {
+      proxy.web(req, res, {
+        target: parcelEnd,
+        ws: true,
+      })
+    }
+  })
 
-console.log('dev proxy server operating at: http://localhost:5050/')
-server.listen(5050)
+  console.log('dev proxy server operating at: http://localhost:5050/')
+  server.listen(5050)
+} catch (e) {
+  console.log(e)
+}

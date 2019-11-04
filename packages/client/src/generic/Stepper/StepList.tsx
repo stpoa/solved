@@ -36,7 +36,7 @@ const StepList: FC<StepListProps> = ({
     })
   })
 
-  const className = (...names: string[]) => names.join(' ')
+  const cs = (...names: string[]) => names.join(' ')
 
   const stepsIndicator = (
     <div className={classes.progressBar}>
@@ -49,7 +49,7 @@ const StepList: FC<StepListProps> = ({
         return (
           <div
             key={s}
-            className={className(classes.indicator, disabledClass, activeClass)}
+            className={cs(classes.indicator, disabledClass, activeClass)}
           />
         )
       })}

@@ -41,23 +41,14 @@ const TaskPage = ({ match, auth: { user } }: TaskPageProps) => {
   })
 
   const { data, error, loading } = result
-
-  const Content = () => {
-    if (error) {
-      return <div>Error</div>
-    }
-
-    return loading || !data ? (
-      <LoadingOverlay />
-    ) : (
-      <Task {...{ task: { ...data.task }, user }} />
-    )
-  }
+  const task = (data && data.task) as TaskData
 
   return (
     <>
       <PageHeader title={(data && data.task.category) || ''} />
-      <Content />
+      <LoadingOverlay {...{ loading, error }}>
+        <Task {...{ task, user }} />
+      </LoadingOverlay>
       <NavigationBar />
     </>
   )
