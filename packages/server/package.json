@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "index.ts",
   "scripts": {
-    "local": "sls offline start --skipCacheInvalidation"
+    "start": "sls offline start --skipCacheInvalidation"
   },
   "dependencies": {
     "@notowork/lib": "^0.0.1",

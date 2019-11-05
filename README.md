@@ -1,15 +1,24 @@
 # notowork
 
-## Build
-- npm run build
+## Setup
+- yarn
+- yarn bootstrap
+- yarn build
 
-## Publish to npm:
+## Run server
+- cd packages/server
+- yarn start
 
-### Publishing master
+### GraphQL playground
+- http://localhost:3000/api/gql
 
-- npm run lerna version
-- npm run lerna publish from-git
+## Run client
+- cd packages/client
+- yarn start
 
-### Publishing feature branch for testing
+### Client url
+- http://localhost:1234/
 
-- npm run lerna:publish:feature
+## TODO
+- Build
+- Publish
