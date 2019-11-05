@@ -35,15 +35,18 @@ const server = new ApolloServer({
     type User {
       id: ID!
       name: String!
-      email: String! @lower
+      email: String!
       roles: [Role!]!
-      notes: [Note!]
     }
     type Query {
       tasks: [Task]
       task(id: String): Task
       users: [User!]!
       me: User
+    }
+    type AuthPayload {
+      token: String!
+      user: User!
     }
     type Mutation {
       signup(name: String!, email: String!, password: String!): AuthPayload!
@@ -57,6 +60,7 @@ const server = new ApolloServer({
     },
     Mutation: {
       async signup(_, { name, email, password }, ctx) {
+        console.log('signup mutation')
         const hashPassword = await AuthService.getHashPassword(password)
 
         const user = {
@@ -96,8 +100,10 @@ const server = new ApolloServer({
     },
     User: {},
   },
-  context: ({ req }) => {
+  context: (req) => {
+    console.log('get user')
     const user = AuthService.getUser(req)
+    console.log('after get user')
 
     return { user, db: { users } }
   },

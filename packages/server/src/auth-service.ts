@@ -4,8 +4,8 @@ import jwt from 'jsonwebtoken'
 const APP_SECRET = process.env.APP_SECRET || 'my-super-secure-secret'
 
 export const AuthService = {
-  getUser: (req: { headers: { authorization: string; }; }) => {
-    const tokenHeader = req.headers.authorization || ''
+  getUser: (req: Request) => {
+    const tokenHeader = req.event.headers.authorization || ''
 
     if (!tokenHeader) {
       return {}
@@ -28,4 +28,9 @@ export const AuthService = {
   },
 
   getToken: (data: string | object | Buffer) => jwt.sign(data, APP_SECRET),
+}
+
+type Request = {
+  headers: { authorization: string }
+  event: any
 }
