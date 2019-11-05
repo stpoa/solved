@@ -17,10 +17,7 @@ export const AuthService = {
     return Object.assign({}, data)
   },
 
-  getHashPassword: async (password: string) => {
-    const hashPassword = await bcrypt.hash(password, 10)
-    return hashPassword
-  },
+  getHashedPassword: (password: string) => bcrypt.hash(password, 10),
 
   checkPassword: async (inputPassword: string, userPassword: string) => {
     const isValid = await bcrypt.compare(inputPassword, userPassword)
