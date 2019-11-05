@@ -33,9 +33,9 @@ const TaskListElement = ({
   onMoreButtonClick,
   classes,
 }: TaskListElementProps) => (
-  <Card className={classes.root} elevation={1}>
-    <CardContent className={classes.content}>
-      <NavLink className={classes.navLink} to={'task/' + id}>
+  <NavLink className={classes.navLink} to={'task/' + id}>
+    <Card className={classes.root} elevation={1}>
+      <CardContent className={classes.content}>
         <Typography variant="h2" color="textSecondary">
           <p className={classes.shortDescription}>{shortDescription}</p>
           <div className={classes.tags}>
@@ -54,51 +54,51 @@ const TaskListElement = ({
             </span>
           </div>
         </Typography>
-      </NavLink>
-      <div className={classes.moreOptionsWrapper}>
-        {(isEditable || isDeletable) && (
-          <Fragment>
-            <IconButton
-              aria-label="More"
-              aria-haspopup="true"
-              onClick={onMoreButtonClick(id)}
-              className={classes.moreButton}
-            >
-              <MoreVertRounded />
-            </IconButton>
-            <Menu
-              anchorEl={anchorEl}
-              open={isMoreExpanded}
-              onClose={onExpandedMenuLeave}
-            >
-              {isEditable && (
-                <MenuItem className={classes.expandedMenu}>
-                  <Typography
-                    className={classes.menuItemElement}
-                    color="textSecondary"
-                  >
-                    <Edit className={classes.expandedMenuIcon} />
-                    Edytuj
-                  </Typography>
-                </MenuItem>
-              )}
-              {isDeletable && (
-                <MenuItem className={classes.expandedMenu}>
-                  <Typography
-                    className={classes.menuItemElement}
-                    color="textSecondary"
-                  >
-                    <Delete className={classes.expandedMenuIcon} />
-                    Usuń
-                  </Typography>
-                </MenuItem>
-              )}
-            </Menu>
-          </Fragment>
-        )}
-      </div>
-    </CardContent>
-  </Card>
+        <div className={classes.moreOptionsWrapper}>
+          {(isEditable || isDeletable) && (
+            <Fragment>
+              <IconButton
+                aria-label="More"
+                aria-haspopup="true"
+                onClick={onMoreButtonClick(id)}
+                className={classes.moreButton}
+              >
+                <MoreVertRounded />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                open={isMoreExpanded}
+                onClose={onExpandedMenuLeave}
+              >
+                {isEditable && (
+                  <MenuItem className={classes.expandedMenu}>
+                    <Typography
+                      className={classes.menuItemElement}
+                      color="textSecondary"
+                    >
+                      <Edit className={classes.expandedMenuIcon} />
+                      Edytuj
+                    </Typography>
+                  </MenuItem>
+                )}
+                {isDeletable && (
+                  <MenuItem className={classes.expandedMenu}>
+                    <Typography
+                      className={classes.menuItemElement}
+                      color="textSecondary"
+                    >
+                      <Delete className={classes.expandedMenuIcon} />
+                      Usuń
+                    </Typography>
+                  </MenuItem>
+                )}
+              </Menu>
+            </Fragment>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  </NavLink>
 )
 
 const styles: StyleRulesCallback = (theme: Theme) => ({
