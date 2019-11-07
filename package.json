@@ -9,7 +9,7 @@
   "scripts": {
     "start": "run-p server client",
     "build": "lerna run build",
-    "server": "lerna run local --scope @notowork/server",
+    "server": "lerna run start --scope @notowork/server",
     "client": "lerna run start --scope @notowork/client",
     "init": "npm run bootstrap",
     "bootstrap": "lerna bootstrap",
