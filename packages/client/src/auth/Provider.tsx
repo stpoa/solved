@@ -1,6 +1,11 @@
 import { Status } from '@notowork/models/interfaces'
 import React, { Component } from 'react'
-import context, { defaultValue, SignIn, SignOut, Value } from './context'
+import context, {
+  AuthContextValue,
+  defaultValue,
+  SignIn,
+  SignOut,
+} from './context'
 import { signIn } from './service'
 
 export default class Provider extends Component<{}, ProviderState> {
@@ -53,4 +58,4 @@ export default class Provider extends Component<{}, ProviderState> {
   }
 }
 
-export type ProviderState = Value
+export type ProviderState = AuthContextValue

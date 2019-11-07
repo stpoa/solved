@@ -1,7 +1,7 @@
 import { Status, User } from '@notowork/models/interfaces'
 import { Context, createContext } from 'react'
 
-export const defaultValue: Value = {
+export const defaultValue: AuthContextValue = {
   signIn: () => new Promise<void>(resolve => resolve()),
   signOut: () => undefined,
   signedIn: false,
@@ -9,18 +9,17 @@ export const defaultValue: Value = {
   user: null,
 }
 
-const context: Context<Value> = createContext(defaultValue)
+const context: Context<AuthContextValue> = createContext(defaultValue)
 
 export default context
 
 export type SignIn = (email: string, password: string) => Promise<void>
 export type SignOut = () => void
-export type MaybeUser = User | null
 
-export interface Value {
+export interface AuthContextValue {
   signedIn: boolean
   status: Status | undefined
-  user: MaybeUser
+  user: User | null
   signIn: SignIn
   signOut: SignOut
 }
