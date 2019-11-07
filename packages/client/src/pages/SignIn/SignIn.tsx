@@ -11,10 +11,10 @@ import {
 } from '@notowork/lib/validators'
 import { Status } from '@notowork/models/interfaces'
 import React, {
-  ChangeEvent,
   ChangeEventHandler,
-  Component,
+  FC,
   MouseEventHandler,
+  useState,
 } from 'react'
 import { Redirect } from 'react-router-dom'
 import { withAuth, WithAuth } from '~auth'
@@ -30,137 +30,88 @@ import {
 import Checkbox from './components/Checkbox'
 import SnackbarError from './components/SnackbarError'
 
-class SignIn extends Component<SignInProps, SignInState> {
-  public readonly state: SignInState = {
-    email: '',
-    emailError: '',
-    password: '',
-    passwordError: '',
-    showSignInError: false,
-    rememberMe: false,
+const SignIn: FC<SignInProps> = ({
+  auth: { status, signIn, signedIn, error },
+  classes,
+}) => {
+  const [email, setEmail] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [showSignInError, setShowSignInError] = useState(false)
+  const [rememberMe, setRememberMe] = useState(false)
+
+  const handleChangePassword: ChangeEventHandler<HTMLInputElement> = e => {
+    setPassword(e.target.value)
+    setPasswordError('')
+  }
+  const handleChangeEmail: ChangeEventHandler<HTMLInputElement> = e => {
+    setEmail(e.target.value)
+    setEmailError('')
   }
 
-  public componentDidUpdate(prevProps: SignInProps) {
-    if (
-      prevProps.auth.status === Status.Pending &&
-      this.props.auth.status === Status.Failure
-    ) {
-      this.setState({ showSignInError: true })
-    }
+  const handleSubmit: MouseEventHandler<HTMLElement> = () => {
+    setEmailError(emailValidator(email))
+    setPasswordError(passwordLengthValidator(password, 'Nieprawidłowe hasło!'))
+
+    signIn(email, password).catch(logError)
   }
 
-  public render() {
-    if (this.props.auth.signedIn) return <Redirect to="/profile" />
+  const handleChangeRememberMe = (_: any, checked: boolean) =>
+    setRememberMe(checked)
 
-    const {
-      auth: { status },
-      classes,
-    } = this.props
-    const {
-      rememberMe,
-      email,
-      emailError,
-      password,
-      passwordError,
-      showSignInError,
-    } = this.state
-    const isPending = status === Status.Pending
+  const hideSignInError = () => setShowSignInError(false)
 
-    return (
-      <Container header="Logowanie">
-        <Snackbar
-          autoHideDuration={4000}
-          open={showSignInError}
-          onClose={this.hideSignInError}
-        >
-          <SnackbarError message="Logowanie się nie powiodło!" />
-        </Snackbar>
-        <FieldContainer>
-          <Email
-            disabled={isPending}
-            error={emailError}
-            value={email}
-            onChange={this.handleChangeText}
-          />
-        </FieldContainer>
-        <FieldContainer secondary>
-          <Password
-            disabled={isPending}
-            error={passwordError}
-            value={password}
-            onChange={this.handleChangeText}
-          />
-        </FieldContainer>
-        <div className={classes.checkboxForm}>
-          <Checkbox
-            disabled={isPending}
-            checked={rememberMe}
-            onChange={this.handleChangeCheckbox}
-            name="rememberMe"
-            label="Zapamiętaj mnie"
-          />
-          <Link to="/remind-password">Nie pamiętam hasła</Link>
-        </div>
-        <Button disabled={isPending} onClick={this.handleSubmit}>
-          Zaloguj
-        </Button>
-        <Advice
-          text="Nie posiadasz konta? "
-          linkText="Załóż teraz!"
-          linkTo="/register"
+  if (signedIn) return <Redirect to="/profile" />
+
+  const isPending = status === Status.Pending
+
+  return (
+    <Container header="Logowanie">
+      <Snackbar
+        autoHideDuration={4000}
+        open={showSignInError}
+        onClose={hideSignInError}
+      >
+        <SnackbarError message="Logowanie się nie powiodło!" />
+      </Snackbar>
+      <FieldContainer>
+        <Email
+          disabled={isPending}
+          error={emailError}
+          value={email}
+          onChange={handleChangeEmail}
         />
-      </Container>
-    )
-  }
-
-  private handleChangeText: ChangeEventHandler<HTMLInputElement> = e => {
-    const state = {
-      [e.target.name]: e.target.value,
-      emailError: '',
-      passwordError: '',
-    }
-
-    // https://github.com/Microsoft/TypeScript/issues/13948
-    this.setState(state as Pick<
-      SignInState,
-      Exclude<keyof SignInState, 'showSignInError' | 'rememberMe'>
-    >)
-  }
-
-  private handleSubmit: MouseEventHandler<HTMLElement> = () => {
-    this.setState((state, props) => {
-      const errors = {
-        emailError: emailValidator(state.email),
-        passwordError: passwordLengthValidator(
-          state.password,
-          'Nieprawidłowe hasło!',
-        ),
-      }
-
-      const hasErrors = Object.values(errors).some(error =>
-        Boolean(error.length),
-      )
-
-      if (hasErrors) return { ...errors }
-
-      props.auth.signIn(state.email, state.password).catch(logError)
-
-      return null
-    })
-  }
-
-  private handleChangeCheckbox = (
-    e: ChangeEvent<HTMLInputElement>,
-    checked: boolean,
-  ) => {
-    const state = { [e.target.name]: checked }
-
-    this.setState(state as Pick<SignInState, 'rememberMe'>)
-  }
-
-  private hideSignInError: () => void = () => {
-    this.setState({ showSignInError: false })
-  }
+      </FieldContainer>
+      <FieldContainer secondary>
+        <Password
+          disabled={isPending}
+          error={passwordError}
+          value={password}
+          onChange={handleChangePassword}
+        />
+      </FieldContainer>
+      <div className={classes.checkboxForm}>
+        <Checkbox
+          disabled={isPending}
+          checked={rememberMe}
+          onChange={handleChangeRememberMe}
+          name="rememberMe"
+          label="Zapamiętaj mnie"
+        />
+        <Link to="/remind-password">Nie pamiętam hasła</Link>
+      </div>
+      <Button disabled={isPending} onClick={handleSubmit}>
+        Zaloguj
+      </Button>
+        {error ? <div>{error}</div> : null}
+      <Advice
+        text="Nie posiadasz konta? "
+        linkText="Załóż teraz!"
+        linkTo="/register"
+      />
+    </Container>
+  )
 }
 
 const styles: StyleRulesCallback = () => ({
@@ -173,17 +124,5 @@ const styles: StyleRulesCallback = () => ({
 })
 
 interface SignInProps extends WithAuth, WithStyles<typeof styles> {}
-
-interface Errors {
-  emailError: string
-  passwordError: string
-}
-
-interface SignInState extends Errors {
-  email: string
-  password: string
-  rememberMe: boolean
-  showSignInError: boolean
-}
 
 export default withAuth(withStyles(styles)(SignIn))

@@ -1,0 +1,2 @@
+~/W/s/notowork   feature/start-whole-app 
+-> Zmiany

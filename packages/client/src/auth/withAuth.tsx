@@ -1,6 +1,6 @@
 import React, { ComponentType } from 'react'
 import { Subtract } from 'utility-types'
-import context, { Value } from './context'
+import context, { AuthContextValue } from './context'
 
 const withAuth = <P extends WithAuth>(Component: ComponentType<P>) => {
   return class AuthedComponent extends React.Component<Subtract<P, WithAuth>> {
@@ -8,9 +8,8 @@ const withAuth = <P extends WithAuth>(Component: ComponentType<P>) => {
       return <context.Consumer>{this.renderComponent}</context.Consumer>
     }
 
-    public renderComponent = (authProps: Value) => {
-      const props = { auth: authProps, ...this.props }
-      return <Component {...props as any} />
+    public renderComponent = (authProps: AuthContextValue) => {
+      return <Component {...{ auth: authProps, ...this.props } as any} />
     }
   }
 }
@@ -18,5 +17,5 @@ const withAuth = <P extends WithAuth>(Component: ComponentType<P>) => {
 export default withAuth
 
 export interface WithAuth {
-  auth: Value
+  auth: AuthContextValue
 }
