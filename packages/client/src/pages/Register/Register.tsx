@@ -32,7 +32,7 @@ const Register: FC<RegisterProps> = ({ auth: { status }, classes }) => {
   const [acceptDataProcessingTerms, setAcceptDataProcessingTerms] = useState(
     false,
   )
-  const [_, setAcceptError] = useState('')
+  const [, setAcceptError] = useState('')
   const [acceptTermsOfService, setAcceptTermsOfService] = useState(false)
 
   const isPending = status === Status.Pending
