@@ -31,7 +31,7 @@ import Checkbox from './components/Checkbox'
 import SnackbarError from './components/SnackbarError'
 
 const SignIn: FC<SignInProps> = ({
-  auth: { status, signIn, signedIn },
+  auth: { status, signIn, signedIn, error },
   classes,
 }) => {
   const [email, setEmail] = useState('')
@@ -104,6 +104,7 @@ const SignIn: FC<SignInProps> = ({
       <Button disabled={isPending} onClick={handleSubmit}>
         Zaloguj
       </Button>
+        {error ? <div>{error}</div> : null}
       <Advice
         text="Nie posiadasz konta? "
         linkText="Załóż teraz!"

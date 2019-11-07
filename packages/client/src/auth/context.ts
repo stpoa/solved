@@ -22,4 +22,5 @@ export interface AuthContextValue {
   user: User | null
   signIn: SignIn
   signOut: SignOut
+  error?: string
 }
